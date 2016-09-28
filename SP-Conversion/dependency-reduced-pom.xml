@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>spconversion</groupId>
+  <artifactId>spconversion</artifactId>
+  <name>Singleton Property Conversion</name>
+  <version>0.0.1-SNAPSHOT</version>
+  <description>Convert any given RDF dataset to the representation which uses Singleton Property for modelling contextual information for the triples.
+
+This approach is described in the paper:
+Don't like RDF Reification? Making Statements about Statements using Singleton Property"
+Vinh Nguyen, Olivier Bodenreider, Amit Sheth.
+Proceedings of 23th International Conference on the World Wide Web.</description>
+  <build>
+    <sourceDirectory>src/main/java</sourceDirectory>
+    <testSourceDirectory>src/test/java</testSourceDirectory>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </resource>
+      <resource>
+        <directory>src/test/resources</directory>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.4.3</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <transformers>
+                <transformer>
+                  <mainClass>org.knoesis.semanticweb.rdf.jena.sp.main.SPConverter</mainClass>
+                </transformer>
+                <transformer />
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.jena</groupId>
+      <artifactId>apache-jena-libs</artifactId>
+      <version>3.1.0</version>
+      <type>pom</type>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+  <properties>
+    <WORKSPACE_HOME>/Users/Vinh/Documents/workspace</WORKSPACE_HOME>
+    <PROJECT_HOME>$(WORKSPACE_HOME)/$(PROJECT_NAME)</PROJECT_HOME>
+    <PROJECT_NAME>SP-Conversion</PROJECT_NAME>
+  </properties>
+</project>
+

@@ -1,0 +1,1152 @@
+2016-09-27 15:29:12 DEBUG Jena:204 - Jena initialization
+2016-09-27 15:29:12 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 15:29:12 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 15:29:12 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 15:29:12 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 15:29:12 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 15:29:12 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 15:29:12 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 15:29:12 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 15:29:12 DEBUG StreamManager:93 - open(resources/test-nq/genders_en.tql)
+2016-09-27 15:29:12 DEBUG StreamManager:112 - Not mapped: resources/test-nq/genders_en.tql
+2016-09-27 15:29:12 DEBUG StreamManager:142 - Found: resources/test-nq/genders_en.tql (LocatorFile)
+2016-09-27 15:29:12 DEBUG RDFDataMgr:841 - Found: resources/test-nq/genders_en.tql
+2016-09-27 15:29:14 DEBUG StreamManager:93 - open(resources/test-nq/geo_coordinates_en.nq)
+2016-09-27 15:29:14 DEBUG StreamManager:112 - Not mapped: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 15:29:14 DEBUG StreamManager:142 - Found: resources/test-nq/geo_coordinates_en.nq (LocatorFile)
+2016-09-27 15:29:14 DEBUG RDFDataMgr:841 - Found: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 15:29:14 DEBUG StreamManager:93 - open(resources/test-nq/test1.nq)
+2016-09-27 15:29:14 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test1.nq
+2016-09-27 15:29:14 DEBUG StreamManager:142 - Found: resources/test-nq/test1.nq (LocatorFile)
+2016-09-27 15:29:14 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test1.nq
+2016-09-27 15:29:14 ERROR riot:84 - [line: 1, col: 85] Failed to find a prefix name or keyword: /(47;0x002F)
+2016-09-27 15:29:14 DEBUG StreamManager:93 - open(resources/test-nq/test2.nq)
+2016-09-27 15:29:14 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test2.nq
+2016-09-27 15:29:14 DEBUG StreamManager:142 - Found: resources/test-nq/test2.nq (LocatorFile)
+2016-09-27 15:29:14 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test2.nq
+2016-09-27 15:29:57 DEBUG Jena:204 - Jena initialization
+2016-09-27 15:29:57 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 15:29:57 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 15:29:57 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 15:29:57 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 15:29:57 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 15:29:57 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 15:29:57 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 15:29:58 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 15:29:58 DEBUG StreamManager:93 - open(resources/test-nq/genders_en.tql)
+2016-09-27 15:29:58 DEBUG StreamManager:112 - Not mapped: resources/test-nq/genders_en.tql
+2016-09-27 15:29:58 DEBUG StreamManager:142 - Found: resources/test-nq/genders_en.tql (LocatorFile)
+2016-09-27 15:29:58 DEBUG RDFDataMgr:841 - Found: resources/test-nq/genders_en.tql
+2016-09-27 15:29:59 DEBUG StreamManager:93 - open(resources/test-nq/geo_coordinates_en.nq)
+2016-09-27 15:29:59 DEBUG StreamManager:112 - Not mapped: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 15:29:59 DEBUG StreamManager:142 - Found: resources/test-nq/geo_coordinates_en.nq (LocatorFile)
+2016-09-27 15:29:59 DEBUG RDFDataMgr:841 - Found: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 15:29:59 DEBUG StreamManager:93 - open(resources/test-nq/test1.nq)
+2016-09-27 15:29:59 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test1.nq
+2016-09-27 15:29:59 DEBUG StreamManager:142 - Found: resources/test-nq/test1.nq (LocatorFile)
+2016-09-27 15:29:59 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test1.nq
+2016-09-27 15:29:59 ERROR riot:84 - [line: 1, col: 85] Failed to find a prefix name or keyword: /(47;0x002F)
+2016-09-27 15:29:59 DEBUG StreamManager:93 - open(resources/test-nq/test2.nq)
+2016-09-27 15:29:59 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test2.nq
+2016-09-27 15:29:59 DEBUG StreamManager:142 - Found: resources/test-nq/test2.nq (LocatorFile)
+2016-09-27 15:29:59 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test2.nq
+2016-09-27 15:35:59 DEBUG Jena:204 - Jena initialization
+2016-09-27 15:35:59 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 15:35:59 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 15:35:59 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 15:35:59 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 15:35:59 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 15:35:59 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 15:35:59 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 15:36:00 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 15:36:00 DEBUG StreamManager:93 - open(resources/test-nq/genders_en.tql)
+2016-09-27 15:36:00 DEBUG StreamManager:112 - Not mapped: resources/test-nq/genders_en.tql
+2016-09-27 15:36:00 DEBUG StreamManager:142 - Found: resources/test-nq/genders_en.tql (LocatorFile)
+2016-09-27 15:36:00 DEBUG RDFDataMgr:841 - Found: resources/test-nq/genders_en.tql
+2016-09-27 15:36:01 DEBUG StreamManager:93 - open(resources/test-nq/geo_coordinates_en.nq)
+2016-09-27 15:36:01 DEBUG StreamManager:112 - Not mapped: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 15:36:01 DEBUG StreamManager:142 - Found: resources/test-nq/geo_coordinates_en.nq (LocatorFile)
+2016-09-27 15:36:01 DEBUG RDFDataMgr:841 - Found: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 15:36:01 DEBUG StreamManager:93 - open(resources/test-nq/test1.nq)
+2016-09-27 15:36:01 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test1.nq
+2016-09-27 15:36:01 DEBUG StreamManager:142 - Found: resources/test-nq/test1.nq (LocatorFile)
+2016-09-27 15:36:01 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test1.nq
+2016-09-27 15:36:01 ERROR riot:84 - [line: 1, col: 85] Failed to find a prefix name or keyword: /(47;0x002F)
+2016-09-27 15:36:01 DEBUG StreamManager:93 - open(resources/test-nq/test2.nq)
+2016-09-27 15:36:01 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test2.nq
+2016-09-27 15:36:01 DEBUG StreamManager:142 - Found: resources/test-nq/test2.nq (LocatorFile)
+2016-09-27 15:36:01 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test2.nq
+2016-09-27 15:38:07 DEBUG Jena:204 - Jena initialization
+2016-09-27 15:38:07 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 15:38:07 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 15:38:07 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 15:38:07 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 15:38:07 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 15:38:07 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 15:38:07 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 15:38:08 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 15:38:08 DEBUG StreamManager:93 - open(resources/test-nq/genders_en.tql)
+2016-09-27 15:38:08 DEBUG StreamManager:112 - Not mapped: resources/test-nq/genders_en.tql
+2016-09-27 15:38:08 DEBUG StreamManager:142 - Found: resources/test-nq/genders_en.tql (LocatorFile)
+2016-09-27 15:38:08 DEBUG RDFDataMgr:841 - Found: resources/test-nq/genders_en.tql
+2016-09-27 15:38:09 DEBUG StreamManager:93 - open(resources/test-nq/geo_coordinates_en.nq)
+2016-09-27 15:38:09 DEBUG StreamManager:112 - Not mapped: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 15:38:09 DEBUG StreamManager:142 - Found: resources/test-nq/geo_coordinates_en.nq (LocatorFile)
+2016-09-27 15:38:09 DEBUG RDFDataMgr:841 - Found: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 15:38:09 DEBUG StreamManager:93 - open(resources/test-nq/test1.nq)
+2016-09-27 15:38:09 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test1.nq
+2016-09-27 15:38:09 DEBUG StreamManager:142 - Found: resources/test-nq/test1.nq (LocatorFile)
+2016-09-27 15:38:09 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test1.nq
+2016-09-27 15:38:09 ERROR riot:84 - [line: 1, col: 85] Failed to find a prefix name or keyword: /(47;0x002F)
+2016-09-27 15:38:09 DEBUG StreamManager:93 - open(resources/test-nq/test2.nq)
+2016-09-27 15:38:09 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test2.nq
+2016-09-27 15:38:09 DEBUG StreamManager:142 - Found: resources/test-nq/test2.nq (LocatorFile)
+2016-09-27 15:38:09 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test2.nq
+2016-09-27 15:45:52 DEBUG Jena:204 - Jena initialization
+2016-09-27 15:45:53 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 15:45:53 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 15:45:53 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 15:45:53 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 15:45:53 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 15:45:53 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 15:45:53 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 15:45:53 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 15:45:53 DEBUG StreamManager:93 - open(resources/test-nq/genders_en.tql)
+2016-09-27 15:45:53 DEBUG StreamManager:112 - Not mapped: resources/test-nq/genders_en.tql
+2016-09-27 15:45:53 DEBUG StreamManager:142 - Found: resources/test-nq/genders_en.tql (LocatorFile)
+2016-09-27 15:45:53 DEBUG RDFDataMgr:841 - Found: resources/test-nq/genders_en.tql
+2016-09-27 15:45:55 DEBUG StreamManager:93 - open(resources/test-nq/geo_coordinates_en.nq)
+2016-09-27 15:45:55 DEBUG StreamManager:112 - Not mapped: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 15:45:55 DEBUG StreamManager:142 - Found: resources/test-nq/geo_coordinates_en.nq (LocatorFile)
+2016-09-27 15:45:55 DEBUG RDFDataMgr:841 - Found: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 15:45:55 DEBUG StreamManager:93 - open(resources/test-nq/test1.nq)
+2016-09-27 15:45:55 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test1.nq
+2016-09-27 15:45:55 DEBUG StreamManager:142 - Found: resources/test-nq/test1.nq (LocatorFile)
+2016-09-27 15:45:55 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test1.nq
+2016-09-27 15:45:55 ERROR riot:84 - [line: 1, col: 85] Failed to find a prefix name or keyword: /(47;0x002F)
+2016-09-27 15:45:55 DEBUG StreamManager:93 - open(resources/test-nq/test2.nq)
+2016-09-27 15:45:55 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test2.nq
+2016-09-27 15:45:55 DEBUG StreamManager:142 - Found: resources/test-nq/test2.nq (LocatorFile)
+2016-09-27 15:45:55 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test2.nq
+2016-09-27 15:48:34 DEBUG Jena:204 - Jena initialization
+2016-09-27 15:48:34 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 15:48:34 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 15:48:34 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 15:48:34 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 15:48:34 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 15:48:34 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 15:48:34 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 15:48:34 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 15:48:34 DEBUG StreamManager:93 - open(resources/test-nq/genders_en.tql)
+2016-09-27 15:48:34 DEBUG StreamManager:112 - Not mapped: resources/test-nq/genders_en.tql
+2016-09-27 15:48:34 DEBUG StreamManager:142 - Found: resources/test-nq/genders_en.tql (LocatorFile)
+2016-09-27 15:48:34 DEBUG RDFDataMgr:841 - Found: resources/test-nq/genders_en.tql
+2016-09-27 15:48:36 DEBUG StreamManager:93 - open(resources/test-nq/geo_coordinates_en.nq)
+2016-09-27 15:48:36 DEBUG StreamManager:112 - Not mapped: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 15:48:36 DEBUG StreamManager:142 - Found: resources/test-nq/geo_coordinates_en.nq (LocatorFile)
+2016-09-27 15:48:36 DEBUG RDFDataMgr:841 - Found: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 15:48:36 DEBUG StreamManager:93 - open(resources/test-nq/test1.nq)
+2016-09-27 15:48:36 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test1.nq
+2016-09-27 15:48:36 DEBUG StreamManager:142 - Found: resources/test-nq/test1.nq (LocatorFile)
+2016-09-27 15:48:36 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test1.nq
+2016-09-27 15:48:36 ERROR riot:84 - [line: 1, col: 85] Failed to find a prefix name or keyword: /(47;0x002F)
+2016-09-27 15:48:36 DEBUG StreamManager:93 - open(resources/test-nq/test2.nq)
+2016-09-27 15:48:36 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test2.nq
+2016-09-27 15:48:36 DEBUG StreamManager:142 - Found: resources/test-nq/test2.nq (LocatorFile)
+2016-09-27 15:48:36 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test2.nq
+2016-09-27 15:49:40 DEBUG Jena:204 - Jena initialization
+2016-09-27 15:49:40 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 15:49:40 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 15:49:40 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 15:49:40 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 15:49:40 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 15:49:40 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 15:49:40 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 15:49:41 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 15:49:41 DEBUG StreamManager:93 - open(resources/test-nq/genders_en.tql)
+2016-09-27 15:49:41 DEBUG StreamManager:112 - Not mapped: resources/test-nq/genders_en.tql
+2016-09-27 15:49:41 DEBUG StreamManager:142 - Found: resources/test-nq/genders_en.tql (LocatorFile)
+2016-09-27 15:49:41 DEBUG RDFDataMgr:841 - Found: resources/test-nq/genders_en.tql
+2016-09-27 15:49:43 DEBUG StreamManager:93 - open(resources/test-nq/geo_coordinates_en.nq)
+2016-09-27 15:49:43 DEBUG StreamManager:112 - Not mapped: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 15:49:43 DEBUG StreamManager:142 - Found: resources/test-nq/geo_coordinates_en.nq (LocatorFile)
+2016-09-27 15:49:43 DEBUG RDFDataMgr:841 - Found: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 15:49:43 DEBUG StreamManager:93 - open(resources/test-nq/test1.nq)
+2016-09-27 15:49:43 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test1.nq
+2016-09-27 15:49:43 DEBUG StreamManager:142 - Found: resources/test-nq/test1.nq (LocatorFile)
+2016-09-27 15:49:43 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test1.nq
+2016-09-27 15:49:43 ERROR riot:84 - [line: 1, col: 85] Failed to find a prefix name or keyword: /(47;0x002F)
+2016-09-27 15:49:43 DEBUG StreamManager:93 - open(resources/test-nq/test2.nq)
+2016-09-27 15:49:43 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test2.nq
+2016-09-27 15:49:43 DEBUG StreamManager:142 - Found: resources/test-nq/test2.nq (LocatorFile)
+2016-09-27 15:49:43 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test2.nq
+2016-09-27 15:50:23 DEBUG Jena:204 - Jena initialization
+2016-09-27 15:50:23 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 15:50:23 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 15:50:23 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 15:50:23 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 15:50:23 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 15:50:23 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 15:50:23 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 15:50:24 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 15:50:24 DEBUG StreamManager:93 - open(resources/test-nq/genders_en.tql)
+2016-09-27 15:50:24 DEBUG StreamManager:112 - Not mapped: resources/test-nq/genders_en.tql
+2016-09-27 15:50:24 DEBUG StreamManager:142 - Found: resources/test-nq/genders_en.tql (LocatorFile)
+2016-09-27 15:50:24 DEBUG RDFDataMgr:841 - Found: resources/test-nq/genders_en.tql
+2016-09-27 15:50:25 DEBUG StreamManager:93 - open(resources/test-nq/geo_coordinates_en.nq)
+2016-09-27 15:50:25 DEBUG StreamManager:112 - Not mapped: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 15:50:25 DEBUG StreamManager:142 - Found: resources/test-nq/geo_coordinates_en.nq (LocatorFile)
+2016-09-27 15:50:25 DEBUG RDFDataMgr:841 - Found: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 15:50:25 DEBUG StreamManager:93 - open(resources/test-nq/test1.nq)
+2016-09-27 15:50:25 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test1.nq
+2016-09-27 15:50:25 DEBUG StreamManager:142 - Found: resources/test-nq/test1.nq (LocatorFile)
+2016-09-27 15:50:25 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test1.nq
+2016-09-27 15:50:25 ERROR riot:84 - [line: 1, col: 85] Failed to find a prefix name or keyword: /(47;0x002F)
+2016-09-27 15:50:25 DEBUG StreamManager:93 - open(resources/test-nq/test2.nq)
+2016-09-27 15:50:25 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test2.nq
+2016-09-27 15:50:25 DEBUG StreamManager:142 - Found: resources/test-nq/test2.nq (LocatorFile)
+2016-09-27 15:50:25 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test2.nq
+2016-09-27 16:27:41 DEBUG Jena:204 - Jena initialization
+2016-09-27 16:27:41 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 16:27:41 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 16:27:41 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 16:27:41 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 16:27:41 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 16:27:41 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 16:27:41 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 16:27:41 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 16:27:42 DEBUG StreamManager:93 - open(resources/test-nq/genders_en.tql)
+2016-09-27 16:27:42 DEBUG StreamManager:112 - Not mapped: resources/test-nq/genders_en.tql
+2016-09-27 16:27:42 DEBUG StreamManager:142 - Found: resources/test-nq/genders_en.tql (LocatorFile)
+2016-09-27 16:27:42 DEBUG RDFDataMgr:841 - Found: resources/test-nq/genders_en.tql
+2016-09-27 16:27:43 DEBUG StreamManager:93 - open(resources/test-nq/geo_coordinates_en.nq)
+2016-09-27 16:27:43 DEBUG StreamManager:112 - Not mapped: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 16:27:43 DEBUG StreamManager:142 - Found: resources/test-nq/geo_coordinates_en.nq (LocatorFile)
+2016-09-27 16:27:43 DEBUG RDFDataMgr:841 - Found: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 16:27:43 DEBUG StreamManager:93 - open(resources/test-nq/test1.nq)
+2016-09-27 16:27:43 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test1.nq
+2016-09-27 16:27:43 DEBUG StreamManager:142 - Found: resources/test-nq/test1.nq (LocatorFile)
+2016-09-27 16:27:43 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test1.nq
+2016-09-27 16:27:43 ERROR riot:84 - [line: 1, col: 85] Failed to find a prefix name or keyword: /(47;0x002F)
+2016-09-27 16:27:43 DEBUG StreamManager:93 - open(resources/test-nq/test2.nq)
+2016-09-27 16:27:43 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test2.nq
+2016-09-27 16:27:43 DEBUG StreamManager:142 - Found: resources/test-nq/test2.nq (LocatorFile)
+2016-09-27 16:27:43 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test2.nq
+2016-09-27 18:25:20 DEBUG Jena:204 - Jena initialization
+2016-09-27 18:25:20 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 18:25:20 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 18:25:20 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 18:25:20 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 18:25:20 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 18:25:20 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 18:25:20 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 18:25:21 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 18:25:21 DEBUG StreamManager:93 - open(resources/test-nq/genders_en.tql)
+2016-09-27 18:25:21 DEBUG StreamManager:112 - Not mapped: resources/test-nq/genders_en.tql
+2016-09-27 18:25:21 DEBUG StreamManager:142 - Found: resources/test-nq/genders_en.tql (LocatorFile)
+2016-09-27 18:25:21 DEBUG RDFDataMgr:841 - Found: resources/test-nq/genders_en.tql
+2016-09-27 18:25:22 DEBUG StreamManager:93 - open(resources/test-nq/geo_coordinates_en.nq)
+2016-09-27 18:25:22 DEBUG StreamManager:112 - Not mapped: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 18:25:22 DEBUG StreamManager:142 - Found: resources/test-nq/geo_coordinates_en.nq (LocatorFile)
+2016-09-27 18:25:22 DEBUG RDFDataMgr:841 - Found: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 18:25:22 DEBUG StreamManager:93 - open(resources/test-nq/test1.nq)
+2016-09-27 18:25:22 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test1.nq
+2016-09-27 18:25:22 DEBUG StreamManager:142 - Found: resources/test-nq/test1.nq (LocatorFile)
+2016-09-27 18:25:22 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test1.nq
+2016-09-27 18:25:22 ERROR riot:84 - [line: 1, col: 85] Failed to find a prefix name or keyword: /(47;0x002F)
+2016-09-27 18:25:22 DEBUG StreamManager:93 - open(resources/test-nq/test2.nq)
+2016-09-27 18:25:22 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test2.nq
+2016-09-27 18:25:22 DEBUG StreamManager:142 - Found: resources/test-nq/test2.nq (LocatorFile)
+2016-09-27 18:25:22 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test2.nq
+2016-09-27 18:26:19 DEBUG Jena:204 - Jena initialization
+2016-09-27 18:26:19 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 18:26:19 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 18:26:19 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 18:26:19 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 18:26:19 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 18:26:19 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 18:26:19 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 18:26:20 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 18:26:20 DEBUG StreamManager:93 - open(resources/test-nq/genders_en.tql)
+2016-09-27 18:26:20 DEBUG StreamManager:112 - Not mapped: resources/test-nq/genders_en.tql
+2016-09-27 18:26:20 DEBUG StreamManager:142 - Found: resources/test-nq/genders_en.tql (LocatorFile)
+2016-09-27 18:26:20 DEBUG RDFDataMgr:841 - Found: resources/test-nq/genders_en.tql
+2016-09-27 18:26:21 DEBUG StreamManager:93 - open(resources/test-nq/geo_coordinates_en.nq)
+2016-09-27 18:26:21 DEBUG StreamManager:112 - Not mapped: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 18:26:21 DEBUG StreamManager:142 - Found: resources/test-nq/geo_coordinates_en.nq (LocatorFile)
+2016-09-27 18:26:21 DEBUG RDFDataMgr:841 - Found: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 18:26:21 DEBUG StreamManager:93 - open(resources/test-nq/test1.nq)
+2016-09-27 18:26:21 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test1.nq
+2016-09-27 18:26:21 DEBUG StreamManager:142 - Found: resources/test-nq/test1.nq (LocatorFile)
+2016-09-27 18:26:21 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test1.nq
+2016-09-27 18:26:21 ERROR riot:84 - [line: 1, col: 85] Failed to find a prefix name or keyword: /(47;0x002F)
+2016-09-27 18:26:21 DEBUG StreamManager:93 - open(resources/test-nq/test2.nq)
+2016-09-27 18:26:21 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test2.nq
+2016-09-27 18:26:21 DEBUG StreamManager:142 - Found: resources/test-nq/test2.nq (LocatorFile)
+2016-09-27 18:26:21 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test2.nq
+2016-09-27 18:33:45 DEBUG Jena:204 - Jena initialization
+2016-09-27 18:33:46 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 18:33:46 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 18:33:46 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 18:33:46 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 18:33:46 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 18:33:46 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 18:33:46 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 18:33:46 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 18:33:46 DEBUG StreamManager:93 - open(resources/test-nq/genders_en.tql)
+2016-09-27 18:33:46 DEBUG StreamManager:112 - Not mapped: resources/test-nq/genders_en.tql
+2016-09-27 18:33:46 DEBUG StreamManager:142 - Found: resources/test-nq/genders_en.tql (LocatorFile)
+2016-09-27 18:33:46 DEBUG RDFDataMgr:841 - Found: resources/test-nq/genders_en.tql
+2016-09-27 18:33:47 DEBUG StreamManager:93 - open(resources/test-nq/geo_coordinates_en.nq)
+2016-09-27 18:33:47 DEBUG StreamManager:112 - Not mapped: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 18:33:47 DEBUG StreamManager:142 - Found: resources/test-nq/geo_coordinates_en.nq (LocatorFile)
+2016-09-27 18:33:47 DEBUG RDFDataMgr:841 - Found: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 18:33:47 DEBUG StreamManager:93 - open(resources/test-nq/test1.nq)
+2016-09-27 18:33:47 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test1.nq
+2016-09-27 18:33:47 DEBUG StreamManager:142 - Found: resources/test-nq/test1.nq (LocatorFile)
+2016-09-27 18:33:47 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test1.nq
+2016-09-27 18:33:47 ERROR riot:84 - [line: 1, col: 85] Failed to find a prefix name or keyword: /(47;0x002F)
+2016-09-27 18:33:47 DEBUG StreamManager:93 - open(resources/test-nq/test2.nq)
+2016-09-27 18:33:47 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test2.nq
+2016-09-27 18:33:47 DEBUG StreamManager:142 - Found: resources/test-nq/test2.nq (LocatorFile)
+2016-09-27 18:33:47 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test2.nq
+2016-09-27 18:35:11 DEBUG Jena:204 - Jena initialization
+2016-09-27 18:35:11 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 18:35:11 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 18:35:11 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 18:35:11 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 18:35:11 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 18:35:11 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 18:35:11 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 18:35:12 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 18:35:12 DEBUG StreamManager:93 - open(resources/test-nq/genders_en.tql)
+2016-09-27 18:35:12 DEBUG StreamManager:112 - Not mapped: resources/test-nq/genders_en.tql
+2016-09-27 18:35:12 DEBUG StreamManager:142 - Found: resources/test-nq/genders_en.tql (LocatorFile)
+2016-09-27 18:35:12 DEBUG RDFDataMgr:841 - Found: resources/test-nq/genders_en.tql
+2016-09-27 18:35:13 DEBUG StreamManager:93 - open(resources/test-nq/geo_coordinates_en.nq)
+2016-09-27 18:35:13 DEBUG StreamManager:112 - Not mapped: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 18:35:13 DEBUG StreamManager:142 - Found: resources/test-nq/geo_coordinates_en.nq (LocatorFile)
+2016-09-27 18:35:13 DEBUG RDFDataMgr:841 - Found: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 18:35:13 DEBUG StreamManager:93 - open(resources/test-nq/test1.nq)
+2016-09-27 18:35:13 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test1.nq
+2016-09-27 18:35:13 DEBUG StreamManager:142 - Found: resources/test-nq/test1.nq (LocatorFile)
+2016-09-27 18:35:13 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test1.nq
+2016-09-27 18:35:13 ERROR riot:84 - [line: 1, col: 85] Failed to find a prefix name or keyword: /(47;0x002F)
+2016-09-27 18:35:13 DEBUG StreamManager:93 - open(resources/test-nq/test2.nq)
+2016-09-27 18:35:13 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test2.nq
+2016-09-27 18:35:13 DEBUG StreamManager:142 - Found: resources/test-nq/test2.nq (LocatorFile)
+2016-09-27 18:35:13 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test2.nq
+2016-09-27 18:36:12 DEBUG Jena:204 - Jena initialization
+2016-09-27 18:36:12 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 18:36:12 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 18:36:12 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 18:36:12 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 18:36:12 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 18:36:12 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 18:36:12 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 18:36:13 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 18:36:13 DEBUG StreamManager:93 - open(resources/test-nq/genders_en.tql)
+2016-09-27 18:36:13 DEBUG StreamManager:112 - Not mapped: resources/test-nq/genders_en.tql
+2016-09-27 18:36:13 DEBUG StreamManager:142 - Found: resources/test-nq/genders_en.tql (LocatorFile)
+2016-09-27 18:36:13 DEBUG RDFDataMgr:841 - Found: resources/test-nq/genders_en.tql
+2016-09-27 18:36:14 DEBUG StreamManager:93 - open(resources/test-nq/geo_coordinates_en.nq)
+2016-09-27 18:36:14 DEBUG StreamManager:112 - Not mapped: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 18:36:14 DEBUG StreamManager:142 - Found: resources/test-nq/geo_coordinates_en.nq (LocatorFile)
+2016-09-27 18:36:14 DEBUG RDFDataMgr:841 - Found: resources/test-nq/geo_coordinates_en.nq
+2016-09-27 18:36:14 DEBUG StreamManager:93 - open(resources/test-nq/test1.nq)
+2016-09-27 18:36:14 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test1.nq
+2016-09-27 18:36:14 DEBUG StreamManager:142 - Found: resources/test-nq/test1.nq (LocatorFile)
+2016-09-27 18:36:14 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test1.nq
+2016-09-27 18:36:14 DEBUG StreamManager:93 - open(resources/test-nq/test2.nq)
+2016-09-27 18:36:14 DEBUG StreamManager:112 - Not mapped: resources/test-nq/test2.nq
+2016-09-27 18:36:14 DEBUG StreamManager:142 - Found: resources/test-nq/test2.nq (LocatorFile)
+2016-09-27 18:36:14 DEBUG RDFDataMgr:841 - Found: resources/test-nq/test2.nq
+2016-09-27 18:42:28 DEBUG Jena:204 - Jena initialization
+2016-09-27 18:42:28 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 18:42:28 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 18:42:28 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 18:42:28 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 18:42:28 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 18:42:28 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 18:42:28 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 18:42:29 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 18:42:29 DEBUG StreamManager:93 - open(resources/test-default/yagoFacts.ttl)
+2016-09-27 18:42:29 DEBUG StreamManager:112 - Not mapped: resources/test-default/yagoFacts.ttl
+2016-09-27 18:42:29 DEBUG StreamManager:142 - Found: resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-27 18:42:29 DEBUG RDFDataMgr:841 - Found: resources/test-default/yagoFacts.ttl
+2016-09-27 18:44:37 DEBUG Jena:204 - Jena initialization
+2016-09-27 18:44:37 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 18:44:37 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 18:44:37 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 18:44:37 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 18:44:37 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 18:44:37 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 18:44:37 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 18:44:38 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 18:44:38 DEBUG StreamManager:93 - open(resources/test-default/yagoFacts.ttl)
+2016-09-27 18:44:38 DEBUG StreamManager:112 - Not mapped: resources/test-default/yagoFacts.ttl
+2016-09-27 18:44:38 DEBUG StreamManager:142 - Found: resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-27 18:44:38 DEBUG RDFDataMgr:841 - Found: resources/test-default/yagoFacts.ttl
+2016-09-27 18:48:20 DEBUG Jena:204 - Jena initialization
+2016-09-27 18:48:20 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 18:48:20 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 18:48:20 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 18:48:20 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 18:48:20 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 18:48:20 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 18:48:20 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 18:48:21 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 18:48:21 DEBUG StreamManager:93 - open(resources/test-default/yagoFacts.ttl)
+2016-09-27 18:48:21 DEBUG StreamManager:112 - Not mapped: resources/test-default/yagoFacts.ttl
+2016-09-27 18:48:21 DEBUG StreamManager:142 - Found: resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-27 18:48:21 DEBUG RDFDataMgr:841 - Found: resources/test-default/yagoFacts.ttl
+2016-09-27 18:49:55 DEBUG Jena:204 - Jena initialization
+2016-09-27 18:49:55 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 18:49:55 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 18:49:55 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 18:49:55 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 18:49:55 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 18:49:55 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 18:49:55 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 18:49:55 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 18:49:55 DEBUG StreamManager:93 - open(resources/test-default/yagoFacts.ttl)
+2016-09-27 18:49:55 DEBUG StreamManager:112 - Not mapped: resources/test-default/yagoFacts.ttl
+2016-09-27 18:49:55 DEBUG StreamManager:142 - Found: resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-27 18:49:55 DEBUG RDFDataMgr:841 - Found: resources/test-default/yagoFacts.ttl
+2016-09-27 18:53:46 DEBUG Jena:204 - Jena initialization
+2016-09-27 18:53:46 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 18:53:46 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 18:53:46 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 18:53:46 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 18:53:46 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 18:53:46 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 18:53:46 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 18:53:47 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 18:53:47 DEBUG StreamManager:93 - open(resources/test-default/yagoFacts.ttl)
+2016-09-27 18:53:47 DEBUG StreamManager:112 - Not mapped: resources/test-default/yagoFacts.ttl
+2016-09-27 18:53:47 DEBUG StreamManager:142 - Found: resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-27 18:53:47 DEBUG RDFDataMgr:841 - Found: resources/test-default/yagoFacts.ttl
+2016-09-27 19:03:54 DEBUG Jena:204 - Jena initialization
+2016-09-27 19:03:55 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 19:03:55 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 19:03:55 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 19:03:55 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 19:03:55 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 19:03:55 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 19:03:55 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 19:03:55 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 19:03:55 DEBUG StreamManager:93 - open(resources/test-default/yagoFacts.ttl)
+2016-09-27 19:03:55 DEBUG StreamManager:112 - Not mapped: resources/test-default/yagoFacts.ttl
+2016-09-27 19:03:55 DEBUG StreamManager:142 - Found: resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-27 19:03:55 DEBUG RDFDataMgr:841 - Found: resources/test-default/yagoFacts.ttl
+2016-09-27 19:13:17 DEBUG Jena:204 - Jena initialization
+2016-09-27 19:13:18 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 19:13:18 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 19:13:18 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 19:13:18 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 19:13:18 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 19:13:18 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 19:13:18 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 19:13:18 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 19:13:18 DEBUG StreamManager:93 - open(resources/test-default/yagoFacts.ttl)
+2016-09-27 19:13:18 DEBUG StreamManager:112 - Not mapped: resources/test-default/yagoFacts.ttl
+2016-09-27 19:13:18 DEBUG StreamManager:142 - Found: resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-27 19:13:18 DEBUG RDFDataMgr:841 - Found: resources/test-default/yagoFacts.ttl
+2016-09-27 19:16:27 DEBUG Jena:204 - Jena initialization
+2016-09-27 19:16:27 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 19:16:27 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 19:16:27 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 19:16:27 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 19:16:27 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 19:16:27 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 19:16:27 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 19:16:27 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 19:16:27 DEBUG StreamManager:93 - open(resources/test-default/yagoFacts.ttl)
+2016-09-27 19:16:27 DEBUG StreamManager:112 - Not mapped: resources/test-default/yagoFacts.ttl
+2016-09-27 19:16:27 DEBUG StreamManager:142 - Found: resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-27 19:16:27 DEBUG RDFDataMgr:841 - Found: resources/test-default/yagoFacts.ttl
+2016-09-27 19:17:42 DEBUG Jena:204 - Jena initialization
+2016-09-27 19:17:42 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 19:17:42 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 19:17:42 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 19:17:42 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 19:17:42 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 19:17:42 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 19:17:42 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 19:17:43 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 19:17:43 DEBUG StreamManager:93 - open(resources/test-default/yagoFacts.ttl)
+2016-09-27 19:17:43 DEBUG StreamManager:112 - Not mapped: resources/test-default/yagoFacts.ttl
+2016-09-27 19:17:43 DEBUG StreamManager:142 - Found: resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-27 19:17:43 DEBUG RDFDataMgr:841 - Found: resources/test-default/yagoFacts.ttl
+2016-09-27 19:17:43 DEBUG TripleParser:76 - Finished generating file resources/test-default-converted-to-sp-ttl/yagoFacts.ttl
+2016-09-27 19:19:14 DEBUG Jena:204 - Jena initialization
+2016-09-27 19:19:15 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 19:19:15 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 19:19:15 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 19:19:15 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 19:19:15 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 19:19:15 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 19:19:15 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 19:19:15 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 19:19:15 DEBUG StreamManager:93 - open(resources/test-default/yagoFacts.ttl)
+2016-09-27 19:19:15 DEBUG StreamManager:112 - Not mapped: resources/test-default/yagoFacts.ttl
+2016-09-27 19:19:15 DEBUG StreamManager:142 - Found: resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-27 19:19:15 DEBUG RDFDataMgr:841 - Found: resources/test-default/yagoFacts.ttl
+2016-09-27 19:19:15 DEBUG TripleParser:76 - Finished generating file resources/test-default-converted-to-sp-ttl/yagoFacts.ttl
+2016-09-27 19:21:06 DEBUG Jena:204 - Jena initialization
+2016-09-27 19:21:06 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 19:21:06 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 19:21:06 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 19:21:06 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 19:21:06 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 19:21:06 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 19:21:06 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 19:21:07 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 19:21:07 DEBUG StreamManager:93 - open(resources/test-default/yagoFacts.ttl)
+2016-09-27 19:21:07 DEBUG StreamManager:112 - Not mapped: resources/test-default/yagoFacts.ttl
+2016-09-27 19:21:07 DEBUG StreamManager:142 - Found: resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-27 19:21:07 DEBUG RDFDataMgr:841 - Found: resources/test-default/yagoFacts.ttl
+2016-09-27 19:21:07 DEBUG TripleParser:76 - Finished generating file resources/test-default-converted-to-sp-ttl/yagoFacts.ttl
+2016-09-27 19:23:36 DEBUG Jena:204 - Jena initialization
+2016-09-27 19:23:37 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 19:23:37 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 19:23:37 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 19:23:37 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 19:23:37 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 19:23:37 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 19:23:37 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 19:23:37 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 19:23:37 DEBUG StreamManager:93 - open(resources/test-default/yagoFacts.ttl)
+2016-09-27 19:23:37 DEBUG StreamManager:112 - Not mapped: resources/test-default/yagoFacts.ttl
+2016-09-27 19:23:37 DEBUG StreamManager:142 - Found: resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-27 19:23:37 DEBUG RDFDataMgr:841 - Found: resources/test-default/yagoFacts.ttl
+2016-09-27 19:23:37 DEBUG TripleParser:76 - Finished generating file resources/test-default-converted-to-sp-ttl/yagoFacts.ttl
+2016-09-27 19:25:21 DEBUG Jena:204 - Jena initialization
+2016-09-27 19:25:21 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 19:25:21 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 19:25:21 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 19:25:21 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 19:25:21 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 19:25:21 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 19:25:22 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 19:25:22 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 19:25:22 DEBUG StreamManager:93 - open(resources/test-default/yagoFacts.ttl)
+2016-09-27 19:25:22 DEBUG StreamManager:112 - Not mapped: resources/test-default/yagoFacts.ttl
+2016-09-27 19:25:22 DEBUG StreamManager:142 - Found: resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-27 19:25:22 DEBUG RDFDataMgr:841 - Found: resources/test-default/yagoFacts.ttl
+2016-09-27 19:25:22 DEBUG TripleParser:76 - Finished generating file resources/test-default-converted-to-sp-ttl/yagoFacts.ttl
+2016-09-27 19:28:07 DEBUG Jena:204 - Jena initialization
+2016-09-27 19:28:07 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 19:28:07 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 19:28:07 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 19:28:07 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 19:28:07 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 19:28:07 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 19:28:07 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 19:28:08 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 19:28:08 DEBUG StreamManager:93 - open(resources/test-default/yagoFacts.ttl)
+2016-09-27 19:28:08 DEBUG StreamManager:112 - Not mapped: resources/test-default/yagoFacts.ttl
+2016-09-27 19:28:08 DEBUG StreamManager:142 - Found: resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-27 19:28:08 DEBUG RDFDataMgr:841 - Found: resources/test-default/yagoFacts.ttl
+2016-09-27 19:30:24 DEBUG TripleParser:76 - Finished generating file resources/test-default-converted-to-sp-ttl/yagoFacts.ttl
+2016-09-27 19:32:59 DEBUG Jena:204 - Jena initialization
+2016-09-27 19:32:59 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 19:32:59 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 19:32:59 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 19:32:59 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 19:32:59 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 19:32:59 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 19:32:59 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 19:33:00 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 19:33:00 DEBUG StreamManager:93 - open(resources/test-default/yagoFacts.ttl)
+2016-09-27 19:33:00 DEBUG StreamManager:112 - Not mapped: resources/test-default/yagoFacts.ttl
+2016-09-27 19:33:00 DEBUG StreamManager:142 - Found: resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-27 19:33:00 DEBUG RDFDataMgr:841 - Found: resources/test-default/yagoFacts.ttl
+2016-09-27 19:33:00 DEBUG TripleParser:77 - Finished generating file resources/test-default-converted-to-sp-ttl/yagoFacts.ttl
+2016-09-27 19:33:10 DEBUG Jena:204 - Jena initialization
+2016-09-27 19:33:10 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 19:33:10 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 19:33:10 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 19:33:10 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 19:33:10 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 19:33:10 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 19:33:10 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 19:33:10 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 19:33:10 DEBUG StreamManager:93 - open(resources/test-default/yagoFacts.ttl)
+2016-09-27 19:33:10 DEBUG StreamManager:112 - Not mapped: resources/test-default/yagoFacts.ttl
+2016-09-27 19:33:10 DEBUG StreamManager:142 - Found: resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-27 19:33:10 DEBUG RDFDataMgr:841 - Found: resources/test-default/yagoFacts.ttl
+2016-09-27 19:33:10 DEBUG TripleParser:77 - Finished generating file resources/test-default-converted-to-sp-ttl/yagoFacts.ttl
+2016-09-27 19:33:41 DEBUG Jena:204 - Jena initialization
+2016-09-27 19:33:41 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 19:33:42 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 19:33:42 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 19:33:42 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 19:33:42 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 19:33:42 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 19:33:42 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 19:33:42 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 19:33:42 DEBUG StreamManager:93 - open(resources/test-default/yagoFacts.ttl)
+2016-09-27 19:33:42 DEBUG StreamManager:112 - Not mapped: resources/test-default/yagoFacts.ttl
+2016-09-27 19:33:42 DEBUG StreamManager:142 - Found: resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-27 19:33:42 DEBUG RDFDataMgr:841 - Found: resources/test-default/yagoFacts.ttl
+2016-09-27 19:33:42 DEBUG TripleParser:77 - Finished generating file resources/test-default-converted-to-sp-ttl/yagoFacts.ttl
+2016-09-27 19:39:28 DEBUG Jena:204 - Jena initialization
+2016-09-27 19:39:28 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 19:39:28 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 19:39:28 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-27 19:39:28 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-27 19:39:28 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-27 19:39:28 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-27 19:39:28 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-27 19:39:29 DEBUG info:334 - System architecture: 64 bit
+2016-09-27 19:39:29 DEBUG StreamManager:93 - open(resources/test-default/yagoFacts.ttl)
+2016-09-27 19:39:29 DEBUG StreamManager:112 - Not mapped: resources/test-default/yagoFacts.ttl
+2016-09-27 19:39:29 DEBUG StreamManager:142 - Found: resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-27 19:39:29 DEBUG RDFDataMgr:841 - Found: resources/test-default/yagoFacts.ttl
+2016-09-27 19:39:29 DEBUG TripleParser:77 - Finished generating file resources/test-default-converted-to-sp-ttl/yagoFacts.ttl
+2016-09-28 09:27:42 DEBUG Jena:204 - Jena initialization
+2016-09-28 09:27:43 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 09:27:43 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 09:27:43 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 09:27:43 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 09:27:43 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 09:27:43 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 09:27:43 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 09:27:44 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 09:27:45 DEBUG StreamManager:93 - open(resources/test-nano/test2.nq)
+2016-09-28 09:27:45 DEBUG StreamManager:112 - Not mapped: resources/test-nano/test2.nq
+2016-09-28 09:27:45 DEBUG StreamManager:142 - Found: resources/test-nano/test2.nq (LocatorFile)
+2016-09-28 09:27:45 DEBUG RDFDataMgr:841 - Found: resources/test-nano/test2.nq
+2016-09-28 09:27:45 DEBUG QuadParser:86 - Finished generating file resources/test-nano-converted-to-sp-ttl/test2.ttl
+2016-09-28 09:28:23 DEBUG Jena:204 - Jena initialization
+2016-09-28 09:28:23 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 09:28:23 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 09:28:23 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 09:28:23 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 09:28:23 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 09:28:23 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 09:28:23 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 09:28:23 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 09:28:23 DEBUG StreamManager:93 - open(resources/test-nano/test2.nq)
+2016-09-28 09:28:23 DEBUG StreamManager:112 - Not mapped: resources/test-nano/test2.nq
+2016-09-28 09:28:23 DEBUG StreamManager:142 - Found: resources/test-nano/test2.nq (LocatorFile)
+2016-09-28 09:28:23 DEBUG RDFDataMgr:841 - Found: resources/test-nano/test2.nq
+2016-09-28 09:28:23 DEBUG QuadParser:86 - Finished generating file resources/test-nano-converted-to-sp-nt/test2.nt
+2016-09-28 11:39:18 DEBUG Jena:204 - Jena initialization
+2016-09-28 11:39:19 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 11:39:19 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 11:39:19 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 11:39:19 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 11:39:19 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 11:39:19 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 11:39:19 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 11:39:19 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 11:39:19 DEBUG StreamManager:93 - open(resources/prefixes.txt)
+2016-09-28 11:39:19 DEBUG StreamManager:112 - Not mapped: resources/prefixes.txt
+2016-09-28 11:39:19 DEBUG RDFDataMgr:835 - Not Found: resources/prefixes.txt
+2016-09-28 11:39:30 DEBUG Jena:204 - Jena initialization
+2016-09-28 11:39:31 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 11:39:31 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 11:39:31 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 11:39:31 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 11:39:31 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 11:39:31 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 11:39:31 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 11:39:31 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 11:39:31 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 11:39:31 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 11:39:31 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 11:39:31 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 11:39:31 DEBUG StreamManager:93 - open(resources/test-nano/test2.nq)
+2016-09-28 11:39:31 DEBUG StreamManager:112 - Not mapped: resources/test-nano/test2.nq
+2016-09-28 11:39:31 DEBUG StreamManager:142 - Found: resources/test-nano/test2.nq (LocatorFile)
+2016-09-28 11:39:31 DEBUG RDFDataMgr:841 - Found: resources/test-nano/test2.nq
+2016-09-28 11:39:31 DEBUG QuadParser:86 - Finished generating file resources/test-nano-converted-to-sp-nt/test2.nt
+2016-09-28 11:40:23 DEBUG Jena:204 - Jena initialization
+2016-09-28 11:40:23 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 11:40:23 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 11:40:23 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 11:40:23 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 11:40:23 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 11:40:23 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 11:40:23 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 11:40:23 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 11:40:23 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 11:40:23 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 11:40:23 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 11:40:23 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 11:40:23 DEBUG StreamManager:93 - open(resources/test-nano/test2.nq)
+2016-09-28 11:40:23 DEBUG StreamManager:112 - Not mapped: resources/test-nano/test2.nq
+2016-09-28 11:40:23 DEBUG StreamManager:142 - Found: resources/test-nano/test2.nq (LocatorFile)
+2016-09-28 11:40:23 DEBUG RDFDataMgr:841 - Found: resources/test-nano/test2.nq
+2016-09-28 11:40:23 DEBUG QuadParser:86 - Finished generating file resources/test-nano-converted-to-sp-ttl/test2.ttl
+2016-09-28 12:34:18 DEBUG Jena:204 - Jena initialization
+2016-09-28 12:34:19 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:34:19 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:34:19 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 12:34:19 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:34:19 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 12:34:19 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:34:19 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 12:34:20 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 12:34:20 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 12:34:20 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 12:34:20 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 12:34:20 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 12:34:20 DEBUG StreamManager:93 - open(resources/test-rei/test2.ttl)
+2016-09-28 12:34:20 DEBUG StreamManager:112 - Not mapped: resources/test-rei/test2.ttl
+2016-09-28 12:34:20 DEBUG StreamManager:142 - Found: resources/test-rei/test2.ttl (LocatorFile)
+2016-09-28 12:34:20 DEBUG RDFDataMgr:841 - Found: resources/test-rei/test2.ttl
+2016-09-28 12:34:20 ERROR riot:84 - [line: 22, col: 1 ] Undefined prefix: dbpedia
+2016-09-28 12:34:20 DEBUG TripleParser:77 - Finished generating file resources/test-rei-converted-to-sp-ttl/test2.ttl
+2016-09-28 12:35:27 DEBUG Jena:204 - Jena initialization
+2016-09-28 12:35:27 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:35:27 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:35:27 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 12:35:27 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:35:27 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 12:35:27 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:35:27 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 12:35:27 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 12:35:27 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 12:35:27 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 12:35:27 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 12:35:27 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 12:35:27 DEBUG StreamManager:93 - open(resources/test-rei/test2.ttl)
+2016-09-28 12:35:27 DEBUG StreamManager:112 - Not mapped: resources/test-rei/test2.ttl
+2016-09-28 12:35:27 DEBUG StreamManager:142 - Found: resources/test-rei/test2.ttl (LocatorFile)
+2016-09-28 12:35:28 DEBUG RDFDataMgr:841 - Found: resources/test-rei/test2.ttl
+2016-09-28 12:35:28 DEBUG TripleParser:77 - Finished generating file resources/test-rei-converted-to-sp-ttl/test2.ttl
+2016-09-28 12:37:46 DEBUG Jena:204 - Jena initialization
+2016-09-28 12:37:46 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:37:46 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:37:46 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 12:37:46 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:37:46 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 12:37:46 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:37:46 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 12:37:47 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 12:37:47 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 12:37:47 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 12:37:47 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 12:37:47 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 12:37:47 DEBUG StreamManager:93 - open(resources/test-rei/test2.ttl)
+2016-09-28 12:37:47 DEBUG StreamManager:112 - Not mapped: resources/test-rei/test2.ttl
+2016-09-28 12:37:47 DEBUG StreamManager:142 - Found: resources/test-rei/test2.ttl (LocatorFile)
+2016-09-28 12:37:47 DEBUG RDFDataMgr:841 - Found: resources/test-rei/test2.ttl
+2016-09-28 12:37:47 DEBUG TripleParser:77 - Finished generating file resources/test-rei-converted-to-sp-ttl/test2.ttl
+2016-09-28 12:38:16 DEBUG Jena:204 - Jena initialization
+2016-09-28 12:38:16 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:38:16 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:38:16 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 12:38:16 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:38:16 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 12:38:16 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:38:16 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 12:38:17 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 12:38:17 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 12:38:17 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 12:38:17 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 12:38:17 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 12:38:17 DEBUG StreamManager:93 - open(resources/test-rei/test2.ttl)
+2016-09-28 12:38:17 DEBUG StreamManager:112 - Not mapped: resources/test-rei/test2.ttl
+2016-09-28 12:38:17 DEBUG StreamManager:142 - Found: resources/test-rei/test2.ttl (LocatorFile)
+2016-09-28 12:38:17 DEBUG RDFDataMgr:841 - Found: resources/test-rei/test2.ttl
+2016-09-28 12:38:17 DEBUG TripleParser:77 - Finished generating file resources/test-rei-converted-to-sp-ttl/test2.ttl
+2016-09-28 12:42:15 DEBUG Jena:204 - Jena initialization
+2016-09-28 12:42:15 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:42:15 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:42:15 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 12:42:15 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:42:15 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 12:42:15 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:42:15 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 12:42:16 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 12:42:16 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 12:42:16 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 12:42:16 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 12:42:16 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 12:42:16 DEBUG StreamManager:93 - open(resources/test-rei/test2.ttl)
+2016-09-28 12:42:16 DEBUG StreamManager:112 - Not mapped: resources/test-rei/test2.ttl
+2016-09-28 12:42:16 DEBUG StreamManager:142 - Found: resources/test-rei/test2.ttl (LocatorFile)
+2016-09-28 12:42:16 DEBUG RDFDataMgr:841 - Found: resources/test-rei/test2.ttl
+2016-09-28 12:42:16 DEBUG TripleParser:77 - Finished generating file resources/test-rei-converted-to-sp-ttl/test2.ttl
+2016-09-28 12:42:45 DEBUG Jena:204 - Jena initialization
+2016-09-28 12:42:45 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:42:45 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:42:45 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 12:42:45 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:42:45 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 12:42:45 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:42:45 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 12:42:46 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 12:42:46 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 12:42:46 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 12:42:46 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 12:42:46 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 12:42:46 DEBUG StreamManager:93 - open(resources/test-rei/test2.ttl)
+2016-09-28 12:42:46 DEBUG StreamManager:112 - Not mapped: resources/test-rei/test2.ttl
+2016-09-28 12:42:46 DEBUG StreamManager:142 - Found: resources/test-rei/test2.ttl (LocatorFile)
+2016-09-28 12:42:46 DEBUG RDFDataMgr:841 - Found: resources/test-rei/test2.ttl
+2016-09-28 12:42:46 DEBUG TripleParser:77 - Finished generating file resources/test-rei-converted-to-sp-ttl/test2.ttl
+2016-09-28 12:44:10 DEBUG Jena:204 - Jena initialization
+2016-09-28 12:44:10 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:44:10 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:44:10 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 12:44:10 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:44:10 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 12:44:10 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:44:10 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 12:44:11 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 12:44:11 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 12:44:11 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 12:44:11 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 12:44:11 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 12:44:11 DEBUG StreamManager:93 - open(resources/test-rei/test2.ttl)
+2016-09-28 12:44:11 DEBUG StreamManager:112 - Not mapped: resources/test-rei/test2.ttl
+2016-09-28 12:44:11 DEBUG StreamManager:142 - Found: resources/test-rei/test2.ttl (LocatorFile)
+2016-09-28 12:44:11 DEBUG RDFDataMgr:841 - Found: resources/test-rei/test2.ttl
+2016-09-28 12:44:11 DEBUG TripleParser:77 - Finished generating file resources/test-rei-converted-to-sp-ttl/test2.ttl
+2016-09-28 12:44:54 DEBUG Jena:204 - Jena initialization
+2016-09-28 12:44:54 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:44:54 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:44:54 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 12:44:54 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:44:54 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 12:44:54 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:44:54 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 12:44:54 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 12:44:54 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 12:44:54 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 12:44:54 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 12:44:54 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 12:44:55 DEBUG StreamManager:93 - open(resources/test-rei/test2.ttl)
+2016-09-28 12:44:55 DEBUG StreamManager:112 - Not mapped: resources/test-rei/test2.ttl
+2016-09-28 12:44:55 DEBUG StreamManager:142 - Found: resources/test-rei/test2.ttl (LocatorFile)
+2016-09-28 12:44:55 DEBUG RDFDataMgr:841 - Found: resources/test-rei/test2.ttl
+2016-09-28 12:44:55 DEBUG TripleParser:77 - Finished generating file resources/test-rei-converted-to-sp-ttl/test2.ttl
+2016-09-28 12:45:52 DEBUG Jena:204 - Jena initialization
+2016-09-28 12:45:53 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:45:53 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:45:53 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 12:45:53 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:45:53 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 12:45:53 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:45:53 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 12:45:53 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 12:45:53 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 12:45:53 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 12:45:53 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 12:45:53 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 12:45:53 DEBUG StreamManager:93 - open(resources/test-rei/test2.ttl)
+2016-09-28 12:45:53 DEBUG StreamManager:112 - Not mapped: resources/test-rei/test2.ttl
+2016-09-28 12:45:53 DEBUG StreamManager:142 - Found: resources/test-rei/test2.ttl (LocatorFile)
+2016-09-28 12:45:53 DEBUG RDFDataMgr:841 - Found: resources/test-rei/test2.ttl
+2016-09-28 12:45:53 DEBUG TripleParser:77 - Finished generating file resources/test-rei-converted-to-sp-ttl/test2.ttl
+2016-09-28 12:46:40 DEBUG Jena:204 - Jena initialization
+2016-09-28 12:46:40 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:46:40 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:46:40 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 12:46:40 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:46:40 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 12:46:40 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:46:40 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 12:46:40 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 12:46:40 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 12:46:40 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 12:46:40 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 12:46:40 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 12:46:40 DEBUG StreamManager:93 - open(resources/test-rei/test2.ttl)
+2016-09-28 12:46:40 DEBUG StreamManager:112 - Not mapped: resources/test-rei/test2.ttl
+2016-09-28 12:46:40 DEBUG StreamManager:142 - Found: resources/test-rei/test2.ttl (LocatorFile)
+2016-09-28 12:46:40 DEBUG RDFDataMgr:841 - Found: resources/test-rei/test2.ttl
+2016-09-28 12:46:40 DEBUG TripleParser:77 - Finished generating file resources/test-rei-converted-to-sp-ttl/test2.ttl
+2016-09-28 12:47:17 DEBUG Jena:204 - Jena initialization
+2016-09-28 12:47:18 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:47:18 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:47:18 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 12:47:18 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:47:18 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 12:47:18 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:47:18 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 12:47:18 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 12:47:18 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 12:47:18 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 12:47:18 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 12:47:18 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 12:47:18 DEBUG StreamManager:93 - open(resources/test-rei/test2.ttl)
+2016-09-28 12:47:18 DEBUG StreamManager:112 - Not mapped: resources/test-rei/test2.ttl
+2016-09-28 12:47:18 DEBUG StreamManager:142 - Found: resources/test-rei/test2.ttl (LocatorFile)
+2016-09-28 12:47:18 DEBUG RDFDataMgr:841 - Found: resources/test-rei/test2.ttl
+2016-09-28 12:47:18 DEBUG TripleParser:77 - Finished generating file resources/test-rei-converted-to-sp-ttl/test2.ttl
+2016-09-28 12:48:17 DEBUG Jena:204 - Jena initialization
+2016-09-28 12:48:17 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:48:17 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:48:17 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 12:48:17 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:48:17 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 12:48:17 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:48:17 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 12:48:17 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 12:48:18 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 12:48:18 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 12:48:18 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 12:48:18 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 12:48:18 DEBUG StreamManager:93 - open(resources/test-rei/test2.ttl)
+2016-09-28 12:48:18 DEBUG StreamManager:112 - Not mapped: resources/test-rei/test2.ttl
+2016-09-28 12:48:18 DEBUG StreamManager:142 - Found: resources/test-rei/test2.ttl (LocatorFile)
+2016-09-28 12:48:18 DEBUG RDFDataMgr:841 - Found: resources/test-rei/test2.ttl
+2016-09-28 12:48:18 DEBUG TripleParser:77 - Finished generating file resources/test-rei-converted-to-sp-ttl/test2.ttl
+2016-09-28 12:48:59 DEBUG Jena:204 - Jena initialization
+2016-09-28 12:48:59 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:48:59 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:48:59 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 12:48:59 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:48:59 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 12:48:59 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:48:59 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 12:48:59 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 12:48:59 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 12:48:59 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 12:48:59 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 12:48:59 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 12:49:00 DEBUG StreamManager:93 - open(resources/test-rei/test2.ttl)
+2016-09-28 12:49:00 DEBUG StreamManager:112 - Not mapped: resources/test-rei/test2.ttl
+2016-09-28 12:49:00 DEBUG StreamManager:142 - Found: resources/test-rei/test2.ttl (LocatorFile)
+2016-09-28 12:49:00 DEBUG RDFDataMgr:841 - Found: resources/test-rei/test2.ttl
+2016-09-28 12:49:00 DEBUG TripleParser:77 - Finished generating file resources/test-rei-converted-to-sp-ttl/test2.ttl
+2016-09-28 12:50:58 DEBUG Jena:204 - Jena initialization
+2016-09-28 12:50:58 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:50:58 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:50:58 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 12:50:58 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:50:58 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 12:50:58 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:50:58 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 12:50:58 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 12:50:58 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 12:50:58 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 12:50:58 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 12:50:58 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 12:50:58 DEBUG StreamManager:93 - open(resources/test-rei/test2.ttl)
+2016-09-28 12:50:58 DEBUG StreamManager:112 - Not mapped: resources/test-rei/test2.ttl
+2016-09-28 12:50:58 DEBUG StreamManager:142 - Found: resources/test-rei/test2.ttl (LocatorFile)
+2016-09-28 12:50:58 DEBUG RDFDataMgr:841 - Found: resources/test-rei/test2.ttl
+2016-09-28 12:50:58 DEBUG TripleParser:77 - Finished generating file resources/test-rei-converted-to-sp-ttl/test2.ttl
+2016-09-28 12:56:20 DEBUG Jena:204 - Jena initialization
+2016-09-28 12:56:21 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:56:21 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:56:21 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 12:56:21 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:56:21 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 12:56:21 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:56:21 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 12:56:21 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 12:56:21 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 12:56:21 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 12:56:21 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 12:56:21 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 12:56:21 DEBUG StreamManager:93 - open(resources/test-rei/test2.ttl)
+2016-09-28 12:56:21 DEBUG StreamManager:112 - Not mapped: resources/test-rei/test2.ttl
+2016-09-28 12:56:21 DEBUG StreamManager:142 - Found: resources/test-rei/test2.ttl (LocatorFile)
+2016-09-28 12:56:21 DEBUG RDFDataMgr:841 - Found: resources/test-rei/test2.ttl
+2016-09-28 12:56:21 DEBUG TripleParser:77 - Finished generating file resources/test-rei-converted-to-sp-ttl/test2.ttl
+2016-09-28 12:57:51 DEBUG Jena:204 - Jena initialization
+2016-09-28 12:57:52 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:57:52 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:57:52 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 12:57:52 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:57:52 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 12:57:52 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:57:52 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 12:57:52 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 12:57:52 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 12:57:52 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 12:57:52 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 12:57:52 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 12:57:52 DEBUG StreamManager:93 - open(resources/test-rei/test2.ttl)
+2016-09-28 12:57:52 DEBUG StreamManager:112 - Not mapped: resources/test-rei/test2.ttl
+2016-09-28 12:57:52 DEBUG StreamManager:142 - Found: resources/test-rei/test2.ttl (LocatorFile)
+2016-09-28 12:57:52 DEBUG RDFDataMgr:841 - Found: resources/test-rei/test2.ttl
+2016-09-28 12:57:52 DEBUG TripleParser:77 - Finished generating file resources/test-rei-converted-to-sp-nt/test2.nt
+2016-09-28 12:58:42 DEBUG Jena:204 - Jena initialization
+2016-09-28 12:58:42 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:58:42 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:58:42 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 12:58:42 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 12:58:42 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 12:58:42 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 12:58:42 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 12:58:43 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 12:58:43 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 12:58:43 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 12:58:43 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 12:58:43 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 12:58:43 DEBUG StreamManager:93 - open(resources/test-rei/test2.ttl)
+2016-09-28 12:58:43 DEBUG StreamManager:112 - Not mapped: resources/test-rei/test2.ttl
+2016-09-28 12:58:43 DEBUG StreamManager:142 - Found: resources/test-rei/test2.ttl (LocatorFile)
+2016-09-28 12:58:43 DEBUG RDFDataMgr:841 - Found: resources/test-rei/test2.ttl
+2016-09-28 12:58:43 DEBUG TripleParser:77 - Finished generating file resources/test-rei-converted-to-sp-nt/test2.nt
+2016-09-28 13:00:17 DEBUG Jena:204 - Jena initialization
+2016-09-28 13:00:17 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 13:00:17 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 13:00:17 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 13:00:17 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 13:00:17 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 13:00:17 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 13:00:17 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 13:00:18 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 13:00:18 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 13:00:18 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 13:00:18 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 13:00:18 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 13:00:18 DEBUG StreamManager:93 - open(resources/test-rei/test2.ttl)
+2016-09-28 13:00:18 DEBUG StreamManager:112 - Not mapped: resources/test-rei/test2.ttl
+2016-09-28 13:00:18 DEBUG StreamManager:142 - Found: resources/test-rei/test2.ttl (LocatorFile)
+2016-09-28 13:00:18 DEBUG RDFDataMgr:841 - Found: resources/test-rei/test2.ttl
+2016-09-28 13:00:18 DEBUG TripleParser:77 - Finished generating file resources/test-rei-converted-to-sp-nt/test2.nt
+2016-09-28 13:03:59 DEBUG Jena:204 - Jena initialization
+2016-09-28 13:03:59 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 13:03:59 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 13:03:59 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 13:03:59 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 13:03:59 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 13:03:59 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 13:03:59 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 13:04:00 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 13:04:00 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 13:04:00 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 13:04:00 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 13:04:00 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 13:04:00 DEBUG StreamManager:93 - open(resources/test-rei/test2.ttl)
+2016-09-28 13:04:00 DEBUG StreamManager:112 - Not mapped: resources/test-rei/test2.ttl
+2016-09-28 13:04:00 DEBUG StreamManager:142 - Found: resources/test-rei/test2.ttl (LocatorFile)
+2016-09-28 13:04:00 DEBUG RDFDataMgr:841 - Found: resources/test-rei/test2.ttl
+2016-09-28 13:04:00 DEBUG TripleParser:77 - Finished generating file resources/test-rei-converted-to-sp-nt/test2.nt
+2016-09-28 13:04:42 DEBUG Jena:204 - Jena initialization
+2016-09-28 13:04:42 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 13:04:42 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 13:04:42 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 13:04:42 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 13:04:42 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 13:04:42 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 13:04:42 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 13:04:43 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 13:04:43 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 13:04:43 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 13:04:43 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 13:04:43 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 13:04:43 DEBUG StreamManager:93 - open(resources/test-rei/test2.ttl)
+2016-09-28 13:04:43 DEBUG StreamManager:112 - Not mapped: resources/test-rei/test2.ttl
+2016-09-28 13:04:43 DEBUG StreamManager:142 - Found: resources/test-rei/test2.ttl (LocatorFile)
+2016-09-28 13:04:43 DEBUG RDFDataMgr:841 - Found: resources/test-rei/test2.ttl
+2016-09-28 13:04:43 DEBUG TripleParser:77 - Finished generating file resources/test-rei-converted-to-sp-ttl/test2.ttl
+2016-09-28 13:05:18 DEBUG Jena:204 - Jena initialization
+2016-09-28 13:05:18 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 13:05:18 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 13:05:18 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 13:05:18 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 13:05:18 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 13:05:18 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 13:05:18 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 13:05:18 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 13:05:18 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 13:05:18 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 13:05:18 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 13:05:18 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 13:05:18 DEBUG StreamManager:93 - open(resources/test-rei/test2.ttl)
+2016-09-28 13:05:18 DEBUG StreamManager:112 - Not mapped: resources/test-rei/test2.ttl
+2016-09-28 13:05:18 DEBUG StreamManager:142 - Found: resources/test-rei/test2.ttl (LocatorFile)
+2016-09-28 13:05:18 DEBUG RDFDataMgr:841 - Found: resources/test-rei/test2.ttl
+2016-09-28 13:05:18 DEBUG TripleParser:77 - Finished generating file resources/test-rei-converted-to-sp-ttl/test2.ttl
+2016-09-28 13:05:58 DEBUG Jena:204 - Jena initialization
+2016-09-28 13:05:58 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 13:05:58 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 13:05:58 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 13:05:58 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 13:05:58 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 13:05:58 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 13:05:58 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 13:05:59 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 13:05:59 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 13:05:59 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 13:05:59 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 13:05:59 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 13:05:59 DEBUG StreamManager:93 - open(resources/test-rei/test2.ttl)
+2016-09-28 13:05:59 DEBUG StreamManager:112 - Not mapped: resources/test-rei/test2.ttl
+2016-09-28 13:05:59 DEBUG StreamManager:142 - Found: resources/test-rei/test2.ttl (LocatorFile)
+2016-09-28 13:05:59 DEBUG RDFDataMgr:841 - Found: resources/test-rei/test2.ttl
+2016-09-28 13:05:59 DEBUG TripleParser:77 - Finished generating file resources/test-rei-converted-to-sp-ttl/test2.ttl
+2016-09-28 13:07:06 DEBUG Jena:204 - Jena initialization
+2016-09-28 13:07:06 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 13:07:06 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 13:07:06 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 13:07:06 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 13:07:06 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 13:07:06 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 13:07:06 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 13:07:06 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 13:07:06 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 13:07:06 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 13:07:06 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 13:07:06 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 13:07:06 DEBUG StreamManager:93 - open(resources/test-rei/test2.ttl)
+2016-09-28 13:07:06 DEBUG StreamManager:112 - Not mapped: resources/test-rei/test2.ttl
+2016-09-28 13:07:06 DEBUG StreamManager:142 - Found: resources/test-rei/test2.ttl (LocatorFile)
+2016-09-28 13:07:06 DEBUG RDFDataMgr:841 - Found: resources/test-rei/test2.ttl
+2016-09-28 13:07:06 DEBUG TripleParser:77 - Finished generating file resources/test-rei-converted-to-sp-ttl/test2.ttl
+2016-09-28 13:07:27 DEBUG Jena:204 - Jena initialization
+2016-09-28 13:07:27 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 13:07:27 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 13:07:27 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 13:07:27 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 13:07:27 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 13:07:27 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 13:07:27 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 13:07:28 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 13:07:28 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 13:07:28 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 13:07:28 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 13:07:28 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 13:07:28 DEBUG StreamManager:93 - open(resources/test-rei/test2.ttl)
+2016-09-28 13:07:28 DEBUG StreamManager:112 - Not mapped: resources/test-rei/test2.ttl
+2016-09-28 13:07:28 DEBUG StreamManager:142 - Found: resources/test-rei/test2.ttl (LocatorFile)
+2016-09-28 13:07:28 DEBUG RDFDataMgr:841 - Found: resources/test-rei/test2.ttl
+2016-09-28 13:07:28 DEBUG TripleParser:77 - Finished generating file resources/test-rei-converted-to-sp-nt/test2.nt
+2016-09-28 13:09:07 DEBUG Jena:204 - Jena initialization
+2016-09-28 13:09:07 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 13:09:07 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 13:09:07 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 13:09:07 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 13:09:07 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 13:09:07 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 13:09:07 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 13:09:07 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 13:09:07 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 13:09:07 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 13:09:07 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 13:09:07 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 13:09:07 DEBUG StreamManager:93 - open(resources/test-rei/test2.ttl)
+2016-09-28 13:09:07 DEBUG StreamManager:112 - Not mapped: resources/test-rei/test2.ttl
+2016-09-28 13:09:07 DEBUG StreamManager:142 - Found: resources/test-rei/test2.ttl (LocatorFile)
+2016-09-28 13:09:07 DEBUG RDFDataMgr:841 - Found: resources/test-rei/test2.ttl
+2016-09-28 13:09:07 DEBUG TripleParser:77 - Finished generating file resources/test-rei-converted-to-sp-nt/test2.nt
+2016-09-28 13:12:57 DEBUG Jena:204 - Jena initialization
+2016-09-28 13:12:57 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 13:12:57 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 13:12:57 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-28 13:12:57 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-28 13:12:57 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-28 13:12:57 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-28 13:12:57 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-28 13:12:57 DEBUG info:334 - System architecture: 64 bit
+2016-09-28 13:12:57 DEBUG StreamManager:93 - open(resources/prefixes.ttl)
+2016-09-28 13:12:57 DEBUG StreamManager:112 - Not mapped: resources/prefixes.ttl
+2016-09-28 13:12:57 DEBUG StreamManager:142 - Found: resources/prefixes.ttl (LocatorFile)
+2016-09-28 13:12:57 DEBUG RDFDataMgr:841 - Found: resources/prefixes.ttl
+2016-09-28 13:12:57 DEBUG StreamManager:93 - open(resources/test-rei/test2.ttl)
+2016-09-28 13:12:57 DEBUG StreamManager:112 - Not mapped: resources/test-rei/test2.ttl
+2016-09-28 13:12:57 DEBUG StreamManager:142 - Found: resources/test-rei/test2.ttl (LocatorFile)
+2016-09-28 13:12:57 DEBUG RDFDataMgr:841 - Found: resources/test-rei/test2.ttl
+2016-09-28 13:12:57 DEBUG TripleParser:77 - Finished generating file resources/test-rei_converted_to_sp_nt/test2_converted_to_sp_converted_to_sp.nt
