@@ -139,7 +139,7 @@ public class ContextualRepresentationConverter {
 				
 				// Write the prefixes if ttl
 				if (ext.equalsIgnoreCase(Constants.TURTLE_EXT)) {
-					RDFWriteUtils.writePrefixes(out);
+					RDFWriteUtils.resetPrefixMapping();
 				}
 				Parser nxp = null;
 				switch (rep.toUpperCase()) {

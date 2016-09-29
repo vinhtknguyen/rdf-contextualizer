@@ -74,8 +74,9 @@ public class PrefixTrie {
 		return node;
 	}
 	
-	public String shortenURIWithPrefix(Node uri) {
+	public String[] shortenURIWithPrefix(Node uri) {
 
+		String[] output = new String[2];
 		Map<Character, PrefixTrieNode> children = root.children;
 		StringBuilder out = new StringBuilder();
 		
@@ -91,20 +92,25 @@ public class PrefixTrie {
 			} else {
 				// No leaf with prefix
 				if (latestLeaf == null){
-					return "<" + uriStr + ">";
+					output[0] = "<" + uriStr + ">";
+					output[1] = null;
+					return output;
 				} else if (latestLeaf != null){
 					// Construct the shorted uri
 					out.append(latestLeaf.prefix);
 					out.append(":");
 					out.append(uriStr.subSequence(i, uriStr.length()));
-			        RDFWriteUtils.prefixMapping.setNsPrefix( latestLeaf.prefix, uriStr.substring(0, i) );
-
-					return out.toString();
+			        if (RDFWriteUtils.prefixMapping.get(latestLeaf.prefix) == null) {
+			        	RDFWriteUtils.prefixMapping.put( latestLeaf.prefix, uriStr.substring(0, i) );
+			        	output[1] = RDFWriteUtils.printPrefix(uriStr.substring(0, i), latestLeaf.prefix);
+			        }
+			        output[0] = out.toString();
+					return output;
 				}
 						
 			}
 		}
 		
-		return "<" + uriStr + ">";
+		return output;
 	}
 }

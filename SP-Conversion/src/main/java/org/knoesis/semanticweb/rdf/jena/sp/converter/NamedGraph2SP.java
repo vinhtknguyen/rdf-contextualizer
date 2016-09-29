@@ -13,6 +13,7 @@ public class NamedGraph2SP extends ContextualRepresentationConverter{
 	public NamedGraph2SP(long spPrefixNum, String spPrefixStr,
 			String spDelimiter, String singletonPropertyOfURI) {
 		super(spPrefixNum, spPrefixStr, spDelimiter, singletonPropertyOfURI);
+		this.namedGraphProp = NodeFactory.createURI(Constants.WAS_DERIVED_FROM);
 		// TODO Auto-generated constructor stub
 	}
 	protected Node namedGraphProp = null;
@@ -47,7 +48,7 @@ public class NamedGraph2SP extends ContextualRepresentationConverter{
 				out = new StringBuilder();
 				out.append(RDFWriteUtils.Triple2NT(nodes[0], singletonNode, nodes[2]));
 				out.append(RDFWriteUtils.Triple2NT(singletonNode, this.singletonPropertyOf, nodes[1]));
-				out.append(RDFWriteUtils.Triple2NT(singletonNode, this.namedGraphProp, nodes[2]));
+				out.append(RDFWriteUtils.Triple2NT(singletonNode, this.namedGraphProp, nodes[3]));
 				return out.toString();
 				
 			/* NANO TO TURTLE */
@@ -61,7 +62,7 @@ public class NamedGraph2SP extends ContextualRepresentationConverter{
 				out = new StringBuilder();
 				out.append(RDFWriteUtils.Triple2N3(nodes[0], singletonNode, nodes[2]));
 				out.append(RDFWriteUtils.Triple2N3(singletonNode, this.singletonPropertyOf, nodes[1]));
-				out.append(RDFWriteUtils.Triple2N3(singletonNode, this.namedGraphProp, nodes[2]));
+				out.append(RDFWriteUtils.Triple2N3(singletonNode, this.namedGraphProp, nodes[3]));
 				return out.toString();
 				default:
 				break;

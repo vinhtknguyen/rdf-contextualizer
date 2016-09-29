@@ -23,7 +23,7 @@ import org.apache.jena.shared.PrefixMapping;
 
 public class RDFWriteUtils {
     
-	public static PrefixMapping prefixMapping = PrefixMapping.Factory.create();
+	public static Map<String,String> prefixMapping = new HashMap<String,String>();
 	public static PrefixTrie trie = new PrefixTrie();
  
     /**
@@ -39,7 +39,7 @@ public class RDFWriteUtils {
      * the print strings for resources in known namespaces.
      */
     public static void registerPrefixMap(Map<String, String> map) {
-        prefixMapping.setNsPrefixes( map );
+        prefixMapping = map;
         loadPrefixesToTrie(map);
     }
     
@@ -47,7 +47,7 @@ public class RDFWriteUtils {
      * Remove a registered prefix from the table of known short forms
      */
     public static void removePrefix(String prefix) {
-        prefixMapping.removeNsPrefix(prefix);
+        prefixMapping.remove(prefix);
     }
     
     /**
@@ -56,13 +56,24 @@ public class RDFWriteUtils {
     public static void removePrefixMap(Map<String, String> map) {
         for ( String s : map.keySet() )
         {
-            prefixMapping.removeNsPrefix( s );
+            prefixMapping.remove( s );
         }
     }
 
-	public static String Node2N3(Node in){
-		
-		if (in == null) return "";
+    /** 
+     * Reset the prefixMapping 
+     */
+    
+    public static void resetPrefixMapping(){
+    	prefixMapping = new HashMap<String,String>();
+    }
+    /** This method returns an array of size 2 
+     * First element is the shorten URI string
+     * Second element is the line of prefix from the shorten one
+     * */
+	public static String[] Node2N3(Node in){
+		String[] output = new String[2];
+		if (in == null) return output;
 		
 	    if (in.isURI()) {
 			// shorten the whole URI with prefix 
@@ -84,20 +95,22 @@ public class RDFWriteUtils {
 			// shorten the whole URI with prefix for data type
 	    	if (!in.getLiteralDatatypeURI().equals("")){
 	    		out.append("^^");
-	    		out.append(Node2N3(NodeFactory.createURI(in.getLiteralDatatypeURI())));
+	    		String[] tmp = Node2N3(NodeFactory.createURI(in.getLiteralDatatypeURI()));
+	    		out.append(tmp[0]);
+	    		output[1] = tmp[1];
 //	    		System.out.println("output datatype: " + toN3(((Literal) in).getDatatype()));
 	    	}
-	    	return out.toString();
+	    	return output;
 	    } 
 	    
-	    return "";
+	    return output;
 	}
 	
 	
 	public static String shortenURIWithMapping(Node in){
 		// shorten the whole URI with prefix 
 		
-		Iterator<Entry<String, String>> it = prefixMapping.getNsPrefixMap().entrySet().iterator();
+		Iterator<Entry<String, String>> it = prefixMapping.entrySet().iterator();
 	    while (it.hasNext()) {
 	        Map.Entry<String,String> pair = (Map.Entry<String,String>)it.next();									
 	        if (in.getURI().startsWith(pair.getValue().toString())){
@@ -111,7 +124,7 @@ public class RDFWriteUtils {
 	    }
 	    return "<" + in.toString() + ">";
 	}
-	public static String shortenURI(Node in){
+	public static String[] shortenURI(Node in){
 		// shorten the whole URI with prefix 
 		return trie.shortenURIWithPrefix(in);
 		 
@@ -154,14 +167,34 @@ public class RDFWriteUtils {
 	}
 	
 	public static String Triple2N3(Node subject, Node predicate, Node object){
-		StringBuilder  out = new StringBuilder(RDFWriteUtils.Node2N3(subject));
+		StringBuilder out = new StringBuilder();
+		StringBuilder prefixes = new StringBuilder();
+		String[] tmp = null;
+
+		// Check for new prefixes to add to the prefixMapping
+		tmp = RDFWriteUtils.Node2N3(subject);
+		// The first element of temp is the shorten form, the second element is the prefix line
+		if (tmp[1] != null){
+			prefixes.append(tmp[1]);
+		}
+		out.append(tmp[0]);
 		out.append('\t');
-		out.append(RDFWriteUtils.Node2N3(predicate));
+		tmp = RDFWriteUtils.Node2N3(predicate);
+		if (tmp[1] != null){
+			prefixes.append(tmp[1]);
+		}
+		out.append(tmp[0]);
 		out.append('\t');
-		out.append(RDFWriteUtils.Node2N3(object));
+		tmp = RDFWriteUtils.Node2N3(predicate);
+		if (tmp[1] != null){
+			prefixes.append(tmp[1]);
+		}
+		out.append(tmp[0]);
 		out.append("\t . \n");
 		
-		return out.toString();
+		prefixes.append(out);
+		
+		return prefixes.toString();
 	}
 
 	public static String Triple2NT(Node[] nodes){
@@ -183,7 +216,7 @@ public class RDFWriteUtils {
 	public static void writePrefixes(String file){
 		try {
 			if (prefixMapping == null) return;
-			Iterator<Entry<String, String>> it = prefixMapping.getNsPrefixMap().entrySet().iterator();
+			Iterator<Entry<String, String>> it = prefixMapping.entrySet().iterator();
 		    while (it.hasNext()) {
 		        Map.Entry<String,String> pair = (Map.Entry<String,String>)it.next();
 				String prefixStr = "@prefix " + pair.getKey() + ":\t <" + pair.getValue() + "> \t .\n";
@@ -193,6 +226,16 @@ public class RDFWriteUtils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public static String printPrefix(String namespace, String prefix){
+		StringBuilder out = new StringBuilder();
+		out.append("@prefix\t");
+		out.append(prefix);
+		out.append(":\t<");
+		out.append(namespace);
+		out.append(">\t . \n");
+		return out.toString();
 	}
 
 

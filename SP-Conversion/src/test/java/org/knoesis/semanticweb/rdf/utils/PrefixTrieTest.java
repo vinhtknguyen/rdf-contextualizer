@@ -41,11 +41,11 @@ public class PrefixTrieTest {
 
 	@Test
 	public void testShortenURIWithPrefix() {
-		assertEquals(trie.shortenURIWithPrefix(NodeFactory.createURI("http://yago-knowledge.org/resource/BarackObama")),"yago:BarackObama");
-		assertEquals(trie.shortenURIWithPrefix(NodeFactory.createURI("http://www.w3.org/ns/prov#wasDerivedFrom")),"prov:wasDerivedFrom");
-		assertEquals(trie.shortenURIWithPrefix(NodeFactory.createURI("http://www.w3.org/ns/prov#something")),"prov:something");
-		assertNotEquals(trie.shortenURIWithPrefix(NodeFactory.createURI("http://www.w3.org/ns/pro#something")),"prov:something");
-		assertEquals(trie.shortenURIWithPrefix(NodeFactory.createURI("http://www.me.org/ns/prov#something")),"<http://www.me.org/ns/prov#something>");
+		assertEquals(trie.shortenURIWithPrefix(NodeFactory.createURI("http://yago-knowledge.org/resource/BarackObama"))[0],"yago:BarackObama");
+		assertEquals(trie.shortenURIWithPrefix(NodeFactory.createURI("http://www.w3.org/ns/prov#wasDerivedFrom"))[0],"prov:wasDerivedFrom");
+		assertEquals(trie.shortenURIWithPrefix(NodeFactory.createURI("http://www.w3.org/ns/prov#something"))[0],"prov:something");
+		assertNotEquals(trie.shortenURIWithPrefix(NodeFactory.createURI("http://www.w3.org/ns/pro#something"))[0],"prov:something");
+		assertEquals(trie.shortenURIWithPrefix(NodeFactory.createURI("http://www.me.org/ns/prov#something"))[0],"<http://www.me.org/ns/prov#something>");
 
 	}
 
