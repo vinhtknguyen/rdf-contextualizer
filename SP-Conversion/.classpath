@@ -31,7 +31,7 @@
 	<classpathentry kind="lib" path="/Volumes/Data/Development/apache-jena-3.1.0/lib/jackson-databind-2.3.3.jar"/>
 	<classpathentry kind="lib" path="/Volumes/Data/Development/apache-jena-3.1.0/lib/jcl-over-slf4j-1.7.20.jar"/>
 	<classpathentry kind="lib" path="/Volumes/Data/Development/apache-jena-3.1.0/lib/jena-arq-3.1.0.jar" sourcepath="/Volumes/Data/Development/apache-jena-3.1.0/lib-src/jena-arq-3.1.0-sources.jar"/>
-	<classpathentry kind="lib" path="/Volumes/Data/Development/apache-jena-3.1.0/lib/jena-base-3.1.0.jar"/>
+	<classpathentry kind="lib" path="/Volumes/Data/Development/apache-jena-3.1.0/lib/jena-base-3.1.0.jar" sourcepath="/Volumes/Data/Development/apache-jena-3.1.0/lib-src/jena-arq-3.1.0-sources.jar"/>
 	<classpathentry kind="lib" path="/Volumes/Data/Development/apache-jena-3.1.0/lib/jena-cmds-3.1.0.jar"/>
 	<classpathentry kind="lib" path="/Volumes/Data/Development/apache-jena-3.1.0/lib/jena-core-3.1.0.jar" sourcepath="/Volumes/Data/Development/apache-jena-3.1.0/lib-src/jena-core-3.1.0-sources.jar"/>
 	<classpathentry kind="lib" path="/Volumes/Data/Development/apache-jena-3.1.0/lib/jena-iri-3.1.0.jar"/>
@@ -64,5 +64,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="target/original-spconversion-0.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="target/spconversion-0.0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

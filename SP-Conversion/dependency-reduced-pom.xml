@@ -69,7 +69,7 @@ Proceedings of 23th International Conference on the World Wide Web.</description
     </dependency>
   </dependencies>
   <properties>
-    <WORKSPACE_HOME>/Users/Vinh/Documents/workspace</WORKSPACE_HOME>
+    <WORKSPACE_HOME>/Users/Vinh/products/</WORKSPACE_HOME>
     <PROJECT_HOME>$(WORKSPACE_HOME)/$(PROJECT_NAME)</PROJECT_HOME>
     <PROJECT_NAME>SP-Conversion</PROJECT_NAME>
   </properties>

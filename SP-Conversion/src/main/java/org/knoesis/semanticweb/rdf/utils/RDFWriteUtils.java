@@ -24,13 +24,14 @@ import org.apache.jena.shared.PrefixMapping;
 public class RDFWriteUtils {
     
 	public static PrefixMapping prefixMapping = PrefixMapping.Factory.create();
+	public static PrefixTrie trie = new PrefixTrie();
  
     /**
      * Register a new prefix/namespace mapping which will be used to shorten
      * the print strings for resources in known namespaces.
      */
     public static void registerPrefix(String prefix, String namespace) {
-        prefixMapping.setNsPrefix( prefix, namespace );
+        trie.insert(namespace, prefix);
     }
     
     /**
@@ -39,6 +40,7 @@ public class RDFWriteUtils {
      */
     public static void registerPrefixMap(Map<String, String> map) {
         prefixMapping.setNsPrefixes( map );
+        loadPrefixesToTrie(map);
     }
     
     /**
@@ -92,7 +94,7 @@ public class RDFWriteUtils {
 	}
 	
 	
-	public static String shortenURI(Node in){
+	public static String shortenURIWithMapping(Node in){
 		// shorten the whole URI with prefix 
 		
 		Iterator<Entry<String, String>> it = prefixMapping.getNsPrefixMap().entrySet().iterator();
@@ -108,6 +110,11 @@ public class RDFWriteUtils {
 	        }
 	    }
 	    return "<" + in.toString() + ">";
+	}
+	public static String shortenURI(Node in){
+		// shorten the whole URI with prefix 
+		return trie.shortenURIWithPrefix(in);
+		 
 	}
 
 
@@ -209,11 +216,21 @@ public class RDFWriteUtils {
 		return map;
 	}
 	
-	public static Map<String, String> loadPrefixes(String file){
+	public static void loadPrefixes(String file){
 		//read file into stream, try-with-resources
 		Model model = ModelFactory.createDefaultModel();
 		model.read(file);
-		return model.getNsPrefixMap();
+		if (model.getNsPrefixMap() == null) return;
+		else loadPrefixesToTrie(model.getNsPrefixMap());
+	}
+	
+	private static void loadPrefixesToTrie(Map<String,String> map){
+		if (map == null) return;
+		Iterator<Entry<String, String>> it = map.entrySet().iterator();
+		while (it.hasNext()) {
+		    Map.Entry<String,String> pair = (Map.Entry<String,String>)it.next();
+		    trie.insert(pair.getValue(), pair.getKey());
+		}
 	}
 
 }

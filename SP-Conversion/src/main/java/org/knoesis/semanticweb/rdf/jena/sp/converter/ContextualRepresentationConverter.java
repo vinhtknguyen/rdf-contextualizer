@@ -35,9 +35,8 @@ public class ContextualRepresentationConverter {
 	
 	final static Logger logger = Logger.getLogger(ContextualRepresentationConverter.class);
 
-	private String prefixesFile = "src/main/resources/prefixes.ttl";
+	private String prefixesFile = "prefixes.ttl";
 
-	protected Model model = null;
 	protected long initUUIDNumber = -1;
 	protected String initUUIDPrefix = null;
 
@@ -50,10 +49,7 @@ public class ContextualRepresentationConverter {
 		spDelimiter = "_";
 		initUUIDPrefix = "sp";
 		
-		Map<String,String> map = RDFWriteUtils.loadPrefixes(this.prefixesFile);
-		this.model = ModelFactory.createDefaultModel();
-		this.model.setNsPrefixes(map);
-		RDFWriteUtils.registerPrefixMap(map);;
+		RDFWriteUtils.loadPrefixes(this.prefixesFile);
 	}
 	
 	public ContextualRepresentationConverter(long spPrefixNum, String spPrefixStr, String spDelimiter, String singletonPropertyOfURI){
@@ -62,10 +58,7 @@ public class ContextualRepresentationConverter {
 		this.setSPDelimiter(spDelimiter);
 		this.singletonPropertyOf = NodeFactory.createURI(singletonPropertyOfURI);
 		
-		Map<String,String> map = RDFWriteUtils.loadPrefixes(this.prefixesFile);
-		this.model = ModelFactory.createDefaultModel();
-		this.model.setNsPrefixes(map);
-		RDFWriteUtils.registerPrefixMap(map);;
+		RDFWriteUtils.loadPrefixes(this.prefixesFile);
 	}
 	
 	public void convert(String file, String ext, String rep) {
@@ -73,7 +66,18 @@ public class ContextualRepresentationConverter {
 		// If the input is a file
 		if (!Files.isDirectory(Paths.get(file))){
 			try {
-				convertFile(file, genFileOut(file, ext), ext, rep);
+				String fileOut = genFileOut(file, ext);
+
+				long start = System.currentTimeMillis();
+				
+				convertFile(file, fileOut, ext, rep);
+				
+				long end = System.currentTimeMillis() - start;
+				
+				System.out.println("Time\t" + file + "\t" + end);
+				
+				System.out.println("Size\t" + file + "\t" + Paths.get(file).toFile().length() + "\t" + fileOut + "\t" + Paths.get(fileOut).toFile().length());
+
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
@@ -86,12 +90,21 @@ public class ContextualRepresentationConverter {
 				String dirOut = file + (ext.equals(Constants.NTRIPLE_EXT)?Constants.CONVERTED_TO_SP_NT:Constants.CONVERTED_TO_SP_TTL);
 				Files.createDirectories(Paths.get(dirOut));
 		        
-				String fileout = null;
+				String fileOut = null;
 				
 				/* PROCESS EACH INPUT FILE & GENERATE OUTPUT FILE */
 				for (Path entry : stream) {
-					fileout = dirOut + "/" + genFileOut(entry.getFileName().toString(), ext);
-		        	convertFile(entry.toString(), fileout, ext, rep);
+					fileOut = dirOut + "/" + genFileOut(entry.getFileName().toString(), ext);
+
+					long start = System.currentTimeMillis();
+		        	
+					convertFile(entry.toString(), fileOut, ext, rep);
+					
+		        	long end = System.currentTimeMillis() - start;
+
+					System.out.println("Time(s)\t" + entry.toString() + "\t" + end);
+					
+					System.out.println("Size(mb)\t" + entry.toString() + "\t" + Paths.get(entry.toString()).toFile().length() + "\t" + fileOut + "\t" + Paths.get(fileOut).toFile().length());
 		        }
 		    } catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block

@@ -1,10 +1,7 @@
 package org.knoesis.semanticweb.rdf.jena.sp.converter;
 
-import static org.junit.Assert.*;
-
 import org.junit.Before;
 import org.junit.Test;
-import org.knoesis.semanticweb.rdf.utils.RDFWriteUtils;
 
 public class ContextualRepresentationConverterTest {
 
