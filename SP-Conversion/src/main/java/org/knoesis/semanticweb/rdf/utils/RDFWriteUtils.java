@@ -19,13 +19,17 @@ import org.apache.jena.graph.Node_Literal;
 import org.apache.jena.graph.Node_URI;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.shared.PrefixMapping;
 
 public class RDFWriteUtils {
     
 	public static Map<String,String> prefixMapping = new HashMap<String,String>();
 	public static PrefixTrie trie = new PrefixTrie();
+	private static int currentAutoPrefixNsNum = 0;
  
+	public static String getNextPrefixNs(){
+		currentAutoPrefixNsNum++;
+		return Constants.NS_STR + currentAutoPrefixNsNum;
+	}
     /**
      * Register a new prefix/namespace mapping which will be used to shorten
      * the print strings for resources in known namespaces.
@@ -71,9 +75,9 @@ public class RDFWriteUtils {
      * First element is the shorten URI string
      * Second element is the line of prefix from the shorten one
      * */
-	public static String[] Node2N3(Node in){
-		String[] output = new String[2];
-		if (in == null) return output;
+	public static URIShorteningTriplet Node2N3(Node in){
+		URIShorteningTriplet triplet = null;
+		if (in == null) return triplet;
 		
 	    if (in.isURI()) {
 			// shorten the whole URI with prefix 
@@ -95,15 +99,14 @@ public class RDFWriteUtils {
 			// shorten the whole URI with prefix for data type
 	    	if (!in.getLiteralDatatypeURI().equals("")){
 	    		out.append("^^");
-	    		String[] tmp = Node2N3(NodeFactory.createURI(in.getLiteralDatatypeURI()));
-	    		out.append(tmp[0]);
-	    		output[1] = tmp[1];
+	    		triplet = Node2N3(NodeFactory.createURI(in.getLiteralDatatypeURI()));
+	    		out.append(triplet.getShortenURI());
 //	    		System.out.println("output datatype: " + toN3(((Literal) in).getDatatype()));
 	    	}
-	    	return output;
+	    	return URIShorteningTriplet.createTriplet(out.toString(), triplet.getPrefix(), triplet.getNamespace());
 	    } 
 	    
-	    return output;
+	    return triplet;
 	}
 	
 	
@@ -124,7 +127,7 @@ public class RDFWriteUtils {
 	    }
 	    return "<" + in.toString() + ">";
 	}
-	public static String[] shortenURI(Node in){
+	public static URIShorteningTriplet shortenURI(Node in){
 		// shorten the whole URI with prefix 
 		return trie.shortenURIWithPrefix(in);
 		 
@@ -166,30 +169,48 @@ public class RDFWriteUtils {
 		return RDFWriteUtils.Triple2N3(nodes[0], nodes[1], nodes[2]);
 	}
 	
+	public static String printPrefix(String prefix, String namespace){
+		if (namespace != null && prefix != null){
+			StringBuilder out = new StringBuilder();
+			out.append("@prefix\t");
+			out.append(prefix);
+			out.append(":\t<");
+			out.append(namespace);
+			out.append(">\t . \n");
+			return out.toString();
+		}
+		return "";
+	}
 	public static String Triple2N3(Node subject, Node predicate, Node object){
 		StringBuilder out = new StringBuilder();
 		StringBuilder prefixes = new StringBuilder();
-		String[] tmp = null;
+		// The first element of temp is the shorten form, the second element is the prefix, and the third is the namespace
+		URIShorteningTriplet triplet = null;
 
 		// Check for new prefixes to add to the prefixMapping
-		tmp = RDFWriteUtils.Node2N3(subject);
-		// The first element of temp is the shorten form, the second element is the prefix line
-		if (tmp[1] != null){
-			prefixes.append(tmp[1]);
-		}
-		out.append(tmp[0]);
+		// In Subject
+		triplet = RDFWriteUtils.Node2N3(subject);
+		
+		prefixes.append(printPrefix(triplet.getPrefix(),triplet.getNamespace()));
+		
+		out.append(triplet.getShortenURI());
 		out.append('\t');
-		tmp = RDFWriteUtils.Node2N3(predicate);
-		if (tmp[1] != null){
-			prefixes.append(tmp[1]);
-		}
-		out.append(tmp[0]);
+		
+		// In Predicate
+		triplet = RDFWriteUtils.Node2N3(predicate);
+		
+		prefixes.append(printPrefix(triplet.getPrefix(),triplet.getNamespace()));
+		
+		out.append(triplet.getShortenURI());
 		out.append('\t');
-		tmp = RDFWriteUtils.Node2N3(predicate);
-		if (tmp[1] != null){
-			prefixes.append(tmp[1]);
-		}
-		out.append(tmp[0]);
+		
+		// In Object
+		triplet = RDFWriteUtils.Node2N3(object);
+		
+		prefixes.append(printPrefix(triplet.getPrefix(),triplet.getNamespace()));
+		
+		out.append(triplet.getShortenURI());
+		out.append('\t');
 		out.append("\t . \n");
 		
 		prefixes.append(out);
@@ -228,17 +249,6 @@ public class RDFWriteUtils {
 		}
 	}
 	
-	public static String printPrefix(String namespace, String prefix){
-		StringBuilder out = new StringBuilder();
-		out.append("@prefix\t");
-		out.append(prefix);
-		out.append(":\t<");
-		out.append(namespace);
-		out.append(">\t . \n");
-		return out.toString();
-	}
-
-
 	public static Map<String,String> parsePrefixes(String file){
 		//read file into stream, try-with-resources
 		Map<String,String> map = new HashMap<String,String>();

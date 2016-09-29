@@ -9,12 +9,9 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Map;
 
 import org.apache.jena.graph.Node;
 import org.apache.jena.graph.NodeFactory;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.log4j.Logger;
 import org.knoesis.semanticweb.rdf.jena.sp.parser.Parser;
 import org.knoesis.semanticweb.rdf.jena.sp.parser.QuadParser;

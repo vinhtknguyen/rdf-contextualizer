@@ -1,5 +1,7 @@
 package org.knoesis.semanticweb.rdf.utils;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -74,43 +76,77 @@ public class PrefixTrie {
 		return node;
 	}
 	
-	public String[] shortenURIWithPrefix(Node uri) {
+	/**
+	 * Return a pair of <shortenURI, <prefix, namespace>>
+	 * */
+	public URIShorteningTriplet shortenURIWithPrefix(Node uri) {
 
-		String[] output = new String[2];
 		Map<Character, PrefixTrieNode> children = root.children;
-		StringBuilder out = new StringBuilder();
+		String ns = null, prefix;
 		
 		PrefixTrieNode curnode = null, latestLeaf = null;
-		int i = 0;
-		String uriStr = uri.toString();
+		int i = 0, lastNsInd = 0;
+		final String uriStr = uri.toString();
+		StringBuilder shorten = new StringBuilder();
+		
 		for (i = 0; i < uriStr.length(); i++) {
+			
 			char c = uriStr.charAt(i);
+			
 			if (children.containsKey(c)) {
+				
 				curnode = children.get(c);
 				children = curnode.children;
 				if (curnode.isLeaf) latestLeaf = curnode;
+				
 			} else {
-				// No leaf with prefix
-				if (latestLeaf == null){
-					output[0] = "<" + uriStr + ">";
-					output[1] = null;
-					return output;
-				} else if (latestLeaf != null){
-					// Construct the shorted uri
-					out.append(latestLeaf.prefix);
-					out.append(":");
-					out.append(uriStr.subSequence(i, uriStr.length()));
-			        if (RDFWriteUtils.prefixMapping.get(latestLeaf.prefix) == null) {
-			        	RDFWriteUtils.prefixMapping.put( latestLeaf.prefix, uriStr.substring(0, i) );
-			        	output[1] = RDFWriteUtils.printPrefix(uriStr.substring(0, i), latestLeaf.prefix);
-			        }
-			        output[0] = out.toString();
-					return output;
-				}
-						
+				lastNsInd = i;
+				break;
 			}
 		}
 		
-		return output;
+		// No leaf with existing prefix
+		if (latestLeaf != null){
+			// Construct the shorted uri
+			lastNsInd = i;
+			prefix = latestLeaf.prefix;
+			ns = uriStr.substring(0, lastNsInd);
+			shorten.append(prefix);
+			shorten.append(":");
+			try {
+				shorten.append(URLEncoder.encode(uriStr.substring(lastNsInd),"UTF-8").replaceAll("[{}()\\|\\$\\*\\+\\.\\^:,]",""));
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			
+			// Generating new prefix and ns, insert it to the trie,
+			lastNsInd = uriStr.lastIndexOf('/');
+			prefix = RDFWriteUtils.getNextPrefixNs();
+			if (lastNsInd > 0 && uriStr.charAt(lastNsInd-1) != '/' && uriStr.charAt(lastNsInd-2) != ':' ) {
+				ns = uriStr.substring(0, lastNsInd + 1);
+				shorten.append(prefix);
+				shorten.append(":");
+				try {
+					shorten.append(URLEncoder.encode(uriStr.substring(lastNsInd+1),"UTF-8").replaceAll("[{}()\\|\\$\\*\\+\\.\\^:,]",""));
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				ns = uriStr;
+				shorten.append(prefix);
+			}
+		
+			insert(ns, prefix);
+		}
+		
+        if (RDFWriteUtils.prefixMapping.get(prefix) == null) {
+        	RDFWriteUtils.prefixMapping.put( prefix, ns );
+        	return URIShorteningTriplet.createTriplet(shorten.toString(), prefix, ns);
+        }
+		return URIShorteningTriplet.createTriplet(shorten.toString(), null, null);
+
 	}
 }
