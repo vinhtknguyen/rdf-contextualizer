@@ -11,6 +11,6 @@ yago:id_f258yz_1gi_15sq7rt	rdf:singletonPropertyOf	yago:created		 .
 yago:Tony_Gibson	yago:id_f258yz_1gi_15sq7rt	yago:Ghetto_Blaster_%28video_game%29		 . 
 yago:id_6z0jld_ice_qhtymo	rdf:singletonPropertyOf	yago:hasWebsite		 . 
 @prefix	ns1:	<http://www.manttavilppula.fi>	 . 
-yago:M%C3%A4ntt%C3%A4-Vilppula	yago:id_6z0jld_ice_qhtymo	ns1		 . 
+yago:M%C3%A4ntt%C3%A4-Vilppula	yago:id_6z0jld_ice_qhtymo	ns1:		 . 
 yago:id_ha2a9a_1s2_4mobd4	rdf:singletonPropertyOf	yago:isAffiliatedTo		 . 
 yago:Luis_Carlos_Mart%C3%ADn	yago:id_ha2a9a_1s2_4mobd4	yago:Real_Murcia_Imperial		 . 

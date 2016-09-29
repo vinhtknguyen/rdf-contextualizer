@@ -112,7 +112,8 @@ public class ContextualRepresentationConverter {
 			}
 				
 		}
-	
+		System.out.println("Namespaces:\t" + RDFWriteUtils.getCurrentAutoPrefixNsNum());
+
 	}
 	
 	

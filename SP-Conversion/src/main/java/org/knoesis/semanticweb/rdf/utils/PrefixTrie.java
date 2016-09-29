@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.jena.graph.Node;
+import org.apache.jena.util.PrintUtil;
 
 public class PrefixTrie {
 	private PrefixTrieNode root;
@@ -104,15 +105,13 @@ public class PrefixTrie {
 				break;
 			}
 		}
-		
 		// No leaf with existing prefix
 		if (latestLeaf != null){
 			// Construct the shorted uri
 			lastNsInd = i;
 			prefix = latestLeaf.prefix;
 			ns = uriStr.substring(0, lastNsInd);
-			shorten.append(prefix);
-			shorten.append(":");
+			shorten.append(prefix + ":");
 			try {
 				shorten.append(URLEncoder.encode(uriStr.substring(lastNsInd),"UTF-8").replaceAll("[{}()\\|\\$\\*\\+\\.\\^:,]",""));
 			} catch (UnsupportedEncodingException e) {
@@ -126,17 +125,18 @@ public class PrefixTrie {
 			prefix = RDFWriteUtils.getNextPrefixNs();
 			if (lastNsInd > 0 && uriStr.charAt(lastNsInd-1) != '/' && uriStr.charAt(lastNsInd-2) != ':' ) {
 				ns = uriStr.substring(0, lastNsInd + 1);
-				shorten.append(prefix);
-				shorten.append(":");
+				shorten.append(prefix + ":");
 				try {
-					shorten.append(URLEncoder.encode(uriStr.substring(lastNsInd+1),"UTF-8").replaceAll("[{}()\\|\\$\\*\\+\\.\\^:,]",""));
+					if (!uriStr.substring(lastNsInd+1).isEmpty()){
+						shorten.append(URLEncoder.encode(uriStr.substring(lastNsInd+1),"UTF-8").replaceAll("[{}()\\|\\$\\*\\+\\.\\^:,]",""));
+					}
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			} else {
 				ns = uriStr;
-				shorten.append(prefix);
+				shorten.append(prefix + ":");
 			}
 		
 			insert(ns, prefix);

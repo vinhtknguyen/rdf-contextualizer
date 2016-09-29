@@ -19934,3 +19934,1653 @@
 2016-09-29 15:31:44 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
 2016-09-29 15:31:44 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
 2016-09-29 15:31:44 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:38 DEBUG Jena:204 - Jena initialization
+2016-09-29 15:38:39 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-29 15:38:39 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-29 15:38:39 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-29 15:38:39 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-29 15:38:39 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-29 15:38:39 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-29 15:38:39 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-29 15:38:39 DEBUG info:334 - System architecture: 64 bit
+2016-09-29 15:38:39 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:39 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:39 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:39 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:39 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:39 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:39 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:39 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:39 DEBUG StreamManager:93 - open(src/test/resources/test-file/yagoFacts.ttl)
+2016-09-29 15:38:39 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/yagoFacts.ttl
+2016-09-29 15:38:39 DEBUG StreamManager:142 - Found: src/test/resources/test-file/yagoFacts.ttl (LocatorFile)
+2016-09-29 15:38:39 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/yagoFacts.ttl
+2016-09-29 15:38:39 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/yagoFacts_sp.ttl
+2016-09-29 15:38:39 DEBUG StreamManager:93 - open(src/test/resources/test-file/yagoFacts.ttl)
+2016-09-29 15:38:39 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/yagoFacts.ttl
+2016-09-29 15:38:39 DEBUG StreamManager:142 - Found: src/test/resources/test-file/yagoFacts.ttl (LocatorFile)
+2016-09-29 15:38:39 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/yagoFacts.ttl
+2016-09-29 15:38:39 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/yagoFacts_sp.nt
+2016-09-29 15:38:39 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:39 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:39 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:39 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:39 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:39 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:39 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:39 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:39 DEBUG StreamManager:93 - open(src/test/resources/test-default/yagoFacts.ttl)
+2016-09-29 15:38:39 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-default/yagoFacts.ttl
+2016-09-29 15:38:39 DEBUG StreamManager:142 - Found: src/test/resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-29 15:38:39 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-default/yagoFacts.ttl
+2016-09-29 15:38:39 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-default_converted_to_sp_ttl/yagoFacts_sp.ttl
+2016-09-29 15:38:39 DEBUG StreamManager:93 - open(src/test/resources/test-default/yagoFacts.ttl)
+2016-09-29 15:38:39 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-default/yagoFacts.ttl
+2016-09-29 15:38:39 DEBUG StreamManager:142 - Found: src/test/resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-29 15:38:39 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-default/yagoFacts.ttl
+2016-09-29 15:38:39 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-default_converted_to_sp_nt/yagoFacts_sp.nt
+2016-09-29 15:38:39 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:39 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:39 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:39 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:40 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:40 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:40 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:40 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:40 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:40 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:40 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:40 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:40 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:40 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:40 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:40 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:40 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_ng.nq)
+2016-09-29 15:38:40 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_ng.nq
+2016-09-29 15:38:40 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_ng.nq (LocatorFile)
+2016-09-29 15:38:40 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_ng.nq
+2016-09-29 15:38:40 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-file/test2_ng_sp.ttl
+2016-09-29 15:38:40 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_ng.nq)
+2016-09-29 15:38:40 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_ng.nq
+2016-09-29 15:38:40 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_ng.nq (LocatorFile)
+2016-09-29 15:38:40 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_ng.nq
+2016-09-29 15:38:40 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-file/test2_ng_sp.nt
+2016-09-29 15:38:40 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:40 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:40 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:40 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:40 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:40 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:40 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:40 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:40 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:40 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:40 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:40 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:40 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:40 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:40 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:40 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:40 DEBUG StreamManager:93 - open(src/test/resources/test-ng/genders_en.tql)
+2016-09-29 15:38:40 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/genders_en.tql
+2016-09-29 15:38:40 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/genders_en.tql (LocatorFile)
+2016-09-29 15:38:40 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/genders_en.tql
+2016-09-29 15:38:41 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_ttl/genders_en_sp.ttl
+2016-09-29 15:38:41 DEBUG StreamManager:93 - open(src/test/resources/test-ng/geo_coordinates_en.nq)
+2016-09-29 15:38:41 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/geo_coordinates_en.nq
+2016-09-29 15:38:41 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/geo_coordinates_en.nq (LocatorFile)
+2016-09-29 15:38:41 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/geo_coordinates_en.nq
+2016-09-29 15:38:41 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_ttl/geo_coordinates_en_sp.ttl
+2016-09-29 15:38:41 DEBUG StreamManager:93 - open(src/test/resources/test-ng/test1.nq)
+2016-09-29 15:38:41 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/test1.nq
+2016-09-29 15:38:41 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/test1.nq (LocatorFile)
+2016-09-29 15:38:41 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/test1.nq
+2016-09-29 15:38:41 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_ttl/test1_sp.ttl
+2016-09-29 15:38:41 DEBUG StreamManager:93 - open(src/test/resources/test-ng/test2_ng.nq)
+2016-09-29 15:38:41 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/test2_ng.nq
+2016-09-29 15:38:41 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/test2_ng.nq (LocatorFile)
+2016-09-29 15:38:41 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/test2_ng.nq
+2016-09-29 15:38:41 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_ttl/test2_ng_sp.ttl
+2016-09-29 15:38:41 DEBUG StreamManager:93 - open(src/test/resources/test-ng/genders_en.tql)
+2016-09-29 15:38:41 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/genders_en.tql
+2016-09-29 15:38:41 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/genders_en.tql (LocatorFile)
+2016-09-29 15:38:41 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/genders_en.tql
+2016-09-29 15:38:42 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_nt/genders_en_sp.nt
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(src/test/resources/test-ng/geo_coordinates_en.nq)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/geo_coordinates_en.nq
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/geo_coordinates_en.nq (LocatorFile)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/geo_coordinates_en.nq
+2016-09-29 15:38:42 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_nt/geo_coordinates_en_sp.nt
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(src/test/resources/test-ng/test1.nq)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/test1.nq
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/test1.nq (LocatorFile)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/test1.nq
+2016-09-29 15:38:42 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_nt/test1_sp.nt
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(src/test/resources/test-ng/test2_ng.nq)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/test2_ng.nq
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/test2_ng.nq (LocatorFile)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/test2_ng.nq
+2016-09-29 15:38:42 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_nt/test2_ng_sp.nt
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_nano.nq)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_nano.nq
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_nano.nq (LocatorFile)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_nano.nq
+2016-09-29 15:38:42 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-file/test2_nano_sp.nt
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_nano.nq)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_nano.nq
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_nano.nq (LocatorFile)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_nano.nq
+2016-09-29 15:38:42 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-file/test2_nano_sp.nt
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(src/test/resources/test-nano/test2_nano.nq)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-nano/test2_nano.nq
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: src/test/resources/test-nano/test2_nano.nq (LocatorFile)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-nano/test2_nano.nq
+2016-09-29 15:38:42 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-nano_converted_to_sp_nt/test2_nano_sp.nt
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(src/test/resources/test-nano/test2_nano.nq)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-nano/test2_nano.nq
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: src/test/resources/test-nano/test2_nano.nq (LocatorFile)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-nano/test2_nano.nq
+2016-09-29 15:38:42 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-nano_converted_to_sp_ttl/test2_nano_sp.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_rei.ttl)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_rei.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_rei.ttl (LocatorFile)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_rei.ttl
+2016-09-29 15:38:42 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/test2_rei_sp.nt
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_rei.ttl)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_rei.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_rei.ttl (LocatorFile)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_rei.ttl
+2016-09-29 15:38:42 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/test2_rei_sp.nt
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(src/test/resources/test-rei/test2.ttl)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-rei/test2.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: src/test/resources/test-rei/test2.ttl (LocatorFile)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-rei/test2.ttl
+2016-09-29 15:38:42 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-rei_converted_to_sp_nt/test2_sp.nt
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(src/test/resources/test-rei/test2.ttl)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-rei/test2.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: src/test/resources/test-rei/test2.ttl (LocatorFile)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-rei/test2.ttl
+2016-09-29 15:38:42 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-rei_converted_to_sp_ttl/test2_sp.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_triple.nt)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_triple.nt
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_triple.nt (LocatorFile)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_triple.nt
+2016-09-29 15:38:42 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/test2_triple_sp.nt
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_triple.nt)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_triple.nt
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_triple.nt (LocatorFile)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_triple.nt
+2016-09-29 15:38:42 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/test2_triple_sp.nt
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(src/test/resources/test-triple/test2_triple.nt)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-triple/test2_triple.nt
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: src/test/resources/test-triple/test2_triple.nt (LocatorFile)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-triple/test2_triple.nt
+2016-09-29 15:38:42 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-triple_converted_to_sp_ttl/test2_triple_sp.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(src/test/resources/test-triple/test2_triple.nt)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-triple/test2_triple.nt
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: src/test/resources/test-triple/test2_triple.nt (LocatorFile)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-triple/test2_triple.nt
+2016-09-29 15:38:42 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-triple_converted_to_sp_nt/test2_triple_sp.nt
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:38:42 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:38:42 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:38:42 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:49 DEBUG Jena:204 - Jena initialization
+2016-09-29 15:45:49 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-29 15:45:49 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-29 15:45:49 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-29 15:45:49 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-29 15:45:49 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-29 15:45:49 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-29 15:45:49 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-29 15:45:50 DEBUG info:334 - System architecture: 64 bit
+2016-09-29 15:45:50 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:50 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:50 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:50 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:50 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:93 - open(src/test/resources/test-file/yagoFacts.ttl)
+2016-09-29 15:45:50 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/yagoFacts.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:142 - Found: src/test/resources/test-file/yagoFacts.ttl (LocatorFile)
+2016-09-29 15:45:50 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/yagoFacts.ttl
+2016-09-29 15:45:50 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/yagoFacts_sp.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:93 - open(src/test/resources/test-file/yagoFacts.ttl)
+2016-09-29 15:45:50 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/yagoFacts.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:142 - Found: src/test/resources/test-file/yagoFacts.ttl (LocatorFile)
+2016-09-29 15:45:50 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/yagoFacts.ttl
+2016-09-29 15:45:50 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/yagoFacts_sp.nt
+2016-09-29 15:45:50 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:50 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:50 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:50 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:50 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:93 - open(src/test/resources/test-default/yagoFacts.ttl)
+2016-09-29 15:45:50 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-default/yagoFacts.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:142 - Found: src/test/resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-29 15:45:50 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-default/yagoFacts.ttl
+2016-09-29 15:45:50 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-default_converted_to_sp_ttl/yagoFacts_sp.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:93 - open(src/test/resources/test-default/yagoFacts.ttl)
+2016-09-29 15:45:50 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-default/yagoFacts.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:142 - Found: src/test/resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-29 15:45:50 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-default/yagoFacts.ttl
+2016-09-29 15:45:50 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-default_converted_to_sp_nt/yagoFacts_sp.nt
+2016-09-29 15:45:50 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:50 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:50 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:50 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:50 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:50 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:50 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:50 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:50 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_ng.nq)
+2016-09-29 15:45:50 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_ng.nq
+2016-09-29 15:45:50 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_ng.nq (LocatorFile)
+2016-09-29 15:45:50 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_ng.nq
+2016-09-29 15:45:50 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-file/test2_ng_sp.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_ng.nq)
+2016-09-29 15:45:50 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_ng.nq
+2016-09-29 15:45:50 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_ng.nq (LocatorFile)
+2016-09-29 15:45:50 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_ng.nq
+2016-09-29 15:45:50 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-file/test2_ng_sp.nt
+2016-09-29 15:45:50 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:50 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:50 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:50 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:50 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:50 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:50 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:50 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:50 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:50 DEBUG StreamManager:93 - open(src/test/resources/test-ng/genders_en.tql)
+2016-09-29 15:45:50 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/genders_en.tql
+2016-09-29 15:45:50 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/genders_en.tql (LocatorFile)
+2016-09-29 15:45:50 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/genders_en.tql
+2016-09-29 15:45:51 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_ttl/genders_en_sp.ttl
+2016-09-29 15:45:51 DEBUG StreamManager:93 - open(src/test/resources/test-ng/geo_coordinates_en.nq)
+2016-09-29 15:45:51 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/geo_coordinates_en.nq
+2016-09-29 15:45:51 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/geo_coordinates_en.nq (LocatorFile)
+2016-09-29 15:45:51 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/geo_coordinates_en.nq
+2016-09-29 15:45:51 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_ttl/geo_coordinates_en_sp.ttl
+2016-09-29 15:45:51 DEBUG StreamManager:93 - open(src/test/resources/test-ng/test1.nq)
+2016-09-29 15:45:51 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/test1.nq
+2016-09-29 15:45:51 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/test1.nq (LocatorFile)
+2016-09-29 15:45:51 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/test1.nq
+2016-09-29 15:45:51 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_ttl/test1_sp.ttl
+2016-09-29 15:45:51 DEBUG StreamManager:93 - open(src/test/resources/test-ng/test2_ng.nq)
+2016-09-29 15:45:51 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/test2_ng.nq
+2016-09-29 15:45:51 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/test2_ng.nq (LocatorFile)
+2016-09-29 15:45:51 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/test2_ng.nq
+2016-09-29 15:45:51 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_ttl/test2_ng_sp.ttl
+2016-09-29 15:45:51 DEBUG StreamManager:93 - open(src/test/resources/test-ng/genders_en.tql)
+2016-09-29 15:45:51 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/genders_en.tql
+2016-09-29 15:45:51 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/genders_en.tql (LocatorFile)
+2016-09-29 15:45:51 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/genders_en.tql
+2016-09-29 15:45:52 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_nt/genders_en_sp.nt
+2016-09-29 15:45:52 DEBUG StreamManager:93 - open(src/test/resources/test-ng/geo_coordinates_en.nq)
+2016-09-29 15:45:52 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/geo_coordinates_en.nq
+2016-09-29 15:45:52 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/geo_coordinates_en.nq (LocatorFile)
+2016-09-29 15:45:52 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/geo_coordinates_en.nq
+2016-09-29 15:45:52 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_nt/geo_coordinates_en_sp.nt
+2016-09-29 15:45:52 DEBUG StreamManager:93 - open(src/test/resources/test-ng/test1.nq)
+2016-09-29 15:45:52 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/test1.nq
+2016-09-29 15:45:52 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/test1.nq (LocatorFile)
+2016-09-29 15:45:52 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/test1.nq
+2016-09-29 15:45:52 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_nt/test1_sp.nt
+2016-09-29 15:45:52 DEBUG StreamManager:93 - open(src/test/resources/test-ng/test2_ng.nq)
+2016-09-29 15:45:52 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/test2_ng.nq
+2016-09-29 15:45:52 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/test2_ng.nq (LocatorFile)
+2016-09-29 15:45:52 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/test2_ng.nq
+2016-09-29 15:45:52 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_nt/test2_ng_sp.nt
+2016-09-29 15:45:52 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:52 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:52 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:52 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:52 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:52 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:52 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:52 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:52 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:52 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:52 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:52 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:52 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:52 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:52 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:52 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:52 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_nano.nq)
+2016-09-29 15:45:52 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_nano.nq
+2016-09-29 15:45:52 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_nano.nq (LocatorFile)
+2016-09-29 15:45:52 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_nano.nq
+2016-09-29 15:45:52 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-file/test2_nano_sp.nt
+2016-09-29 15:45:52 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_nano.nq)
+2016-09-29 15:45:52 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_nano.nq
+2016-09-29 15:45:52 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_nano.nq (LocatorFile)
+2016-09-29 15:45:52 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_nano.nq
+2016-09-29 15:45:52 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-file/test2_nano_sp.nt
+2016-09-29 15:45:52 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:52 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:52 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:52 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:52 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:52 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:52 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:52 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:52 DEBUG StreamManager:93 - open(src/test/resources/test-nano/test2_nano.nq)
+2016-09-29 15:45:52 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-nano/test2_nano.nq
+2016-09-29 15:45:52 DEBUG StreamManager:142 - Found: src/test/resources/test-nano/test2_nano.nq (LocatorFile)
+2016-09-29 15:45:52 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-nano/test2_nano.nq
+2016-09-29 15:45:52 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-nano_converted_to_sp_nt/test2_nano_sp.nt
+2016-09-29 15:45:52 DEBUG StreamManager:93 - open(src/test/resources/test-nano/test2_nano.nq)
+2016-09-29 15:45:52 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-nano/test2_nano.nq
+2016-09-29 15:45:52 DEBUG StreamManager:142 - Found: src/test/resources/test-nano/test2_nano.nq (LocatorFile)
+2016-09-29 15:45:52 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-nano/test2_nano.nq
+2016-09-29 15:45:52 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-nano_converted_to_sp_ttl/test2_nano_sp.ttl
+2016-09-29 15:45:52 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:52 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:52 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:52 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:52 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:52 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:52 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:52 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:52 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:52 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:53 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:53 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:53 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:53 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:53 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:53 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:53 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_rei.ttl)
+2016-09-29 15:45:53 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_rei.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_rei.ttl (LocatorFile)
+2016-09-29 15:45:53 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_rei.ttl
+2016-09-29 15:45:53 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/test2_rei_sp.nt
+2016-09-29 15:45:53 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_rei.ttl)
+2016-09-29 15:45:53 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_rei.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_rei.ttl (LocatorFile)
+2016-09-29 15:45:53 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_rei.ttl
+2016-09-29 15:45:53 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/test2_rei_sp.nt
+2016-09-29 15:45:53 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:53 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:53 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:53 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:53 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:93 - open(src/test/resources/test-rei/test2.ttl)
+2016-09-29 15:45:53 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-rei/test2.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:142 - Found: src/test/resources/test-rei/test2.ttl (LocatorFile)
+2016-09-29 15:45:53 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-rei/test2.ttl
+2016-09-29 15:45:53 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-rei_converted_to_sp_nt/test2_sp.nt
+2016-09-29 15:45:53 DEBUG StreamManager:93 - open(src/test/resources/test-rei/test2.ttl)
+2016-09-29 15:45:53 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-rei/test2.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:142 - Found: src/test/resources/test-rei/test2.ttl (LocatorFile)
+2016-09-29 15:45:53 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-rei/test2.ttl
+2016-09-29 15:45:53 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-rei_converted_to_sp_ttl/test2_sp.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:53 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:53 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:53 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:53 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:53 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:53 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:53 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:53 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_triple.nt)
+2016-09-29 15:45:53 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_triple.nt
+2016-09-29 15:45:53 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_triple.nt (LocatorFile)
+2016-09-29 15:45:53 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_triple.nt
+2016-09-29 15:45:53 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/test2_triple_sp.nt
+2016-09-29 15:45:53 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_triple.nt)
+2016-09-29 15:45:53 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_triple.nt
+2016-09-29 15:45:53 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_triple.nt (LocatorFile)
+2016-09-29 15:45:53 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_triple.nt
+2016-09-29 15:45:53 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/test2_triple_sp.nt
+2016-09-29 15:45:53 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:53 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:53 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:53 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:53 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:93 - open(src/test/resources/test-triple/test2_triple.nt)
+2016-09-29 15:45:53 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-triple/test2_triple.nt
+2016-09-29 15:45:53 DEBUG StreamManager:142 - Found: src/test/resources/test-triple/test2_triple.nt (LocatorFile)
+2016-09-29 15:45:53 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-triple/test2_triple.nt
+2016-09-29 15:45:53 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-triple_converted_to_sp_ttl/test2_triple_sp.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:93 - open(src/test/resources/test-triple/test2_triple.nt)
+2016-09-29 15:45:53 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-triple/test2_triple.nt
+2016-09-29 15:45:53 DEBUG StreamManager:142 - Found: src/test/resources/test-triple/test2_triple.nt (LocatorFile)
+2016-09-29 15:45:53 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-triple/test2_triple.nt
+2016-09-29 15:45:53 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-triple_converted_to_sp_nt/test2_triple_sp.nt
+2016-09-29 15:45:53 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:53 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:53 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:45:53 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:45:53 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:45:53 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:15 DEBUG Jena:204 - Jena initialization
+2016-09-29 15:54:15 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-29 15:54:15 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-29 15:54:15 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-29 15:54:15 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-29 15:54:15 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-29 15:54:15 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-29 15:54:15 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-29 15:54:16 DEBUG info:334 - System architecture: 64 bit
+2016-09-29 15:54:16 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:16 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:16 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:16 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:16 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:93 - open(src/test/resources/test-file/yagoFacts.ttl)
+2016-09-29 15:54:16 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/yagoFacts.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:142 - Found: src/test/resources/test-file/yagoFacts.ttl (LocatorFile)
+2016-09-29 15:54:16 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/yagoFacts.ttl
+2016-09-29 15:54:16 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/yagoFacts_sp.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:93 - open(src/test/resources/test-file/yagoFacts.ttl)
+2016-09-29 15:54:16 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/yagoFacts.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:142 - Found: src/test/resources/test-file/yagoFacts.ttl (LocatorFile)
+2016-09-29 15:54:16 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/yagoFacts.ttl
+2016-09-29 15:54:16 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/yagoFacts_sp.nt
+2016-09-29 15:54:16 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:16 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:16 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:16 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:16 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:93 - open(src/test/resources/test-default/yagoFacts.ttl)
+2016-09-29 15:54:16 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-default/yagoFacts.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:142 - Found: src/test/resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-29 15:54:16 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-default/yagoFacts.ttl
+2016-09-29 15:54:16 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-default_converted_to_sp_ttl/yagoFacts_sp.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:93 - open(src/test/resources/test-default/yagoFacts.ttl)
+2016-09-29 15:54:16 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-default/yagoFacts.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:142 - Found: src/test/resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-29 15:54:16 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-default/yagoFacts.ttl
+2016-09-29 15:54:16 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-default_converted_to_sp_nt/yagoFacts_sp.nt
+2016-09-29 15:54:16 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:16 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:16 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:16 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:16 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:16 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:16 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:16 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:16 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_ng.nq)
+2016-09-29 15:54:16 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_ng.nq
+2016-09-29 15:54:16 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_ng.nq (LocatorFile)
+2016-09-29 15:54:16 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_ng.nq
+2016-09-29 15:54:16 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-file/test2_ng_sp.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_ng.nq)
+2016-09-29 15:54:16 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_ng.nq
+2016-09-29 15:54:16 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_ng.nq (LocatorFile)
+2016-09-29 15:54:16 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_ng.nq
+2016-09-29 15:54:16 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-file/test2_ng_sp.nt
+2016-09-29 15:54:16 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:16 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:16 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:16 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:16 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:16 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:16 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:16 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:16 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:16 DEBUG StreamManager:93 - open(src/test/resources/test-ng/genders_en.tql)
+2016-09-29 15:54:16 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/genders_en.tql
+2016-09-29 15:54:16 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/genders_en.tql (LocatorFile)
+2016-09-29 15:54:16 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/genders_en.tql
+2016-09-29 15:54:17 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_ttl/genders_en_sp.ttl
+2016-09-29 15:54:17 DEBUG StreamManager:93 - open(src/test/resources/test-ng/geo_coordinates_en.nq)
+2016-09-29 15:54:17 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/geo_coordinates_en.nq
+2016-09-29 15:54:17 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/geo_coordinates_en.nq (LocatorFile)
+2016-09-29 15:54:17 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/geo_coordinates_en.nq
+2016-09-29 15:54:17 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_ttl/geo_coordinates_en_sp.ttl
+2016-09-29 15:54:17 DEBUG StreamManager:93 - open(src/test/resources/test-ng/test1.nq)
+2016-09-29 15:54:17 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/test1.nq
+2016-09-29 15:54:17 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/test1.nq (LocatorFile)
+2016-09-29 15:54:17 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/test1.nq
+2016-09-29 15:54:17 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_ttl/test1_sp.ttl
+2016-09-29 15:54:17 DEBUG StreamManager:93 - open(src/test/resources/test-ng/test2_ng.nq)
+2016-09-29 15:54:17 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/test2_ng.nq
+2016-09-29 15:54:17 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/test2_ng.nq (LocatorFile)
+2016-09-29 15:54:17 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/test2_ng.nq
+2016-09-29 15:54:17 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_ttl/test2_ng_sp.ttl
+2016-09-29 15:54:17 DEBUG StreamManager:93 - open(src/test/resources/test-ng/genders_en.tql)
+2016-09-29 15:54:17 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/genders_en.tql
+2016-09-29 15:54:17 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/genders_en.tql (LocatorFile)
+2016-09-29 15:54:17 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/genders_en.tql
+2016-09-29 15:54:18 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_nt/genders_en_sp.nt
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(src/test/resources/test-ng/geo_coordinates_en.nq)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/geo_coordinates_en.nq
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/geo_coordinates_en.nq (LocatorFile)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/geo_coordinates_en.nq
+2016-09-29 15:54:18 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_nt/geo_coordinates_en_sp.nt
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(src/test/resources/test-ng/test1.nq)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/test1.nq
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/test1.nq (LocatorFile)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/test1.nq
+2016-09-29 15:54:18 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_nt/test1_sp.nt
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(src/test/resources/test-ng/test2_ng.nq)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/test2_ng.nq
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/test2_ng.nq (LocatorFile)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/test2_ng.nq
+2016-09-29 15:54:18 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_nt/test2_ng_sp.nt
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_nano.nq)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_nano.nq
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_nano.nq (LocatorFile)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_nano.nq
+2016-09-29 15:54:18 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-file/test2_nano_sp.nt
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_nano.nq)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_nano.nq
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_nano.nq (LocatorFile)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_nano.nq
+2016-09-29 15:54:18 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-file/test2_nano_sp.nt
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(src/test/resources/test-nano/test2_nano.nq)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-nano/test2_nano.nq
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: src/test/resources/test-nano/test2_nano.nq (LocatorFile)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-nano/test2_nano.nq
+2016-09-29 15:54:18 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-nano_converted_to_sp_nt/test2_nano_sp.nt
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(src/test/resources/test-nano/test2_nano.nq)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-nano/test2_nano.nq
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: src/test/resources/test-nano/test2_nano.nq (LocatorFile)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-nano/test2_nano.nq
+2016-09-29 15:54:18 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-nano_converted_to_sp_ttl/test2_nano_sp.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_rei.ttl)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_rei.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_rei.ttl (LocatorFile)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_rei.ttl
+2016-09-29 15:54:18 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/test2_rei_sp.nt
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_rei.ttl)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_rei.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_rei.ttl (LocatorFile)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_rei.ttl
+2016-09-29 15:54:18 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/test2_rei_sp.nt
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(src/test/resources/test-rei/test2.ttl)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-rei/test2.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: src/test/resources/test-rei/test2.ttl (LocatorFile)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-rei/test2.ttl
+2016-09-29 15:54:18 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-rei_converted_to_sp_nt/test2_sp.nt
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(src/test/resources/test-rei/test2.ttl)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-rei/test2.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: src/test/resources/test-rei/test2.ttl (LocatorFile)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-rei/test2.ttl
+2016-09-29 15:54:18 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-rei_converted_to_sp_ttl/test2_sp.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_triple.nt)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_triple.nt
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_triple.nt (LocatorFile)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_triple.nt
+2016-09-29 15:54:18 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/test2_triple_sp.nt
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_triple.nt)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_triple.nt
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_triple.nt (LocatorFile)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_triple.nt
+2016-09-29 15:54:18 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/test2_triple_sp.nt
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(src/test/resources/test-triple/test2_triple.nt)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-triple/test2_triple.nt
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: src/test/resources/test-triple/test2_triple.nt (LocatorFile)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-triple/test2_triple.nt
+2016-09-29 15:54:18 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-triple_converted_to_sp_ttl/test2_triple_sp.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(src/test/resources/test-triple/test2_triple.nt)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-triple/test2_triple.nt
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: src/test/resources/test-triple/test2_triple.nt (LocatorFile)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-triple/test2_triple.nt
+2016-09-29 15:54:18 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-triple_converted_to_sp_nt/test2_triple_sp.nt
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:54:18 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:54:18 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:54:18 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:55:57 DEBUG Jena:204 - Jena initialization
+2016-09-29 15:55:57 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-29 15:55:57 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-29 15:55:57 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-29 15:55:57 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-29 15:55:57 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-29 15:55:57 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-29 15:55:57 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-29 15:55:57 DEBUG info:334 - System architecture: 64 bit
+2016-09-29 15:55:57 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:55:57 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:55:57 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:55:57 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:55:57 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:55:57 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:55:57 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:55:57 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:55:57 DEBUG StreamManager:93 - open(src/test/resources/test-file/yagoFacts.ttl)
+2016-09-29 15:55:57 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/yagoFacts.ttl
+2016-09-29 15:55:57 DEBUG StreamManager:142 - Found: src/test/resources/test-file/yagoFacts.ttl (LocatorFile)
+2016-09-29 15:55:57 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/yagoFacts.ttl
+2016-09-29 15:55:57 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/yagoFacts_sp.ttl
+2016-09-29 15:55:57 DEBUG StreamManager:93 - open(src/test/resources/test-file/yagoFacts.ttl)
+2016-09-29 15:55:57 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/yagoFacts.ttl
+2016-09-29 15:55:57 DEBUG StreamManager:142 - Found: src/test/resources/test-file/yagoFacts.ttl (LocatorFile)
+2016-09-29 15:55:57 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/yagoFacts.ttl
+2016-09-29 15:55:57 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/yagoFacts_sp.nt
+2016-09-29 15:55:57 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:55:57 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:55:57 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:55:57 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:55:57 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:55:57 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:55:57 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:55:57 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:55:57 DEBUG StreamManager:93 - open(src/test/resources/test-default/yagoFacts.ttl)
+2016-09-29 15:55:57 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-default/yagoFacts.ttl
+2016-09-29 15:55:57 DEBUG StreamManager:142 - Found: src/test/resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-29 15:55:57 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-default/yagoFacts.ttl
+2016-09-29 15:55:57 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-default_converted_to_sp_ttl/yagoFacts_sp.ttl
+2016-09-29 15:55:57 DEBUG StreamManager:93 - open(src/test/resources/test-default/yagoFacts.ttl)
+2016-09-29 15:55:57 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-default/yagoFacts.ttl
+2016-09-29 15:55:57 DEBUG StreamManager:142 - Found: src/test/resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-29 15:55:57 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-default/yagoFacts.ttl
+2016-09-29 15:55:57 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-default_converted_to_sp_nt/yagoFacts_sp.nt
+2016-09-29 15:55:57 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:55:57 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:55:57 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:55:57 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:55:57 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:55:57 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:55:57 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:55:57 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:55:58 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:55:58 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:55:58 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:55:58 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:55:58 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:55:58 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:55:58 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:55:58 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:55:58 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_ng.nq)
+2016-09-29 15:55:58 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_ng.nq
+2016-09-29 15:55:58 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_ng.nq (LocatorFile)
+2016-09-29 15:55:58 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_ng.nq
+2016-09-29 15:55:58 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-file/test2_ng_sp.ttl
+2016-09-29 15:55:58 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_ng.nq)
+2016-09-29 15:55:58 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_ng.nq
+2016-09-29 15:55:58 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_ng.nq (LocatorFile)
+2016-09-29 15:55:58 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_ng.nq
+2016-09-29 15:55:58 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-file/test2_ng_sp.nt
+2016-09-29 15:55:58 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:55:58 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:55:58 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:55:58 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:55:58 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:55:58 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:55:58 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:55:58 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:55:58 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:55:58 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:55:58 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:55:58 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:55:58 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:55:58 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:55:58 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:55:58 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:55:58 DEBUG StreamManager:93 - open(src/test/resources/test-ng/genders_en.tql)
+2016-09-29 15:55:58 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/genders_en.tql
+2016-09-29 15:55:58 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/genders_en.tql (LocatorFile)
+2016-09-29 15:55:58 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/genders_en.tql
+2016-09-29 15:55:58 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_ttl/genders_en_sp.ttl
+2016-09-29 15:55:58 DEBUG StreamManager:93 - open(src/test/resources/test-ng/geo_coordinates_en.nq)
+2016-09-29 15:55:58 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/geo_coordinates_en.nq
+2016-09-29 15:55:58 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/geo_coordinates_en.nq (LocatorFile)
+2016-09-29 15:55:58 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/geo_coordinates_en.nq
+2016-09-29 15:55:58 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_ttl/geo_coordinates_en_sp.ttl
+2016-09-29 15:55:58 DEBUG StreamManager:93 - open(src/test/resources/test-ng/test1.nq)
+2016-09-29 15:55:58 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/test1.nq
+2016-09-29 15:55:58 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/test1.nq (LocatorFile)
+2016-09-29 15:55:58 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/test1.nq
+2016-09-29 15:55:58 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_ttl/test1_sp.ttl
+2016-09-29 15:55:58 DEBUG StreamManager:93 - open(src/test/resources/test-ng/test2_ng.nq)
+2016-09-29 15:55:58 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/test2_ng.nq
+2016-09-29 15:55:58 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/test2_ng.nq (LocatorFile)
+2016-09-29 15:55:58 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/test2_ng.nq
+2016-09-29 15:55:58 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_ttl/test2_ng_sp.ttl
+2016-09-29 15:55:58 DEBUG StreamManager:93 - open(src/test/resources/test-ng/genders_en.tql)
+2016-09-29 15:55:58 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/genders_en.tql
+2016-09-29 15:55:58 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/genders_en.tql (LocatorFile)
+2016-09-29 15:55:58 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/genders_en.tql
+2016-09-29 15:55:59 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_nt/genders_en_sp.nt
+2016-09-29 15:55:59 DEBUG StreamManager:93 - open(src/test/resources/test-ng/geo_coordinates_en.nq)
+2016-09-29 15:55:59 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/geo_coordinates_en.nq
+2016-09-29 15:55:59 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/geo_coordinates_en.nq (LocatorFile)
+2016-09-29 15:55:59 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/geo_coordinates_en.nq
+2016-09-29 15:55:59 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_nt/geo_coordinates_en_sp.nt
+2016-09-29 15:55:59 DEBUG StreamManager:93 - open(src/test/resources/test-ng/test1.nq)
+2016-09-29 15:55:59 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/test1.nq
+2016-09-29 15:55:59 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/test1.nq (LocatorFile)
+2016-09-29 15:55:59 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/test1.nq
+2016-09-29 15:55:59 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_nt/test1_sp.nt
+2016-09-29 15:55:59 DEBUG StreamManager:93 - open(src/test/resources/test-ng/test2_ng.nq)
+2016-09-29 15:55:59 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/test2_ng.nq
+2016-09-29 15:55:59 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/test2_ng.nq (LocatorFile)
+2016-09-29 15:55:59 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/test2_ng.nq
+2016-09-29 15:55:59 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_nt/test2_ng_sp.nt
+2016-09-29 15:55:59 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:55:59 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:55:59 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:55:59 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:55:59 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:55:59 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:55:59 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:55:59 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:55:59 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:55:59 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:55:59 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:55:59 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:55:59 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:55:59 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:55:59 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:55:59 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:55:59 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_nano.nq)
+2016-09-29 15:55:59 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_nano.nq
+2016-09-29 15:55:59 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_nano.nq (LocatorFile)
+2016-09-29 15:55:59 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_nano.nq
+2016-09-29 15:55:59 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-file/test2_nano_sp.nt
+2016-09-29 15:55:59 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_nano.nq)
+2016-09-29 15:55:59 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_nano.nq
+2016-09-29 15:55:59 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_nano.nq (LocatorFile)
+2016-09-29 15:55:59 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_nano.nq
+2016-09-29 15:55:59 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-file/test2_nano_sp.nt
+2016-09-29 15:55:59 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:55:59 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:55:59 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:55:59 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:55:59 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:55:59 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:55:59 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:55:59 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:55:59 DEBUG StreamManager:93 - open(src/test/resources/test-nano/test2_nano.nq)
+2016-09-29 15:55:59 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-nano/test2_nano.nq
+2016-09-29 15:55:59 DEBUG StreamManager:142 - Found: src/test/resources/test-nano/test2_nano.nq (LocatorFile)
+2016-09-29 15:55:59 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-nano/test2_nano.nq
+2016-09-29 15:55:59 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-nano_converted_to_sp_nt/test2_nano_sp.nt
+2016-09-29 15:55:59 DEBUG StreamManager:93 - open(src/test/resources/test-nano/test2_nano.nq)
+2016-09-29 15:55:59 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-nano/test2_nano.nq
+2016-09-29 15:55:59 DEBUG StreamManager:142 - Found: src/test/resources/test-nano/test2_nano.nq (LocatorFile)
+2016-09-29 15:55:59 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-nano/test2_nano.nq
+2016-09-29 15:55:59 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-nano_converted_to_sp_ttl/test2_nano_sp.ttl
+2016-09-29 15:55:59 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:55:59 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:55:59 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:55:59 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:55:59 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:55:59 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:55:59 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:55:59 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:55:59 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:55:59 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:55:59 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:55:59 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:55:59 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:55:59 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:55:59 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:55:59 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:55:59 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:55:59 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:55:59 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:55:59 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:55:59 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:55:59 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:55:59 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:55:59 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:55:59 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_rei.ttl)
+2016-09-29 15:55:59 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_rei.ttl
+2016-09-29 15:55:59 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_rei.ttl (LocatorFile)
+2016-09-29 15:55:59 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_rei.ttl
+2016-09-29 15:56:00 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/test2_rei_sp.nt
+2016-09-29 15:56:00 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_rei.ttl)
+2016-09-29 15:56:00 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_rei.ttl
+2016-09-29 15:56:00 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_rei.ttl (LocatorFile)
+2016-09-29 15:56:00 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_rei.ttl
+2016-09-29 15:56:00 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/test2_rei_sp.nt
+2016-09-29 15:56:00 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:56:00 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:56:00 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:56:00 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:56:00 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:56:00 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:56:00 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:56:00 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:56:00 DEBUG StreamManager:93 - open(src/test/resources/test-rei/test2.ttl)
+2016-09-29 15:56:00 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-rei/test2.ttl
+2016-09-29 15:56:00 DEBUG StreamManager:142 - Found: src/test/resources/test-rei/test2.ttl (LocatorFile)
+2016-09-29 15:56:00 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-rei/test2.ttl
+2016-09-29 15:56:00 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-rei_converted_to_sp_nt/test2_sp.nt
+2016-09-29 15:56:00 DEBUG StreamManager:93 - open(src/test/resources/test-rei/test2.ttl)
+2016-09-29 15:56:00 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-rei/test2.ttl
+2016-09-29 15:56:00 DEBUG StreamManager:142 - Found: src/test/resources/test-rei/test2.ttl (LocatorFile)
+2016-09-29 15:56:00 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-rei/test2.ttl
+2016-09-29 15:56:00 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-rei_converted_to_sp_ttl/test2_sp.ttl
+2016-09-29 15:56:00 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:56:00 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:56:00 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:56:00 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:56:00 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:56:00 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:56:00 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:56:00 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:56:00 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:56:00 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:56:00 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:56:00 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:56:00 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:56:00 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:56:00 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:56:00 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:56:00 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_triple.nt)
+2016-09-29 15:56:00 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_triple.nt
+2016-09-29 15:56:00 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_triple.nt (LocatorFile)
+2016-09-29 15:56:00 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_triple.nt
+2016-09-29 15:56:00 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/test2_triple_sp.nt
+2016-09-29 15:56:00 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_triple.nt)
+2016-09-29 15:56:00 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_triple.nt
+2016-09-29 15:56:00 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_triple.nt (LocatorFile)
+2016-09-29 15:56:00 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_triple.nt
+2016-09-29 15:56:00 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/test2_triple_sp.nt
+2016-09-29 15:56:00 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:56:00 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:56:00 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:56:00 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:56:00 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:56:00 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:56:00 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:56:00 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:56:00 DEBUG StreamManager:93 - open(src/test/resources/test-triple/test2_triple.nt)
+2016-09-29 15:56:00 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-triple/test2_triple.nt
+2016-09-29 15:56:00 DEBUG StreamManager:142 - Found: src/test/resources/test-triple/test2_triple.nt (LocatorFile)
+2016-09-29 15:56:00 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-triple/test2_triple.nt
+2016-09-29 15:56:00 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-triple_converted_to_sp_ttl/test2_triple_sp.ttl
+2016-09-29 15:56:00 DEBUG StreamManager:93 - open(src/test/resources/test-triple/test2_triple.nt)
+2016-09-29 15:56:00 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-triple/test2_triple.nt
+2016-09-29 15:56:00 DEBUG StreamManager:142 - Found: src/test/resources/test-triple/test2_triple.nt (LocatorFile)
+2016-09-29 15:56:00 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-triple/test2_triple.nt
+2016-09-29 15:56:00 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-triple_converted_to_sp_nt/test2_triple_sp.nt
+2016-09-29 15:56:00 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:56:00 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:56:00 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:56:00 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:56:00 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:56:00 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:56:00 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:56:00 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:09 DEBUG Jena:204 - Jena initialization
+2016-09-29 15:57:09 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-29 15:57:09 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-29 15:57:09 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-29 15:57:09 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-29 15:57:09 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-29 15:57:09 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-29 15:57:09 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-29 15:57:10 DEBUG info:334 - System architecture: 64 bit
+2016-09-29 15:57:10 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:10 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:10 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:10 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:10 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:93 - open(src/test/resources/test-file/yagoFacts.ttl)
+2016-09-29 15:57:10 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/yagoFacts.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:142 - Found: src/test/resources/test-file/yagoFacts.ttl (LocatorFile)
+2016-09-29 15:57:10 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/yagoFacts.ttl
+2016-09-29 15:57:10 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/yagoFacts_sp.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:93 - open(src/test/resources/test-file/yagoFacts.ttl)
+2016-09-29 15:57:10 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/yagoFacts.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:142 - Found: src/test/resources/test-file/yagoFacts.ttl (LocatorFile)
+2016-09-29 15:57:10 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/yagoFacts.ttl
+2016-09-29 15:57:10 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/yagoFacts_sp.nt
+2016-09-29 15:57:10 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:10 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:10 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:10 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:10 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:93 - open(src/test/resources/test-default/yagoFacts.ttl)
+2016-09-29 15:57:10 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-default/yagoFacts.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:142 - Found: src/test/resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-29 15:57:10 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-default/yagoFacts.ttl
+2016-09-29 15:57:10 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-default_converted_to_sp_ttl/yagoFacts_sp.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:93 - open(src/test/resources/test-default/yagoFacts.ttl)
+2016-09-29 15:57:10 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-default/yagoFacts.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:142 - Found: src/test/resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-29 15:57:10 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-default/yagoFacts.ttl
+2016-09-29 15:57:10 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-default_converted_to_sp_nt/yagoFacts_sp.nt
+2016-09-29 15:57:10 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:10 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:10 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:10 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:10 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:10 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:10 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:10 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:10 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_ng.nq)
+2016-09-29 15:57:10 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_ng.nq
+2016-09-29 15:57:10 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_ng.nq (LocatorFile)
+2016-09-29 15:57:10 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_ng.nq
+2016-09-29 15:57:10 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-file/test2_ng_sp.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_ng.nq)
+2016-09-29 15:57:10 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_ng.nq
+2016-09-29 15:57:10 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_ng.nq (LocatorFile)
+2016-09-29 15:57:10 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_ng.nq
+2016-09-29 15:57:10 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-file/test2_ng_sp.nt
+2016-09-29 15:57:10 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:10 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:10 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:10 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:10 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:10 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:10 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:10 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:10 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:10 DEBUG StreamManager:93 - open(src/test/resources/test-ng/genders_en.tql)
+2016-09-29 15:57:10 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/genders_en.tql
+2016-09-29 15:57:10 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/genders_en.tql (LocatorFile)
+2016-09-29 15:57:10 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/genders_en.tql
+2016-09-29 15:57:11 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_ttl/genders_en_sp.ttl
+2016-09-29 15:57:11 DEBUG StreamManager:93 - open(src/test/resources/test-ng/geo_coordinates_en.nq)
+2016-09-29 15:57:11 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/geo_coordinates_en.nq
+2016-09-29 15:57:11 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/geo_coordinates_en.nq (LocatorFile)
+2016-09-29 15:57:11 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/geo_coordinates_en.nq
+2016-09-29 15:57:11 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_ttl/geo_coordinates_en_sp.ttl
+2016-09-29 15:57:11 DEBUG StreamManager:93 - open(src/test/resources/test-ng/test1.nq)
+2016-09-29 15:57:11 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/test1.nq
+2016-09-29 15:57:11 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/test1.nq (LocatorFile)
+2016-09-29 15:57:11 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/test1.nq
+2016-09-29 15:57:11 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_ttl/test1_sp.ttl
+2016-09-29 15:57:11 DEBUG StreamManager:93 - open(src/test/resources/test-ng/test2_ng.nq)
+2016-09-29 15:57:11 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/test2_ng.nq
+2016-09-29 15:57:11 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/test2_ng.nq (LocatorFile)
+2016-09-29 15:57:11 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/test2_ng.nq
+2016-09-29 15:57:11 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_ttl/test2_ng_sp.ttl
+2016-09-29 15:57:11 DEBUG StreamManager:93 - open(src/test/resources/test-ng/genders_en.tql)
+2016-09-29 15:57:11 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/genders_en.tql
+2016-09-29 15:57:11 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/genders_en.tql (LocatorFile)
+2016-09-29 15:57:11 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/genders_en.tql
+2016-09-29 15:57:12 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_nt/genders_en_sp.nt
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(src/test/resources/test-ng/geo_coordinates_en.nq)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/geo_coordinates_en.nq
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/geo_coordinates_en.nq (LocatorFile)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/geo_coordinates_en.nq
+2016-09-29 15:57:12 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_nt/geo_coordinates_en_sp.nt
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(src/test/resources/test-ng/test1.nq)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/test1.nq
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/test1.nq (LocatorFile)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/test1.nq
+2016-09-29 15:57:12 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_nt/test1_sp.nt
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(src/test/resources/test-ng/test2_ng.nq)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/test2_ng.nq
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/test2_ng.nq (LocatorFile)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/test2_ng.nq
+2016-09-29 15:57:12 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_nt/test2_ng_sp.nt
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_nano.nq)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_nano.nq
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_nano.nq (LocatorFile)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_nano.nq
+2016-09-29 15:57:12 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-file/test2_nano_sp.nt
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_nano.nq)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_nano.nq
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_nano.nq (LocatorFile)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_nano.nq
+2016-09-29 15:57:12 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-file/test2_nano_sp.nt
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(src/test/resources/test-nano/test2_nano.nq)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-nano/test2_nano.nq
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: src/test/resources/test-nano/test2_nano.nq (LocatorFile)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-nano/test2_nano.nq
+2016-09-29 15:57:12 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-nano_converted_to_sp_nt/test2_nano_sp.nt
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(src/test/resources/test-nano/test2_nano.nq)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-nano/test2_nano.nq
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: src/test/resources/test-nano/test2_nano.nq (LocatorFile)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-nano/test2_nano.nq
+2016-09-29 15:57:12 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-nano_converted_to_sp_ttl/test2_nano_sp.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_rei.ttl)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_rei.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_rei.ttl (LocatorFile)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_rei.ttl
+2016-09-29 15:57:12 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/test2_rei_sp.nt
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_rei.ttl)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_rei.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_rei.ttl (LocatorFile)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_rei.ttl
+2016-09-29 15:57:12 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/test2_rei_sp.nt
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(src/test/resources/test-rei/test2.ttl)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-rei/test2.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: src/test/resources/test-rei/test2.ttl (LocatorFile)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-rei/test2.ttl
+2016-09-29 15:57:12 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-rei_converted_to_sp_nt/test2_sp.nt
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(src/test/resources/test-rei/test2.ttl)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-rei/test2.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: src/test/resources/test-rei/test2.ttl (LocatorFile)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-rei/test2.ttl
+2016-09-29 15:57:12 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-rei_converted_to_sp_ttl/test2_sp.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_triple.nt)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_triple.nt
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_triple.nt (LocatorFile)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_triple.nt
+2016-09-29 15:57:12 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/test2_triple_sp.nt
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_triple.nt)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_triple.nt
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_triple.nt (LocatorFile)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_triple.nt
+2016-09-29 15:57:12 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/test2_triple_sp.nt
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(src/test/resources/test-triple/test2_triple.nt)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-triple/test2_triple.nt
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: src/test/resources/test-triple/test2_triple.nt (LocatorFile)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-triple/test2_triple.nt
+2016-09-29 15:57:12 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-triple_converted_to_sp_ttl/test2_triple_sp.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(src/test/resources/test-triple/test2_triple.nt)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-triple/test2_triple.nt
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: src/test/resources/test-triple/test2_triple.nt (LocatorFile)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-triple/test2_triple.nt
+2016-09-29 15:57:12 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-triple_converted_to_sp_nt/test2_triple_sp.nt
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:57:12 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:57:12 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:57:12 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:44 DEBUG Jena:204 - Jena initialization
+2016-09-29 15:59:44 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-29 15:59:44 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-29 15:59:44 DEBUG LocationMapper:152 - Failed to find configuration: file:location-mapping.rdf;file:location-mapping.n3;file:location-mapping.ttl;file:etc/location-mapping.rdf;file:etc/location-mapping.n3;file:etc/location-mapping.ttl
+2016-09-29 15:59:44 DEBUG FileManager:157 - Add location: LocatorFile
+2016-09-29 15:59:44 DEBUG FileManager:157 - Add location: LocatorURL
+2016-09-29 15:59:44 DEBUG FileManager:157 - Add location: ClassLoaderLocator
+2016-09-29 15:59:44 DEBUG JenaIOEnvironment:180 - Failed to find configuration: location-mapping.ttl;location-mapping.rdf;location-mapping.n3;etc/location-mapping.rdf;etc/location-mapping.n3;etc/location-mapping.ttl
+2016-09-29 15:59:45 DEBUG info:334 - System architecture: 64 bit
+2016-09-29 15:59:45 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:45 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:45 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:45 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:45 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:93 - open(src/test/resources/test-file/yagoFacts.ttl)
+2016-09-29 15:59:45 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/yagoFacts.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:142 - Found: src/test/resources/test-file/yagoFacts.ttl (LocatorFile)
+2016-09-29 15:59:45 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/yagoFacts.ttl
+2016-09-29 15:59:45 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/yagoFacts_sp.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:93 - open(src/test/resources/test-file/yagoFacts.ttl)
+2016-09-29 15:59:45 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/yagoFacts.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:142 - Found: src/test/resources/test-file/yagoFacts.ttl (LocatorFile)
+2016-09-29 15:59:45 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/yagoFacts.ttl
+2016-09-29 15:59:45 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/yagoFacts_sp.nt
+2016-09-29 15:59:45 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:45 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:45 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:45 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:45 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:93 - open(src/test/resources/test-default/yagoFacts.ttl)
+2016-09-29 15:59:45 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-default/yagoFacts.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:142 - Found: src/test/resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-29 15:59:45 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-default/yagoFacts.ttl
+2016-09-29 15:59:45 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-default_converted_to_sp_ttl/yagoFacts_sp.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:93 - open(src/test/resources/test-default/yagoFacts.ttl)
+2016-09-29 15:59:45 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-default/yagoFacts.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:142 - Found: src/test/resources/test-default/yagoFacts.ttl (LocatorFile)
+2016-09-29 15:59:45 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-default/yagoFacts.ttl
+2016-09-29 15:59:45 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-default_converted_to_sp_nt/yagoFacts_sp.nt
+2016-09-29 15:59:45 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:45 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:45 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:45 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:45 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:45 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:45 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:45 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:45 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_ng.nq)
+2016-09-29 15:59:45 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_ng.nq
+2016-09-29 15:59:45 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_ng.nq (LocatorFile)
+2016-09-29 15:59:45 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_ng.nq
+2016-09-29 15:59:45 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-file/test2_ng_sp.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_ng.nq)
+2016-09-29 15:59:45 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_ng.nq
+2016-09-29 15:59:45 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_ng.nq (LocatorFile)
+2016-09-29 15:59:45 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_ng.nq
+2016-09-29 15:59:45 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-file/test2_ng_sp.nt
+2016-09-29 15:59:45 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:45 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:45 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:45 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:45 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:45 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:45 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:45 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:45 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:45 DEBUG StreamManager:93 - open(src/test/resources/test-ng/genders_en.tql)
+2016-09-29 15:59:45 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/genders_en.tql
+2016-09-29 15:59:45 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/genders_en.tql (LocatorFile)
+2016-09-29 15:59:45 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/genders_en.tql
+2016-09-29 15:59:47 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_ttl/genders_en_sp.ttl
+2016-09-29 15:59:47 DEBUG StreamManager:93 - open(src/test/resources/test-ng/geo_coordinates_en.nq)
+2016-09-29 15:59:47 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/geo_coordinates_en.nq
+2016-09-29 15:59:47 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/geo_coordinates_en.nq (LocatorFile)
+2016-09-29 15:59:47 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/geo_coordinates_en.nq
+2016-09-29 15:59:47 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_ttl/geo_coordinates_en_sp.ttl
+2016-09-29 15:59:47 DEBUG StreamManager:93 - open(src/test/resources/test-ng/test1.nq)
+2016-09-29 15:59:47 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/test1.nq
+2016-09-29 15:59:47 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/test1.nq (LocatorFile)
+2016-09-29 15:59:47 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/test1.nq
+2016-09-29 15:59:47 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_ttl/test1_sp.ttl
+2016-09-29 15:59:47 DEBUG StreamManager:93 - open(src/test/resources/test-ng/test2_ng.nq)
+2016-09-29 15:59:47 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/test2_ng.nq
+2016-09-29 15:59:47 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/test2_ng.nq (LocatorFile)
+2016-09-29 15:59:47 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/test2_ng.nq
+2016-09-29 15:59:47 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_ttl/test2_ng_sp.ttl
+2016-09-29 15:59:47 DEBUG StreamManager:93 - open(src/test/resources/test-ng/genders_en.tql)
+2016-09-29 15:59:47 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/genders_en.tql
+2016-09-29 15:59:47 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/genders_en.tql (LocatorFile)
+2016-09-29 15:59:47 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/genders_en.tql
+2016-09-29 15:59:48 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_nt/genders_en_sp.nt
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(src/test/resources/test-ng/geo_coordinates_en.nq)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/geo_coordinates_en.nq
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/geo_coordinates_en.nq (LocatorFile)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/geo_coordinates_en.nq
+2016-09-29 15:59:48 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_nt/geo_coordinates_en_sp.nt
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(src/test/resources/test-ng/test1.nq)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/test1.nq
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/test1.nq (LocatorFile)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/test1.nq
+2016-09-29 15:59:48 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_nt/test1_sp.nt
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(src/test/resources/test-ng/test2_ng.nq)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-ng/test2_ng.nq
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: src/test/resources/test-ng/test2_ng.nq (LocatorFile)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-ng/test2_ng.nq
+2016-09-29 15:59:48 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-ng_converted_to_sp_nt/test2_ng_sp.nt
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_nano.nq)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_nano.nq
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_nano.nq (LocatorFile)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_nano.nq
+2016-09-29 15:59:48 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-file/test2_nano_sp.nt
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_nano.nq)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_nano.nq
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_nano.nq (LocatorFile)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_nano.nq
+2016-09-29 15:59:48 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-file/test2_nano_sp.nt
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(src/test/resources/test-nano/test2_nano.nq)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-nano/test2_nano.nq
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: src/test/resources/test-nano/test2_nano.nq (LocatorFile)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-nano/test2_nano.nq
+2016-09-29 15:59:48 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-nano_converted_to_sp_nt/test2_nano_sp.nt
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(src/test/resources/test-nano/test2_nano.nq)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-nano/test2_nano.nq
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: src/test/resources/test-nano/test2_nano.nq (LocatorFile)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-nano/test2_nano.nq
+2016-09-29 15:59:48 DEBUG QuadParser:86 - Finished generating file src/test/resources/test-nano_converted_to_sp_ttl/test2_nano_sp.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_rei.ttl)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_rei.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_rei.ttl (LocatorFile)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_rei.ttl
+2016-09-29 15:59:48 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/test2_rei_sp.nt
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_rei.ttl)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_rei.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_rei.ttl (LocatorFile)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_rei.ttl
+2016-09-29 15:59:48 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/test2_rei_sp.nt
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(src/test/resources/test-rei/test2.ttl)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-rei/test2.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: src/test/resources/test-rei/test2.ttl (LocatorFile)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-rei/test2.ttl
+2016-09-29 15:59:48 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-rei_converted_to_sp_nt/test2_sp.nt
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(src/test/resources/test-rei/test2.ttl)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-rei/test2.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: src/test/resources/test-rei/test2.ttl (LocatorFile)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-rei/test2.ttl
+2016-09-29 15:59:48 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-rei_converted_to_sp_ttl/test2_sp.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_triple.nt)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_triple.nt
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_triple.nt (LocatorFile)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_triple.nt
+2016-09-29 15:59:48 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/test2_triple_sp.nt
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(src/test/resources/test-file/test2_triple.nt)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-file/test2_triple.nt
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: src/test/resources/test-file/test2_triple.nt (LocatorFile)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-file/test2_triple.nt
+2016-09-29 15:59:48 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-file/test2_triple_sp.nt
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(src/test/resources/test-triple/test2_triple.nt)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-triple/test2_triple.nt
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: src/test/resources/test-triple/test2_triple.nt (LocatorFile)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-triple/test2_triple.nt
+2016-09-29 15:59:48 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-triple_converted_to_sp_ttl/test2_triple_sp.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(src/test/resources/test-triple/test2_triple.nt)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: src/test/resources/test-triple/test2_triple.nt
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: src/test/resources/test-triple/test2_triple.nt (LocatorFile)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: src/test/resources/test-triple/test2_triple.nt
+2016-09-29 15:59:48 DEBUG TripleParser:77 - Finished generating file src/test/resources/test-triple_converted_to_sp_nt/test2_triple_sp.nt
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:93 - open(prefixes.ttl)
+2016-09-29 15:59:48 DEBUG StreamManager:112 - Not mapped: prefixes.ttl
+2016-09-29 15:59:48 DEBUG StreamManager:142 - Found: prefixes.ttl (ClassLoaderLocator)
+2016-09-29 15:59:48 DEBUG RDFDataMgr:841 - Found: prefixes.ttl

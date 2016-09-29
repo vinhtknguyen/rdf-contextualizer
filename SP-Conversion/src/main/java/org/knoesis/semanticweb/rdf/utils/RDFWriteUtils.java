@@ -26,6 +26,10 @@ public class RDFWriteUtils {
 	public static PrefixTrie trie = new PrefixTrie();
 	private static int currentAutoPrefixNsNum = 0;
  
+	public static int getCurrentAutoPrefixNsNum() {
+		return currentAutoPrefixNsNum;
+	}
+
 	public static String getNextPrefixNs(){
 		currentAutoPrefixNsNum++;
 		return Constants.NS_STR + currentAutoPrefixNsNum;
@@ -89,12 +93,6 @@ public class RDFWriteUtils {
 	    	out.append("\"");
 	    	out.append(in.getLiteralLexicalForm());
 	    	out.append("\"");
-
-	    	// Check the language tag
-	    	if (!in.getLiteralLanguage().equals("")){
-	    		out.append('@');
-	    		out.append(in.getLiteralLanguage());
-	    	}
 	    	
 			// shorten the whole URI with prefix for data type
 	    	if (!in.getLiteralDatatypeURI().equals("")){
