@@ -144,9 +144,12 @@ public class SPConverter {
 			
 			if (this.getSpInitNum() != -1 ) converter.setInitUUIDNumber(this.getSpInitNum());
 			if (this.getSpInitStr() != null) converter.setInitUUIDPrefix(this.getSpInitStr());
+
 			// Start running the conversion
+			long start = System.currentTimeMillis();
 			converter.convert(this.getFileIn(), this.getExt(), this.getRep());
-			
+			long end = System.currentTimeMillis() - start;
+			logger.trace("Finished converting " + this.getFileIn() + " in " + end/1000);
 		}
 		
 	}
