@@ -10,7 +10,7 @@ public class Triple2SPTest {
 	@Before
 	public void setUp() throws Exception {
 		con1 = new Triple2SP();
-		con2 = new Triple2SP(10, "crc_", "___", "http://knoesis.org/singletonPropertyOf");
+		con2 = new Triple2SP(10, "crc_", "___", "http://knoesis.org/rdf:singletonPropertyOf");
 	}
 
 	@Test

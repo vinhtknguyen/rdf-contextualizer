@@ -43,8 +43,8 @@ public class ContextualRepresentationConverter {
 
 	public ContextualRepresentationConverter(){
 		initUUIDNumber = System.currentTimeMillis();
-		spDelimiter = "_";
-		initUUIDPrefix = "sp";
+		spDelimiter = Constants.SP_START_DELIMITER;
+		initUUIDPrefix = Constants.SP_UUID_PREFIX;
 		
 		RDFWriteUtils.loadPrefixes(this.prefixesFile);
 	}
@@ -194,7 +194,7 @@ public class ContextualRepresentationConverter {
 	protected String genFileOut(String in, String ext){
 		if (in != null) {
 			
-			return in.split("\\.")[0] + Constants.SP_FILE_SUFFIX + "." + ext.toLowerCase();
+			return in.split("\\.")[0] + Constants.SP_SUFFIX + "." + ext.toLowerCase();
 		}
 		return in;
 		
@@ -227,8 +227,9 @@ public class ContextualRepresentationConverter {
 	protected String getNextUUID(){
 		StringBuilder uuid = new StringBuilder(this.spDelimiter);
 		uuid.append(initUUIDPrefix);
-		uuid.append(this.spDelimiter);
+		uuid.append(Constants.SP_MID_DELIMITER);
 		uuid.append(this.initUUIDNumber);
+		uuid.append(Constants.SP_END_DELIMITER);
 		this.initUUIDNumber++;
 		
 		return uuid.toString();

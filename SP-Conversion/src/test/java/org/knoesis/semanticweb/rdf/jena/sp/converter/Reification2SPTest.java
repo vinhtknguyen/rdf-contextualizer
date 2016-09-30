@@ -10,7 +10,7 @@ public class Reification2SPTest {
 	@Before
 	public void setUp() throws Exception {
 		con1 = new Reification2SP();
-		con2 = new Reification2SP(10, "crc_", "___", "http://knoesis.org/singletonPropertyOf#");
+		con2 = new Reification2SP(10, "crc_", "___", "http://knoesis.org/rdf:singletonPropertyOf");
 	}
 
 	@Test

@@ -10,7 +10,7 @@ public class ContextualRepresentationConverterTest {
 	@Before
 	public void setUp() throws Exception {
 		con1 = new ContextualRepresentationConverter();
-		con2 = new ContextualRepresentationConverter(10, "crc_", "___", "http://knoesis.org/singletonPropertyOf");
+		con2 = new ContextualRepresentationConverter(10, "crc_", "_", "http://knoesis.org/rdf:singletonPropertyOf");
 	}
 
 	@Test

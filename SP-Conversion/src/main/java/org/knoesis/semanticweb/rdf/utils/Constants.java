@@ -14,8 +14,15 @@ public class Constants {
 
 	public static final String CONVERTED_TO_SP_NT = "_converted_to_sp_nt";
 	public static final String CONVERTED_TO_SP_TTL = "_converted_to_sp_ttl";
-	public static final String SP_FILE_SUFFIX = "_sp";
+	public static final String SP_SUFFIX = "_sp";
+	public static final String SP_UUID_PREFIX = "sp";
 	public static final String NS_STR = "ns";
+	public static final String SP_START_DELIMITER = "_";
+	public static final String SP_MID_DELIMITER = "/";
+	public static final String SP_END_DELIMITER = "";
+
+	
+
 	
 	public static final String SINGLETON_PROPERTY_OF_URI = "<http://www.w3.org/1999/02/22-rdf-syntax-ns#singletonPropertyOf>";
 	public static final String SINGLETON_PROPERTY_OF = "http://www.w3.org/1999/02/22-rdf-syntax-ns#singletonPropertyOf";

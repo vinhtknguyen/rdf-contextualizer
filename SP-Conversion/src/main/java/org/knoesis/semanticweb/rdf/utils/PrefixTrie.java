@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.jena.graph.Node;
-import org.apache.jena.util.PrintUtil;
 
 public class PrefixTrie {
 	private PrefixTrieNode root;
@@ -94,18 +93,24 @@ public class PrefixTrie {
 			
 			char c = uriStr.charAt(i);
 			
+			if (latestLeaf != null && isSPDelimiter(c)){
+				latestLeaf = null;
+			}
 			if (children.containsKey(c)) {
 				
 				curnode = children.get(c);
 				children = curnode.children;
-				if (curnode.isLeaf) latestLeaf = curnode;
+				if (curnode.isLeaf) {
+					latestLeaf = curnode;
+				}
 				
 			} else {
 				lastNsInd = i;
 				break;
 			}
 		}
-		// No leaf with existing prefix
+		
+		// Special treatment for URI with SP prefix to shorten the URI even more
 		if (latestLeaf != null){
 			// Construct the shorted uri
 			lastNsInd = i;
@@ -113,22 +118,21 @@ public class PrefixTrie {
 			ns = uriStr.substring(0, lastNsInd);
 			shorten.append(prefix + ":");
 			try {
-				shorten.append(URLEncoder.encode(uriStr.substring(lastNsInd),"UTF-8").replaceAll("[{}()\\|\\$\\*\\+\\.\\^:,]",""));
+				shorten.append(URLEncoder.encode(uriStr.substring(lastNsInd, uriStr.length()),"UTF-8"));
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} else {
-			
+		} else{
 			// Generating new prefix and ns, insert it to the trie,
-			lastNsInd = uriStr.lastIndexOf('/');
+			lastNsInd = getLastIndexOfDelimiter(uriStr);
 			prefix = RDFWriteUtils.getNextPrefixNs();
 			if (lastNsInd > 0 && uriStr.charAt(lastNsInd-1) != '/' && uriStr.charAt(lastNsInd-2) != ':' ) {
 				ns = uriStr.substring(0, lastNsInd + 1);
 				shorten.append(prefix + ":");
 				try {
-					if (!uriStr.substring(lastNsInd+1).isEmpty()){
-						shorten.append(URLEncoder.encode(uriStr.substring(lastNsInd+1),"UTF-8").replaceAll("[{}()\\|\\$\\*\\+\\.\\^:,]",""));
+					if (!uriStr.substring(lastNsInd+1, uriStr.length()).isEmpty()){
+						shorten.append(URLEncoder.encode(uriStr.substring(lastNsInd+1, uriStr.length()),"UTF-8"));
 					}
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
@@ -138,7 +142,7 @@ public class PrefixTrie {
 				ns = uriStr;
 				shorten.append(prefix + ":");
 			}
-		
+			System.out.println(uriStr + "\t" + ns + "\t" + prefix + "\t" + shorten.toString());
 			insert(ns, prefix);
 		}
 		
@@ -148,5 +152,23 @@ public class PrefixTrie {
         }
 		return URIShorteningTriplet.createTriplet(shorten.toString(), null, null);
 
+	}
+	
+	public int getLastIndexOfDelimiter(String uri){
+		int ind = uri.length()-1;
+		int pastProtocol = 0;
+		while (ind >=0){
+			if (uri.charAt(ind) == '/' || uri.charAt(ind) == '#' || uri.charAt(ind) == ':'){
+				if (pastProtocol < 3) return ind;
+			}
+			if (uri.charAt(ind) == '/' && pastProtocol == 0 || pastProtocol == 1) pastProtocol++;
+			if (uri.charAt(ind) == ':' && pastProtocol == 2) pastProtocol++;
+			ind--;
+		}
+		return ind;
+	}
+	
+	public boolean isSPDelimiter(char c){
+		return (c == '/' || c == '#' || c == ':');
 	}
 }
