@@ -10,7 +10,7 @@ public class NamedGraph2SPTest {
 	@Before
 	public void setUp() throws Exception {
 		con1 = new NamedGraph2SP();
-		con2 = new NamedGraph2SP(10, "crc_", "___", "http://knoesis.org/singletonPropertyOf");
+		con2 = new NamedGraph2SP(10, "_sp", "___", "http://knoesis.org/rdf:singletonPropertyOf");
 	}
 
 	@Test
@@ -24,13 +24,13 @@ public class NamedGraph2SPTest {
 	@Test
 	public void testConvert() {
 		con1.convert("src/test/resources/test-ng", "ttl", "ng");
-		con2.convert("src/test/resources/test-ng", "nt", "ng");
+		con1.convert("src/test/resources/test-ng", "nt", "ng");
 	}
 
 	@Test
 	public void testConvertFile() {
 		con1.convert("src/test/resources/test-file/test2_ng.nq", "ttl", "ng");
-		con2.convert("src/test/resources/test-file/test2_ng.nq", "nt", "ng");
+		con1.convert("src/test/resources/test-file/test2_ng.nq", "nt", "ng");
 	}
 
 }

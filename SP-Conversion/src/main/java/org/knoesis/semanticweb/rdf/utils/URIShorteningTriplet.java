@@ -26,4 +26,8 @@ public class URIShorteningTriplet {
     public String getNamespace(){
     	return this.namespace;
     }
+    
+    public String toString(){
+    	return this.shortenURI + "\t" + this.prefix + "\t" + this.namespace;
+    }
 }

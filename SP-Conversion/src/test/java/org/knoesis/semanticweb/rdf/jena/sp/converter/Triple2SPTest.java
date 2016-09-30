@@ -10,7 +10,7 @@ public class Triple2SPTest {
 	@Before
 	public void setUp() throws Exception {
 		con1 = new Triple2SP();
-		con2 = new Triple2SP(10, "crc_", "___", "http://knoesis.org/singletonPropertyOf");
+		con2 = new Triple2SP(10, "crc_", "___", "http://knoesis.org/rdf:singletonPropertyOf");
 	}
 
 	@Test
@@ -20,13 +20,13 @@ public class Triple2SPTest {
 	@Test
 	public void testConvert() {
 		con1.convert("src/test/resources/test-triple", "ttl", "triple");
-		con2.convert("src/test/resources/test-triple", "nt", "triple");
+		con1.convert("src/test/resources/test-triple", "nt", "triple");
 	}
 
 	@Test
 	public void testConvertFile() {
+		con1.convert("src/test/resources/test-file/test2_triple.nt", "ttl", "triple");
 		con1.convert("src/test/resources/test-file/test2_triple.nt", "nt", "triple");
-		con2.convert("src/test/resources/test-file/test2_triple.nt", "nt", "triple");
 	}
 
 }
