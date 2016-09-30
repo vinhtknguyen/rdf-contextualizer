@@ -97,11 +97,11 @@ public class PrefixTrie {
 			
 			char c = uriStr.charAt(i);
 			
-			// Special treatment for URI with SP prefix to shorten the URI even more
 			if (children.containsKey(c)) {
 				
 				curnode = children.get(c);
 				children = curnode.children;
+
 				if (curnode.isPrefix) {
 					latestLeaf = curnode;
 					lastNsInd = i+1;
@@ -132,6 +132,8 @@ public class PrefixTrie {
 //			System.out.println("not existing prefix" + uriStr);
 			// Generating new prefix and ns, insert it to the trie,
 			lastNsInd = ind;
+			lastNsInd = getLastIndexOfDelimiter(uriStr);
+			prefix = RDFWriteUtils.getNextPrefixNs();
 			if (lastNsInd > 0 && uriStr.charAt(lastNsInd-1) != '/' && uriStr.charAt(lastNsInd-2) != ':' ) {
 				ns = uriStr.substring(0, lastNsInd + 1);
 				prefix = searchPrefix(ns);
@@ -141,8 +143,7 @@ public class PrefixTrie {
 				if (!uriStr.substring(lastNsInd+1, len).isEmpty()){
 					shorten.append(normalizeN3(uriStr.substring(lastNsInd+1, len)));
 				}
-			} 
-			if (lastNsInd < 0){
+			} else {
 				ns = uriStr;
 				shorten.append(prefix + ":");
 				prefix = RDFWriteUtils.getNextPrefixNs();
