@@ -1,10 +1,8 @@
 package org.knoesis.semanticweb.rdf.jena.sp.parser;
 
 
+import java.io.BufferedWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -48,7 +46,7 @@ public class QuadParser implements Parser{
 
 
 	@Override
-	public void parse(ContextualRepresentationConverter con, String in, String fileOut,
+	public void parse(ContextualRepresentationConverter con, String in, BufferedWriter writer,
 			String ext) {
         iter = new PipedRDFIterator<Quad>();
         inputStream = new PipedQuadsStream(iter);
@@ -73,7 +71,7 @@ public class QuadParser implements Parser{
             quad = iter.next();
             nodes = new Node[] {quad.getSubject(), quad.getPredicate(), quad.getObject(), quad.getGraph()};
 			try {
-				Files.write(Paths.get(fileOut), con.transform(nodes, ext).getBytes(), StandardOpenOption.APPEND);
+				writer.write(con.transform(nodes, ext));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				logger.error(e);
@@ -83,7 +81,6 @@ public class QuadParser implements Parser{
         executor.shutdown();
         iter.close();
         inputStream.finish();
-        logger.debug("Finished generating file " + fileOut);
 	}
 
 	
