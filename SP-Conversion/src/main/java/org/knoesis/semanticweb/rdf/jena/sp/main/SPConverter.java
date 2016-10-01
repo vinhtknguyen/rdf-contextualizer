@@ -23,7 +23,25 @@ public class SPConverter {
 	protected String spProp = null;
 	protected long spInitNum = -1;
 	protected String spInitStr = null;
+	protected boolean zip = false;
+	protected boolean infer = false;
 	
+	public boolean isInfer() {
+		return infer;
+	}
+
+	public void setInfer(boolean infer) {
+		this.infer = infer;
+	}
+
+	public boolean isZip() {
+		return zip;
+	}
+
+	public void setZip(boolean zip) {
+		this.zip = zip;
+	}
+
 	public String getMetaProp() {
 		return metaProp;
 	}
@@ -65,7 +83,7 @@ public class SPConverter {
 	
 	/** Examples for testing
 	 * 
-	 * 1)	-f resources/test-nq -ext TTL -rep NG -spInitNum 1 -spInitStr str1
+	 * 1)	-zip -f resources/test-nq -ext TTL -rep NG -spInitNum 1 -spInitStr str1
 	 * 
 	 * 2)	-f resources/test-nq -ext NT -rep NG -spInitNum 1 -spInitStr str2
 	 * 
@@ -150,7 +168,8 @@ public class SPConverter {
 			
 			if (this.getSpInitNum() != -1 ) converter.setInitUUIDNumber(this.getSpInitNum());
 			if (this.getSpInitStr() != null) converter.setInitUUIDPrefix(this.getSpInitStr());
-
+			converter.setZip(this.isZip());
+			converter.setInfer(this.isInfer());
 			// Start running the conversion
 			converter.convert(this.getFileIn(), this.getExt(), this.getRep());
 		}
@@ -165,6 +184,16 @@ public class SPConverter {
 			if (args[i].equals("-f")) {
 //				System.out.println("File in: " + args[i + 1]);
 				this.setFileIn(args[i + 1]);
+			}
+			// Get zip para
+			if (args[i].equals("-zip")) {
+//				System.out.println("File in: " + args[i + 1]);
+				this.setZip(true);;
+			}
+			// Get infer para
+			if (args[i].equals("-infer")) {
+//				System.out.println("File in: " + args[i + 1]);
+				this.setInfer(true);
 			}
 
 			// Get input file extension

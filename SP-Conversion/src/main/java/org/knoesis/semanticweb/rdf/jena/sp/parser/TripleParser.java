@@ -1,5 +1,6 @@
 package org.knoesis.semanticweb.rdf.jena.sp.parser;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -42,7 +43,7 @@ public class TripleParser implements Parser {
 
 	@Override
 	public void parse(ContextualRepresentationConverter con, String in,
-			String fileOut, String ext) {
+			BufferedWriter writer, String ext) {
         // PipedRDFStream and PipedRDFIterator need to be on different threads
         ExecutorService executor = Executors.newSingleThreadExecutor();
 
@@ -65,7 +66,7 @@ public class TripleParser implements Parser {
         	triple = iter.next();
             nodes = new Node[] {triple.getSubject(), triple.getPredicate(), triple.getObject()};
 			try {
-				Files.write(Paths.get(fileOut), con.transform(nodes, ext).getBytes(), StandardOpenOption.APPEND);
+				writer.write(con.transform(nodes, ext));
 			} catch (IOException e) {
 				logger.error(e);
 			}
@@ -74,7 +75,6 @@ public class TripleParser implements Parser {
         iter.close();
         inputStream.finish();
         executor.shutdown();
-        logger.debug("Finished generating file " + fileOut);
 		
 	}
 
