@@ -133,7 +133,7 @@ public class PrefixTrie {
 			// Generating new prefix and ns, insert it to the trie,
 			lastNsInd = ind;
 			lastNsInd = getLastIndexOfDelimiter(uriStr);
-			prefix = RDFWriteUtils.getNextPrefixNs();
+//			prefix = RDFWriteUtils.getNextPrefixNs();
 			if (lastNsInd > 0 && uriStr.charAt(lastNsInd-1) != '/' && uriStr.charAt(lastNsInd-2) != ':' ) {
 				ns = uriStr.substring(0, lastNsInd + 1);
 				prefix = searchPrefix(ns);
