@@ -173,9 +173,14 @@ public class PrefixTrie {
 //		System.out.println("last slash of " + uri + " is at: " + lastSlash);
 		
 		boolean pastProtocol = false;
+		boolean foundPeriod = false;
 		while (ind >=0){
-			if (uri.charAt(ind) == '/' || uri.charAt(ind) == '#' || uri.charAt(ind) == ':' || (uri.charAt(ind) == '.' && ind >= lastSlash)){
+			if (uri.charAt(ind) == '/' || uri.charAt(ind) == '#' || uri.charAt(ind) == ':'){
 				if (!pastProtocol) return ind;
+			}
+			if (uri.charAt(ind) == '.' && ind >= lastSlash){
+				if (foundPeriod) return ind;
+				foundPeriod = true;
 			}
 			if (uri.charAt(ind) == '/' && uri.charAt(ind-1) == '/' && uri.charAt(ind-2) == ':') pastProtocol = true;
 			ind--;
