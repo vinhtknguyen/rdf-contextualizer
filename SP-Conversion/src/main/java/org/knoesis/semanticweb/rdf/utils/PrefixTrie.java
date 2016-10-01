@@ -179,13 +179,12 @@ public class PrefixTrie {
 	}
 	
 	public String normalizeN3(String in){
-		String out = in.replaceAll("[(\\-\\+\\.\\^:,)]","");
 		try {
-			return URLEncoder.encode(out, "UTF-8");
+			return URLEncoder.encode(in, "UTF-8").replaceAll("\\.",":");
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return out;
+		return in;
 	}
 }

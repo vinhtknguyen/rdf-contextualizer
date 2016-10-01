@@ -68,4 +68,8 @@ public class PrefixTrieTest {
 		
 	}
 
+	@Test
+	public void testNormalizeN3(){
+		System.out.println(trie.normalizeN3("123:.456+789-(){}[],.=%$#!asdf"));
+	}
 }
