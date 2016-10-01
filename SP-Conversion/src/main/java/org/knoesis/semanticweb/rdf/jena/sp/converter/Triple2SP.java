@@ -93,8 +93,11 @@ public class Triple2SP extends ContextualRepresentationConverter {
 				out = new StringBuilder();
 				out.append(RDFWriteUtils.Triple2N3(nodes[0], singletonNode, nodes[2]));
 				out.append(RDFWriteUtils.Triple2N3(singletonNode, this.singletonPropertyOf, nodes[1]));
-				if (this.getMetaObject() != null && this.getMetaPredicate() != null) 
-					out.append(RDFWriteUtils.Triple2N3(singletonNode, this.metaPredicate, this.metaObject));
+				if (this.getMetaObject() != null && this.getMetaPredicate() != null) {
+					out.append(RDFWriteUtils.TwoTriples2N3(singletonNode, this.singletonPropertyOf, nodes[1], singletonNode, this.metaPredicate, this.metaObject));
+				} else {
+					out.append(RDFWriteUtils.Triple2N3(singletonNode, this.singletonPropertyOf, nodes[1]));
+				}
 				return out.toString();
 
 			default:

@@ -61,8 +61,7 @@ public class NamedGraph2SP extends ContextualRepresentationConverter{
 				singletonNode = NodeFactory.createURI(singletonBdr.toString());
 				out = new StringBuilder();
 				out.append(RDFWriteUtils.Triple2N3(nodes[0], singletonNode, nodes[2]));
-				out.append(RDFWriteUtils.Triple2N3(singletonNode, this.singletonPropertyOf, nodes[1]));
-				out.append(RDFWriteUtils.Triple2N3(singletonNode, this.namedGraphProp, nodes[3]));
+				out.append(RDFWriteUtils.TwoTriples2N3(singletonNode, this.singletonPropertyOf, nodes[1], singletonNode, this.namedGraphProp, nodes[3]));
 				return out.toString();
 				default:
 				break;

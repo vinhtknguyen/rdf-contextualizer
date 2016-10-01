@@ -167,6 +167,82 @@ public class RDFWriteUtils {
 		return RDFWriteUtils.Triple2N3(nodes[0], nodes[1], nodes[2]);
 	}
 	
+	/**
+	 * Shorten the two triples with common subject
+	 * */
+	public static String TwoTriples2N3(Node sub1, Node pred1, Node obj1, Node sub2, Node pred2, Node obj2){
+		if (!sub1.toString().equals(sub2.toString())){
+			return Triple2N3(sub1, pred1, obj1) + Triple2N3(sub2, pred2, obj2);
+		}
+		
+		StringBuilder tripleStr = new StringBuilder();
+		StringBuilder prefixes = new StringBuilder();
+		// The first element of temp is the shorten form, the second element is the prefix, and the third is the namespace
+		URIShorteningTriplet triplet = null;
+
+		/* CONSTRUCTING TRIPLE 1 */
+
+		// Check for new prefixes to add to the prefixMapping
+		// In Subject
+		triplet = RDFWriteUtils.Node2N3(sub1);
+		
+		prefixes.append(printPrefix(triplet.getPrefix(),triplet.getNamespace()));
+		
+		tripleStr.append(triplet.getShortenURI());
+		tripleStr.append('\t');
+		
+		// In Predicate
+		triplet = RDFWriteUtils.Node2N3(pred1);
+		
+		prefixes.append(printPrefix(triplet.getPrefix(),triplet.getNamespace()));
+		
+		tripleStr.append(triplet.getShortenURI());
+		tripleStr.append('\t');
+		
+		// In Object
+		triplet = RDFWriteUtils.Node2N3(obj1);
+		
+		prefixes.append(printPrefix(triplet.getPrefix(),triplet.getNamespace()));
+		
+		tripleStr.append(triplet.getShortenURI());
+		tripleStr.append("\t ; \n");
+		
+		/* CONSTRUCTING TRIPLE 2 */
+		// Check for new prefixes to add to the prefixMapping
+		tripleStr.append('\t');
+		
+		// In Predicate
+		triplet = RDFWriteUtils.Node2N3(pred2);
+		
+		prefixes.append(printPrefix(triplet.getPrefix(),triplet.getNamespace()));
+		
+		tripleStr.append(triplet.getShortenURI());
+		tripleStr.append('\t');
+		
+		// In Object
+		triplet = RDFWriteUtils.Node2N3(obj2);
+		
+		prefixes.append(printPrefix(triplet.getPrefix(),triplet.getNamespace()));
+		
+		tripleStr.append(triplet.getShortenURI());
+		tripleStr.append('\t');
+		tripleStr.append("\t . \n");
+		
+		prefixes.append(tripleStr);
+		
+		return prefixes.toString();
+	}
+	/**
+	 * Shorten the two triples with common subject
+	 * */
+	public static String TwoTriples2N3(Node[] triple1, Node[] triple2){
+		if (triple1.length == 3 && triple2.length == 3){
+			return TwoTriples2N3(triple1[0], triple1[1], triple1[2], triple2[0], triple2[1], triple2[2]);
+		} else {
+			return "";
+		}
+	}
+
 	public static String printPrefix(String prefix, String namespace){
 		if (namespace != null && prefix != null){
 			StringBuilder out = new StringBuilder();
