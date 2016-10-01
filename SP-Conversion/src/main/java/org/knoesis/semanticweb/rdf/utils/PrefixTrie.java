@@ -5,6 +5,7 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.graph.Node;
 
 public class PrefixTrie {
@@ -162,29 +163,38 @@ public class PrefixTrie {
 	
 	public int getLastIndexOfDelimiter(String uri){
 		int ind = uri.length()-1;
-		int pastProtocol = 0;
+		
+		// Find the 3rd slash symbol
+		int lastSlash = 0, slashCount = 0;
+		while (lastSlash < ind & slashCount < 3){
+			if (uri.charAt(lastSlash) == '/') slashCount++;
+			lastSlash++;
+		}
+//		System.out.println("last slash of " + uri + " is at: " + lastSlash);
+		
+		boolean pastProtocol = false;
 		while (ind >=0){
-			if (uri.charAt(ind) == '/' || uri.charAt(ind) == '#' || uri.charAt(ind) == ':'){
-				if (pastProtocol < 3) return ind;
+			if (uri.charAt(ind) == '/' || uri.charAt(ind) == '#' || uri.charAt(ind) == ':' || (uri.charAt(ind) == '.' && ind >= lastSlash)){
+				if (!pastProtocol) return ind;
 			}
-			if (uri.charAt(ind) == '/' && pastProtocol == 0 || pastProtocol == 1) pastProtocol++;
-			if (uri.charAt(ind) == ':' && pastProtocol == 2) pastProtocol++;
+			if (uri.charAt(ind) == '/' && uri.charAt(ind-1) == '/' && uri.charAt(ind-2) == ':') pastProtocol = true;
 			ind--;
 		}
 		return ind;
 	}
 	
 	public boolean isSPDelimiter(char c){
-		return (c == '/' || c == '#' || c == ':');
+		return (c == '/' || c == '#' || c == ':' || c == '.');
 	}
 	
 	public String normalizeN3(String in){
 		try {
-			return URLEncoder.encode(in, "UTF-8").replaceAll("\\.",":").replaceAll("%3A",":");
+			return URLEncoder.encode(in, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return in;
 	}
+	
 }

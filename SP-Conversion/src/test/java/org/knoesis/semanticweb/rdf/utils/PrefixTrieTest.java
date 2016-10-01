@@ -63,13 +63,23 @@ public class PrefixTrieTest {
 		assertEquals(trie.shortenURIWithPrefix(NodeFactory.createURI("http://www.w3.org/ns/prov#something")).getShortenURI(),"prov:something");
 		assertTrue(trie.shortenURIWithPrefix(NodeFactory.createURI("http://www.w3.org/ns/pro#something")).getShortenURI().contains(":"));
 		System.out.println(trie.shortenURIWithPrefix(NodeFactory.createURI("http://www.w3.org/2003/01/geo/wgs84_pos#long_sp/123")).toString());
-		assertTrue(trie.shortenURIWithPrefix(NodeFactory.createURI("http://www.w3.org/2003/01/geo/wgs84_pos#long_sp/123")).getShortenURI().contains("123"));
-
 		
+		assertTrue(trie.shortenURIWithPrefix(NodeFactory.createURI("http://www.w3.org/2003/01/geo/wgs84_pos#long_sp/123")).getShortenURI().contains("123"));
+		
+		System.out.println("http://xmlns.com/foaf/0.1/gender.sp.123 to " + trie.shortenURIWithPrefix(NodeFactory.createURI("http://xmlns.com/foaf/0.1/gender.sp.123")).getShortenURI());
+
 	}
 
 	@Test
 	public void testNormalizeN3(){
 		System.out.println(trie.normalizeN3("123:.456+789-(){}[],.=%$#!asdf"));
 	}
+	@Test
+	public void testGetLastIndexOfDelimiter(){
+		assertEquals(trie.getLastIndexOfDelimiter("http://xmlns.com/foaf/0.1/gender.sp.123"),35);
+		assertEquals(trie.getLastIndexOfDelimiter("http://xmlns.com/foaf/0.1/gender.sp/123"),35);
+		assertEquals(trie.getLastIndexOfDelimiter("http://xmlns.com/foaf/0.1/gender.sp#123"),35);
+		assertEquals(trie.getLastIndexOfDelimiter("http://xmlns.com/foaf/0.1/gender.sp:123"),35);
+	}
+	
 }
