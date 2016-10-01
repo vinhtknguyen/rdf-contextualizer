@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>rdf-conversion</groupId>
   <artifactId>rdf-conversion</artifactId>
-  <name>Singleton Property Conversion</name>
+  <name>RDF Conversion</name>
   <version>0.0.1-SNAPSHOT</version>
   <description>Convert any given RDF dataset to the representation which uses Singleton Property for modelling contextual information for the triples.
 

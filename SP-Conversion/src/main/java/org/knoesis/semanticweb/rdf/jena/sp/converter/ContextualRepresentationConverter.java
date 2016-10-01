@@ -40,11 +40,21 @@ public class ContextualRepresentationConverter {
 	protected String spDelimiter;
 	protected Node singletonPropertyOf = NodeFactory.createURI(Constants.SINGLETON_PROPERTY_OF);
 
+	protected boolean infer = false;
+
+	public boolean isInfer() {
+		return infer;
+	}
+
+	public void setInfer(boolean infer) {
+		this.infer = infer;
+	}
 
 	public ContextualRepresentationConverter(){
 		initUUIDNumber = System.currentTimeMillis();
 		spDelimiter = Constants.SP_START_DELIMITER;
 		initUUIDPrefix = Constants.SP_UUID_PREFIX;
+		infer = false;
 		
 		RDFWriteUtils.loadPrefixes(this.prefixesFile);
 	}

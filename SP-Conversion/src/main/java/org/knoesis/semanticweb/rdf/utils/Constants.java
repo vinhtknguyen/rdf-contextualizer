@@ -1,6 +1,7 @@
 package org.knoesis.semanticweb.rdf.utils;
 
 public class Constants {
+	
 	public static final String QUAD_EXT = "nq";
 	public static final String NTRIPLE_EXT = "nt";
 	public static final String TURTLE_EXT = "ttl";

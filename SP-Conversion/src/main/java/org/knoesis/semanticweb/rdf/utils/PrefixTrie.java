@@ -5,10 +5,12 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.graph.Node;
+import org.apache.log4j.Logger;
+import org.knoesis.semanticweb.rdf.jena.sp.converter.NamedGraph2SP;
 
 public class PrefixTrie {
+	final static Logger logger = Logger.getLogger(NamedGraph2SP.class);
 	private PrefixTrieNode root;
 
 	public PrefixTrie() {
@@ -75,7 +77,6 @@ public class PrefixTrie {
 				return null;
 			}
 		}
-
 		return node;
 	}
 	
@@ -106,18 +107,19 @@ public class PrefixTrie {
 				if (curnode.isPrefix) {
 					latestLeaf = curnode;
 					lastNsInd = i+1;
-//					System.out.println("found ns " + curnode.prefix + " at " + c +" with " + uriStr.substring(i, len));
+					logger.trace("found ns " + curnode.prefix + " at " + c +" with " + uriStr.substring(i, len));
 				}
 				
 			} else {
-				lastNsInd = i;
+//				lastNsInd = i;
 				break;
 			}
 		}
 		
 		int ind = getLastIndexOfDelimiter(uriStr);
-		if (ind > lastNsInd) {
-//			System.out.println("found possible longer ns");
+//		System.out.println(uriStr + " uri with len=" + len +  " getLastIndexOfDelimiter=" + ind + " vs. lastNsInd=" + lastNsInd );
+		
+		if (ind >= lastNsInd) {
 			latestLeaf = null;
 			lastNsInd = ind;
 		}
@@ -126,16 +128,14 @@ public class PrefixTrie {
 			// Construct the shorted uri
 			ns = uriStr.substring(0, lastNsInd);
 			prefix = latestLeaf.prefix;
-			if (prefix == null) System.out.println(uriStr + " null prefix");
+			logger.trace(uriStr + " has prefix" + prefix);
 			shorten.append(prefix + ":");
 			shorten.append(normalizeN3(uriStr.substring(lastNsInd, len)));
 		} else {
-//			System.out.println("not existing prefix" + uriStr);
+			logger.trace("not existing prefix" + uriStr);
 			// Generating new prefix and ns, insert it to the trie,
-			lastNsInd = ind;
-			lastNsInd = getLastIndexOfDelimiter(uriStr);
 //			prefix = RDFWriteUtils.getNextPrefixNs();
-			if (lastNsInd > 0 && uriStr.charAt(lastNsInd-1) != '/' && uriStr.charAt(lastNsInd-2) != ':' ) {
+			if (lastNsInd > 2 && uriStr.charAt(lastNsInd-1) != '/' && uriStr.charAt(lastNsInd-2) != ':' ) {
 				ns = uriStr.substring(0, lastNsInd + 1);
 				prefix = searchPrefix(ns);
 				if (prefix == null) prefix = RDFWriteUtils.getNextPrefixNs();

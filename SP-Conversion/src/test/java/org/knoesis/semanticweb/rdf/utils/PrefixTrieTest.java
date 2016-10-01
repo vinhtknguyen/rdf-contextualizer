@@ -64,9 +64,14 @@ public class PrefixTrieTest {
 		assertTrue(trie.shortenURIWithPrefix(NodeFactory.createURI("http://www.w3.org/ns/pro#something")).getShortenURI().contains(":"));
 		System.out.println(trie.shortenURIWithPrefix(NodeFactory.createURI("http://www.w3.org/2003/01/geo/wgs84_pos#long_sp/123")).toString());
 		
-		assertTrue(trie.shortenURIWithPrefix(NodeFactory.createURI("http://www.w3.org/2003/01/geo/wgs84_pos#long_sp/123")).getShortenURI().contains("123"));
-		
+		assertTrue(trie.shortenURIWithPrefix(NodeFactory.createURI("http://www.w3.org/2003/01/geo/wgs84_pos#long_sp.123")).getShortenURI().contains("123"));
+		assertTrue(trie.shortenURIWithPrefix(NodeFactory.createURI("http://www.w3.org/2003/01/geo/wgs84_pos#long_sp:123")).getShortenURI().contains("123"));
+		assertTrue(trie.shortenURIWithPrefix(NodeFactory.createURI("http://www.w3.org/2003/01/geo/wgs84_pos#long_sp#123")).getShortenURI().contains("123"));
+
 		System.out.println("http://xmlns.com/foaf/0.1/gender.sp.123 to " + trie.shortenURIWithPrefix(NodeFactory.createURI("http://xmlns.com/foaf/0.1/gender.sp.123")).getShortenURI());
+		System.out.println("http://www.w3.org/2003/01/geo/wgs84_pos#long_sp.123 to " + trie.shortenURIWithPrefix(NodeFactory.createURI("http://www.w3.org/2003/01/geo/wgs84_pos#long_sp.123")).getShortenURI());
+		System.out.println("http://www.w3.org/2003/01/geo/wgs84_pos#long_sp:123 to " + trie.shortenURIWithPrefix(NodeFactory.createURI("http://www.w3.org/2003/01/geo/wgs84_pos#long_sp:123")).getShortenURI());
+		System.out.println("http://www.w3.org/2003/01/geo/wgs84_pos#long_sp#123 to " + trie.shortenURIWithPrefix(NodeFactory.createURI("http://www.w3.org/2003/01/geo/wgs84_pos#long_sp#123")).getShortenURI());
 
 	}
 
