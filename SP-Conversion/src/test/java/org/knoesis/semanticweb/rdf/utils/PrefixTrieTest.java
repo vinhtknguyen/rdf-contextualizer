@@ -76,8 +76,8 @@ public class PrefixTrieTest {
 	}
 	@Test
 	public void testGetLastIndexOfDelimiter(){
-		assertEquals(trie.getLastIndexOfDelimiter("http://xmlns.com/foaf/0.1/gender.sp.123"),32);
-		assertEquals(trie.getLastIndexOfDelimiter("http://xmlns.com/foaf/0.1/gender/sp.123"),32);
+		assertEquals(trie.getLastIndexOfDelimiter("http://xmlns.com/foaf/0.1/gender.sp.123"),35);
+		assertEquals(trie.getLastIndexOfDelimiter("http://xmlns.com/foaf/0.1/gender/sp.123"),35);
 		assertEquals(trie.getLastIndexOfDelimiter("http://xmlns.com/foaf/0.1/gender.sp#123"),35);
 		assertEquals(trie.getLastIndexOfDelimiter("http://xmlns.com/foaf/0.1/gender.sp/123"),35);
 		assertEquals(trie.getLastIndexOfDelimiter("http://xmlns.com/foaf/0.1/gender.sp:123"),35);

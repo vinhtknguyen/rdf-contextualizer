@@ -163,6 +163,20 @@ public class PrefixTrie {
 	
 	public int getLastIndexOfDelimiter(String uri){
 		int ind = uri.length()-1;
+				
+		boolean pastProtocol = false;
+		while (ind >=0){
+			if (uri.charAt(ind) == '/' || uri.charAt(ind) == '#' || uri.charAt(ind) == ':' || uri.charAt(ind) == '.'){
+				if (!pastProtocol) return ind;
+			}
+			if (uri.charAt(ind) == '/' && uri.charAt(ind-1) == '/' && uri.charAt(ind-2) == ':') pastProtocol = true;
+			ind--;
+		}
+		return ind;
+	}
+	
+	public int getLastIndexOfDelimiterWithSecondPeriod(String uri){
+		int ind = uri.length()-1;
 		
 		// Find the 3rd slash symbol
 		int lastSlash = 0, slashCount = 0;
@@ -188,6 +202,7 @@ public class PrefixTrie {
 		return ind;
 	}
 	
+
 	public boolean isSPDelimiter(char c){
 		return (c == '/' || c == '#' || c == ':' || c == '.');
 	}
