@@ -1,33 +1,35 @@
 package org.knoesis.semanticweb.rdf.jena.sp.converter;
 
-import org.apache.jena.graph.Node;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.apache.jena.graph.NodeFactory;
 import org.apache.log4j.Logger;
-import org.knoesis.semanticweb.rdf.utils.Constants;
-import org.knoesis.semanticweb.rdf.utils.RDFWriteUtils;
+import org.knoesis.semanticweb.rdf.sp.model.SPNode;
+import org.knoesis.semanticweb.rdf.sp.model.SPTriple;
 
 public class Triple2SP extends ContextualRepresentationConverter {
 	
 	final static Logger logger = Logger.getLogger(NamedGraph2SP.class);
-	protected Node metaPredicate = null;
-	protected Node metaObject = null;
+	protected SPNode metaPredicate = null;
+	protected SPNode metaObject = null;
 	
-	public Node getMetaPredicate() {
+	public SPNode getMetaPredicate() {
 		return metaPredicate;
 	}
 
-	public void setMetaPredicate(Node metaPredicate) {
+	public void setMetaPredicate(SPNode metaPredicate) {
 		this.metaPredicate = metaPredicate;
 	}
 
 	public void setMetaPredicate(String metaPredicate) {
-		Node node = NodeFactory.createURI(metaPredicate);
-		if (node != null){
-			this.metaPredicate = node;
+		SPNode sPNode = new SPNode(NodeFactory.createURI(metaPredicate));
+		if (sPNode != null){
+			this.metaPredicate = sPNode;
 		}
 	}
 
-	public Node getMetaObject() {
+	public SPNode getMetaObject() {
 		return metaObject;
 	}
 
@@ -42,69 +44,39 @@ public class Triple2SP extends ContextualRepresentationConverter {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void setMetaObject(Node metaObject) {
+	public void setMetaObject(SPNode metaObject) {
 		this.metaObject = metaObject;
 	}
 	public void setMetaObject(String metaObject) {
-		Node node = NodeFactory.createURI(metaObject);
-		if (node != null){
-			this.metaObject = node;
+		SPNode sPNode = new SPNode(NodeFactory.createURI(metaObject));
+		if (sPNode != null){
+			this.metaObject = sPNode;
 		}
 	}
 
 	@Override
-	public String transform(Node[] nodes, String ext){
+	public List<SPTriple> transformTriple(org.apache.jena.graph.Triple triple){
 		
-		if (nodes.length == 3 ){
+		List<SPTriple> triples = new LinkedList<SPTriple>();
+		if (triple != null ){
 		
-			Node singletonNode = null;
-			StringBuilder singletonBdr = null, out = null;
+			SPNode singletonNode = null;
+			StringBuilder singletonBdr = null;
 			
-			switch (ext){
-
-			/* NANO TO NTRIPLE */
+			singletonBdr = new StringBuilder();
+			singletonBdr.append(triple.getSubject().toString());
+			singletonBdr.append(this.getSPDelimiter());
+			singletonBdr.append(this.getNextUUID());
 			
-			case Constants.NTRIPLE_EXT:
+			singletonNode = new SPNode(NodeFactory.createURI(singletonBdr.toString()));
+			
+			triples.add(new SPTriple(new SPNode(triple.getSubject()), singletonNode, new SPNode(triple.getObject())));
+			triples.add(new SPTriple(singletonNode, this.singletonPropertyOf, new SPNode(triple.getPredicate())));
+			if (this.getMetaObject() != null && this.getMetaPredicate() != null) 
+				triples.add(new SPTriple(singletonNode, this.metaPredicate, this.metaObject));
 				
-				singletonBdr = new StringBuilder();
-				singletonBdr.append(nodes[1].toString());
-				singletonBdr.append(this.getSPDelimiter());
-				singletonBdr.append(this.getNextUUID());
-				
-				singletonNode = NodeFactory.createURI(singletonBdr.toString());
-				
-				out = new StringBuilder();
-				out.append(RDFWriteUtils.Triple2NT(nodes[0], singletonNode, nodes[2]));
-				out.append(RDFWriteUtils.Triple2NT(singletonNode, this.singletonPropertyOf, nodes[1]));
-				if (this.getMetaObject() != null && this.getMetaPredicate() != null) 
-					out.append(RDFWriteUtils.Triple2NT(singletonNode, this.metaPredicate, this.metaObject));
-				return out.toString();
-				
-			/* NANO TO TURTLE */
-	
-			case Constants.TURTLE_EXT:
-				
-				singletonBdr = new StringBuilder(nodes[1].toString());
-				singletonBdr.append(this.getSPDelimiter());
-				singletonBdr.append(this.getNextUUID());
-
-				singletonNode = NodeFactory.createURI(singletonBdr.toString());
-
-				out = new StringBuilder();
-				out.append(RDFWriteUtils.Triple2N3(nodes[0], singletonNode, nodes[2]));
-				out.append(RDFWriteUtils.Triple2N3(singletonNode, this.singletonPropertyOf, nodes[1]));
-				if (this.getMetaObject() != null && this.getMetaPredicate() != null) {
-					out.append(RDFWriteUtils.TwoTriples2N3(singletonNode, this.singletonPropertyOf, nodes[1], singletonNode, this.metaPredicate, this.metaObject));
-				} else {
-					out.append(RDFWriteUtils.Triple2N3(singletonNode, this.singletonPropertyOf, nodes[1]));
-				}
-				return out.toString();
-
-			default:
-				break;
-			} 
 		}
-		return "";
+		return triples;
 	}
 
 }

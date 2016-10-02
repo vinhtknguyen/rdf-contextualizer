@@ -91,6 +91,12 @@ Proceedings of 23th International Conference on the World Wide Web.
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.5</version>
+		<exclusions>
+		    <exclusion>
+		        <groupId>org.slf4j</groupId>
+		        <artifactId>slf4j-log4j12</artifactId>
+		    </exclusion>
+		</exclusions> 
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>

@@ -1,18 +1,20 @@
 package org.knoesis.semanticweb.rdf.jena.sp.converter;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
-import org.apache.jena.graph.Node;
 import org.apache.log4j.Logger;
+import org.knoesis.semanticweb.rdf.sp.model.SPNode;
+import org.knoesis.semanticweb.rdf.sp.model.SPTriple;
 import org.knoesis.semanticweb.rdf.utils.Constants;
-import org.knoesis.semanticweb.rdf.utils.RDFWriteUtils;
 
 public class Reification2SP extends ContextualRepresentationConverter{
 	
 	final static Logger logger = Logger.getLogger(Reification2SP.class);
 
-	private Map<String,Node[]> reifiedTriples = new HashMap<String,Node[]>();
+	private Map<String,org.apache.jena.graph.Node[]> reifiedTriples = new HashMap<String,org.apache.jena.graph.Node[]>();
 	
 	private boolean type_flag = false;
 	private boolean subject_flag = false;
@@ -31,40 +33,40 @@ public class Reification2SP extends ContextualRepresentationConverter{
 		// TODO Auto-generated constructor stub
 	}
 
-	private boolean isReifiedStatementCompleted(){
+	private boolean isReifiedPatternCompleted(){
 		return (type_flag && subject_flag && predicate_flag && object_flag);
 	}
 	
-	private boolean addTriple(Node[] nodes){
-		if (nodes.length == 3){
-			if (nodes[1].toString().equals(Constants.RDF_TYPE) && nodes[2].toString().equals(Constants.RDF_STATEMENT)){
-				if (nodes[0] != null){
-					Node[] rei = new Node[3];
-					reifiedTriples.put(nodes[0].toString(), rei);
+	private boolean addTripleToReifiedPattern(org.apache.jena.graph.Triple triple){
+		if (triple != null){
+			if (triple.getPredicate().toString().equals(Constants.RDF_TYPE) && triple.getObject().toString().equals(Constants.RDF_STATEMENT)){
+				if (triple.getSubject() != null){
+					org.apache.jena.graph.Node[] rei = new org.apache.jena.graph.Node[3];
+					reifiedTriples.put(triple.getSubject().toString(), rei);
 					type_flag = true;
 					return true;
 				}
 			}
 			
-			if (nodes[1].toString().equals(Constants.RDF_SUBJECT)){
-				if (reifiedTriples.get(nodes[0].toString()) != null && nodes[2] != null){
-					reifiedTriples.get(nodes[0].toString())[0] = nodes[2];
+			if (triple.getPredicate().toString().equals(Constants.RDF_SUBJECT)){
+				if (reifiedTriples.get(triple.getSubject().toString()) != null && triple.getObject() != null){
+					reifiedTriples.get(triple.getSubject().toString())[0] = triple.getObject();
 					subject_flag = true;
 					return true;
 				}
 			}
 			
-			if (nodes[1].toString().equals(Constants.RDF_PREDICATE)){
-				if (reifiedTriples.get(nodes[0].toString()) != null && nodes[2] != null){
-					reifiedTriples.get(nodes[0].toString())[1] = nodes[2];
+			if (triple.getPredicate().toString().equals(Constants.RDF_PREDICATE)){
+				if (reifiedTriples.get(triple.getSubject().toString()) != null && triple.getObject() != null){
+					reifiedTriples.get(triple.getSubject().toString())[1] = triple.getObject();
 					predicate_flag = true;
 					return true;
 				}
 			}
 			
-			if (nodes[1].toString().equals(Constants.RDF_OBJECT)){
-				if (reifiedTriples.get(nodes[0].toString()) != null && nodes[2] != null){
-					reifiedTriples.get(nodes[0].toString())[2] = nodes[2];
+			if (triple.getPredicate().toString().equals(Constants.RDF_OBJECT)){
+				if (reifiedTriples.get(triple.getSubject().toString()) != null && triple.getObject() != null){
+					reifiedTriples.get(triple.getSubject().toString())[2] = triple.getObject();
 					object_flag = true;
 					return true;
 				}
@@ -81,56 +83,34 @@ public class Reification2SP extends ContextualRepresentationConverter{
 	}
 	
 	@Override
-	public String transform(Node[] nodes, String ext){
+	public List<SPTriple> transformTriple(org.apache.jena.graph.Triple triple){
+		List<SPTriple> triples = new LinkedList<SPTriple>();
 		
-		if (nodes.length == 3 ){
+		if (triple != null){
 			
 			// Trying to add the current triple to the Reified Statement
-			if (!addTriple(nodes)) {
+			if (!addTripleToReifiedPattern(triple)) {
 				
 				// Print the regular triple
-				return super.transform(nodes, ext);
+				return super.transformTriple(triple);
 			}
 			
 			// Check if the reified statement is completed
 			
-			if (!isReifiedStatementCompleted()){
-				return "";
+			if (!isReifiedPatternCompleted()){
+				return triples;
 			}
 			
-			Node[] reifiedStatement = reifiedTriples.get(nodes[0].toString());
-			
-			
-			StringBuilder out = new StringBuilder();
-			
-			switch (ext){
-
-			/* NANO TO NTRIPLE */
-			
-			case Constants.NTRIPLE_EXT:
-				
-				out.append(RDFWriteUtils.Triple2NT(reifiedStatement[0], nodes[0], reifiedStatement[2]));
-				out.append(RDFWriteUtils.Triple2NT(nodes[0], this.singletonPropertyOf, reifiedStatement[1]));
-				
-				break;
-			/* NANO TO TURTLE */
-	
-			case Constants.TURTLE_EXT:
-				
-				out.append(RDFWriteUtils.Triple2N3(reifiedStatement[0], nodes[0], reifiedStatement[2]));
-				out.append(RDFWriteUtils.Triple2N3(nodes[0], this.singletonPropertyOf, reifiedStatement[1]));
-
-			default:
-				break;
-			} 
+			org.apache.jena.graph.Node[] reifiedStatement = reifiedTriples.get(triple.getSubject().toString());
+			triples.add(new SPTriple(new SPNode(reifiedStatement[0]), new SPNode(triple.getSubject()), new SPNode(reifiedStatement[2])));
+			triples.add(new SPTriple(new SPNode(triple.getSubject()), this.singletonPropertyOf, new SPNode(reifiedStatement[1])));
 			
 			// Reset the flasg and remove the reified statement
 			resetReifiedFlags();
-			reifiedTriples.remove(nodes[0]);
+			reifiedTriples.remove(triple.getSubject());
 
-			return out.toString();
 		}
-		return "";
+		return triples;
 	}
 
 }

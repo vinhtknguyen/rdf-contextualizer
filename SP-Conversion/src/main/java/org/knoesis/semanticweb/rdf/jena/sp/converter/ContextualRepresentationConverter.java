@@ -13,16 +13,18 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.zip.GZIPOutputStream;
 
-import org.apache.jena.graph.Node;
 import org.apache.jena.graph.NodeFactory;
+import org.apache.jena.sparql.core.Quad;
 import org.apache.log4j.Logger;
 import org.knoesis.semanticweb.rdf.jena.sp.parser.Parser;
 import org.knoesis.semanticweb.rdf.jena.sp.parser.QuadParser;
 import org.knoesis.semanticweb.rdf.jena.sp.parser.TripleParser;
 import org.knoesis.semanticweb.rdf.utils.*;
-
+import org.knoesis.semanticweb.rdf.sp.model.*;
 /*	Subclasses: 
  * 		NamedGraph2SP
  * 			Input: a property specifying the relationship between the triple and the graph
@@ -43,7 +45,7 @@ public class ContextualRepresentationConverter {
 	protected String initUUIDPrefix = null;
 
 	protected String spDelimiter;
-	protected Node singletonPropertyOf = NodeFactory.createURI(Constants.SINGLETON_PROPERTY_OF);
+	protected SPNode singletonPropertyOf = new SPNode(NodeFactory.createURI(Constants.SINGLETON_PROPERTY_OF));
 
 	protected boolean infer = false;
 	protected boolean zip = false;
@@ -78,7 +80,7 @@ public class ContextualRepresentationConverter {
 		this.setInitUUIDNumber(spPrefixNum);
 		this.setInitUUIDPrefix(spPrefixStr);
 		this.setSPDelimiter(spDelimiter);
-		this.singletonPropertyOf = NodeFactory.createURI(singletonPropertyOfURI);
+		this.singletonPropertyOf = new SPNode(NodeFactory.createURI(singletonPropertyOfURI));
 		
 		RDFWriteUtils.loadPrefixes(this.prefixesFile);
 	}
@@ -220,27 +222,19 @@ public class ContextualRepresentationConverter {
 	}
 		
 
-	public String transform(Node[] nodes, String ext) {
-				
-		/* REI/TRIPLE to TURTLE/NTRIPLE*/
-		
-		switch (ext.toLowerCase()) {
-
-		/* NANO TO NTRIPLE */
-		case Constants.NTRIPLE_EXT:
-			
-			return RDFWriteUtils.Triple2NT(nodes);
-			
-		/* NANO TO TURTLE */
-
-		case Constants.TURTLE_EXT:
-			
-			return RDFWriteUtils.Triple2N3(nodes);
-
-		}
-		return "";
+	public List<SPTriple> transformTriple(org.apache.jena.graph.Triple triple) {
+		List<SPTriple> triples = new LinkedList<SPTriple>();
+		triples.add(new SPTriple(triple.getSubject(), triple.getPredicate(), triple.getPredicate()));
+		return triples;
 	}
-	
+
+	public List<SPTriple> transformQuad(Quad triple) {
+		
+		List<SPTriple> triples = new LinkedList<SPTriple>();
+		
+		return triples;
+	}
+
 
 	protected String genFileOut(String in, String ext){
 		if (in != null && !this.isZip()) {
@@ -287,16 +281,16 @@ public class ContextualRepresentationConverter {
 	}
 
 
-	public Node getSingletonPropertyOf() {
+	public SPNode getSingletonPropertyOf() {
 		return singletonPropertyOf;
 	}
 
 
-	public void setSingletonPropertyOf(Node singletonPropertyOf) {
+	public void setSingletonPropertyOf(SPNode singletonPropertyOf) {
 		this.singletonPropertyOf = singletonPropertyOf;
 	}
 	
 	public void setSingletonPropertyOf(String singletonPropertyOf) {
-		this.singletonPropertyOf = NodeFactory.createURI(singletonPropertyOf);
+		this.singletonPropertyOf = new SPNode(NodeFactory.createURI(singletonPropertyOf));
 	}
 }

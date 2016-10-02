@@ -1,9 +1,13 @@
 package org.knoesis.semanticweb.rdf.jena.sp.converter;
 
-import org.apache.jena.graph.Node;
+import java.util.LinkedList;
+import java.util.List;
+
+import org.apache.jena.graph.NodeFactory;
+import org.apache.jena.sparql.core.Quad;
 import org.apache.log4j.Logger;
-import org.knoesis.semanticweb.rdf.utils.Constants;
-import org.knoesis.semanticweb.rdf.utils.RDFWriteUtils;
+import org.knoesis.semanticweb.rdf.sp.model.SPNode;
+import org.knoesis.semanticweb.rdf.sp.model.SPTriple;
 
 public class NanoPub2SP extends ContextualRepresentationConverter {
 	
@@ -11,42 +15,24 @@ public class NanoPub2SP extends ContextualRepresentationConverter {
 
 
 	@Override
-	public String transform(Node[] nodes, String ext){
+	public List<SPTriple> transformQuad(Quad quad){
 		
-		if (nodes.length == 4 ){
+		List<SPTriple> triples = new LinkedList<SPTriple>();
+		if (quad.getGraph() != null){
 		
-			Node singletonNode = null;
-			StringBuilder out = null;
+			StringBuilder singletonBdr = null;
+			singletonBdr = new StringBuilder();
+			singletonBdr.append(quad.getPredicate().toString());
+			singletonBdr.append(this.getSPDelimiter());
+			singletonBdr.append(this.getNextUUID());
 			
-			switch (ext){
+			SPNode singletonNode = new SPNode(NodeFactory.createURI(singletonBdr.toString()));
 
-			/* NANO TO NTRIPLE */
-			
-			case Constants.NTRIPLE_EXT:
-				
-				singletonNode = nodes[3];
-				
-				out = new StringBuilder();
-				out.append(RDFWriteUtils.Triple2NT(nodes[0], singletonNode, nodes[2]));
-				out.append(RDFWriteUtils.Triple2NT(singletonNode, this.singletonPropertyOf, nodes[1]));
-				return out.toString();
-				
-			/* NANO TO TURTLE */
-	
-			case Constants.TURTLE_EXT:
-				
-				singletonNode = nodes[3];
+			triples.add(new SPTriple(singletonNode, this.singletonPropertyOf, new SPNode(quad.getPredicate())));
+			triples.add(new SPTriple(new SPNode(quad.getSubject()), singletonNode, new SPNode(quad.getObject())));
 
-				out = new StringBuilder();
-				out.append(RDFWriteUtils.Triple2N3(nodes[0], singletonNode, nodes[2]));
-				out.append(RDFWriteUtils.Triple2N3(singletonNode, this.singletonPropertyOf, nodes[1]));
-				return out.toString();
-
-			default:
-				break;
-			} 
 		}
-		return "";
+		return triples;
 	}
 
 
