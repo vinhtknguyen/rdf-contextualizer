@@ -25,7 +25,16 @@ public class SPConverter {
 	protected String spInitStr = null;
 	protected boolean zip = false;
 	protected boolean infer = false;
+	protected String ontoDir = null;
 	
+	public String getOntoDir() {
+		return ontoDir;
+	}
+
+	public void setOntoDir(String ontoDir) {
+		this.ontoDir = ontoDir;
+	}
+
 	public boolean isInfer() {
 		return infer;
 	}
@@ -78,12 +87,13 @@ public class SPConverter {
 	 * -metaProp	meta property of the triple, which could the provenance property of the triple, default value is prov:wasDerivedFrom
 	 * -metaObj 	meta object of the triple, which could be the source where the triple was created
 	 * -spProp		by default, it is rdf:singletonPropertyOf
-	 * 
+	 * -zip
+	 * -infer 		Ontology file or directory
 	 */
 	
 	/** Examples for testing
 	 * 
-	 * 1)	-zip -f resources/test-nq -ext TTL -rep NG -spInitNum 1 -spInitStr str1
+	 * 1)	-f resources/test-nq -ext TTL -rep NG -spInitNum 1 -spInitStr str1
 	 * 
 	 * 2)	-f resources/test-nq -ext NT -rep NG -spInitNum 1 -spInitStr str2
 	 * 
@@ -170,6 +180,7 @@ public class SPConverter {
 			if (this.getSpInitStr() != null) converter.setInitUUIDPrefix(this.getSpInitStr());
 			converter.setZip(this.isZip());
 			converter.setInfer(this.isInfer());
+			converter.setOntoDir(this.getOntoDir());
 			// Start running the conversion
 			converter.convert(this.getFileIn(), this.getExt(), this.getRep());
 		}
@@ -194,6 +205,7 @@ public class SPConverter {
 			if (args[i].equals("-infer")) {
 //				System.out.println("File in: " + args[i + 1]);
 				this.setInfer(true);
+				this.setOntoDir(args[i+1]);
 			}
 
 			// Get input file extension

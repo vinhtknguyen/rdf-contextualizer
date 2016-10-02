@@ -8,19 +8,16 @@ import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.jena.graph.NodeFactory;
-import org.apache.jena.graph.Node_Literal;
-import org.apache.jena.graph.Node_URI;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.log4j.Logger;
+import org.knoesis.semanticweb.rdf.sp.model.PrefixTrie;
 import org.knoesis.semanticweb.rdf.sp.model.SPNode;
 import org.knoesis.semanticweb.rdf.sp.model.SPTriple;
 
@@ -81,38 +78,7 @@ public class RDFWriteUtils {
     public static void resetPrefixMapping(){
     	prefixMapping = new HashMap<String,String>();
     }
-    /** This method returns an array of size 2 
-     * First element is the shorten URI string
-     * Second element is the line of prefix from the shorten one
-     * */
-	public static URIShorteningTriplet Node2N3(SPNode in){
-		URIShorteningTriplet triplet = null;
-		if (in == null) return triplet;
-		
-	    if (in.getJenaNode().isURI()) {
-			// shorten the whole URI with prefix 
-			return RDFWriteUtils.shortenURI(in);
-	    }
-	    
-	    if (in.getJenaNode().isLiteral()) {
-	    	StringBuilder out = new StringBuilder();
-	    	out.append("\"");
-	    	out.append(in.getJenaNode().getLiteralLexicalForm());
-	    	out.append("\"");
-	    	
-			// shorten the whole URI with prefix for data type
-	    	if (!in.getJenaNode().getLiteralDatatypeURI().equals("")){
-	    		out.append("^^");
-	    		triplet = Node2N3(new SPNode(NodeFactory.createURI(in.getJenaNode().getLiteralDatatypeURI())));
-	    		out.append(triplet.getShortenURI());
-//	    		System.out.println("output datatype: " + toN3(((Literal) in).getDatatype()));
-	    	}
-	    	return URIShorteningTriplet.createTriplet(out.toString(), triplet.getPrefix(), triplet.getNamespace());
-	    } 
-	    
-	    return triplet;
-	}
-	
+
 	
 	public static String shortenURIWithMapping(SPNode in){
 		// shorten the whole URI with prefix 
@@ -131,45 +97,15 @@ public class RDFWriteUtils {
 	    }
 	    return "<" + in.toString() + ">";
 	}
-	public static URIShorteningTriplet shortenURI(SPNode in){
-		// shorten the whole URI with prefix 
-		return trie.shortenURIWithPrefix(in.getJenaNode());
-		 
-	}
-
-
-	public static String Node2NT(SPNode in){
-		
-	    if (in.getJenaNode() instanceof Node_URI) {
-			// shorten the whole URI with prefix 
-			return "<" + in.toString() + ">";
-	    }
-	    
-	    if (in.getJenaNode() instanceof Node_Literal) {
-	    	StringBuilder out = new StringBuilder();
-	    	out.append("\"");
-	    	out.append(in.getJenaNode().getLiteralLexicalForm());
-	    	out.append("\"");
-
-	    	// shorten the whole URI with prefix for data type
-	    	if (!in.getJenaNode().getLiteralDatatypeURI().equals("")){
-	    		out.append("^^");
-	    		out.append(Node2NT(new SPNode(NodeFactory.createURI(in.getJenaNode().getLiteralDatatypeURI()))));
-	    	}
-	    	return out.toString();
-	    } 
-	    
-	    return "";
-	}
 
 	/**
 	 * Print a list of triples
 	 * 
 	 * */
 	public static String printTriples(List<SPTriple> triples, String ext){
-		if (ext.toUpperCase().equals(Constants.TURTLE_EXT)){
+		if (ext.toLowerCase().equals(Constants.TURTLE_EXT)){
 			return printTriples2N3(triples);
-		} else if (ext.toUpperCase().equals(Constants.NTRIPLE_EXT)){
+		} else if (ext.toLowerCase().equals(Constants.NTRIPLE_EXT)){
 			return printTriples2NT(triples);
 		}
 		return printTriples2N3(triples);
@@ -185,27 +121,13 @@ public class RDFWriteUtils {
 			return "";
 		}
 		
-		StringBuilder prefixes = new StringBuilder(), triplesStr = new StringBuilder();
-		
-		// Shorten the nodes in the triples.
-		for (int i = 0; i < triples.size(); i++){
-			URIShorteningTriplet triplet = RDFWriteUtils.Node2N3(triples.get(i).getSubject());
-			triples.get(i).getSubject().setShorten(triplet.getShortenURI());
-			prefixes.append(printPrefix(triplet.getPrefix(), triplet.getNamespace()));
-			
-			triplet = RDFWriteUtils.Node2N3(triples.get(i).getPredicate());
-			triples.get(i).getPredicate().setShorten(triplet.getShortenURI());
-			prefixes.append(printPrefix(triplet.getPrefix(), triplet.getNamespace()));
 
-			triplet = RDFWriteUtils.Node2N3(triples.get(i).getObject());
-			triples.get(i).getObject().setShorten(triplet.getShortenURI());
-			prefixes.append(printPrefix(triplet.getPrefix(), triplet.getNamespace()));
-		}
-		logger.debug("Input triples");
+		System.out.println("Input triples");
 		for (SPTriple triple : triples){
-			logger.debug(triple.toString());
+			System.out.println(triple.toString());
 		}
 		
+		/* No sorting as it takes too long to finish
 		// Sort the input triples
 		Collections.sort(triples, new TripleComparator());
 	
@@ -214,17 +136,27 @@ public class RDFWriteUtils {
 			logger.debug(triple.toShortenString());
 		}
 		
+		*/
+		
 		// Print the triple in shorten turtle form 
 		SPTriple cur = null; 
 		SPNode commonSubject = null, commonPredicate = null;
 		StringBuilder curStr = new StringBuilder();
-		
+		StringBuilder prefixes = new StringBuilder();
+	
 		if (triples.size() == 0) return "";
 		if (triples.size() == 1) return printTriple2N3(triples.get(0));
 		
 		for (int i = 0; i < triples.size(); i++){
+			
 			cur = triples.get(i);
+			
 			if (cur != null){
+
+				// Generate the prefix string
+				prefixes.append(printPrefix(cur.getSubject().toN3().getPrefix(), cur.getSubject().toN3().getNamespace()));
+				prefixes.append(printPrefix(cur.getPredicate().toN3().getPrefix(), cur.getPredicate().toN3().getNamespace()));
+				prefixes.append(printPrefix(cur.getObject().toN3().getPrefix(), cur.getObject().toN3().getNamespace()));
 
 				// Print the subject for the current triple 
 				if (commonSubject == null && commonPredicate == null) {
@@ -267,48 +199,39 @@ public class RDFWriteUtils {
 	}
 	
 	public static String printPrefix(String prefix, String namespace){
+		
 		if (namespace != null && prefix != null){
-			StringBuilder out = new StringBuilder();
-			out.append("@prefix\t");
-			out.append(prefix);
-			out.append(":\t<");
-			out.append(namespace);
-			out.append(">\t . \n");
-			return out.toString();
+			// Print the prefix if not added before
+			if (RDFWriteUtils.prefixMapping.get(prefix) == null){
+				RDFWriteUtils.prefixMapping.put(prefix, namespace);
+				StringBuilder out = new StringBuilder();
+				out.append("@prefix\t");
+				out.append(prefix);
+				out.append(":\t<");
+				out.append(namespace);
+				out.append(">\t . \n");
+				return out.toString();
+			}
 		}
 		return "";
 	}
 	
 	public static String printTriple2N3(SPTriple triple){
+		
 		StringBuilder out = new StringBuilder();
 		StringBuilder prefixes = new StringBuilder();
-		// The first element of temp is the shorten form, the second element is the prefix, and the third is the namespace
-		URIShorteningTriplet triplet = null;
 
-		// Check for new prefixes to add to the prefixMapping
-		// In Subject
-		triplet = RDFWriteUtils.Node2N3(triple.getSubject());
-		
-		prefixes.append(printPrefix(triplet.getPrefix(),triplet.getNamespace()));
-		
-		out.append(triplet.getShortenURI());
+		prefixes.append(printPrefix(triple.getSubject().toN3().getPrefix(),triple.getSubject().toN3().getNamespace()));
+		prefixes.append(printPrefix(triple.getPredicate().toN3().getPrefix(),triple.getPredicate().toN3().getNamespace()));
+		prefixes.append(printPrefix(triple.getObject().toN3().getPrefix(),triple.getObject().toN3().getNamespace()));
+
+		out.append(triple.getSubject().getShorten());
 		out.append('\t');
 		
-		// In Predicate
-		triplet = RDFWriteUtils.Node2N3(triple.getPredicate());
-		
-		prefixes.append(printPrefix(triplet.getPrefix(),triplet.getNamespace()));
-		
-		out.append(triplet.getShortenURI());
+		out.append(triple.getPredicate().getShorten());
 		out.append('\t');
 		
-		// In Object
-		triplet = RDFWriteUtils.Node2N3(triple.getObject());
-		
-		prefixes.append(printPrefix(triplet.getPrefix(),triplet.getNamespace()));
-		
-		out.append(triplet.getShortenURI());
-		out.append('\t');
+		out.append(triple.getObject().getShorten());
 		out.append("\t . \n");
 		
 		prefixes.append(out);
@@ -329,11 +252,11 @@ public class RDFWriteUtils {
 		
 		if (triple == null) return "";
 		
-		StringBuilder  out = new StringBuilder(RDFWriteUtils.Node2NT(triple.getSubject()));
+		StringBuilder  out = new StringBuilder(triple.getSubject().toNT());
 		out.append('\t');
-		out.append(RDFWriteUtils.Node2NT(triple.getPredicate()));
+		out.append(triple.getPredicate().toNT());
 		out.append('\t');
-		out.append(RDFWriteUtils.Node2NT(triple.getObject()));
+		out.append(triple.getObject().toNT());
 		out.append("\t . \n");
 		
 		return out.toString();

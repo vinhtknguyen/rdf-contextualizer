@@ -5,7 +5,8 @@ public class Constants {
 	public static final String QUAD_EXT = "nq";
 	public static final String NTRIPLE_EXT = "nt";
 	public static final String TURTLE_EXT = "ttl";
-	
+	public static final String DEFAULT_EXT = "ttl";
+
 	public static final String REI_REP = "REI";
 	public static final String SP_REP = "SP";
 	public static final String NG_REP = "NG";

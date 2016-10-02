@@ -29,7 +29,7 @@ public class Reification2SP extends ContextualRepresentationConverter{
 
 	public Reification2SP(long spPrefixNum, String spPrefixStr,
 			String spDelimiter, String singletonPropertyOfURI) {
-		super(spPrefixNum, spPrefixStr, spDelimiter, singletonPropertyOfURI);
+		super(spPrefixNum, spPrefixStr, spDelimiter);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -83,7 +83,7 @@ public class Reification2SP extends ContextualRepresentationConverter{
 	}
 	
 	@Override
-	public List<SPTriple> transformTriple(org.apache.jena.graph.Triple triple){
+	public List<SPTriple> transformTriple(org.apache.jena.graph.Triple triple, String ext){
 		List<SPTriple> triples = new LinkedList<SPTriple>();
 		
 		if (triple != null){
@@ -92,7 +92,7 @@ public class Reification2SP extends ContextualRepresentationConverter{
 			if (!addTripleToReifiedPattern(triple)) {
 				
 				// Print the regular triple
-				return super.transformTriple(triple);
+				return super.transformTriple(triple, ext);
 			}
 			
 			// Check if the reified statement is completed

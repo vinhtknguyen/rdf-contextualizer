@@ -3,7 +3,6 @@ package org.knoesis.semanticweb.rdf.jena.sp.converter;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.apache.jena.graph.NodeFactory;
 import org.apache.jena.sparql.core.Quad;
 import org.apache.log4j.Logger;
 
@@ -15,26 +14,25 @@ public class NamedGraph2SP extends ContextualRepresentationConverter{
 	final static Logger logger = Logger.getLogger(NamedGraph2SP.class);
 
 	public NamedGraph2SP(long spPrefixNum, String spPrefixStr,
-			String spDelimiter, String singletonPropertyOfURI) {
-		super(spPrefixNum, spPrefixStr, spDelimiter, singletonPropertyOfURI);
-		this.namedGraphProp = new SPNode(NodeFactory.createURI(Constants.WAS_DERIVED_FROM), false);
+			String spDelimiter) {
+		super(spPrefixNum, spPrefixStr, spDelimiter);
 		// TODO Auto-generated constructor stub
 	}
 	protected SPNode namedGraphProp = null;
 
 	public NamedGraph2SP(){
 		super();
-		this.namedGraphProp = new SPNode(NodeFactory.createURI(Constants.WAS_DERIVED_FROM), false);
 	}
 	
 	@Override
-	public List<SPTriple> transformQuad(Quad quad){
+	public List<SPTriple> transformQuad(Quad quad, String ext){
 
 		List<SPTriple> triples = new LinkedList<SPTriple>();
 		
 		if (quad == null){
 			return triples;
 		}
+		
 		if (quad.getGraph() != null ){
 
 			StringBuilder singletonBdr = null;
@@ -43,11 +41,13 @@ public class NamedGraph2SP extends ContextualRepresentationConverter{
 			singletonBdr.append(this.getSPDelimiter());
 			singletonBdr.append(this.getNextUUID());
 			
-			SPNode singletonNode = new SPNode(NodeFactory.createURI(singletonBdr.toString()), true);
-
-			triples.add(new SPTriple(singletonNode, this.singletonPropertyOf, new SPNode(quad.getPredicate())));
-			triples.add(new SPTriple(singletonNode, this.namedGraphProp, new SPNode(quad.getGraph())));
-			triples.add(new SPTriple(new SPNode(quad.getSubject()), singletonNode, new SPNode(quad.getObject())));
+			SPNode singletonNode = new SPNode(singletonBdr.toString(), true);
+			
+			SPTriple singletonTriple = new SPTriple(new SPNode(quad.getSubject()), singletonNode, new SPNode(quad.getObject()));
+			singletonTriple.addSingletonPropertyTriple(new SPTriple(singletonNode, this.singletonPropertyOf, new SPNode(quad.getPredicate())));
+			singletonTriple.addMetaTriple(new SPTriple(singletonNode, this.getNamedGraphProp(), new SPNode(quad.getGraph())));
+			
+			triples.add(singletonTriple);
 
 		} else {
 			triples.add(new SPTriple(new SPNode(quad.getSubject()), new SPNode(quad.getPredicate()), new SPNode(quad.getObject())));
@@ -57,14 +57,18 @@ public class NamedGraph2SP extends ContextualRepresentationConverter{
 	}
 
 	public SPNode getNamedGraphProp() {
+		if (namedGraphProp == null)
+			this.namedGraphProp = new SPNode(Constants.WAS_DERIVED_FROM);
 		return namedGraphProp;
 	}
 
 	public void setNamedGraphProp(SPNode namedGraphProp) {
 		this.namedGraphProp = namedGraphProp;
 	}
+		
 	public void setNamedGraphProp(String prop){
-		this.namedGraphProp = new SPNode(NodeFactory.createURI(prop));
+		if (prop != null)
+		this.namedGraphProp = new SPNode(prop);
 	}
 		
  

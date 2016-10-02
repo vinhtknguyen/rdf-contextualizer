@@ -40,7 +40,7 @@ public class Triple2SP extends ContextualRepresentationConverter {
 
 	public Triple2SP(long spPrefixNum, String spPrefixStr, String spDelimiter,
 			String singletonPropertyOfURI) {
-		super(spPrefixNum, spPrefixStr, spDelimiter, singletonPropertyOfURI);
+		super(spPrefixNum, spPrefixStr, spDelimiter);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -55,7 +55,7 @@ public class Triple2SP extends ContextualRepresentationConverter {
 	}
 
 	@Override
-	public List<SPTriple> transformTriple(org.apache.jena.graph.Triple triple){
+	public List<SPTriple> transformTriple(org.apache.jena.graph.Triple triple, String ext){
 		
 		List<SPTriple> triples = new LinkedList<SPTriple>();
 		if (triple != null ){

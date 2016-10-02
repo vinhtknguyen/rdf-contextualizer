@@ -1,13 +1,13 @@
-package org.knoesis.semanticweb.rdf.utils;
+package org.knoesis.semanticweb.rdf.sp.model;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.jena.graph.Node;
 import org.apache.log4j.Logger;
 import org.knoesis.semanticweb.rdf.jena.sp.converter.NamedGraph2SP;
+import org.knoesis.semanticweb.rdf.utils.RDFWriteUtils;
 
 public class PrefixTrie {
 	final static Logger logger = Logger.getLogger(NamedGraph2SP.class);
@@ -83,7 +83,7 @@ public class PrefixTrie {
 	/**
 	 * Return a triplet of <shortenURI, prefix, namespace>
 	 * */
-	public URIShorteningTriplet shortenURIWithPrefix(Node uri) {
+	public SPNode shortenURIWithPrefix(SPNode uri) {
 
 		Map<Character, PrefixTrieNode> children = root.children;
 		String ns = null, prefix = null;
@@ -91,7 +91,7 @@ public class PrefixTrie {
 		PrefixTrieNode curnode = null, latestLeaf = null;
 		int i = 0, lastNsInd = 0;
 		
-		final String uriStr = uri.toString();
+		final String uriStr = uri.getJenaNode().toString();
 		int len = uriStr.length();
 		StringBuilder shorten = new StringBuilder();
 		
@@ -107,7 +107,7 @@ public class PrefixTrie {
 				if (curnode.isPrefix) {
 					latestLeaf = curnode;
 					lastNsInd = i+1;
-					logger.trace("found ns " + curnode.prefix + " at " + c +" with " + uriStr.substring(i, len));
+//					logger.trace("found ns " + curnode.prefix + " at " + c +" with " + uriStr.substring(i, len));
 				}
 				
 			} else {
@@ -116,7 +116,7 @@ public class PrefixTrie {
 			}
 		}
 		
-		int ind = getLastIndexOfDelimiter(uriStr);
+		int ind = getLastIndexOfDelimiterWithSecondPeriod(uriStr);
 //		System.out.println(uriStr + " uri with len=" + len +  " getLastIndexOfDelimiter=" + ind + " vs. lastNsInd=" + lastNsInd );
 		
 		if (ind >= lastNsInd) {
@@ -128,11 +128,11 @@ public class PrefixTrie {
 			// Construct the shorted uri
 			ns = uriStr.substring(0, lastNsInd);
 			prefix = latestLeaf.prefix;
-			logger.trace(uriStr + " has prefix" + prefix);
+//			logger.trace(uriStr + " has prefix" + prefix);
 			shorten.append(prefix + ":");
 			shorten.append(normalizeN3(uriStr.substring(lastNsInd, len)));
 		} else {
-			logger.trace("not existing prefix" + uriStr);
+//			logger.trace("not existing prefix" + uriStr);
 			// Generating new prefix and ns, insert it to the trie,
 //			prefix = RDFWriteUtils.getNextPrefixNs();
 			if (lastNsInd > 2 && uriStr.charAt(lastNsInd-1) != '/' && uriStr.charAt(lastNsInd-2) != ':' ) {
@@ -152,12 +152,10 @@ public class PrefixTrie {
 			System.out.println(uriStr + "\t" + ns + "\t" + prefix + "\t" + shorten.toString());
 			insert(ns, prefix);
 		}
-		
-        if (RDFWriteUtils.prefixMapping.get(prefix) == null) {
-        	RDFWriteUtils.prefixMapping.put( prefix, ns );
-        	return URIShorteningTriplet.createTriplet(shorten.toString(), prefix, ns);
-        }
-		return URIShorteningTriplet.createTriplet(shorten.toString(), null, null);
+		uri.setShorten(shorten.toString());
+		uri.setNamespace(ns);
+		uri.setPrefix(prefix);
+		return uri;
 
 	}
 	

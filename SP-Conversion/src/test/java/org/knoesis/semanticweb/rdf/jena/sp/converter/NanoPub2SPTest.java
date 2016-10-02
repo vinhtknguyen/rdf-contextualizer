@@ -10,7 +10,7 @@ public class NanoPub2SPTest {
 	@Before
 	public void setUp() throws Exception {
 		con1 = new NanoPub2SP();
-		con2 = new NanoPub2SP(10, "crc_", "___", "http://knoesis.org/rdf:singletonPropertyOf");
+		con2 = new NanoPub2SP(10, "crc_", "___");
 	}
 
 	@Test

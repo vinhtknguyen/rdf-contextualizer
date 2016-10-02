@@ -45,10 +45,19 @@ public class ContextualRepresentationConverter {
 	protected String initUUIDPrefix = null;
 
 	protected String spDelimiter;
-	protected SPNode singletonPropertyOf = new SPNode(NodeFactory.createURI(Constants.SINGLETON_PROPERTY_OF));
+	protected SPNode singletonPropertyOf = null;
 
 	protected boolean infer = false;
 	protected boolean zip = false;
+	protected String ontoDir = null;
+
+	public String getOntoDir() {
+		return ontoDir;
+	}
+
+	public void setOntoDir(String ontoDir) {
+		this.ontoDir = ontoDir;
+	}
 
 	public boolean isZip() {
 		return zip;
@@ -72,16 +81,16 @@ public class ContextualRepresentationConverter {
 		initUUIDPrefix = Constants.SP_UUID_PREFIX;
 		infer = false;
 		zip = false;
+		this.singletonPropertyOf = new SPNode(Constants.SINGLETON_PROPERTY_OF);
+		this.singletonPropertyOf.setSingletonPropertyOf(true);
 		
 		RDFWriteUtils.loadPrefixes(this.prefixesFile);
 	}
 	
-	public ContextualRepresentationConverter(long spPrefixNum, String spPrefixStr, String spDelimiter, String singletonPropertyOfURI){
+	public ContextualRepresentationConverter(long spPrefixNum, String spPrefixStr, String spDelimiter){
 		this.setInitUUIDNumber(spPrefixNum);
 		this.setInitUUIDPrefix(spPrefixStr);
 		this.setSPDelimiter(spDelimiter);
-		this.singletonPropertyOf = new SPNode(NodeFactory.createURI(singletonPropertyOfURI));
-		
 		RDFWriteUtils.loadPrefixes(this.prefixesFile);
 	}
 	
@@ -222,13 +231,13 @@ public class ContextualRepresentationConverter {
 	}
 		
 
-	public List<SPTriple> transformTriple(org.apache.jena.graph.Triple triple) {
+	public List<SPTriple> transformTriple(org.apache.jena.graph.Triple triple, String ext) {
 		List<SPTriple> triples = new LinkedList<SPTriple>();
-		triples.add(new SPTriple(triple.getSubject(), triple.getPredicate(), triple.getPredicate()));
+		triples.add(new SPTriple(triple.getSubject(), triple.getPredicate(), triple.getPredicate(), ext));
 		return triples;
 	}
 
-	public List<SPTriple> transformQuad(Quad triple) {
+	public List<SPTriple> transformQuad(Quad triple, String ext) {
 		
 		List<SPTriple> triples = new LinkedList<SPTriple>();
 		

@@ -2,6 +2,7 @@ package org.knoesis.semanticweb.rdf.jena.sp.parser;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -52,15 +53,18 @@ public class TripleParser implements Parser {
         // Start the parser on another thread
         executor.submit(parser);
         
+        List<SPTriple> triples = new LinkedList<SPTriple>();
         org.apache.jena.graph.Triple triple;
         while (iter.hasNext()) {
         	triple = iter.next();
 			try {
-				List<SPTriple> triples = con.transformTriple(triple);
+				triples.addAll(con.transformTriple(triple, ext));
 				if (con.isInfer()){
 					// infer new triples and add them to the list
+					
 				}
 				writer.write(RDFWriteUtils.printTriples(triples,ext));
+				triples.clear();
 			} catch (IOException e) {
 				logger.error(e);
 			}

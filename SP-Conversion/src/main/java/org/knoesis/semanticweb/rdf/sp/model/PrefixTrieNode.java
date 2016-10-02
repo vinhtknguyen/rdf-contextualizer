@@ -1,4 +1,4 @@
-package org.knoesis.semanticweb.rdf.utils;
+package org.knoesis.semanticweb.rdf.sp.model;
 
 import java.util.HashMap;
 

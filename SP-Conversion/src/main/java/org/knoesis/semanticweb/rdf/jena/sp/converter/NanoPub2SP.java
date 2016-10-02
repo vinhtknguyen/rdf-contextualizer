@@ -15,7 +15,7 @@ public class NanoPub2SP extends ContextualRepresentationConverter {
 
 
 	@Override
-	public List<SPTriple> transformQuad(Quad quad){
+	public List<SPTriple> transformQuad(Quad quad, String ext){
 		
 		List<SPTriple> triples = new LinkedList<SPTriple>();
 		if (quad.getGraph() != null){
@@ -27,6 +27,9 @@ public class NanoPub2SP extends ContextualRepresentationConverter {
 			singletonBdr.append(this.getNextUUID());
 			
 			SPNode singletonNode = new SPNode(NodeFactory.createURI(singletonBdr.toString()));
+
+			SPTriple singletonTriple = new SPTriple(new SPNode(quad.getSubject()), singletonNode, new SPNode(quad.getObject()));
+			singletonTriple.addSingletonPropertyTriple(new SPTriple(singletonNode, this.singletonPropertyOf, new SPNode(quad.getPredicate())));
 
 			triples.add(new SPTriple(singletonNode, this.singletonPropertyOf, new SPNode(quad.getPredicate())));
 			triples.add(new SPTriple(new SPNode(quad.getSubject()), singletonNode, new SPNode(quad.getObject())));
@@ -42,9 +45,8 @@ public class NanoPub2SP extends ContextualRepresentationConverter {
 	}
 
 
-	public NanoPub2SP(long spPrefixNum, String spPrefixStr, String spDelimiter,
-			String singletonPropertyOfURI) {
-		super(spPrefixNum, spPrefixStr, spDelimiter, singletonPropertyOfURI);
+	public NanoPub2SP(long spPrefixNum, String spPrefixStr, String spDelimiter) {
+		super(spPrefixNum, spPrefixStr, spDelimiter);
 		// TODO Auto-generated constructor stub
 	}
 	
