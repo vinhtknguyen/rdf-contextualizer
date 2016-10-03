@@ -2,26 +2,55 @@ package org.knoesis.rdf.sp.model;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents a singleton triple with its associated triples in the singleton property pattern
+ * sub	sp	obj						:singleton triple
+ * sp	rdf:singletonPropertyOf	p	: singleton instance triple
+ * sp	mp	mv						: meta triple
+ * @author vinh
+ *
+ */
 public class SPTriple {
 
 	protected SPNode subject = null;
 	protected SPNode predicate = null;
 	protected SPNode object = null;
+	/* *
+	 * This contains all the meta triples of this singleton triple
+	 * */
 	protected ArrayList<SPTriple> metaTriples = new ArrayList<SPTriple>();
-	protected ArrayList<SPTriple> singletonPropertyTriples = new ArrayList<SPTriple>();
-	protected boolean isSingletonTriple;
-	
+	/* *
+	 * This contains all the meta triples of this singleton triple
+	 * */
+	protected ArrayList<SPTriple> singletonInstanceTriples = new ArrayList<SPTriple>();
+	/* *
+	 * This contains all the meta triples of this singleton triple
+	 * */
+	protected ArrayList<SPTriple> genericPropertyTriples = new ArrayList<SPTriple>();
+
 	public SPTriple(SPNode s, SPNode p, SPNode o) {
 		subject = s;
 		predicate = p;
 		object = o;
 	}
 	
+	public SPTriple(SPTriple triple){
+		subject = triple.getSubject();
+		predicate = triple.getPredicate();
+		object = triple.getObject();
+		metaTriples = new ArrayList<SPTriple>();
+		metaTriples.addAll(triple.getMetaTriples());
+		singletonInstanceTriples = new ArrayList<SPTriple>();
+		singletonInstanceTriples.addAll(triple.getSingletonInstanceTriples());
+		genericPropertyTriples = new ArrayList<SPTriple>();
+		genericPropertyTriples.addAll(triple.getGenericPropertyTriples());
+		
+	}
+	
 	public SPTriple(org.apache.jena.graph.Node s, org.apache.jena.graph.Node p, org.apache.jena.graph.Node o, String ext){
 		subject = new SPNode(s, false);
 		predicate = new SPNode(p, false);
 		object = new SPNode(o, false);
-		this.setSingletonTriple(false);
 	}
 	
 	public SPTriple(org.apache.jena.graph.Node s, org.apache.jena.graph.Node p, org.apache.jena.graph.Node o){
@@ -31,16 +60,44 @@ public class SPTriple {
 	}
 	
 	public void addMetaTriple(SPTriple triple){
-		if (predicate.equalsTo(triple.subject)){
+		if (this.isSingletonTriple() && predicate.equalsTo(triple.subject)){
 			metaTriples.add(triple);
 		}
 	}
 	
-	public void addSingletonPropertyTriple(SPTriple triple){
-		if (predicate.equalsTo(triple.subject) && triple.getPredicate().isSingletonPropertyOf()){
-			singletonPropertyTriples.add(triple);
+	public void addSingletonInstanceTriple(SPTriple triple){
+		if (this.isSingletonTriple() && predicate.equalsTo(triple.subject)){
+			singletonInstanceTriples.add(triple);
 		}
 	}
+	
+	public void addGenericPropertyTriple(SPTriple triple){
+		if (this.isSingletonTriple() && subject.equalsTo(triple.subject) && object.equalsTo(triple.object)){
+			genericPropertyTriples.add(triple);
+		}
+	}
+	public void addMetaTriple(SPNode s, SPNode p, SPNode o){
+//		System.out.println("adding meta triples" + s.toString() + "\t" + p.toString() + "\t" + o.toString());
+//		System.out.println("for " + this.toString());
+//		System.out.println(this.isSingletonTriple() + " and " + predicate.equalsTo(s));
+		if (this.isSingletonTriple() && predicate.equalsTo(s)){
+			metaTriples.add(new SPTriple(s, p, o));
+		}
+	}
+	
+	public void addSingletonInstanceTriple(SPNode s, SPNode p, SPNode o){
+		if (this.isSingletonTriple() && predicate.equalsTo(s)){
+//			System.out.println("adding singleton triples" + s.toString() + "\t" + p.toString() + "\t" + o.toString());
+			singletonInstanceTriples.add(new SPTriple(s, p, o));
+		}
+	}
+	
+	public void addGenericPropertyTriple(SPNode s, SPNode p, SPNode o){
+		if (this.isSingletonTriple() && subject.equalsTo(s) && object.equalsTo(o)){
+			genericPropertyTriples.add(new SPTriple(s, p, o));
+		}
+	}
+	
 	public ArrayList<SPTriple> getMetaTriples() {
 		return metaTriples;
 	}
@@ -49,14 +106,59 @@ public class SPTriple {
 		this.metaTriples = metaTriples;
 	}
 
-	public ArrayList<SPTriple> getSingletonPropertyTriples() {
-		return singletonPropertyTriples;
+	public ArrayList<SPTriple> getSingletonInstanceTriples() {
+		return singletonInstanceTriples;
 	}
 
 	public void setSingletonPropertyTriples(
 			ArrayList<SPTriple> singletonPropertyTriples) {
-		this.singletonPropertyTriples = singletonPropertyTriples;
+		this.singletonInstanceTriples = singletonPropertyTriples;
 	}
+
+	public String printTriple2N3(){
+		
+		StringBuilder out = new StringBuilder();
+		StringBuilder prefixes = new StringBuilder();
+
+		prefixes.append(this.printTriplePrefix());
+
+		out.append(this.getSubject().getShorten());
+		out.append('\t');
+		
+		out.append(this.getPredicate().getShorten());
+		out.append('\t');
+		
+		out.append(this.getObject().getShorten());
+		out.append("\t . \n");
+		
+		prefixes.append(out);
+		
+		return prefixes.toString();
+	}
+	
+	public String printTriplePrefix(){
+		
+		StringBuilder out = new StringBuilder();
+			// Print the prefix if not added before
+		out.append(this.subject.printNodePrefix());
+		out.append(this.predicate.printNodePrefix());
+		out.append(this.object.printNodePrefix());
+		return out.toString();
+	}
+
+	
+	public String printTriple2NT(){
+		
+		StringBuilder  out = new StringBuilder(this.getSubject().toNT());
+		out.append('\t');
+		out.append(this.getPredicate().toNT());
+		out.append('\t');
+		out.append(this.getObject().toNT());
+		out.append("\t . \n");
+		
+		return out.toString();
+	}
+
 
 	public SPNode getSubject() {
 		return subject;
@@ -83,18 +185,35 @@ public class SPTriple {
 	}
 	
 	public boolean isSingletonTriple() {
-		if (this.predicate.isSingletonProperty())
-			this.setSingletonTriple(true);
-		return isSingletonTriple;
+		return this.predicate.isSingletonProperty();
+	}
+	public ArrayList<SPTriple> getGenericPropertyTriples() {
+		return genericPropertyTriples;
 	}
 
-	public void setSingletonTriple(boolean isSingletonTriple) {
-		this.isSingletonTriple = isSingletonTriple;
+	public void setGenericPropertyTriples(ArrayList<SPTriple> genericPropertyTriples) {
+		this.genericPropertyTriples = genericPropertyTriples;
 	}
+
 	public String toString(){
 		
-		return this.subject.getJenaNode().toString() + "\t" + this.predicate.getJenaNode().toString() + "\t" + this.object.getJenaNode().toString() ;
+		return this.subject.getJenaNode().toString() + "\t" + this.predicate.getJenaNode().toString() + "\t" + this.object.getJenaNode().toString() + " \t . \n";
 		
+	}
+	
+	public String printAll(){
+		StringBuilder out = new StringBuilder();
+		out.append(this.toString());
+		for (SPTriple triple : this.singletonInstanceTriples){
+			out.append("\t\t Singleton triples: " + triple.toString());
+		}
+		for (SPTriple triple : this.genericPropertyTriples){
+			out.append("\t\t Generic triples: " + triple.toString());
+		}
+		for (SPTriple triple : this.metaTriples){
+			out.append("\t\t Meta triples: " + triple.toString());
+		}
+		return out.toString();
 	}
 	
 	public String toShortenString(){

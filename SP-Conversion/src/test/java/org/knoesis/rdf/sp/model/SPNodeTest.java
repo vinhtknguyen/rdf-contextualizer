@@ -28,7 +28,7 @@ public class SPNodeTest {
 	@Test
 	public void testToN3() {
 		assertEquals(new SPNode("http://www.w3.org/2003/01/geo/wgs84_pos#lat_sp/123").toN3().getShorten(), "geol:123");
-		assertTrue(new SPNode("http://www.w3.org/2003/01/geo/wgs84_pos#long.sp.123").toN3().getShorten().contains("sp.123"));
+		assertTrue(new SPNode("http://www.w3.org/2003/01/geo/wgs84_pos#long.sp.123").toN3().getShorten().contains("sp%2E123"));
 	}
 
 

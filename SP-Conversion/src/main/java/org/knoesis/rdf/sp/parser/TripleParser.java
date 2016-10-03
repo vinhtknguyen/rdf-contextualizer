@@ -13,6 +13,7 @@ import org.apache.jena.riot.lang.PipedRDFStream;
 import org.apache.jena.riot.lang.PipedTriplesStream;
 import org.apache.log4j.Logger;
 import org.knoesis.rdf.sp.converter.ContextualRepresentationConverter;
+import org.knoesis.rdf.sp.inference.ContextualInference;
 import org.knoesis.rdf.sp.model.SPTriple;
 import org.knoesis.rdf.sp.utils.RDFWriteUtils;
 
@@ -37,43 +38,47 @@ public class TripleParser implements Parser {
 	@Override
 	public void parse(ContextualRepresentationConverter con, String in,
 			BufferedWriter writer, String ext) {
-        // PipedRDFStream and PipedRDFIterator need to be on different threads
-        ExecutorService executor = Executors.newSingleThreadExecutor();
+		// PipedRDFStream and PipedRDFIterator need to be on different threads
+		ExecutorService executor = Executors.newSingleThreadExecutor();
 
-        // Create a runnable for our parser thread
-        Runnable parser = new Runnable() {
+		// Create a runnable for our parser thread
+		Runnable parser = new Runnable() {
 
-            @Override
-            public void run() {
-                // Call the parsing process.
-                RDFDataMgr.parse(inputStream, in, null);
-            }
-        };
-
-        // Start the parser on another thread
-        executor.submit(parser);
-        
-        List<SPTriple> triples = new LinkedList<SPTriple>();
-        org.apache.jena.graph.Triple triple;
-        while (iter.hasNext()) {
-        	triple = iter.next();
-			try {
-				triples.addAll(con.transformTriple(triple, ext));
-				if (con.isInfer()){
-					// infer new triples and add them to the list
-					
-				}
-				writer.write(RDFWriteUtils.printTriples(triples,ext));
-				triples.clear();
-			} catch (IOException e) {
-				logger.error(e);
+			@Override
+			public void run() {
+				// Call the parsing process.
+				RDFDataMgr.parse(inputStream, in, null);
 			}
-            // Do something with each triple
-        }
-        iter.close();
-        inputStream.finish();
-        executor.shutdown();
-		
+		};
+
+		// Start the parser on another thread
+		executor.submit(parser);
+
+		List<SPTriple> triples = new LinkedList<SPTriple>();
+		org.apache.jena.graph.Triple triple;
+		try {
+			while (iter.hasNext()) {
+				triple = iter.next();
+				triples.addAll(con.transformTriple(triple, ext));
+				if (con.isInfer()) {
+					// infer new triples and add them to the list
+					triples.addAll(con.getInference().expandInferredTriples(con.getInference().infer(triples)));
+
+				}
+				writer.write(RDFWriteUtils.printTriples(triples, ext));
+				triples.clear();
+				// Do something with each triple
+			}
+			// Get the generic property triples
+			if (con.isInfer())
+				writer.write(RDFWriteUtils.printTriples(con.getInference().generateGenericPropertyTriples(), ext));
+		} catch (IOException e) {
+			logger.error(e);
+		}
+		iter.close();
+		inputStream.finish();
+		executor.shutdown();
+
 	}
 
 }

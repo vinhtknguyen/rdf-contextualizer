@@ -71,7 +71,7 @@ Proceedings of 23th International Conference on the World Wide Web.</description
   <properties>
     <WORKSPACE_HOME>/Users/Vinh/products/</WORKSPACE_HOME>
     <PROJECT_HOME>$(WORKSPACE_HOME)/$(PROJECT_NAME)</PROJECT_HOME>
-    <PROJECT_NAME>SP-Conversion</PROJECT_NAME>
+    <PROJECT_NAME>rdf-conversion</PROJECT_NAME>
   </properties>
 </project>
 

@@ -68,6 +68,21 @@ public class SPNode {
 	    
 	}
 	
+	public String printNodePrefix(){
+		toN3();
+		if (RDFWriteUtils.prefixMapping.get(prefix) == null){
+			RDFWriteUtils.prefixMapping.put(prefix, namespace);
+			StringBuilder out = new StringBuilder();
+			out.append("@prefix\t");
+			out.append(prefix);
+			out.append(":\t<");
+			out.append(namespace);
+			out.append(">\t . \n");
+			return out.toString();
+		}
+		return "";
+	}
+
 	public SPNode shortenURI(){
 		// shorten the whole URI with prefix 
 		return RDFWriteUtils.trie.shortenURIWithPrefix(this);
@@ -153,6 +168,10 @@ public class SPNode {
 		} else {
 			return this.getJenaNode().toString().equals(node.jenaNode.toString());
 		}
+	}
+	
+	public String toString(){
+		return this.getJenaNode().toString();
 	}
 
 }

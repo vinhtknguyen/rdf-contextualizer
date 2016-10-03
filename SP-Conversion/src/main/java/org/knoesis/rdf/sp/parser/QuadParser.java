@@ -78,18 +78,17 @@ public class QuadParser implements Parser{
 				triples.addAll(con.transformQuad(quad, ext));
 				if (con.isInfer()){
 					// infer new triples and add them to the list
-					ContextualInference inference = new ContextualInference();
-					inference.loadModel(con.getOntoDir());
-					triples.addAll(inference.infer(triples));
+					triples.addAll(con.getInference().expandInferredTriples(con.getInference().infer(triples)));
 				}
 				writer.write(RDFWriteUtils.printTriples(triples,ext));
 				triples.clear();
 	        }
+	        // Get the generic property triples
+	       if (con.isInfer()) writer.write(RDFWriteUtils.printTriples(con.getInference().generateGenericPropertyTriples(), ext));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			logger.error(e);
 		}
-    
         executor.shutdown();
         iter.close();
         inputStream.finish();

@@ -43,7 +43,7 @@ public class NamedGraph2SP extends ContextualRepresentationConverter{
 			SPNode singletonNode = new SPNode(singletonBdr.toString(), true);
 			
 			SPTriple singletonTriple = new SPTriple(new SPNode(quad.getSubject()), singletonNode, new SPNode(quad.getObject()));
-			singletonTriple.addSingletonPropertyTriple(new SPTriple(singletonNode, this.singletonPropertyOf, new SPNode(quad.getPredicate())));
+			singletonTriple.addSingletonInstanceTriple(new SPTriple(singletonNode, this.singletonPropertyOf, new SPNode(quad.getPredicate())));
 			singletonTriple.addMetaTriple(new SPTriple(singletonNode, this.getNamedGraphProp(), new SPNode(quad.getGraph())));
 			
 			triples.add(singletonTriple);
