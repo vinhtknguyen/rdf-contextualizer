@@ -1,7 +1,5 @@
 package org.knoesis.rdf.sp.converter;
 
-import java.nio.file.Paths;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.knoesis.rdf.sp.converter.NamedGraph2SP;

@@ -1,6 +1,14 @@
 package org.knoesis.rdf.sp.utils;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -8,46 +16,50 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class RDFReadUtils {
-    public static void readUrl(String url) {
-        print("Fetching %s...", url);
+	public static void processUrl(String url_in, String dir){
+		CompressFileGzip gz = new CompressFileGzip();
+		System.out.println("Fetching url: " + url_in);
+		List<String> urls = readUrl(url_in);
+		for (String url: urls){
+			String[] tmp = url.split("/");
+			String file = dir + "/" + tmp[tmp.length-1];
+			System.out.println("Downloading file: " + url);
+			downloadFile(url, file);
+			System.out.println("Decompressing file: " + url);
+			gz.decompress(file, file.replace(".gz", ""));
+		}
+	}
+	
+	public static void downloadFile(String url, String target){
+		try {
+			URL website = new URL(url);
+			InputStream in = website.openStream();
+			Files.copy(in, Paths.get(target), StandardCopyOption.REPLACE_EXISTING);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+    public static List<String> readUrl(String url) {
+    	List<String> urls = new ArrayList<String>();
 
         try {
 	        Document doc = Jsoup.connect(url).get();
 	        Elements links = doc.select("a[href]");
-	        Elements media = doc.select("[src]");
-	        Elements imports = doc.select("link[href]");
 	
-	        print("\nMedia: (%d)", media.size());
-	        for (Element src : media) {
-	            if (src.tagName().equals("img"))
-	                print(" * %s: <%s> %sx%s (%s)",
-	                        src.tagName(), src.attr("abs:src"), src.attr("width"), src.attr("height"),
-	                        trim(src.attr("alt"), 20));
-	            else
-	                print(" * %s: <%s>", src.tagName(), src.attr("abs:src"));
-	        }
-	
-	        print("\nImports: (%d)", imports.size());
-	        for (Element link : imports) {
-	            print(" * %s <%s> (%s)", link.tagName(),link.attr("abs:href"), link.attr("rel"));
-	        }
-	
-	        print("\nLinks: (%d)", links.size());
 	        for (Element link : links) {
-	            print(" * a: <%s>  (%s)", link.attr("abs:href"), trim(link.text(), 35));
+	            if (link.attr("abs:href").contains(".gz")) {
+	            	urls.add(link.attr("abs:href").toString());
+	            }
 	        }
         } catch (IOException e){
         	e.printStackTrace();
         }
+        return urls;
     }
 
-    private static void print(String msg, Object... args) {
-        System.out.println(String.format(msg, args));
-    }
-
-    private static String trim(String s, int width) {
-        if (s.length() > width)
-            return s.substring(0, width-1) + ".";
-        else
-            return s;
-    }}
+}
