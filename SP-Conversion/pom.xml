@@ -67,7 +67,7 @@ Proceedings of 23th International Conference on the World Wide Web.
 	<properties>
 		<WORKSPACE_HOME>/Users/Vinh/products/</WORKSPACE_HOME>
 		<PROJECT_HOME>$(WORKSPACE_HOME)/$(PROJECT_NAME)</PROJECT_HOME>
-		<PROJECT_NAME>SP-Conversion</PROJECT_NAME>
+		<PROJECT_NAME>rdf-conversion</PROJECT_NAME>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -91,17 +91,23 @@ Proceedings of 23th International Conference on the World Wide Web.
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.5</version>
-		<exclusions>
-		    <exclusion>
-		        <groupId>org.slf4j</groupId>
-		        <artifactId>slf4j-log4j12</artifactId>
-		    </exclusion>
-		</exclusions> 
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.7.5</version>
+		</dependency>
+		<dependency>
+			<!-- jsoup HTML parser library @ http://jsoup.org/ -->
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.9.2</version>
 		</dependency>
 	</dependencies>
 </project>

@@ -20,6 +20,7 @@ import java.util.zip.GZIPOutputStream;
 import org.apache.jena.graph.NodeFactory;
 import org.apache.jena.sparql.core.Quad;
 import org.apache.log4j.Logger;
+import org.knoesis.rdf.sp.inference.ContextualInference;
 import org.knoesis.rdf.sp.model.*;
 import org.knoesis.rdf.sp.parser.Parser;
 import org.knoesis.rdf.sp.parser.QuadParser;
@@ -41,21 +42,14 @@ public class ContextualRepresentationConverter {
 	protected boolean infer = false;
 	protected boolean zip = false;
 	protected String ontoDir = null;
-
-	public String getOntoDir() {
-		return ontoDir;
+	protected ContextualInference inference = null;
+	
+	public ContextualInference getInference() {
+		return inference;
 	}
 
-	public void setOntoDir(String ontoDir) {
-		this.ontoDir = ontoDir;
-	}
-
-	public boolean isZip() {
-		return zip;
-	}
-
-	public void setZip(boolean zip) {
-		this.zip = zip;
+	public void setInference(ContextualInference inference) {
+		this.inference = inference;
 	}
 
 	public boolean isInfer() {
@@ -64,9 +58,14 @@ public class ContextualRepresentationConverter {
 
 	public void setInfer(boolean infer) {
 		this.infer = infer;
+		if (this.infer){
+			inference = new ContextualInference();
+			inference.loadModel(this.getOntoDir());
+		}
 	}
 
 	public ContextualRepresentationConverter(){
+		RDFWriteUtils.loadPrefixes(this.prefixesFile);
 		initUUIDNumber = System.currentTimeMillis();
 		spDelimiter = Constants.SP_START_DELIMITER;
 		initUUIDPrefix = Constants.SP_UUID_PREFIX;
@@ -75,14 +74,13 @@ public class ContextualRepresentationConverter {
 		this.singletonPropertyOf = new SPNode(Constants.SINGLETON_PROPERTY_OF);
 		this.singletonPropertyOf.setSingletonPropertyOf(true);
 		
-		RDFWriteUtils.loadPrefixes(this.prefixesFile);
 	}
 	
 	public ContextualRepresentationConverter(long spPrefixNum, String spPrefixStr, String spDelimiter){
+		RDFWriteUtils.loadPrefixes(this.prefixesFile);
 		this.setInitUUIDNumber(spPrefixNum);
 		this.setInitUUIDPrefix(spPrefixStr);
 		this.setSPDelimiter(spDelimiter);
-		RDFWriteUtils.loadPrefixes(this.prefixesFile);
 	}
 	
 	public BufferedWriter getBufferedWriter(String file){
@@ -278,6 +276,22 @@ public class ContextualRepresentationConverter {
 		this.initUUIDNumber++;
 		
 		return uuid.toString();
+	}
+
+	public String getOntoDir() {
+		return ontoDir;
+	}
+
+	public void setOntoDir(String ontoDir) {
+		this.ontoDir = ontoDir;
+	}
+
+	public boolean isZip() {
+		return zip;
+	}
+
+	public void setZip(boolean zip) {
+		this.zip = zip;
 	}
 
 

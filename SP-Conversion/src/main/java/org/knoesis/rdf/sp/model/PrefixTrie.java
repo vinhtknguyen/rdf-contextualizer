@@ -207,7 +207,7 @@ public class PrefixTrie {
 	
 	public String normalizeN3(String in){
 		try {
-			return URLEncoder.encode(in, "UTF-8");
+			return URLEncoder.encode(in, "UTF-8").replaceAll("\\.", "%2E");
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

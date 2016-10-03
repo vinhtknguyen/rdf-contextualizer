@@ -111,6 +111,15 @@ public class RDFWriteUtils {
 		return printTriples2N3(triples);
 	}
 	
+	public static String printTriples2NT(List<SPTriple> triples){
+		StringBuilder out = new StringBuilder();
+		
+		for (SPTriple t:triples){
+			out.append(t.printTriple2NT());
+		}
+		return out.toString();
+	}
+
 	/**
 	 * Shorten the two triples with common subject
 	 * By shorting them into common subject, common predicate, and object
@@ -122,10 +131,10 @@ public class RDFWriteUtils {
 		}
 		
 
-		System.out.println("Input triples");
-		for (SPTriple triple : triples){
-			System.out.println(triple.toString());
-		}
+//		System.out.println("Input triples");
+//		for (SPTriple triple : triples){
+//			System.out.println(triple.toString());
+//		}
 		
 		/* No sorting as it takes too long to finish
 		// Sort the input triples
@@ -140,12 +149,12 @@ public class RDFWriteUtils {
 		
 		// Print the triple in shorten turtle form 
 		SPTriple cur = null; 
-		SPNode commonSubject = null, commonPredicate = null;
+		SPNode commonSubject = null, commonPredicate = null, commonObject = null;
 		StringBuilder curStr = new StringBuilder();
 		StringBuilder prefixes = new StringBuilder();
 	
 		if (triples.size() == 0) return "";
-		if (triples.size() == 1) return printTriple2N3(triples.get(0));
+		if (triples.size() == 1) return triples.get(0).printTriple2N3();
 		
 		for (int i = 0; i < triples.size(); i++){
 			
@@ -154,9 +163,7 @@ public class RDFWriteUtils {
 			if (cur != null){
 
 				// Generate the prefix string
-				prefixes.append(printPrefix(cur.getSubject().toN3().getPrefix(), cur.getSubject().toN3().getNamespace()));
-				prefixes.append(printPrefix(cur.getPredicate().toN3().getPrefix(), cur.getPredicate().toN3().getNamespace()));
-				prefixes.append(printPrefix(cur.getObject().toN3().getPrefix(), cur.getObject().toN3().getNamespace()));
+				prefixes.append(cur.printTriplePrefix());
 
 				// Print the subject for the current triple 
 				if (commonSubject == null && commonPredicate == null) {
@@ -171,8 +178,10 @@ public class RDFWriteUtils {
 						
 						if (cur.getPredicate().getShorten().equals(commonPredicate.getShorten())){
 							
-							curStr.append(", ");
-							curStr.append(cur.getObject().getShorten());
+							if (!cur.getObject().getShorten().equals(commonObject.getShorten())){
+								curStr.append(", ");
+								curStr.append(cur.getObject().getShorten());
+							}
 						
 						} else {
 							curStr.append("\t ; \n");
@@ -188,6 +197,7 @@ public class RDFWriteUtils {
 				}
 				commonSubject = cur.getSubject();
 				commonPredicate = cur.getPredicate();
+				commonObject = cur.getObject();
 			}
 		}
 		
@@ -198,70 +208,6 @@ public class RDFWriteUtils {
 		return prefixes.toString();
 	}
 	
-	public static String printPrefix(String prefix, String namespace){
-		
-		if (namespace != null && prefix != null){
-			// Print the prefix if not added before
-			if (RDFWriteUtils.prefixMapping.get(prefix) == null){
-				RDFWriteUtils.prefixMapping.put(prefix, namespace);
-				StringBuilder out = new StringBuilder();
-				out.append("@prefix\t");
-				out.append(prefix);
-				out.append(":\t<");
-				out.append(namespace);
-				out.append(">\t . \n");
-				return out.toString();
-			}
-		}
-		return "";
-	}
-	
-	public static String printTriple2N3(SPTriple triple){
-		
-		StringBuilder out = new StringBuilder();
-		StringBuilder prefixes = new StringBuilder();
-
-		prefixes.append(printPrefix(triple.getSubject().toN3().getPrefix(),triple.getSubject().toN3().getNamespace()));
-		prefixes.append(printPrefix(triple.getPredicate().toN3().getPrefix(),triple.getPredicate().toN3().getNamespace()));
-		prefixes.append(printPrefix(triple.getObject().toN3().getPrefix(),triple.getObject().toN3().getNamespace()));
-
-		out.append(triple.getSubject().getShorten());
-		out.append('\t');
-		
-		out.append(triple.getPredicate().getShorten());
-		out.append('\t');
-		
-		out.append(triple.getObject().getShorten());
-		out.append("\t . \n");
-		
-		prefixes.append(out);
-		
-		return prefixes.toString();
-	}
-	
-	public static String printTriples2NT(List<SPTriple> triples){
-		StringBuilder out = new StringBuilder();
-		
-		for (SPTriple t:triples){
-			out.append(printTriple2NT(t));
-		}
-		return out.toString();
-	}
-
-	public static String printTriple2NT(SPTriple triple){
-		
-		if (triple == null) return "";
-		
-		StringBuilder  out = new StringBuilder(triple.getSubject().toNT());
-		out.append('\t');
-		out.append(triple.getPredicate().toNT());
-		out.append('\t');
-		out.append(triple.getObject().toNT());
-		out.append("\t . \n");
-		
-		return out.toString();
-	}
-
 	public static void writePrefixes(String file){
 		try {
 			if (prefixMapping == null) return;
@@ -276,7 +222,6 @@ public class RDFWriteUtils {
 			e.printStackTrace();
 		}
 	}
-	
 	public static Map<String,String> parsePrefixes(String file){
 		//read file into stream, try-with-resources
 		Map<String,String> map = new HashMap<String,String>();

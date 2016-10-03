@@ -1,0 +1,94 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix y: <http://yago-knowledge.org/resource/> .
+@prefix dbp: <http://dbpedia.org/ontology/> .
+@prefix void:	 <http://rdfs.org/ns/void#> 	 .
+@prefix dbc:	 <http://dataid.dbpedia.org/ns/core#> 	 .
+@prefix owl:	 <http://www.w3.org/2002/07/owl#> 	 .
+@prefix dce:	 <http://purl.org/dc/elements/1.1/> 	 .
+@prefix wiki:	 <http://en.wikipedia.org/wiki/> 	 .
+@prefix xsd:	 <http://www.w3.org/2001/XMLSchema#> 	 .
+@prefix yago:	 <http://yago-knowledge.org/resource/> 	 .
+@prefix skos:	 <http://www.w3.org/2004/02/skos/core#> 	 .
+@prefix rdfs:	 <http://www.w3.org/2000/01/rdf-schema#> 	 .
+@prefix dbi:	 <http://dataid.dbpedia.org/ns/dmp#> 	 .
+@prefix dbo:	 <http://dbpedia.org/ontology/> 	 .
+@prefix geo:	 <http://www.w3.org/2003/01/geo/wgs84_pos#> 	 .
+@prefix dbp:	 <http://dbpedia.org/property/> 	 .
+@prefix dct:	 <http://purl.org/dc/terms/> 	 .
+@prefix rdf:	 <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 	 .
+@prefix dbr:	 <http://dbpedia.org/resource/> 	 .
+@prefix dcat:	 <http://www.w3.org/ns/dcat#> 	 .
+@prefix prov:	 <http://www.w3.org/ns/prov#> 	 .
+@prefix foaf:	 <http://xmlns.com/foaf/0.1/> 	 .
+foaf:gender	rdfs:subPropertyOf dbp:hasGender	.
+foaf:name	rdfs:subPropertyOf	rdfs:label	.	#	0.9817318545533226
+dbp:influencedBy	rdfs:subPropertyOf	y:influences	.	#	0.8587910946793077
+dbp:influenced	rdfs:subPropertyOf	y:influences	.	#	0.8803786035669474
+dbp:birthDate	rdfs:subPropertyOf	y:wasBornOnDate	.	#	0.9345604158549167
+dbp:deathDate	rdfs:subPropertyOf	y:diedOnDate	.	#	0.8857350946549252
+dbp:spouse	rdfs:subPropertyOf	y:isMarriedTo	.	#	0.919536153584312
+dbp:child	rdfs:subPropertyOf	y:hasChild	.	#	0.8427837205739837
+dbp:director	rdfs:subPropertyOf	y:directed	.	#	0.7602789724024915
+dbp:writer	rdfs:subPropertyOf	y:created	.	#	0.7416263696293472
+dbp:starring	rdfs:subPropertyOf	y:actedIn	.	#	0.6797612990642106
+dbp:doctoralAdvisor	rdfs:subPropertyOf	y:hasAcademicAdvisor	.	#	0.7041268758375878
+dbp:doctoralStudent	rdfs:subPropertyOf	y:hasAcademicAdvisor	.	#	0.7001918780032955
+dbp:knownFor	rdfs:subPropertyOf	y:isKnownFor	.	#	0.7597138111834283
+dbp:currency	rdfs:subPropertyOf	y:hasCurrency	.	#	0.652995327584569
+dbp:motto	rdfs:subPropertyOf	y:hasMotto	.	#	0.9359889058848738
+dbp:officialLanguage	rdfs:subPropertyOf	y:hasOfficialLanguage	.	#	0.771716617203762
+dbp:leaderName	rdfs:subPropertyOf	y:isLeaderOf	.	#	0.7583762219443017
+<http://www.w3.org/2003/01/geo/wgs84_pos#long>	rdfs:subPropertyOf	y:hasLongitude	.	#	0.8732928698970236
+<http://www.w3.org/2003/01/geo/wgs84_pos#lat>	rdfs:subPropertyOf	y:hasLatitude	.	#	0.7995813629818894
+dbp:notableWork	rdfs:subPropertyOf	y:created	.	#	0.9542728556006886
+dbp:birthName	rdfs:subPropertyOf	rdfs:label	.	#	0.9673765189227411
+dbp:author	rdfs:subPropertyOf	y:created	.	#	0.7050758641281563
+dbp:isbn	rdfs:subPropertyOf	y:hasISBN	.	#	0.9581215659551396
+dbp:composer	rdfs:subPropertyOf	y:created	.	#	0.6159866814340602
+dbp:residence	rdfs:subPropertyOf	y:livesIn	.	#	0.562199825346457
+dbp:foundingDate	rdfs:subPropertyOf	y:wasCreatedOnDate	.	#	0.5269351695770151
+dbp:place	rdfs:subPropertyOf	y:happenedIn	.	#	0.8516663578535638
+dbp:developer	rdfs:subPropertyOf	y:created	.	#	0.8856292300495531
+dbp:designer	rdfs:subPropertyOf	y:created	.	#	0.8553343768219145
+dbp:alias	rdfs:subPropertyOf	rdfs:label	.	#	0.8880380976978335
+dbp:parent	rdfs:subPropertyOf	y:hasChild	.	#	0.8474671062352814
+dbp:foundationPerson	rdfs:subPropertyOf	y:created	.	#	0.7661706671970692
+dbp:numberOfStaff	rdfs:subPropertyOf	y:hasNumberOfPeople	.	#	0.6985368948606654
+foaf:nick	rdfs:subPropertyOf	rdfs:label	.	#	0.8315613469220973
+dbp:populationTotal	rdfs:subPropertyOf	y:hasPopulation	.	#	0.7893523395398687
+dbp:locationCity	rdfs:subPropertyOf	y:isLocatedIn	.	#	0.5765324093784693
+dbp:pseudonym	rdfs:subPropertyOf	rdfs:label	.	#	0.830031470514383
+dbp:synonym	rdfs:subPropertyOf	rdfs:label	.	#	0.8289927344199574
+foaf:givenName	rdfs:subPropertyOf	rdfs:label	.	#	0.8449077809993691
+dbp:award	rdfs:subPropertyOf	y:hasWonPrize	.	#	0.5882998623706217
+dbp:councilArea	rdfs:subPropertyOf	y:isLocatedIn	.	#	0.7255212884155428
+dbp:creator	rdfs:subPropertyOf	y:created	.	#	0.808616217268724
+dbp:releaseDate	rdfs:subPropertyOf	y:wasCreatedOnDate	.	#	0.6459196443460355
+dbp:meshName	rdfs:subPropertyOf	rdfs:label	.	#	0.7950661818466566
+dbp:icaoLocationIdentifier	rdfs:subPropertyOf	rdfs:label	.	#	0.7263215058180515
+dbp:abbreviation	rdfs:subPropertyOf	rdfs:label	.	#	0.9398612176989332
+dbp:automobileModel	rdfs:subPropertyOf	rdfs:label	.	#	1.0
+dbp:principalArea	rdfs:subPropertyOf	y:isLocatedIn	.	#	0.5518483847024993
+dbp:ceremonialCounty	rdfs:subPropertyOf	y:isLocatedIn	.	#	0.6605168345217071
+dbp:largestSettlement	rdfs:subPropertyOf	y:isLocatedIn	.	#	0.5281446014524012
+dbp:artist	rdfs:subPropertyOf	y:created	.	#	0.8918609190326697
+dbp:foundingPerson	rdfs:subPropertyOf	y:created	.	#	0.7672609631380253
+dbp:shipBeam	rdfs:subPropertyOf	y:hasLatitude	.	#	0.7867529454812761
+dbp:musicalArtist	rdfs:subPropertyOf	y:created	.	#	0.8344335604663341
+dbp:musicalBand	rdfs:subPropertyOf	y:created	.	#	0.8344335604663341
+dbp:symbol	rdfs:subPropertyOf	rdfs:label	.	#	0.8805389473878145
+dbp:usingCountry	rdfs:subPropertyOf	y:hasCurrency	.	#	0.5818686987075781
+dbp:formerName	rdfs:subPropertyOf	rdfs:label	.	#	0.7370841627784779
+dbp:foundationOrganisation	rdfs:subPropertyOf	y:created	.	#	0.7870884873651883
+dbp:aSide	rdfs:subPropertyOf	rdfs:label	.	#	0.7723949266072522
+dbp:numberOfEmployees	rdfs:subPropertyOf	y:hasNumberOfPeople	.	#	0.8358378539243778
+dbp:grammyAward	rdfs:subPropertyOf	y:created	.	#	0.7380264250651343
+dbp:sourceConfluenceState	rdfs:subPropertyOf	y:isLocatedIn	.	#	0.6836995168281833
+dbp:designCompany	rdfs:subPropertyOf	y:created	.	#	0.8754154584529057
+foaf:familyName	rdfs:subPropertyOf	y:hasFamilyName	.	#	0.9612910211108778
+dbp:goldenRaspberryAward	rdfs:subPropertyOf	y:actedIn	.	#	0.5596189914356653
+dbp:goldenCalfAward	rdfs:subPropertyOf	y:actedIn	.	#	0.5035410012277972
+dbp:locationIdentifier	rdfs:subPropertyOf	rdfs:label	.	#	0.9880418281778881
+dbp:orbitalFlights	rdfs:subPropertyOf	y:hasNumberOfPeople	.	#		1.0
+dbp:totalTravellers	rdfs:subPropertyOf	y:hasNumberOfPeople	.	#	1.0

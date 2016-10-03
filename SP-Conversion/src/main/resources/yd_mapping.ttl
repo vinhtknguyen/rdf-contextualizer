@@ -1,0 +1,52 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix y: <http://yago-knowledge.org/resource/> .
+@prefix dbp: <http://dbpedia.org/ontology/> .	
+@prefix void:	 <http://rdfs.org/ns/void#> 	 .
+@prefix dbc:	 <http://dataid.dbpedia.org/ns/core#> 	 .
+@prefix owl:	 <http://www.w3.org/2002/07/owl#> 	 .
+@prefix dce:	 <http://purl.org/dc/elements/1.1/> 	 .
+@prefix wiki:	 <http://en.wikipedia.org/wiki/> 	 .
+@prefix xsd:	 <http://www.w3.org/2001/XMLSchema#> 	 .
+@prefix yago:	 <http://yago-knowledge.org/resource/> 	 .
+@prefix skos:	 <http://www.w3.org/2004/02/skos/core#> 	 .
+@prefix rdfs:	 <http://www.w3.org/2000/01/rdf-schema#> 	 .
+@prefix dbi:	 <http://dataid.dbpedia.org/ns/dmp#> 	 .
+@prefix dbo:	 <http://dbpedia.org/ontology/> 	 .
+@prefix geo:	 <http://www.w3.org/2003/01/geo/wgs84_pos#> 	 .
+@prefix dbp:	 <http://dbpedia.org/property/> 	 .
+@prefix dct:	 <http://purl.org/dc/terms/> 	 .
+@prefix rdf:	 <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 	 .
+@prefix dbr:	 <http://dbpedia.org/resource/> 	 .
+@prefix dcat:	 <http://www.w3.org/ns/dcat#> 	 .
+@prefix prov:	 <http://www.w3.org/ns/prov#> 	 .
+@prefix foaf:	 <http://xmlns.com/foaf/0.1/> 	 .
+y:actedIn	rdfs:subPropertyOf	dbp:starring	.	#	0.9576306910390732
+y:diedIn	rdfs:subPropertyOf	dbp:deathPlace	.	#	0.8675539965768682
+y:diedOnDate	rdfs:subPropertyOf	dbp:deathDate	.	#	0.8362574154959682
+y:directed	rdfs:subPropertyOf	dbp:director	.	#	0.982940596544534
+y:graduatedFrom	rdfs:subPropertyOf	dbp:almaMater	.	#	0.9370079012540957
+y:happenedIn	rdfs:subPropertyOf	dbp:place	.	#	0.940615504329141
+y:hasAcademicAdvisor	rdfs:subPropertyOf	dbp:doctoralStudent	.	#	0.7286597667523746
+y:hasAcademicAdvisor	rdfs:subPropertyOf	dbp:doctoralAdvisor	.	#	0.8296848066055943
+y:hasCapital	rdfs:subPropertyOf	dbp:capital	.	#	0.6080396569879848
+y:hasChild	rdfs:subPropertyOf	dbp:parent	.	#	0.5709225466989074
+y:hasCurrency	rdfs:subPropertyOf	dbp:currency	.	#	0.9240059235580594
+y:produced	rdfs:subPropertyOf	dbp:producer	.	#	0.9569008904820598
+y:hasLatitude	rdfs:subPropertyOf	<http://www.w3.org/2003/01/geo/wgs84_pos#lat>	.	#	0.9797929635880316
+y:influences	rdfs:subPropertyOf	dbp:influencedBy	.	#	0.6422716388034493
+y:isLeaderOf	rdfs:subPropertyOf	dbp:leaderName	.	#	0.7798059205904193
+y:wasBornIn	rdfs:subPropertyOf	dbp:birthPlace	.	#	0.9023475312852406
+y:livesIn	rdfs:subPropertyOf	dbp:residence	.	#	0.8219564376042459
+y:isMarriedTo	rdfs:subPropertyOf	dbp:spouse	.	#	0.5659767122156526
+y:hasOfficialLanguage	rdfs:subPropertyOf	dbp:language	.	#	0.6586946643726214
+y:hasOfficialLanguage	rdfs:subPropertyOf	dbp:officialLanguage	.	#	0.6267075530967705
+y:hasPopulation	rdfs:subPropertyOf	dbp:populationTotal	.	#	0.9589884261719148
+y:hasMotto	rdfs:subPropertyOf	dbp:motto	.	#	0.8685645658400187
+y:hasNumberOfPeople	rdfs:subPropertyOf	dbp:numberOfStaff	.	#	0.9237179825688465
+y:isCitizenOf	rdfs:subPropertyOf	dbp:nationality	.	#	0.8857939919277449
+y:isKnownFor	rdfs:subPropertyOf	dbp:knownFor	.	#	0.8811092544632979
+y:wasBornOnDate	rdfs:subPropertyOf	dbp:birthDate	.	#	0.959686540758736
+y:hasISBN	rdfs:subPropertyOf	dbp:isbn	.	#	0.9994232858681109
+y:hasLongitude	rdfs:subPropertyOf	<http://www.w3.org/2003/01/geo/wgs84_pos#long>	.	#	0.9803075164533169
+rdfs:label	rdfs:subPropertyOf	foaf:name	.	#	0.9565217391304348
