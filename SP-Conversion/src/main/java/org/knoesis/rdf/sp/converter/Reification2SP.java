@@ -1,14 +1,18 @@
 package org.knoesis.rdf.sp.converter;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.knoesis.rdf.sp.inference.ContextualInference;
 import org.knoesis.rdf.sp.model.SPNode;
 import org.knoesis.rdf.sp.model.SPTriple;
 import org.knoesis.rdf.sp.utils.Constants;
+import org.knoesis.rdf.sp.utils.RDFWriteUtils;
 
 public class Reification2SP extends ContextualRepresentationConverter{
 	
@@ -83,7 +87,7 @@ public class Reification2SP extends ContextualRepresentationConverter{
 	}
 	
 	@Override
-	public List<SPTriple> transformTriple(org.apache.jena.graph.Triple triple, String ext){
+	public void transformTriple(BufferedWriter writer, org.apache.jena.graph.Triple triple, String ext, boolean isInfer, ContextualInference con){
 		List<SPTriple> triples = new LinkedList<SPTriple>();
 		
 		if (triple != null){
@@ -92,13 +96,14 @@ public class Reification2SP extends ContextualRepresentationConverter{
 			if (!addTripleToReifiedPattern(triple)) {
 				
 				// Print the regular triple
-				return super.transformTriple(triple, ext);
+				super.transformTriple(writer, triple, ext, isInfer, con);
+				return;
 			}
 			
 			// Check if the reified statement is completed
 			
 			if (!isReifiedPatternCompleted()){
-				return triples;
+				return;
 			}
 			
 			org.apache.jena.graph.Node[] reifiedStatement = reifiedTriples.get(triple.getSubject().toString());
@@ -110,7 +115,16 @@ public class Reification2SP extends ContextualRepresentationConverter{
 			reifiedTriples.remove(triple.getSubject());
 
 		}
-		return triples;
+		try {
+			if (isInfer){
+				// infer new triples and add them to the list
+				triples.addAll(con.expandInferredTriples(con.infer(triples)));
+			}
+			writer.write(RDFWriteUtils.printTriples(triples, ext));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

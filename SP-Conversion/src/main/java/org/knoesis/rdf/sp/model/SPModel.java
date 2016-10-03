@@ -2,7 +2,6 @@ package org.knoesis.rdf.sp.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -14,18 +13,20 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.knoesis.rdf.sp.utils.Constants;
 import org.knoesis.rdf.sp.utils.RULE_SP;
 
+import com.romix.scala.collection.concurrent.TrieMap;
+
 public class SPModel {
 	
 	// Store the hashmap of a property to its super properties obtained from the ontology
-	public static Map<String, List<String>> subPropertyOfMap = new HashMap<String,List<String>>();
+	public static Map<String, List<String>> subPropertyOfMap = new TrieMap<String,List<String>>();
 	// Store the hashmap of a property to its equivalent properties obtained from the ontology mapping
-	public static Map<String, List<String>> equivalentPropertyMap = new HashMap<String,List<String>>();
+	public static Map<String, List<String>> equivalentPropertyMap = new TrieMap<String,List<String>>();
 	// Store the hashmap of a generic property to its number of singleton properties obtained from the data
-	public static Map<String, Integer> genericPropertyMap = new ConcurrentHashMap<String, Integer>();
+	public static Map<String, Integer> genericPropertyMap = new TrieMap<String, Integer>();
 	// Store the hashmap of a domain to its number of singleton properties obtained from the data
-	public static Map<String, List<SPNode>> domainPropertyMap = new ConcurrentHashMap<String, List<SPNode>>();
+	public static Map<String, List<String>> domainPropertyMap = new TrieMap<String, List<String>>();
 	// Store the hashmap of a domain to its number of singleton properties obtained from the data
-	public static Map<String, List<SPNode>> rangePropertyMap = new ConcurrentHashMap<String, List<SPNode>>();
+	public static Map<String, List<String>> rangePropertyMap = new TrieMap<String, List<String>>();
 	
 	SPNode rdfType = new SPNode(Constants.RDF_TYPE);
 	SPNode singletonPropertyOf = new SPNode(Constants.SINGLETON_PROPERTY_OF);
@@ -36,66 +37,66 @@ public class SPModel {
 	SPNode subPropertyOf = new SPNode(Constants.RDFS_SUBPROPERTYOF_PROPERTY);
 	SPNode equivalentProperty = new SPNode(Constants.OWL_EQUIVALENTPROPERTY_PROPERTY);
 	
-	public static int addSubPropertyOfMap(SPNode prop1, SPNode prop2){
-		List<String> props = subPropertyOfMap.get(prop1.toString());
+	public static int addSubPropertyOfMap(String prop1, String prop2){
+		List<String> props = subPropertyOfMap.get(prop1);
 		if (props == null){
 			props = new ArrayList<String>();
 //			System.out.println(prop1.toString() + "\t subPropOf \t" + prop2.toString());
 		}
 //		System.out.println(props.size());
-		if (!props.contains(prop2.toString())) {
-			props.add(prop2.toString());
-			subPropertyOfMap.put(prop1.toString(), props);
+		if (!props.contains(prop2)) {
+			props.add(prop2);
+			subPropertyOfMap.put(prop1, props);
 			return 1;
 		} else return 0;
 	}
 	
-	public static void addDomainPropertyMap(SPNode prop1, SPNode prop2){
-		List<SPNode> props = domainPropertyMap.get(prop1.toString());
+	public static void addDomainPropertyMap(String prop1, String prop2){
+		List<String> props = domainPropertyMap.get(prop1);
 		if (props == null){
-			props = new ArrayList<SPNode>();
+			props = new ArrayList<String>();
 //			System.out.println(prop1.toString() + "\t domain \t" + prop2.toString());
 		}
-		if (!props.contains(prop2.toString())) {
-			props.add(prop2);
+		if (!props.contains(prop2)) {
+			props.add(prop2.toString());
 			domainPropertyMap.put(prop1.toString(), props);
 		}
 	}
 
-	public static void addRangePropertyMap(SPNode prop1, SPNode prop2){
-		List<SPNode> props = rangePropertyMap.get(prop1.toString());
+	public static void addRangePropertyMap(String prop1, String prop2){
+		List<String> props = rangePropertyMap.get(prop1);
 		if (props == null){
-			props = new ArrayList<SPNode>();
+			props = new ArrayList<String>();
 //			System.out.println(prop1.toString() + "\t range \t" + prop2.toString());
 		}
-		if (!props.contains(prop2.toString())) {
+		if (!props.contains(prop2)) {
 			props.add(prop2);
-			rangePropertyMap.put(prop1.toString(), props);
+			rangePropertyMap.put(prop1, props);
 		}
 	}
 
-	public static int addEquivalentPropertyMap(SPNode prop1, SPNode prop2){
-		List<String> props = equivalentPropertyMap.get(prop1.toString());
+	public static int addEquivalentPropertyMap(String prop1, String prop2){
+		List<String> props = equivalentPropertyMap.get(prop1);
 		if (props == null){
 			props = new ArrayList<String>();
 //			System.out.println(prop1.toString() + "\t equi \t" + prop2.toString());
 		}
-		if (!props.contains(prop2.toString())) {
-			props.add(prop2.toString());
-			equivalentPropertyMap.put(prop1.toString(), props);
+		if (!props.contains(prop2)) {
+			props.add(prop2);
+			equivalentPropertyMap.put(prop1, props);
 			return 1;
 		} else return 0;
 	}
 	
-	public static void addGenericPropertyMap(SPNode prop1){
+	public static void addGenericPropertyMap(String prop1){
 		int count;
-		if (genericPropertyMap.get(prop1.toString()) != null){
-			count = genericPropertyMap.get(prop1.toString()) + 1;
+		if (genericPropertyMap.get(prop1) != null){
+			count = genericPropertyMap.get(prop1) + 1;
 		} else {
 			count = 1;
 //			System.out.println(prop1.toString() + "\t generic ");
 		}
-		genericPropertyMap.put(prop1.toString(), count);
+		genericPropertyMap.put(prop1, count);
 	}
 
 	public List<SPTriple> infer(SPTriple triple, RULE_SP[] rules){
@@ -189,7 +190,7 @@ public class SPModel {
 				for (SPTriple sing : triple.singletonInstanceTriples){
 
 					// Add the generic triple to the genericPropertyMap
-					addGenericPropertyMap(sing.getObject());
+					addGenericPropertyMap(sing.getObject().toString());
 				}
 			
 				break;
@@ -209,10 +210,10 @@ public class SPModel {
 					
 					// Check for the domain of the sing.getObject()
 					if (domainPropertyMap.get(sing.getObject().toString()) != null){
-						List<SPNode> domains = domainPropertyMap.get(sing.getObject().toString());
-						for (SPNode domain : domains){
+						List<String> domains = domainPropertyMap.get(sing.getObject().toString());
+						for (String domain : domains){
 							// Add the singleton instance triple to the singleton triple
-							out.addMetaTriple(sing.getSubject(), this.domainProperty, domain);
+							out.addMetaTriple(sing.getSubject(), this.domainProperty, new SPNode(domain));
 						}
 					}
 				}
@@ -225,10 +226,10 @@ public class SPModel {
 					
 					// Check for the domain of the sing.getObject()
 					if (rangePropertyMap.get(sing.getObject().toString()) != null){
-						List<SPNode> ranges = rangePropertyMap.get(sing.getObject().toString());
-						for (SPNode range : ranges){
+						List<String> ranges = rangePropertyMap.get(sing.getObject().toString());
+						for (String range : ranges){
 							// Add the singleton instance triple to the singleton triple
-							out.addMetaTriple(sing.getSubject(), this.rangeProperty, range);
+							out.addMetaTriple(sing.getSubject(), this.rangeProperty, new SPNode(range));
 						}
 					}
 				}

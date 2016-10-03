@@ -7,6 +7,7 @@ import org.knoesis.rdf.sp.converter.NanoPub2SP;
 import org.knoesis.rdf.sp.converter.Reification2SP;
 import org.knoesis.rdf.sp.converter.Triple2SP;
 import org.knoesis.rdf.sp.utils.Constants;
+import org.knoesis.rdf.sp.utils.RDFReadUtils;
 
 
 public class SPConverter {
@@ -26,6 +27,7 @@ public class SPConverter {
 	protected boolean zip = false;
 	protected boolean infer = false;
 	protected String ontoDir = null;
+	protected String url = null;
 	
 	public String getOntoDir() {
 		return ontoDir;
@@ -89,6 +91,7 @@ public class SPConverter {
 	 * -spProp		by default, it is rdf:singletonPropertyOf
 	 * -zip
 	 * -infer 		Ontology file or directory
+	 * -url
 	 */
 	
 	/** Examples for testing
@@ -135,6 +138,13 @@ public class SPConverter {
 	}
 	
 	public void start(){
+		
+		// Prepare the data from url
+		if (this.getUrl() != null){
+			String dir = "ori";
+			RDFReadUtils.processUrl(url, dir);
+			this.setFileIn(dir);
+		}
 		if (this.getRep() != null){
 			ContextualRepresentationConverter converter = null;
 			switch (this.getRep().toUpperCase()){
@@ -192,24 +202,29 @@ public class SPConverter {
 		for (int i = 0; i < args.length; i++) {
 
 			// Get input file
-			if (args[i].equals("-f")) {
+			if (args[i].toLowerCase().equals("-f")) {
 //				System.out.println("File in: " + args[i + 1]);
 				this.setFileIn(args[i + 1]);
 			}
 			// Get zip para
-			if (args[i].equals("-zip")) {
+			if (args[i].toLowerCase().equals("-zip")) {
 //				System.out.println("File in: " + args[i + 1]);
 				this.setZip(true);;
 			}
 			// Get infer para
-			if (args[i].equals("-infer")) {
+			if (args[i].toLowerCase().equals("-infer")) {
 //				System.out.println("File in: " + args[i + 1]);
 				this.setInfer(true);
 				this.setOntoDir(args[i+1]);
 			}
+			
+			// Get url to start with
+			if (args[i].toLowerCase().equals("-url")){
+				this.setUrl(args[i+1]);
+			}
 
 			// Get input file extension
-			if (args[i].equals("-rep")) {
+			if (args[i].toLowerCase().equals("-rep")) {
 				switch (args[i + 1].toUpperCase()) {
 					case Constants.REI_REP:
 						this.rep = Constants.REI_REP;
@@ -228,7 +243,7 @@ public class SPConverter {
 						break;
 				}
 			}
-			if (args[i].equals("-ext")) {
+			if (args[i].toLowerCase().equals("-ext")) {
 				switch (args[i + 1].toLowerCase()) {
 					case Constants.NTRIPLE_EXT:
 						this.ext = Constants.NTRIPLE_EXT;
@@ -242,22 +257,22 @@ public class SPConverter {
 				}
 			}
 						
-			if (args[i].equals("-metaProp")) {
+			if (args[i].toLowerCase().equals("-metaprop")) {
 				this.metaProp = args[i+1];
 			}
 			
-			if (args[i].equals("-metaObj")) {
+			if (args[i].toLowerCase().equals("-metaobj")) {
 				this.metaObj = args[i+1];
 			}
 			
-			if (args[i].equals("-spProp")) {
+			if (args[i].toLowerCase().equals("-spprop")) {
 				this.spProp = args[i+1];
 			}
 			
-			if (args[i].equals("-spInitNum")) {
+			if (args[i].toLowerCase().equals("-spinitnum")) {
 				this.spInitNum = Long.parseLong(args[i+1]);
 			}
-			if (args[i].equals("-spInitStr")) {
+			if (args[i].toLowerCase().equals("-spinitstr")) {
 				this.spInitStr = args[i+1];
 			}
 
@@ -301,6 +316,14 @@ public class SPConverter {
 		return this.rep;
 	}
 
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
 
 	public void setExt(String ext) {
 		this.ext = ext;

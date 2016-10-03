@@ -17,16 +17,18 @@ import java.util.Map.Entry;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.log4j.Logger;
-import org.knoesis.rdf.sp.model.PrefixTrie;
 import org.knoesis.rdf.sp.model.SPNode;
 import org.knoesis.rdf.sp.model.SPTriple;
+
+import com.romix.scala.collection.concurrent.TrieMap;
 
 public class RDFWriteUtils {
     
 	final static Logger logger = Logger.getLogger(RDFWriteUtils.class);
 
-	public static Map<String,String> prefixMapping = new HashMap<String,String>();
-	public static PrefixTrie trie = new PrefixTrie();
+	public static Map<String,String> prefixMapping = new TrieMap<String,String>();
+//	public static PrefixTrie trie = new PrefixTrie();
+	public static Map<String,String> trie = new TrieMap<String,String>();
 	private static int currentAutoPrefixNsNum = 0;
  
 	public static int getCurrentAutoPrefixNsNum() {
@@ -37,40 +39,6 @@ public class RDFWriteUtils {
 		currentAutoPrefixNsNum++;
 		return Constants.NS_STR + currentAutoPrefixNsNum;
 	}
-    /**
-     * Register a new prefix/namespace mapping which will be used to shorten
-     * the print strings for resources in known namespaces.
-     */
-    public static void registerPrefix(String prefix, String namespace) {
-        trie.insert(namespace, prefix);
-    }
-    
-    /**
-     * Register a set of new prefix/namespace mapping which will be used to shorten
-     * the print strings for resources in known namespaces.
-     */
-    public static void registerPrefixMap(Map<String, String> map) {
-        prefixMapping = map;
-        loadPrefixesToTrie(map);
-    }
-    
-    /**
-     * Remove a registered prefix from the table of known short forms
-     */
-    public static void removePrefix(String prefix) {
-        prefixMapping.remove(prefix);
-    }
-    
-    /**
-     * Remove a set of prefix mappings from the table of known short forms
-     */
-    public static void removePrefixMap(Map<String, String> map) {
-        for ( String s : map.keySet() )
-        {
-            prefixMapping.remove( s );
-        }
-    }
-
     /** 
      * Reset the prefixMapping 
      */
@@ -80,22 +48,43 @@ public class RDFWriteUtils {
     }
 
 	
-	public static String shortenURIWithMapping(SPNode in){
+	public static SPNode shortenURIWithPrefixMapping(SPNode in){
 		// shorten the whole URI with prefix 
+		int len = in.toString().length();
+		String ns = null, prefix = null;
+		StringBuilder shorten = new StringBuilder();
 		
-		Iterator<Entry<String, String>> it = prefixMapping.entrySet().iterator();
-	    while (it.hasNext()) {
-	        Map.Entry<String,String> pair = (Map.Entry<String,String>)it.next();									
-	        if (in.getJenaNode().getURI().startsWith(pair.getValue().toString())){
-	        	try {
-					return pair.getKey().toString() + ":" + URLEncoder.encode(in.getJenaNode().getURI().replace(pair.getValue().toString(),""),"UTF-8" ).replaceAll("[{}()\\|\\$\\*\\+\\.\\^:,]","");
-				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	        }
-	    }
-	    return "<" + in.toString() + ">";
+		if (trie.get(in.toString()) != null){
+			prefix = trie.get(in.toString());
+			ns = in.toString();
+			shorten.append(prefix + ":");
+			in.setPrefix(prefix);
+			in.setShorten(shorten.toString());
+			in.setNamespace(ns);
+			return in;
+		} 
+		
+		int lastNsInd = getLastIndexOfDelimiterWithSecondPeriod(in.toString());
+		if (lastNsInd > 2 && in.toString().charAt(lastNsInd-1) != '/' && in.toString().charAt(lastNsInd-2) != ':' ) {
+			ns = in.toString().substring(0, lastNsInd + 1);
+			prefix = trie.get(ns);
+			if (prefix == null) prefix = RDFWriteUtils.getNextPrefixNs();
+			trie.put(ns, prefix);
+
+			shorten.append(prefix + ":");
+			if (!in.toString().substring(lastNsInd+1, len).isEmpty()){
+				shorten.append(RDFWriteUtils.normalizeN3(in.toString().substring(lastNsInd+1, len)));
+			}
+			in.setNamespace(ns);
+			in.setPrefix(prefix);
+			in.setShorten(shorten.toString());
+		} else {
+			ns = in.toString();
+			shorten.append(prefix + ":");
+			prefix = RDFWriteUtils.getNextPrefixNs();
+			trie.put(ns, prefix);
+		}
+	    return in;
 	}
 
 	/**
@@ -255,8 +244,64 @@ public class RDFWriteUtils {
 		Iterator<Entry<String, String>> it = map.entrySet().iterator();
 		while (it.hasNext()) {
 		    Map.Entry<String,String> pair = (Map.Entry<String,String>)it.next();
-		    trie.insert(pair.getValue(), pair.getKey());
+		    trie.put(pair.getValue(), pair.getKey());
 		}
+		
+	}
+	public static int getLastIndexOfDelimiter(String uri){
+		int ind = uri.length()-1;
+				
+		boolean pastProtocol = false;
+		while (ind >=0){
+			if (uri.charAt(ind) == '/' || uri.charAt(ind) == '#' || uri.charAt(ind) == ':' || uri.charAt(ind) == '.'){
+				if (!pastProtocol) return ind;
+			}
+			if (uri.charAt(ind) == '/' && uri.charAt(ind-1) == '/' && uri.charAt(ind-2) == ':') pastProtocol = true;
+			ind--;
+		}
+		return ind;
+	}
+	
+	public static int getLastIndexOfDelimiterWithSecondPeriod(String uri){
+		int ind = uri.length()-1;
+		
+		// Find the 3rd slash symbol
+		int lastSlash = 0, slashCount = 0;
+		while (lastSlash < ind & slashCount < 3){
+			if (uri.charAt(lastSlash) == '/') slashCount++;
+			lastSlash++;
+		}
+//		System.out.println("last slash of " + uri + " is at: " + lastSlash);
+		
+		boolean pastProtocol = false;
+		boolean foundPeriod = false;
+		while (ind >=0){
+			if (uri.charAt(ind) == '/' || uri.charAt(ind) == '#' || uri.charAt(ind) == ':'){
+				if (!pastProtocol) return ind;
+			}
+			if (uri.charAt(ind) == '.' && ind >= lastSlash){
+				if (foundPeriod) return ind;
+				foundPeriod = true;
+			}
+			if (uri.charAt(ind) == '/' && uri.charAt(ind-1) == '/' && uri.charAt(ind-2) == ':') pastProtocol = true;
+			ind--;
+		}
+		return ind;
+	}
+	
+
+	public static boolean isSPDelimiter(char c){
+		return (c == '/' || c == '#' || c == ':' || c == '.');
+	}
+	
+	public static String normalizeN3(String in){
+		try {
+			return URLEncoder.encode(in, "UTF-8").replaceAll("\\.", "%2E");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return in;
 	}
 
 }

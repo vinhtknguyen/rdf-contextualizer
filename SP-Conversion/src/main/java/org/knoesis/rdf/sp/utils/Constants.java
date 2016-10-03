@@ -14,8 +14,6 @@ public class Constants {
 	public static final String TRIPLE_REP = "TRIPLE";
 	public static final String NONE_REP = "NONE";
 
-	public static final String CONVERTED_TO_SP_NT = "_converted_to_sp_nt";
-	public static final String CONVERTED_TO_SP_TTL = "_converted_to_sp_ttl";
 	public static final String SP_SUFFIX = "_sp";
 	public static final String SP_UUID_PREFIX = "sp";
 	public static final String NS_STR = "ns";
@@ -57,5 +55,15 @@ public class Constants {
 	public static final int RULE_RDFS_SP_1 = 10;	// infer domain
 	public static final int RULE_RDFS_SP_2 = 11;	// infer range
 
+	
+	/**
+	 * File management
+	 */
+	public static final String CONVERTED_TO_SP_NT = "_converted_to_sp_nt";
+	public static final String CONVERTED_TO_SP_TTL = "_converted_to_sp_ttl";
+	public static final String ORIGINAL_DIRECTORY = "ori";
+	public static final String REPORTS_DIRECTORY = "reports";
+	public static final String STAT_FILE = REPORTS_DIRECTORY + "/stat.txt";
+	
 }
 

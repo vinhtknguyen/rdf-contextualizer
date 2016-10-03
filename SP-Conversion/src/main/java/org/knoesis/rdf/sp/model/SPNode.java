@@ -85,7 +85,7 @@ public class SPNode {
 
 	public SPNode shortenURI(){
 		// shorten the whole URI with prefix 
-		return RDFWriteUtils.trie.shortenURIWithPrefix(this);
+		return RDFWriteUtils.shortenURIWithPrefixMapping(this);
 		 
 	}
 

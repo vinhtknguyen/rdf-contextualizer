@@ -54,26 +54,10 @@ public class TripleParser implements Parser {
 		// Start the parser on another thread
 		executor.submit(parser);
 
-		List<SPTriple> triples = new LinkedList<SPTriple>();
 		org.apache.jena.graph.Triple triple;
-		try {
-			while (iter.hasNext()) {
-				triple = iter.next();
-				triples.addAll(con.transformTriple(triple, ext));
-				if (con.isInfer()) {
-					// infer new triples and add them to the list
-					triples.addAll(con.getInference().expandInferredTriples(con.getInference().infer(triples)));
-
-				}
-				writer.write(RDFWriteUtils.printTriples(triples, ext));
-				triples.clear();
-				// Do something with each triple
-			}
-			// Get the generic property triples
-			if (con.isInfer())
-				writer.write(RDFWriteUtils.printTriples(con.getInference().generateGenericPropertyTriples(), ext));
-		} catch (IOException e) {
-			logger.error(e);
+		while (iter.hasNext()) {
+			triple = iter.next();
+			con.transformTriple(writer, triple, ext, con.isInfer(), con.getInference());
 		}
 		iter.close();
 		inputStream.finish();

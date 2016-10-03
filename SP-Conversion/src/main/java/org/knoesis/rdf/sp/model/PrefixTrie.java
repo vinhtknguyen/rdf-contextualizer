@@ -1,7 +1,5 @@
 package org.knoesis.rdf.sp.model;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -116,7 +114,7 @@ public class PrefixTrie {
 			}
 		}
 		
-		int ind = getLastIndexOfDelimiterWithSecondPeriod(uriStr);
+		int ind = RDFWriteUtils.getLastIndexOfDelimiterWithSecondPeriod(uriStr);
 //		System.out.println(uriStr + " uri with len=" + len +  " getLastIndexOfDelimiter=" + ind + " vs. lastNsInd=" + lastNsInd );
 		
 		if (ind >= lastNsInd) {
@@ -130,7 +128,7 @@ public class PrefixTrie {
 			prefix = latestLeaf.prefix;
 //			logger.trace(uriStr + " has prefix" + prefix);
 			shorten.append(prefix + ":");
-			shorten.append(normalizeN3(uriStr.substring(lastNsInd, len)));
+			shorten.append(RDFWriteUtils.normalizeN3(uriStr.substring(lastNsInd, len)));
 		} else {
 //			logger.trace("not existing prefix" + uriStr);
 			// Generating new prefix and ns, insert it to the trie,
@@ -142,7 +140,7 @@ public class PrefixTrie {
 
 				shorten.append(prefix + ":");
 				if (!uriStr.substring(lastNsInd+1, len).isEmpty()){
-					shorten.append(normalizeN3(uriStr.substring(lastNsInd+1, len)));
+					shorten.append(RDFWriteUtils.normalizeN3(uriStr.substring(lastNsInd+1, len)));
 				}
 			} else {
 				ns = uriStr;
@@ -157,62 +155,6 @@ public class PrefixTrie {
 		uri.setPrefix(prefix);
 		return uri;
 
-	}
-	
-	public int getLastIndexOfDelimiter(String uri){
-		int ind = uri.length()-1;
-				
-		boolean pastProtocol = false;
-		while (ind >=0){
-			if (uri.charAt(ind) == '/' || uri.charAt(ind) == '#' || uri.charAt(ind) == ':' || uri.charAt(ind) == '.'){
-				if (!pastProtocol) return ind;
-			}
-			if (uri.charAt(ind) == '/' && uri.charAt(ind-1) == '/' && uri.charAt(ind-2) == ':') pastProtocol = true;
-			ind--;
-		}
-		return ind;
-	}
-	
-	public int getLastIndexOfDelimiterWithSecondPeriod(String uri){
-		int ind = uri.length()-1;
-		
-		// Find the 3rd slash symbol
-		int lastSlash = 0, slashCount = 0;
-		while (lastSlash < ind & slashCount < 3){
-			if (uri.charAt(lastSlash) == '/') slashCount++;
-			lastSlash++;
-		}
-//		System.out.println("last slash of " + uri + " is at: " + lastSlash);
-		
-		boolean pastProtocol = false;
-		boolean foundPeriod = false;
-		while (ind >=0){
-			if (uri.charAt(ind) == '/' || uri.charAt(ind) == '#' || uri.charAt(ind) == ':'){
-				if (!pastProtocol) return ind;
-			}
-			if (uri.charAt(ind) == '.' && ind >= lastSlash){
-				if (foundPeriod) return ind;
-				foundPeriod = true;
-			}
-			if (uri.charAt(ind) == '/' && uri.charAt(ind-1) == '/' && uri.charAt(ind-2) == ':') pastProtocol = true;
-			ind--;
-		}
-		return ind;
-	}
-	
-
-	public boolean isSPDelimiter(char c){
-		return (c == '/' || c == '#' || c == ':' || c == '.');
-	}
-	
-	public String normalizeN3(String in){
-		try {
-			return URLEncoder.encode(in, "UTF-8").replaceAll("\\.", "%2E");
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return in;
 	}
 	
 }

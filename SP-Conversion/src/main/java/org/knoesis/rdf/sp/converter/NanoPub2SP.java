@@ -1,13 +1,17 @@
 package org.knoesis.rdf.sp.converter;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.jena.graph.NodeFactory;
 import org.apache.jena.sparql.core.Quad;
 import org.apache.log4j.Logger;
+import org.knoesis.rdf.sp.inference.ContextualInference;
 import org.knoesis.rdf.sp.model.SPNode;
 import org.knoesis.rdf.sp.model.SPTriple;
+import org.knoesis.rdf.sp.utils.RDFWriteUtils;
 
 public class NanoPub2SP extends ContextualRepresentationConverter {
 	
@@ -15,7 +19,7 @@ public class NanoPub2SP extends ContextualRepresentationConverter {
 
 
 	@Override
-	public List<SPTriple> transformQuad(Quad quad, String ext){
+	public void transformQuad(BufferedWriter writer, Quad quad, String ext, boolean isInfer, ContextualInference con){
 		
 		List<SPTriple> triples = new LinkedList<SPTriple>();
 		if (quad.getGraph() != null){
@@ -35,7 +39,16 @@ public class NanoPub2SP extends ContextualRepresentationConverter {
 			triples.add(new SPTriple(new SPNode(quad.getSubject()), singletonNode, new SPNode(quad.getObject())));
 
 		}
-		return triples;
+		try {
+			if (isInfer){
+				// infer new triples and add them to the list
+				triples.addAll(con.expandInferredTriples(con.infer(triples)));
+			}
+			writer.write(RDFWriteUtils.printTriples(triples, ext));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 

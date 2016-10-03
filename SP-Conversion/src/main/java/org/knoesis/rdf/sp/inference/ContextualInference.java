@@ -92,27 +92,20 @@ public class ContextualInference {
 			// Check for subPropertyOf
 			switch (predicate.toString()) {
 			case Constants.RDFS_SUBPROPERTYOF_PROPERTY:
-				SPModel.addSubPropertyOfMap(new SPNode(subject.asNode()),
-						new SPNode((Node) object.asNode()));
+				SPModel.addSubPropertyOfMap(subject.toString(), object.toString());
 				if (!subProps.contains(subject.toString()))subProps.add(subject.toString());
 				if (!subProps.contains(object.toString()))subProps.add(object.toString());
 				break;
 			case Constants.OWL_EQUIVALENTPROPERTY_PROPERTY:
-				SPModel.addEquivalentPropertyMap(
-						new SPNode((Node) subject.asNode()), new SPNode(
-								(Node) object.asNode()));
+				SPModel.addEquivalentPropertyMap(subject.toString(), object.toString());
 				if (!equiProps.contains(subject.toString()))subProps.add(subject.toString());
 				if (!equiProps.contains(object.toString()))subProps.add(object.toString());
 				break;
 			case Constants.RDFS_DOMAIN_PROPERTY:
-				SPModel.addDomainPropertyMap(
-						new SPNode((Node) subject.asNode()), new SPNode(
-								(Node) object.asNode()));
+				SPModel.addDomainPropertyMap(subject.toString(), object.toString());
 				break;
 			case Constants.RDFS_RANGE_PROPERTY:
-				SPModel.addRangePropertyMap(
-						new SPNode((Node) subject.asNode()), new SPNode(
-								(Node) object.asNode()));
+				SPModel.addRangePropertyMap(subject.toString(), object.toString());
 				break;
 			default:
 				break;
@@ -156,9 +149,9 @@ public class ContextualInference {
 								if (!newsuperprop.equals(prop)) {
 									int j = 0;
 									if (isSubProp){
-										j = SPModel.addSubPropertyOfMap(new SPNode(prop), new SPNode(newsuperprop));
+										j = SPModel.addSubPropertyOfMap(prop, newsuperprop);
 									} else {
-										j = SPModel.addEquivalentPropertyMap(new SPNode(prop), new SPNode(newsuperprop));
+										j = SPModel.addEquivalentPropertyMap(prop, newsuperprop);
 			
 									}
 									if (j > 0){

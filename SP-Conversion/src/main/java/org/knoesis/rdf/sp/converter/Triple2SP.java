@@ -1,12 +1,16 @@
 package org.knoesis.rdf.sp.converter;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.jena.graph.NodeFactory;
 import org.apache.log4j.Logger;
+import org.knoesis.rdf.sp.inference.ContextualInference;
 import org.knoesis.rdf.sp.model.SPNode;
 import org.knoesis.rdf.sp.model.SPTriple;
+import org.knoesis.rdf.sp.utils.RDFWriteUtils;
 
 public class Triple2SP extends ContextualRepresentationConverter {
 	
@@ -55,7 +59,7 @@ public class Triple2SP extends ContextualRepresentationConverter {
 	}
 
 	@Override
-	public List<SPTriple> transformTriple(org.apache.jena.graph.Triple triple, String ext){
+	public void transformTriple(BufferedWriter writer, org.apache.jena.graph.Triple triple, String ext, boolean isInfer, ContextualInference con){
 		
 		List<SPTriple> triples = new LinkedList<SPTriple>();
 		if (triple != null ){
@@ -76,7 +80,16 @@ public class Triple2SP extends ContextualRepresentationConverter {
 				triples.add(new SPTriple(singletonNode, this.metaPredicate, this.metaObject));
 				
 		}
-		return triples;
+		try {
+			if (isInfer){
+				// infer new triples and add them to the list
+				triples.addAll(con.expandInferredTriples(con.infer(triples)));
+			}
+			writer.write(RDFWriteUtils.printTriples(triples, ext));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

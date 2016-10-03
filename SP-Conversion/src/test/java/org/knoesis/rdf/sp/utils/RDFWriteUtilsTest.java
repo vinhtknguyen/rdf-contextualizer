@@ -1,6 +1,8 @@
 package org.knoesis.rdf.sp.utils;
 
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +33,18 @@ public class RDFWriteUtilsTest {
 		System.out.println(out);
 		
 		
+	}
+	@Test
+	public void testNormalizeN3(){
+		System.out.println(RDFWriteUtils.normalizeN3("123:.456+789-(){}[],.=%$#!asdf"));
+	}
+	@Test
+	public void testGetLastIndexOfDelimiter(){
+		assertEquals(RDFWriteUtils.getLastIndexOfDelimiter("http://xmlns.com/foaf/0.1/gender.sp.123"),35);
+		assertEquals(RDFWriteUtils.getLastIndexOfDelimiter("http://xmlns.com/foaf/0.1/gender/sp.123"),35);
+		assertEquals(RDFWriteUtils.getLastIndexOfDelimiter("http://xmlns.com/foaf/0.1/gender.sp#123"),35);
+		assertEquals(RDFWriteUtils.getLastIndexOfDelimiter("http://xmlns.com/foaf/0.1/gender.sp/123"),35);
+		assertEquals(RDFWriteUtils.getLastIndexOfDelimiter("http://xmlns.com/foaf/0.1/gender.sp:123"),35);
 	}
 
 }

@@ -17,17 +17,23 @@ import org.jsoup.select.Elements;
 
 public class RDFReadUtils {
 	public static void processUrl(String url_in, String dir){
-		CompressFileGzip gz = new CompressFileGzip();
 		System.out.println("Fetching url: " + url_in);
 		List<String> urls = readUrl(url_in);
-		for (String url: urls){
-			String[] tmp = url.split("/");
-			String file = dir + "/" + tmp[tmp.length-1];
-			System.out.println("Downloading file: " + url);
-			downloadFile(url, file);
-			System.out.println("Decompressing file: " + url);
-			gz.decompress(file, file.replace(".gz", ""));
+		
+		// Create the folder dir if not exist
+		try {
+			Files.createDirectories(Paths.get(dir));
+			for (String url: urls){
+				String[] tmp = url.split("/");
+				String file = dir + "/" + Constants.ORIGINAL_DIRECTORY + "/" + tmp[tmp.length-1];
+				System.out.println("Downloading file: " + url);
+				downloadFile(url, file);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
 	}
 	
 	public static void downloadFile(String url, String target){

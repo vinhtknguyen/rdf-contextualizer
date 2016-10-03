@@ -220,17 +220,19 @@ public class ContextualRepresentationConverter {
 	}
 		
 
-	public List<SPTriple> transformTriple(org.apache.jena.graph.Triple triple, String ext) {
+	public void transformTriple(BufferedWriter writer, org.apache.jena.graph.Triple triple, String ext, boolean isInfer, ContextualInference con) {
 		List<SPTriple> triples = new LinkedList<SPTriple>();
 		triples.add(new SPTriple(triple.getSubject(), triple.getPredicate(), triple.getPredicate(), ext));
-		return triples;
+		try {
+			writer.write(RDFWriteUtils.printTriples(triples, ext));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public List<SPTriple> transformQuad(Quad triple, String ext) {
+	public void transformQuad(BufferedWriter writer, Quad triple, String ext, boolean isInfer, ContextualInference con) {
 		
-		List<SPTriple> triples = new LinkedList<SPTriple>();
-		
-		return triples;
 	}
 
 

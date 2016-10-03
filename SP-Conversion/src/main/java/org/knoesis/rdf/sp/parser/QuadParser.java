@@ -17,7 +17,6 @@ import org.apache.jena.riot.lang.PipedRDFStream;
 import org.apache.jena.sparql.core.Quad;
 import org.apache.log4j.Logger;
 import org.knoesis.rdf.sp.converter.ContextualRepresentationConverter;
-import org.knoesis.rdf.sp.inference.ContextualInference;
 import org.knoesis.rdf.sp.model.SPTriple;
 import org.knoesis.rdf.sp.utils.RDFWriteUtils;
 
@@ -71,23 +70,9 @@ public class QuadParser implements Parser{
         // Start the parser on another thread
         executor.submit(parser);
         Quad quad;
-        List<SPTriple> triples = new LinkedList<SPTriple>();
-		try {
-	        while (iter.hasNext()) {
-	            quad = iter.next();
-				triples.addAll(con.transformQuad(quad, ext));
-				if (con.isInfer()){
-					// infer new triples and add them to the list
-					triples.addAll(con.getInference().expandInferredTriples(con.getInference().infer(triples)));
-				}
-				writer.write(RDFWriteUtils.printTriples(triples,ext));
-				triples.clear();
-	        }
-	        // Get the generic property triples
-	       if (con.isInfer()) writer.write(RDFWriteUtils.printTriples(con.getInference().generateGenericPropertyTriples(), ext));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			logger.error(e);
+		while (iter.hasNext()) {
+		    quad = iter.next();
+			con.transformQuad(writer, quad, ext, con.isInfer(), con.getInference());
 		}
         executor.shutdown();
         iter.close();

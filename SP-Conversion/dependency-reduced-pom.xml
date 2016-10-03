@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>rdf-conversion</groupId>
-  <artifactId>rdf-conversion</artifactId>
-  <name>RDF Conversion</name>
+  <groupId>rdf-contextualizer</groupId>
+  <artifactId>rdf-context-converter</artifactId>
+  <name>RDF Contextualizer for KRR</name>
   <version>0.0.1-SNAPSHOT</version>
-  <description>Convert any given RDF dataset to the representation which uses Singleton Property for modelling contextual information for the triples.
+  <description>A tool for representing and reasoning with context in RDF. It convert any given RDF dataset to the representation which uses Singleton Property for modelling contextual information for the triples.
 
 This approach is described in the paper:
 Don't like RDF Reification? Making Statements about Statements using Singleton Property"

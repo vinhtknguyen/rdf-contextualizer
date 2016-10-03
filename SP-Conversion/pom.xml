@@ -1,17 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>rdf-conversion</groupId>
-	<artifactId>rdf-conversion</artifactId>
+	<groupId>rdf-contextualizer</groupId>
+	<artifactId>rdf-context-converter</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>RDF Conversion</name>
-	<description>Convert any given RDF dataset to the representation which uses Singleton Property for modelling contextual information for the triples.
+	<name>RDF Contextualizer for KRR</name>
+	<description>A tool for representing and reasoning with context in RDF. It convert any given RDF dataset to the representation which uses Singleton Property for modelling contextual information for the triples.
 
 This approach is described in the paper:
 Don't like RDF Reification? Making Statements about Statements using Singleton Property&quot;
 Vinh Nguyen, Olivier Bodenreider, Amit Sheth.
-Proceedings of 23th International Conference on the World Wide Web.
-	</description>
+Proceedings of 23th International Conference on the World Wide Web.</description>
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<testSourceDirectory>src/test/java</testSourceDirectory>
@@ -109,5 +108,15 @@ Proceedings of 23th International Conference on the World Wide Web.
 			<artifactId>jsoup</artifactId>
 			<version>1.9.2</version>
 		</dependency>
-	</dependencies>
+		<dependency>
+		    <groupId>org.jfree</groupId>
+		    <artifactId>jfreechart</artifactId>
+		    <version>1.0.19</version>
+		</dependency>
+		<dependency>
+		        <groupId>com.github.romix</groupId>
+		        <artifactId>java-concurrent-hash-trie-map</artifactId>
+		        <version>0.2.23</version>
+	    </dependency>
+    	</dependencies>
 </project>
