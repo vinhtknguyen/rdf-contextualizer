@@ -51,7 +51,7 @@ Proceedings of 23th International Conference on the World Wide Web.</description
 							<transformers>
 								<transformer
 									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>org.knoesis.semanticweb.rdf.jena.sp.main.SPConverter</mainClass>
+									<mainClass>org.knoesis.rdf.sp.main.SPConverter</mainClass>
 								</transformer>
 								<transformer
 									implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />

@@ -38,7 +38,7 @@ public class NamedGraph2SPTest {
 	@Test
 	public void testConvertFile() {
 		con1.convert("src/test/resources/test-file/test2_ng.nq", "ttl", "ng");
-//		con1.convert("src/test/resources/test-file/test2_ng.nq", "nt", "ng");
+		con1.convert("src/test/resources/test-file/test2_ng.nq", "nt", "ng");
 	}
 
 }

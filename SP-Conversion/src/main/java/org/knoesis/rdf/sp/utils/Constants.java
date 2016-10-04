@@ -63,7 +63,7 @@ public class Constants {
 	public static final String CONVERTED_TO_SP_TTL = "_converted_to_sp_ttl";
 	public static final String ORIGINAL_DIRECTORY = "ori";
 	public static final String REPORTS_DIRECTORY = "reports";
-	public static final String STAT_FILE = REPORTS_DIRECTORY + "/stat.txt";
+	public static final String STAT_FILE = "sp_stat.txt";
 	
 }
 

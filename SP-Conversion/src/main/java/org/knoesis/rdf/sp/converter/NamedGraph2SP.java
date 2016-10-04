@@ -57,7 +57,9 @@ public class NamedGraph2SP extends ContextualRepresentationConverter{
 		}
 		if (isInfer){
 			// infer new triples and add them to the list
-			triples.addAll(con.expandInferredTriples(con.infer(triples)));
+			triples.addAll(SPModel.expandInferredTriples(con.infer(triples)));
+		} else {
+			triples.addAll(SPModel.expandInferredTriples(triples));
 		}
 		try {
 			writer.write(RDFWriteUtils.printTriples(triples, ext));

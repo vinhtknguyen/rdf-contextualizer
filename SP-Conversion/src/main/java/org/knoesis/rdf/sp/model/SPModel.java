@@ -3,7 +3,6 @@ package org.knoesis.rdf.sp.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -116,7 +115,7 @@ public class SPModel {
 		return inferred;
 	}
 	
-	public List<SPTriple> expandInferredTriples(List<SPTriple> in){
+	public static List<SPTriple> expandInferredTriples(List<SPTriple> in){
 		List<SPTriple> inferred = new ArrayList<SPTriple>();
 		
 		for (SPTriple triple : in){

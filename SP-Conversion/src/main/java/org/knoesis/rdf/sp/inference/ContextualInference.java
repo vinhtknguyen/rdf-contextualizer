@@ -8,7 +8,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.jena.graph.Node;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Property;
@@ -17,7 +16,6 @@ import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.rdf.model.StmtIterator;
 import org.knoesis.rdf.sp.model.SPModel;
-import org.knoesis.rdf.sp.model.SPNode;
 import org.knoesis.rdf.sp.model.SPTriple;
 import org.knoesis.rdf.sp.utils.Constants;
 import org.knoesis.rdf.sp.utils.RULE_SP;
@@ -37,7 +35,7 @@ public class ContextualInference {
 	}
 
 	public List<SPTriple> expandInferredTriples(List<SPTriple> triples) {
-		return model.expandInferredTriples(triples);
+		return SPModel.expandInferredTriples(triples);
 	}
 
 	public List<SPTriple> generateGenericPropertyTriples() {
@@ -59,7 +57,7 @@ public class ContextualInference {
 
 		if (!Files.isDirectory(Paths.get(file))) {
 			// load file
-			// System.out.println(file);
+			 System.out.println(file);
 			onto.read(file);
 		} else {
 			// If the input is a directory
@@ -68,7 +66,7 @@ public class ContextualInference {
 					.get(file))) {
 				/* PROCESS EACH INPUT FILE & GENERATE OUTPUT FILE */
 				for (Path entry : stream) {
-					// System.out.println("file: " + entry.toString());
+					 System.out.println("file: " + entry.toString());
 					onto.read(entry.toString());
 				}
 			} catch (IOException e1) {
@@ -82,7 +80,6 @@ public class ContextualInference {
 		StmtIterator iter = onto.listStatements();
 		List<String> subProps = new ArrayList<String>();
 		List<String> equiProps = new ArrayList<String>();
-		int i = 0;
 		while (iter.hasNext()) {
 			Statement stmt = iter.nextStatement(); // get next statement
 			Resource subject = stmt.getSubject(); // get the subject

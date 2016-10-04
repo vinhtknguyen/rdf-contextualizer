@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.knoesis.rdf.sp.inference.ContextualInference;
+import org.knoesis.rdf.sp.model.SPModel;
 import org.knoesis.rdf.sp.model.SPNode;
 import org.knoesis.rdf.sp.model.SPTriple;
 import org.knoesis.rdf.sp.utils.Constants;
@@ -118,8 +119,10 @@ public class Reification2SP extends ContextualRepresentationConverter{
 		try {
 			if (isInfer){
 				// infer new triples and add them to the list
-				triples.addAll(con.expandInferredTriples(con.infer(triples)));
-			}
+				triples.addAll(SPModel.expandInferredTriples(con.infer(triples)));
+			} else {
+				triples.addAll(SPModel.expandInferredTriples(triples));
+			}			
 			writer.write(RDFWriteUtils.printTriples(triples, ext));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

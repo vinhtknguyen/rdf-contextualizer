@@ -49,7 +49,7 @@ Proceedings of 23th International Conference on the World Wide Web.</description
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>org.knoesis.semanticweb.rdf.jena.sp.main.SPConverter</mainClass>
+                  <mainClass>org.knoesis.rdf.sp.main.SPConverter</mainClass>
                 </transformer>
                 <transformer />
               </transformers>

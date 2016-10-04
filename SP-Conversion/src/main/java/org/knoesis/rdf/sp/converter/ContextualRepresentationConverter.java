@@ -13,6 +13,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.zip.GZIPOutputStream;
@@ -84,7 +85,7 @@ public class ContextualRepresentationConverter {
 	}
 	
 	public BufferedWriter getBufferedWriter(String file){
-	    BufferedWriter writer = null;
+		BufferedWriter writer = null;
 	    OutputStream outStream = null;
 	    try {
 		    if (this.isZip()){
@@ -105,6 +106,24 @@ public class ContextualRepresentationConverter {
 	    return writer;
 		  
 	}
+	public BufferedWriter getReportWriter(String file){
+		BufferedWriter writer = null;
+	    OutputStream outStream = null;
+	    try {
+		    outStream = new FileOutputStream(new File(file), true);
+		    writer = new BufferedWriter(
+		            new OutputStreamWriter(outStream, "UTF-8"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    return writer;
+		  
+	}
+	
 	public void convert(String file, String ext, String rep) {
 		
 		// If the input is a file
@@ -114,16 +133,20 @@ public class ContextualRepresentationConverter {
 
 				long start = System.currentTimeMillis();
 				
-				BufferedWriter writer = getBufferedWriter(fileOut);
-				convertFile(file, writer, ext, rep);
-				writer.close();
+				convertFile(file, fileOut, ext, rep);
 				logger.debug("Finished generating file " + fileOut);
 
 				long end = System.currentTimeMillis() - start;
 				
-				System.out.println("Time\t" + file + "\t" + end);
+				DecimalFormat time_formatter = new DecimalFormat("#,###.00");
+				DecimalFormat size_formatter = new DecimalFormat("#,###");
 				
-				System.out.println("Size\t" + file + "\t" + Paths.get(file).toFile().length() + "\t" + fileOut + "\t" + Paths.get(fileOut).toFile().length());
+				BufferedWriter report = this.getReportWriter(Constants.STAT_FILE);
+				report.write("Time\t\t" + time_formatter.format(end) + "\t" + rep + "\t" + (this.isInfer()?" infer ":" no-infer ") + "\t" + ext + "\t" + file + "\t" + "\n");
+				
+				report.write("Diskspace\t" + size_formatter.format(Paths.get(fileOut).toFile().length()) + "\t" + rep + "\t" + (this.isInfer()?" infer ":" no-infer ") + "\t" + ext + "\t" + file + "\t" + "\n");
+				report.write("Diskspace\t" + size_formatter.format(Paths.get(file).toFile().length()) + "\t ORI \t" + (this.isInfer()?" infer ":" no-infer ") + "\t" + ext + "\t" + file + "\t" + "\n");
+				report.close();
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -139,25 +162,30 @@ public class ContextualRepresentationConverter {
 		        
 				String fileOut = null;
 				
+				long start = System.currentTimeMillis();
+				
 				/* PROCESS EACH INPUT FILE & GENERATE OUTPUT FILE */
+				long orisize = 0;
+				
 				for (Path entry : stream) {
+					
 					fileOut = dirOut + "/" + genFileOut(entry.getFileName().toString(), ext);
-
-					long start = System.currentTimeMillis();
-		        	
-					BufferedWriter writer = getBufferedWriter(fileOut);
-					
-					convertFile(entry.toString(), writer, ext, rep);
-					
-			        writer.close();
+					convertFile(entry.toString(), fileOut, ext, rep);
 					logger.debug("Finished generating file " + fileOut);
-					
-		        	long end = System.currentTimeMillis() - start;
-
-					System.out.println("Time(s)\t" + entry.toString() + "\t" + end);
-					
-					System.out.println("Size(mb)\t" + entry.toString() + "\t" + Paths.get(entry.toString()).toFile().length() + "\t" + fileOut + "\t" + Paths.get(fileOut).toFile().length());
+					orisize += Paths.get(entry.toString()).toFile().length();
 		        }
+				
+	        	long end = System.currentTimeMillis() - start;
+				DecimalFormat time_formatter = new DecimalFormat("#,###.00");
+				DecimalFormat size_formatter = new DecimalFormat("#,###");
+				
+				// Write the stat to file
+				BufferedWriter report = getReportWriter(Constants.STAT_FILE);
+				report.write("Time\t\t" + time_formatter.format(end) + "\t" + rep + "\t" + (this.isInfer()?" infer ":" no-infer ") + "\t" + ext + "\t" + file + "\t" +  "\n");
+				
+				report.write("Diskspace\t" + size_formatter.format(directorySize(dirOut)) + "\t" + rep + "\t" + (this.isInfer()?" infer ":" no-infer ") + "\t" + ext + "\t" + file + "\t" + "\n");
+				report.write("Diskspace\t" + size_formatter.format(orisize) + "\t" + "ORI" + "\t" + (this.isInfer()?" infer ":" no-infer ") + "\t" + ext + "\t" +  file + "\t" + "\n");
+				report.close();
 		    } catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -171,8 +199,19 @@ public class ContextualRepresentationConverter {
 
 	}
 	
+	public static long directorySize(String in) {
+	    long length = 0;
+	    File directory = new File(in);
+	    for (File file : directory.listFiles()) {
+	        if (file.isFile())
+	            length += file.length();
+	        else
+	            length += directorySize(file.toString());
+	    }
+	    return length;
+	}
 	
-	public void convertFile(String file, BufferedWriter writer, String ext, String rep) throws FileNotFoundException {
+	public void convertFile(String file, String writer, String ext, String rep) throws FileNotFoundException {
 
 		System.out.println("Processing " + file + " to generate file " + writer );
 
@@ -182,9 +221,6 @@ public class ContextualRepresentationConverter {
 
 			try {
 				
-				// Write the credentials
-				String cred = "# This file is generated by SP-Conversion.\n";
-				writer.write(cred);
 				
 				// Write the prefixes if ttl
 				if (ext.equalsIgnoreCase(Constants.TURTLE_EXT)) {
@@ -208,6 +244,8 @@ public class ContextualRepresentationConverter {
 					nxp = new TripleParser();
 					break;
 				}
+				
+				RDFWriteUtils.resetPrefixMapping();
 				
 				nxp.parse(this, file, writer, ext);
 				stream.close();
@@ -242,6 +280,15 @@ public class ContextualRepresentationConverter {
 			return in.split("\\.")[0] + Constants.SP_SUFFIX + "." + ext.toLowerCase();
 		}
 		return in.split("\\.")[0] + Constants.SP_SUFFIX + "." + ext.toLowerCase() + ".gz";
+		
+	}
+
+	public String genFileOutForThread(String in, int num, String ext){
+		if (in != null && !this.isZip()) {
+			
+			return in.split("\\.")[0] + Constants.SP_SUFFIX + "_" + num + "." + ext.toLowerCase();
+		}
+		return in.split("\\.")[0] + Constants.SP_SUFFIX + "_" + num + "." + ext.toLowerCase() + ".gz";
 		
 	}
 
