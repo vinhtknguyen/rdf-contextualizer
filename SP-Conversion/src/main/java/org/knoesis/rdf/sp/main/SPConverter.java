@@ -1,11 +1,8 @@
 package org.knoesis.rdf.sp.main;
 
 import org.apache.log4j.Logger;
-import org.knoesis.rdf.sp.converter.ContextualRepresentationConverter;
-import org.knoesis.rdf.sp.converter.NamedGraph2SP;
-import org.knoesis.rdf.sp.converter.NanoPub2SP;
-import org.knoesis.rdf.sp.converter.Reification2SP;
-import org.knoesis.rdf.sp.converter.Triple2SP;
+import org.knoesis.rdf.sp.parser.SPParser;
+import org.knoesis.rdf.sp.parser.SPParserFactory;
 import org.knoesis.rdf.sp.utils.Constants;
 import org.knoesis.rdf.sp.utils.RDFReadUtils;
 
@@ -145,54 +142,13 @@ public class SPConverter {
 			RDFReadUtils.processUrl(url, dir);
 			this.setFileIn(dir);
 		}
+		
 		if (this.getRep() != null){
-			ContextualRepresentationConverter converter = null;
-			switch (this.getRep().toUpperCase()){
-			
-			case Constants.NANO_REP:
-				converter = new NanoPub2SP();
-				break;
-			
-			case Constants.NG_REP:
-				converter = new NamedGraph2SP();
-				if (this.getMetaProp() != null) {
-					((NamedGraph2SP)converter).setNamedGraphProp(this.getMetaProp());
-				}
-				break;
-			
-			case Constants.REI_REP:
-				converter = new Reification2SP();
-				break;
-				
-			case Constants.TRIPLE_REP:
-				converter = new Triple2SP();
-				if (this.getMetaProp() != null) {
-					((Triple2SP)converter).setMetaPredicate(this.getMetaProp());
-				}
-				if (this.getMetaObj() != null) {
-					((Triple2SP)converter).setMetaObject(this.getMetaObj());
-				}
-				break;
-			case Constants.NONE_REP:
-				converter = new ContextualRepresentationConverter();
-				break;
-			default:
-				converter = new ContextualRepresentationConverter();
-				break;
-			}
-			
-			// Initialize the variables
-			if (this.getSpProp() != null) {
-				converter.setSingletonPropertyOf(this.getSpProp());
-			}
-			
-			if (this.getSpInitNum() != -1 ) converter.setInitUUIDNumber(this.getSpInitNum());
-			if (this.getSpInitStr() != null) converter.setInitUUIDPrefix(this.getSpInitStr());
-			converter.setZip(this.isZip());
-			converter.setInfer(this.isInfer());
-			converter.setOntoDir(this.getOntoDir());
-			// Start running the conversion
-			converter.convert(this.getFileIn(), this.getExt(), this.getRep());
+			SPParser parser = SPParserFactory.createParser(rep);
+			parser.setInfer(isInfer());
+			parser.setZip(isZip());
+			parser.setOntoDir(getOntoDir());
+			parser.parse(getFileIn(), getExt(), getRep());
 		}
 		
 	}

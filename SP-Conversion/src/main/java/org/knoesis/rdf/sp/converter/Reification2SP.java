@@ -1,25 +1,22 @@
 package org.knoesis.rdf.sp.converter;
 
 import java.io.BufferedWriter;
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.knoesis.rdf.sp.inference.ContextualInference;
-import org.knoesis.rdf.sp.model.SPModel;
 import org.knoesis.rdf.sp.model.SPNode;
 import org.knoesis.rdf.sp.model.SPTriple;
 import org.knoesis.rdf.sp.utils.Constants;
-import org.knoesis.rdf.sp.utils.RDFWriteUtils;
+
+import com.romix.scala.collection.concurrent.TrieMap;
 
 public class Reification2SP extends ContextualRepresentationConverter{
 	
 	final static Logger logger = Logger.getLogger(Reification2SP.class);
 
-	private Map<String,org.apache.jena.graph.Node[]> reifiedTriples = new HashMap<String,org.apache.jena.graph.Node[]>();
+	private Map<String,org.apache.jena.graph.Node[]> reifiedTriples = new TrieMap<String,org.apache.jena.graph.Node[]>();
 	
 	private boolean type_flag = false;
 	private boolean subject_flag = false;
@@ -88,7 +85,7 @@ public class Reification2SP extends ContextualRepresentationConverter{
 	}
 	
 	@Override
-	public void transformTriple(BufferedWriter writer, org.apache.jena.graph.Triple triple, String ext, boolean isInfer, ContextualInference con){
+	public List<SPTriple> transformTriple(BufferedWriter writer, org.apache.jena.graph.Triple triple, String ext){
 		List<SPTriple> triples = new LinkedList<SPTriple>();
 		
 		if (triple != null){
@@ -97,37 +94,29 @@ public class Reification2SP extends ContextualRepresentationConverter{
 			if (!addTripleToReifiedPattern(triple)) {
 				
 				// Print the regular triple
-				super.transformTriple(writer, triple, ext, isInfer, con);
-				return;
+				super.transformTriple(writer, triple, ext);
+				return triples;
 			}
 			
 			// Check if the reified statement is completed
 			
 			if (!isReifiedPatternCompleted()){
-				return;
+				return triples;
 			}
 			
 			org.apache.jena.graph.Node[] reifiedStatement = reifiedTriples.get(triple.getSubject().toString());
-			triples.add(new SPTriple(new SPNode(reifiedStatement[0]), new SPNode(triple.getSubject()), new SPNode(reifiedStatement[2])));
-			triples.add(new SPTriple(new SPNode(triple.getSubject()), this.singletonPropertyOf, new SPNode(reifiedStatement[1])));
+			
+			SPNode singletonNode = new SPNode(triple.getSubject(), true);
+			SPTriple singletonTriple = new SPTriple(new SPNode(reifiedStatement[0]), singletonNode, new SPNode(reifiedStatement[2]));
+			singletonTriple.addSingletonInstanceTriple(new SPTriple(singletonNode, this.singletonPropertyOf, new SPNode(reifiedStatement[1])));
+			
+			triples.add(singletonTriple);
 			
 			// Reset the flasg and remove the reified statement
 			resetReifiedFlags();
 			reifiedTriples.remove(triple.getSubject());
-
 		}
-		try {
-			if (isInfer){
-				// infer new triples and add them to the list
-				triples.addAll(SPModel.expandInferredTriples(con.infer(triples)));
-			} else {
-				triples.addAll(SPModel.expandInferredTriples(triples));
-			}			
-			writer.write(RDFWriteUtils.printTriples(triples, ext));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		return triples;
 	}
 
 }

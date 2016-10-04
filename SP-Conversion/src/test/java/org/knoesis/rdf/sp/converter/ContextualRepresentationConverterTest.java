@@ -2,33 +2,34 @@ package org.knoesis.rdf.sp.converter;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.knoesis.rdf.sp.converter.ContextualRepresentationConverter;
+import org.knoesis.rdf.sp.parser.SPParser;
+import org.knoesis.rdf.sp.parser.SPParserFactory;
 
 public class ContextualRepresentationConverterTest {
 
-	ContextualRepresentationConverter con1 = null;
-	ContextualRepresentationConverter con2 = null;
-	ContextualRepresentationConverter con3 = null;
+	SPParser con1 = null;
+	SPParser con2 = null;
+	SPParser con3 = null;
+	String rep = "none";
 	@Before
 	public void setUp() throws Exception {
-		con1 = new ContextualRepresentationConverter();
-		con2 = new ContextualRepresentationConverter(10, "crc_", "_");
-		con3 = new ContextualRepresentationConverter();
-		con3.setZip(true);
+		con1 = SPParserFactory.createParser(rep);
+//		con1.setZip(true);
+		con1.setOntoDir("src/main/resources/onto");
+		con1.setInfer(true);
+		con1.init();
 	}
 
 	@Test
 	public void testConvert() {
-		con1.convert("src/test/resources/test-default", "ttl", "none");
-		con1.convert("src/test/resources/test-default", "nt", "none");
-		con3.convert("src/test/resources/test-default", "ttl", "none");
-		con3.convert("src/test/resources/test-default", "nt", "none");
+		con1.parse("src/test/resources/test-default", "ttl", rep);
+		con1.parse("src/test/resources/test-default", "nt", rep);
 	}
 
 	@Test
 	public void testConvertFile() {
-		con1.convert("src/test/resources/test-file/yagoFacts.ttl", "ttl", "none");
-		con1.convert("src/test/resources/test-file/yagoFacts.ttl", "nt", "none");
+		con1.parse("src/test/resources/test-file/yagoFacts.ttl", "ttl", rep);
+		con1.parse("src/test/resources/test-file/yagoFacts.ttl", "nt", rep);
 	}
 
 	@Test

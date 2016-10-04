@@ -1,18 +1,26 @@
 package org.knoesis.rdf.sp.utils;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.zip.GZIPOutputStream;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
@@ -25,6 +33,7 @@ import com.romix.scala.collection.concurrent.TrieMap;
 public class RDFWriteUtils {
     
 	final static Logger logger = Logger.getLogger(RDFWriteUtils.class);
+	public final static String prefixesFile = "prefixes.ttl";
 
 	public static Map<String,String> prefixMapping = new TrieMap<String,String>();
 //	public static PrefixTrie trie = new PrefixTrie();
@@ -48,56 +57,51 @@ public class RDFWriteUtils {
     }
 
 	
-	public static SPNode shortenURIWithPrefixMapping(SPNode in){
-		// shorten the whole URI with prefix 
-		int len = in.toString().length();
-		String ns = null, prefix = null;
-		StringBuilder shorten = new StringBuilder();
+	public static List<SPTriple> expandSingletonTriples(List<SPTriple> in){
+		List<SPTriple> expanded = new ArrayList<SPTriple>();
 		
-		if (trie.get(in.toString()) != null){
-			prefix = trie.get(in.toString());
-			ns = in.toString();
-			shorten.append(prefix + ":");
-			in.setPrefix(prefix);
-			in.setShorten(shorten.toString());
-			in.setNamespace(ns);
-			return in;
-		} 
-		
-		int lastNsInd = getLastIndexOfDelimiterWithSecondPeriod(in.toString());
-		if (lastNsInd > 2 && in.toString().charAt(lastNsInd-1) != '/' && in.toString().charAt(lastNsInd-2) != ':' ) {
-			ns = in.toString().substring(0, lastNsInd + 1);
-			prefix = trie.get(ns);
-			if (prefix == null) prefix = RDFWriteUtils.getNextPrefixNs();
-			trie.put(ns, prefix);
-
-			shorten.append(prefix + ":");
-			if (!in.toString().substring(lastNsInd+1, len).isEmpty()){
-				shorten.append(RDFWriteUtils.normalizeN3(in.toString().substring(lastNsInd+1, len)));
-			}
-			in.setNamespace(ns);
-			in.setPrefix(prefix);
-			in.setShorten(shorten.toString());
-		} else {
-			ns = in.toString();
-			shorten.append(prefix + ":");
-			prefix = RDFWriteUtils.getNextPrefixNs();
-			trie.put(ns, prefix);
+		for (SPTriple triple : in){
+			// Singleton instance
+			expanded.addAll(triple.getSingletonInstanceTriples());
+			expanded.addAll(triple.getMetaTriples());
+			// Inferred generic property triple
+			expanded.add(new SPTriple(triple.getSubject(), triple.getPredicate(), triple.getObject()));
+			// Meta property triple
+			expanded.addAll(triple.getGenericPropertyTriples());
 		}
-	    return in;
+		return expanded;
 	}
-
+	
+	public static Map<String,String> extractPrefixesfromTriples(List<SPTriple> triples, Map<String,String> prefixMapping, Map<String,String> trie){
+		for (SPTriple triple:triples){
+			prefixMapping = extractPrefixFromNode(triple.getSubject(), prefixMapping, trie);
+			prefixMapping = extractPrefixFromNode(triple.getSubject(), prefixMapping, trie);
+			prefixMapping = extractPrefixFromNode(triple.getSubject(), prefixMapping, trie);
+			
+		}
+		return prefixMapping;
+	}
+	
+	public static Map<String,String> extractPrefixFromNode(SPNode node, Map<String,String> prefixMapping, Map<String,String> trie){
+		if (node != null){
+			String prefix = node.toN3(prefixMapping, trie).getPrefix();
+			if (prefixMapping.get(prefix) == null) prefixMapping.put(prefix, node.getNamespace());
+		}
+		return prefixMapping;
+	}
 	/**
 	 * Print a list of triples
 	 * 
 	 * */
-	public static String printTriples(List<SPTriple> triples, String ext){
+	public static String printTriples(List<SPTriple> in, Map<String,String> prefixMapping, Map<String,String> trie, String ext){
+		List<SPTriple> triples = new ArrayList<SPTriple>();
+		triples.addAll(expandSingletonTriples(in));
 		if (ext.toLowerCase().equals(Constants.TURTLE_EXT)){
-			return printTriples2N3(triples);
+			return printTriples2N3(triples, prefixMapping, trie);
 		} else if (ext.toLowerCase().equals(Constants.NTRIPLE_EXT)){
 			return printTriples2NT(triples);
 		}
-		return printTriples2N3(triples);
+		return printTriples2N3(triples, prefixMapping, trie);
 	}
 	
 	public static String printTriples2NT(List<SPTriple> triples){
@@ -114,16 +118,16 @@ public class RDFWriteUtils {
 	 * By shorting them into common subject, common predicate, and object
 	 * */
 	
-	public static String printTriples2N3(List<SPTriple> triples){
+	public static String printTriples2N3(List<SPTriple> triples, Map<String,String> prefixMapping, Map<String,String> trie){
 		if (triples == null){
 			return "";
 		}
 		
 
-//		System.out.println("Input triples");
-//		for (SPTriple triple : triples){
-//			System.out.println(triple.toString());
-//		}
+		System.out.println("Input triples");
+		for (SPTriple triple : triples){
+			System.out.println(triple.toString());
+		}
 		
 		/* No sorting as it takes too long to finish
 		// Sort the input triples
@@ -143,7 +147,7 @@ public class RDFWriteUtils {
 		StringBuilder prefixes = new StringBuilder();
 	
 		if (triples.size() == 0) return "";
-		if (triples.size() == 1) return triples.get(0).printTriple2N3();
+		if (triples.size() == 1) return triples.get(0).printTriple2N3(prefixMapping, trie);
 		
 		for (int i = 0; i < triples.size(); i++){
 			
@@ -152,7 +156,7 @@ public class RDFWriteUtils {
 			if (cur != null){
 
 				// Generate the prefix string
-				prefixes.append(cur.printTriplePrefix());
+				prefixes.append(cur.printTriplePrefix(prefixMapping, trie));
 
 				// Print the subject for the current triple 
 				if (commonSubject == null && commonPredicate == null) {
@@ -231,23 +235,20 @@ public class RDFWriteUtils {
 		return map;
 	}
 	
-	public static void loadPrefixes(String file){
+	public static void loadPrefixesToTrie(Map<String,String> trie){
 		//read file into stream, try-with-resources
 		Model model = ModelFactory.createDefaultModel();
-		model.read(file);
+		model.read(prefixesFile);
 		if (model.getNsPrefixMap() == null) return;
-		else loadPrefixesToTrie(model.getNsPrefixMap());
+		else{
+			Iterator<Entry<String, String>> it = model.getNsPrefixMap().entrySet().iterator();
+			while (it.hasNext()) {
+			    Map.Entry<String,String> pair = (Map.Entry<String,String>)it.next();
+			    trie.put(pair.getValue(), pair.getKey());
+			}
+		}
 	}
 	
-	private static void loadPrefixesToTrie(Map<String,String> map){
-		if (map == null) return;
-		Iterator<Entry<String, String>> it = map.entrySet().iterator();
-		while (it.hasNext()) {
-		    Map.Entry<String,String> pair = (Map.Entry<String,String>)it.next();
-		    trie.put(pair.getValue(), pair.getKey());
-		}
-		
-	}
 	public static int getLastIndexOfDelimiter(String uri){
 		int ind = uri.length()-1;
 				
@@ -303,5 +304,64 @@ public class RDFWriteUtils {
 		}
 		return in;
 	}
+	public static String genFileOut(String in, String ext, boolean isZip){
+		if (in != null && !isZip) {
+			
+			return in.split("\\.")[0] + Constants.SP_SUFFIX + "." + ext.toLowerCase();
+		}
+		return in.split("\\.")[0] + Constants.SP_SUFFIX + "." + ext.toLowerCase() + ".gz";
+		
+	}
+
+	public static String genFileOutForThread(String in, String dirOut, int num, String ext, boolean isZip){
+		if (in == null) return null;
+		if (dirOut == null) return in;
+		String[] tmp = in.split("/");
+		String filename = tmp[tmp.length-1].split("\\.")[0];
+		if (!isZip) {
+			return dirOut + "/" + filename + Constants.SP_SUFFIX + num + "." + ext.toLowerCase();
+		} 
+		return dirOut + "/" + filename + Constants.SP_SUFFIX + num + "." + ext.toLowerCase() + ".gz";
+		
+	}
+
+	public static BufferedWriter getBufferedWriter(String file, boolean isZip){
+		BufferedWriter writer = null;
+	    OutputStream outStream = null;
+	    try {
+		    if (isZip){
+			outStream = new GZIPOutputStream(
+			        new FileOutputStream(new File(file)));
+		    } else {
+		    	outStream = new FileOutputStream(new File(file));
+		    }
+		    writer = new BufferedWriter(
+		            new OutputStreamWriter(outStream, "UTF-8"));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	    return writer;
+		  
+	}
+	public static BufferedWriter getReportWriter(String file){
+		BufferedWriter writer = null;
+	    OutputStream outStream = null;
+	    try {
+		    outStream = new FileOutputStream(new File(file), true);
+		    writer = new BufferedWriter(
+		            new OutputStreamWriter(outStream, "UTF-8"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    return writer;
+		  
+	}
+	
 
 }

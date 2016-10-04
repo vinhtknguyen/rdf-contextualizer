@@ -1,16 +1,13 @@
 package org.knoesis.rdf.sp.converter;
 
 import java.io.BufferedWriter;
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.jena.sparql.core.Quad;
 import org.apache.log4j.Logger;
-import org.knoesis.rdf.sp.inference.ContextualInference;
 import org.knoesis.rdf.sp.model.*;
 import org.knoesis.rdf.sp.utils.Constants;
-import org.knoesis.rdf.sp.utils.RDFWriteUtils;
 
 public class NamedGraph2SP extends ContextualRepresentationConverter{
 
@@ -28,12 +25,12 @@ public class NamedGraph2SP extends ContextualRepresentationConverter{
 	}
 	
 	@Override
-	public void transformQuad(BufferedWriter writer, Quad quad, String ext, boolean isInfer, ContextualInference con){
+	public List<SPTriple> transformQuad(BufferedWriter writer, Quad quad, String ext){
 
 		List<SPTriple> triples = new LinkedList<SPTriple>();
 		
 		if (quad == null){
-			return;
+			return null;
 		}
 		
 		if (quad.getGraph() != null ){
@@ -51,22 +48,12 @@ public class NamedGraph2SP extends ContextualRepresentationConverter{
 			singletonTriple.addMetaTriple(new SPTriple(singletonNode, this.getNamedGraphProp(), new SPNode(quad.getGraph())));
 			
 			triples.add(singletonTriple);
+			System.out.println("Singleton triple " + singletonTriple.toString());
 
 		} else {
 			triples.add(new SPTriple(new SPNode(quad.getSubject()), new SPNode(quad.getPredicate()), new SPNode(quad.getObject())));
 		}
-		if (isInfer){
-			// infer new triples and add them to the list
-			triples.addAll(SPModel.expandInferredTriples(con.infer(triples)));
-		} else {
-			triples.addAll(SPModel.expandInferredTriples(triples));
-		}
-		try {
-			writer.write(RDFWriteUtils.printTriples(triples, ext));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		return triples;
 	}
 
 	public SPNode getNamedGraphProp() {

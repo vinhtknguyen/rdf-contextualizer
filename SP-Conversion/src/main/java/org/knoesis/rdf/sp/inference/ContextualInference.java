@@ -1,173 +1,248 @@
 package org.knoesis.rdf.sp.inference;
 
-import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.Property;
-import org.apache.jena.rdf.model.RDFNode;
-import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.rdf.model.Statement;
-import org.apache.jena.rdf.model.StmtIterator;
 import org.knoesis.rdf.sp.model.SPModel;
+import org.knoesis.rdf.sp.model.SPNode;
 import org.knoesis.rdf.sp.model.SPTriple;
-import org.knoesis.rdf.sp.utils.Constants;
 import org.knoesis.rdf.sp.utils.RULE_SP;
+
+import com.romix.scala.collection.concurrent.TrieMap;
 
 public class ContextualInference {
 
-	protected SPModel model = null;
+	// Store the hashmap of a generic property to its number of singleton properties obtained from the data
+	protected Map<String, Integer> genericPropertyMapPerFile = new TrieMap<String, Integer>();
 
 	public ContextualInference() {
-		model = new SPModel();
+	}
+	
+	public void addGenericPropertyMap(String prop1){
+		int count;
+		if (genericPropertyMapPerFile.containsKey(prop1)){
+			count = genericPropertyMapPerFile.get(prop1) + 1;
+		} else {
+			count = 1;
+//			System.out.println(prop1.toString() + "\t generic ");
+		}
+		genericPropertyMapPerFile.put(prop1, count);
+	}
+
+	public List<SPTriple> generateGenericPropertyTriplesPerFile(){
+		List<SPTriple> inferred = new ArrayList<SPTriple>();
+		Iterator<Entry<String, Integer>> it = genericPropertyMapPerFile.entrySet().iterator();
+		while (it.hasNext()) {
+		    Map.Entry<String,Integer> pair = (Map.Entry<String,Integer>)it.next();
+		    inferred.add(new SPTriple(new SPNode(pair.getKey()), SPModel.rdfType, SPModel.genericPropertyClass));
+		}
+		return inferred;
 	}
 
 	public List<SPTriple> infer(List<SPTriple> triples) {
 		List<SPTriple> out = new ArrayList<SPTriple>();
-		out.addAll(model.infer(triples, RULE_SP.RULE_ALL_SP));
+		out.addAll(infer(triples, RULE_SP.RULE_ALL_SP));
+		
+		SPModel.addGenericPropertyMap(this.genericPropertyMapPerFile);
+		
 		return out;
 	}
 
-	public List<SPTriple> expandInferredTriples(List<SPTriple> triples) {
-		return SPModel.expandInferredTriples(triples);
-	}
-
-	public List<SPTriple> generateGenericPropertyTriples() {
-		return model.generateGenericPropertyTriples();
-	}
-
-	public void init() {
-
-	}
-
-	public void clearGenericPropMap() {
-		model.clearGenericPropertyMap();
-	}
-
-	public void loadModel(String file) {
-		// Load ontologies from ontoDir to the model
-		// If the input is a file
-		Model onto = ModelFactory.createDefaultModel();
-
-		if (!Files.isDirectory(Paths.get(file))) {
-			// load file
-			 System.out.println(file);
-			onto.read(file);
-		} else {
-			// If the input is a directory
-			// Create a new directory for output files
-			try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths
-					.get(file))) {
-				/* PROCESS EACH INPUT FILE & GENERATE OUTPUT FILE */
-				for (Path entry : stream) {
-					 System.out.println("file: " + entry.toString());
-					onto.read(entry.toString());
-				}
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-
-		}
-
-		// Process the model to construct the SPModel
-		StmtIterator iter = onto.listStatements();
-		List<String> subProps = new ArrayList<String>();
-		List<String> equiProps = new ArrayList<String>();
-		while (iter.hasNext()) {
-			Statement stmt = iter.nextStatement(); // get next statement
-			Resource subject = stmt.getSubject(); // get the subject
-			Property predicate = stmt.getPredicate(); // get the predicate
-			RDFNode object = stmt.getObject(); // get the object
-
-			// Check for subPropertyOf
-			switch (predicate.toString()) {
-			case Constants.RDFS_SUBPROPERTYOF_PROPERTY:
-				SPModel.addSubPropertyOfMap(subject.toString(), object.toString());
-				if (!subProps.contains(subject.toString()))subProps.add(subject.toString());
-				if (!subProps.contains(object.toString()))subProps.add(object.toString());
-				break;
-			case Constants.OWL_EQUIVALENTPROPERTY_PROPERTY:
-				SPModel.addEquivalentPropertyMap(subject.toString(), object.toString());
-				if (!equiProps.contains(subject.toString()))subProps.add(subject.toString());
-				if (!equiProps.contains(object.toString()))subProps.add(object.toString());
-				break;
-			case Constants.RDFS_DOMAIN_PROPERTY:
-				SPModel.addDomainPropertyMap(subject.toString(), object.toString());
-				break;
-			case Constants.RDFS_RANGE_PROPERTY:
-				SPModel.addRangePropertyMap(subject.toString(), object.toString());
-				break;
-			default:
-				break;
-			}
-		}
-		System.out.println("compute transitive for subprop");
-		// Compute transitive
-		computeTransitive(subProps, true);
-		System.out.println("compute transitive for equiprop");
-		computeTransitive(equiProps, false);
-		// Printing statistics
+	public List<SPTriple> infer(SPTriple triple, RULE_SP[] rules){
+		List<SPTriple> inferred = new ArrayList<SPTriple>();
+		
+		return inferred;
 	}
 	
-	public void computeTransitive(List<String> props, boolean isSubProp){
-		List<String> lst = new ArrayList<String>();
-		lst.addAll(props);
-		int count = 1;
-		while (count > 0) {
-			count = 0;
-			for (String prop : lst) {
-//				System.out.println("outer for: " + prop);
-				// Compute the transitive
-				List<String> supers = new ArrayList<String>();
-				if (isSubProp){
-					if (SPModel.subPropertyOfMap.get(prop) != null) supers.addAll(SPModel.subPropertyOfMap.get(prop));
-				} else {
-					if (SPModel.equivalentPropertyMap.get(prop) != null) supers.addAll(SPModel.equivalentPropertyMap.get(prop));
+	public List<SPTriple> infer(List<SPTriple> triples, RULE_SP[] rules){
+		List<SPTriple> inferred = new ArrayList<SPTriple>();
+		for (RULE_SP rule : rules){
+			inferred.addAll(infer(triples, rule));
+		}
+		
+		// Extract the triples
+		
+		return inferred;
+	}
+	
+	public List<SPTriple> infer(List<SPTriple> triples, RULE_SP rule){
+		List<SPTriple> inferred = new ArrayList<SPTriple>();
+		
+		Comparator<RULE_SP> comparator1 = new Comparator<RULE_SP>() {
+			  public int compare(RULE_SP e1, RULE_SP e2) {
+			     //your magic happens here
+				  return e1.getNum() - e2.getNum();
+			  }
+		};
+		
+		RULE_SP[] rules = RULE_SP.values();
+		Arrays.sort(rules, comparator1);
+		for (SPTriple triple : triples){
+			if (rule == RULE_SP.RULE_ALL_SP){
+				
+				for (RULE_SP r: rules ){
+//					System.out.println("rules: " + r.toString());
+					triple = infer(triple, r);
 				}
-					// Get all the super properties
-				if (supers != null){
-					for (String newProp : supers) {
-						List<String> newsupers = new ArrayList<String>();
-						if (isSubProp){
-							if (SPModel.subPropertyOfMap.get(newProp) != null) newsupers.addAll(SPModel.subPropertyOfMap.get(newProp));
-						} else {
-							if (SPModel.equivalentPropertyMap.get(newProp) != null) newsupers.addAll(SPModel.equivalentPropertyMap.get(newProp));
-						}
-//						System.out.println("1st inner for: " + newProp);
-						if (newsupers != null){
-							for (String newsuperprop: newsupers){
-								if (!newsuperprop.equals(prop)) {
-									int j = 0;
-									if (isSubProp){
-										j = SPModel.addSubPropertyOfMap(prop, newsuperprop);
-									} else {
-										j = SPModel.addEquivalentPropertyMap(prop, newsuperprop);
+			}
+			inferred.add(triple);
+		}
+		// Run the rules RULE_OWL_SP_3 and RULE_RDFS_SP_5
+		return inferred;
+	}
+	
+	public SPTriple infer(SPTriple triple, RULE_SP rule){
+		SPTriple out = new SPTriple(triple);
+		if (triple.isSingletonTriple()){
 			
-									}
-									if (j > 0){
-										count++;
-										System.out.println("insert : " + prop + " subProp " +  newsuperprop + " with j: " + j);
-									}
-//									System.out.println("count: " + count);
+			switch (rule){
+			case RULE_RDF_SP_1:
+
+				// Retrieve all the singleton property of from the singletonInstanceMap
+				for (SPTriple sing : triple.getSingletonInstanceTriples()){
+					// Add the singleton instance triple to the singleton triple
+					out.addMetaTriple(sing.getSubject(), SPModel.rdfType, SPModel.singletonPropertyClass);
+				}
+				break;
 			
-									if (!lst.contains(newsuperprop)) lst.add(newsuperprop);
-								}
-								
-							}
+			case RULE_RDF_SP_2:
+				
+				// Retrieve all the singleton property of from the singletonInstanceMap
+				for (SPTriple sing : triple.getSingletonInstanceTriples()){
+
+					// Add the generic triple to the genericPropertyMap
+					addGenericPropertyMap(sing.getObject().toString());
+				}
+			
+				break;
+				
+			case RULE_RDF_SP_3:
+				// Retrieve all the singleton property of from the singletonInstanceMap
+				for (SPTriple sing : triple.getSingletonInstanceTriples()){
+					// Add the singleton instance triple to the singleton triple
+					out.addGenericPropertyTriple(triple.getSubject(), sing.getObject(), triple.getObject());
+				}
+				
+				break;
+	
+			case RULE_RDFS_SP_1:
+				// Retrieve all the singleton property of from the singletonInstanceMap
+				for (SPTriple sing : triple.getSingletonInstanceTriples()){
+					
+					// Check for the domain of the sing.getObject()
+					if (SPModel.domainPropertyMap.get(sing.getObject().toString()) != null){
+						List<String> domains = SPModel.domainPropertyMap.get(sing.getObject().toString());
+						for (String domain : domains){
+							// Add the singleton instance triple to the singleton triple
+							out.addMetaTriple(sing.getSubject(), SPModel.domainProperty, new SPNode(domain));
 						}
 					}
 				}
+			
+				break;
+	
+			case RULE_RDFS_SP_2:
+				// Retrieve all the singleton property of from the singletonInstanceMap
+				for (SPTriple sing : triple.getSingletonInstanceTriples()){
+					
+					// Check for the domain of the sing.getObject()
+					if (SPModel.rangePropertyMap.get(sing.getObject().toString()) != null){
+						List<String> ranges = SPModel.rangePropertyMap.get(sing.getObject().toString());
+						for (String range : ranges){
+							// Add the singleton instance triple to the singleton triple
+							out.addMetaTriple(sing.getSubject(), SPModel.rangeProperty, new SPNode(range));
+						}
+					}
+				}
+				
+				break;
+	
+			case RULE_RDFS_SP_3:
+				// Retrieve all the singleton property of from the singletonInstanceMap
+				for (SPTriple sing : triple.getSingletonInstanceTriples()){
+//					System.out.println("finding super prop of " + sing.getObject().toString() + " in subPropMap of size " + subPropertyOfMap.size());
+					// Check for the property hierarchy of the sing.getObject()
+					if (SPModel.subPropertyOfMap.get(sing.getObject().toString()) != null){
+//						System.out.println("found super prop of " + sing.getObject().toString());
+						List<String> properties = SPModel.subPropertyOfMap.get(sing.getObject().toString());
+						for (String prop : properties){
+							// Add the singleton instance triple to the singleton triple
+							out.addSingletonInstanceTriple(sing.getSubject(), SPModel.singletonPropertyOf, new SPNode(prop));
+						}
+					} else {
+//						System.out.println("not found super prop of " + sing.getObject().toString());
+					}
+				}
+				
+				break;
+	
+			case RULE_RDFS_SP_4:
+				// Retrieve all the singleton property of from the singletonInstanceMap
+				for (SPTriple sing : triple.getSingletonInstanceTriples()){
+					// Check for the property hierarchy of the sing.getObject()
+					if (SPModel.subPropertyOfMap.get(sing.getObject().toString()) != null){
+						List<String> properties = SPModel.subPropertyOfMap.get(sing.getObject().toString());
+						for (String prop : properties){
+							// Add the generic property to the list
+							addGenericPropertyMap(prop);
+						}
+					}
+				}
+				
+				break;
+		
+			case RULE_OWL_SP_1:
+				// Retrieve all the singleton property of from the singletonInstanceMap
+				for (SPTriple sing : triple.getSingletonInstanceTriples()){
+					
+					// Check for the domain of the sing.getObject()
+					if (SPModel.equivalentPropertyMap.get(sing.getObject().toString()) != null){
+						List<String> properties = SPModel.equivalentPropertyMap.get(sing.getObject().toString());
+						for (String prop : properties){
+							// Add the singleton instance triple to the singleton triple
+							out.addSingletonInstanceTriple(sing.getSubject(), SPModel.singletonPropertyOf, new SPNode(prop));
+						}
+					}
+				}
+				
+				break;
+	
+			case RULE_OWL_SP_2:
+				// Retrieve all the singleton property of from the singletonInstanceMap
+				for (SPTriple sing : triple.getSingletonInstanceTriples()){
+					
+					// Check for the domain of the sing.getObject()
+					if (SPModel.equivalentPropertyMap.get(sing.getObject().toString()) != null){
+						List<String> properties = SPModel.equivalentPropertyMap.get(sing.getObject().toString());
+						for (String prop : properties){
+							// Add the singleton instance triple to the singleton triple
+							addGenericPropertyMap(prop);
+						}
+					}
+				}
+				
+				break;
+	
+			case RULE_OWL_SP_3:
+				// Write this rule separately
+				break;
+			case RULE_RDFS_SP_5:
+				// Write this rule separately
+				break;
+			case RULE_ALL_SP:
+				break;
+	
 			}
-			if (count == 0) break;
 		}
-
+		return out;
 	}
-
+	
+	public void clearGenericPropMap() {
+		genericPropertyMapPerFile.clear();
+	}
 }

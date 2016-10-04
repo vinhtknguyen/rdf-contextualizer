@@ -1,6 +1,7 @@
 package org.knoesis.rdf.sp.model;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * This class represents a singleton triple with its associated triples in the singleton property pattern
@@ -115,12 +116,12 @@ public class SPTriple {
 		this.singletonInstanceTriples = singletonPropertyTriples;
 	}
 
-	public String printTriple2N3(){
+	public String printTriple2N3(Map<String,String> prefixMapping, Map<String,String> trie){
 		
 		StringBuilder out = new StringBuilder();
 		StringBuilder prefixes = new StringBuilder();
 
-		prefixes.append(this.printTriplePrefix());
+		prefixes.append(this.printTriplePrefix(prefixMapping, trie));
 
 		out.append(this.getSubject().getShorten());
 		out.append('\t');
@@ -136,13 +137,13 @@ public class SPTriple {
 		return prefixes.toString();
 	}
 	
-	public String printTriplePrefix(){
+	public String printTriplePrefix(Map<String,String> prefixMapping, Map<String,String> trie){
 		
 		StringBuilder out = new StringBuilder();
 			// Print the prefix if not added before
-		out.append(this.subject.printNodePrefix());
-		out.append(this.predicate.printNodePrefix());
-		out.append(this.object.printNodePrefix());
+		out.append(this.subject.printNodePrefix(prefixMapping, trie));
+		out.append(this.predicate.printNodePrefix(prefixMapping, trie));
+		out.append(this.object.printNodePrefix(prefixMapping, trie));
 		return out.toString();
 	}
 

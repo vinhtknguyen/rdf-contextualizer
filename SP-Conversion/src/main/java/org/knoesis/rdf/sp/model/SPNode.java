@@ -1,5 +1,7 @@
 package org.knoesis.rdf.sp.model;
 
+import java.util.Map;
+
 import org.apache.jena.graph.NodeFactory;
 import org.apache.jena.graph.Node_Literal;
 import org.apache.jena.graph.Node_URI;
@@ -33,10 +35,9 @@ public class SPNode {
 	public SPNode(String uri){
 		this.setJenaNode(NodeFactory.createURI(uri));
 		this.setSingletonProperty(false);
-		if (Constants.DEFAULT_EXT.equals(Constants.TURTLE_EXT)) this.toN3();
 	}
 
-	public SPNode toN3(){
+	public SPNode toN3(Map<String,String> prefixMapping, Map<String,String> trie){
 		
 		if (shorten != null & namespace != null && prefix != null) return this;
 		
@@ -44,7 +45,7 @@ public class SPNode {
 		
 	    if (jenaNode.isURI()) {
 			// shorten the whole URI with prefix 
-			return shortenURI();
+			return shortenURI(prefixMapping, trie);
 	    }
 	    
 	    if (jenaNode.isLiteral()) {
@@ -57,9 +58,10 @@ public class SPNode {
 	    	if (!jenaNode.getLiteralDatatypeURI().equals("")){
 	    		out.append("^^");
 	    		SPNode node = new SPNode(jenaNode.getLiteralDatatypeURI());
-	    		out.append(node.toN3().getShorten());
-		    	setNamespace(node.toN3().getNamespace());
-		    	setPrefix(node.toN3().getPrefix());
+	    		node.toN3(prefixMapping, trie);
+	    		out.append(node.getShorten());
+		    	setNamespace(node.getNamespace());
+		    	setPrefix(node.getPrefix());
 	//		    		System.out.println("output datatype: " + toN3(((Literal) in).getDatatype()));
 	    	}
 	    	setShorten(out.toString());
@@ -68,26 +70,61 @@ public class SPNode {
 	    
 	}
 	
-	public String printNodePrefix(){
-		toN3();
-		if (RDFWriteUtils.prefixMapping.get(prefix) == null){
-			RDFWriteUtils.prefixMapping.put(prefix, namespace);
-			StringBuilder out = new StringBuilder();
+	public String printNodePrefix(Map<String,String> prefixMapping, Map<String,String> trie){
+		toN3(prefixMapping, trie);
+		StringBuilder out = new StringBuilder();
+		if (!prefixMapping.containsKey(prefix)){
+			prefixMapping.put(prefix, namespace);
 			out.append("@prefix\t");
 			out.append(prefix);
 			out.append(":\t<");
 			out.append(namespace);
 			out.append(">\t . \n");
-			return out.toString();
+			
 		}
-		return "";
+		return out.toString();
 	}
 
-	public SPNode shortenURI(){
+	public SPNode shortenURI(Map<String,String> prefixMapping, Map<String,String> trie){
 		// shorten the whole URI with prefix 
-		return RDFWriteUtils.shortenURIWithPrefixMapping(this);
-		 
+		// shorten the whole URI with prefix 
+		int len = jenaNode.toString().length();
+		String ns = null, prefix = null;
+		StringBuilder shorten = new StringBuilder();
+		
+		if (trie.containsKey(jenaNode.toString())){
+			prefix = trie.get(jenaNode.toString());
+			ns = jenaNode.toString();
+			shorten.append(prefix + ":");
+			setPrefix(prefix);
+			setShorten(shorten.toString());
+			setNamespace(ns);
+			return this;
+		} 
+		
+		int lastNsInd = RDFWriteUtils.getLastIndexOfDelimiterWithSecondPeriod(jenaNode.toString());
+		if (lastNsInd > 2 && jenaNode.toString().charAt(lastNsInd-1) != '/' && jenaNode.toString().charAt(lastNsInd-2) != ':' ) {
+			ns = jenaNode.toString().substring(0, lastNsInd + 1);
+			prefix = trie.get(ns);
+			if (prefix == null) prefix = RDFWriteUtils.getNextPrefixNs();
+			trie.put(ns, prefix);
+
+			shorten.append(prefix + ":");
+			if (!jenaNode.toString().substring(lastNsInd+1, len).isEmpty()){
+				shorten.append(RDFWriteUtils.normalizeN3(jenaNode.toString().substring(lastNsInd+1, len)));
+			}
+			this.setNamespace(ns);
+			this.setPrefix(prefix);
+			this.setShorten(shorten.toString());
+		} else {
+			ns = jenaNode.toString();
+			prefix = RDFWriteUtils.getNextPrefixNs();
+			shorten.append(prefix + ":");
+			trie.put(ns, prefix);
+		}
+	    return this;
 	}
+
 
 	public String toNT(){
 		

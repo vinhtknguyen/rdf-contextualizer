@@ -2,22 +2,24 @@ package org.knoesis.rdf.sp.inference;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.knoesis.rdf.sp.converter.NamedGraph2SP;
+import org.knoesis.rdf.sp.parser.SPParser;
+import org.knoesis.rdf.sp.parser.SPParserFactory;
 
 public class ContextualInferenceTest {
 
 	ContextualInference inference;
-	NamedGraph2SP con;
+	SPParser con;
+	String rep = "ng";
 	@Before
 	public void setUp() throws Exception {
-		con = new NamedGraph2SP();
+		con = SPParserFactory.createParser(rep);
 		con.setOntoDir("src/main/resources/onto");
 		con.setInfer(true);
 	}
 
 	@Test
 	public void testInfer() {
-		con.convert("src/test/resources/test-onto", "ttl", "ng");
+		con.parse("src/test/resources/test-onto", "ttl", rep);
 	}
 
 }
