@@ -85,7 +85,7 @@ public class QuadParser extends SPParser{
         		
         		iter.close();
         		inputStream.finish();
-  		
+		
         	}
         };
 

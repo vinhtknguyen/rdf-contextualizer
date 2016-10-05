@@ -49,7 +49,7 @@ public abstract class SPParser {
 	
 	public void parse(String file, String ext, String rep){
 		producerExecutor = Executors.newWorkStealingPool();
-		consumerExecutor = Executors.newWorkStealingPool();
+		consumerExecutor = Executors.newWorkStealingPool(3);
 		// If the input is a file
 		if (!Files.isDirectory(Paths.get(file))){
 			parseFile(file, ext, rep, null);

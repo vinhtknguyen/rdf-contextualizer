@@ -74,7 +74,9 @@ public class SPProcessor{
 			if (isinfer){
 				// infer new triples and add them to the list
 				triples.addAll(reasoner.infer(convert(quad)));
-			} 
+			} else {
+				triples.addAll(convert(quad));
+			}
 			if (triples.size() > 0) {
 				writer.write(RDFWriteUtils.printTriples(triples, prefixMapping, trie, ext));
 			}
@@ -95,7 +97,9 @@ public class SPProcessor{
 			if (isinfer){
 				// infer new triples and add them to the list
 				triples.addAll(reasoner.infer(convert(triple)));
-			} 
+			} else {
+				triples.addAll(convert(triple));
+			}
 			writer.write(RDFWriteUtils.printTriples(triples, prefixMapping, trie, ext));
 			triples.clear();
 			

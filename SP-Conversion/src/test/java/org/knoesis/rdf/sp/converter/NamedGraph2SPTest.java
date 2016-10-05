@@ -15,7 +15,7 @@ public class NamedGraph2SPTest {
 		con1 = SPParserFactory.createParser(rep);
 //		con1.setZip(true);
 		con1.setOntoDir("src/main/resources/onto");
-		con1.setInfer(true);
+		con1.setInfer(false);
 		con1.init();
 		con2 = SPParserFactory.createParser(rep, 10, "str1");
 //		con2.setZip(true);
