@@ -1,7 +1,5 @@
 package org.knoesis.rdf.sp.runnable;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -15,28 +13,24 @@ import org.knoesis.rdf.sp.converter.NanoPub2SP;
 import org.knoesis.rdf.sp.converter.Reification2SP;
 import org.knoesis.rdf.sp.converter.Triple2SP;
 import org.knoesis.rdf.sp.inference.ContextualInference;
+import org.knoesis.rdf.sp.model.SPModel;
 import org.knoesis.rdf.sp.model.SPTriple;
 import org.knoesis.rdf.sp.utils.Constants;
 import org.knoesis.rdf.sp.utils.RDFWriteUtils;
-import org.knoesis.rdf.sp.utils.SPStats;
 
 import com.romix.scala.collection.concurrent.TrieMap;
 
 public class SPProcessor{
 
-	protected String filein;
-	protected String dirout;
-	protected String fileout;
 	protected String ext;
 	protected String rep;
-	protected boolean iszip;
-	protected boolean isinfer;
+	protected boolean isInfer;
+	protected String ontoDir;
 	protected long start;
 	protected String dsName;
 	
 	Map<String,String> prefixMapping = new TrieMap<String,String>();
 	Map<String,String> trie = new TrieMap<String,String>();
-	BufferedWriter writer;
 	ContextualInference reasoner = new ContextualInference();
 	ContextualRepresentationConverter converter;
 	
@@ -51,12 +45,13 @@ public class SPProcessor{
 	}
 
 	public void start(){
+		if (isInfer){
+			SPModel.loadModel(this.getOntoDir());
+		}
 		prefixMapping = new TrieMap<String,String>();
 		trie = new TrieMap<String,String>();
 		start = System.currentTimeMillis();
 		RDFWriteUtils.loadPrefixesToTrie(trie);
-		fileout = filein;
-		writer = RDFWriteUtils.getBufferedWriter(fileout, iszip);
 //			writer.write(Constants.WRITE_FILE_PREFIX);
 	}
 	
@@ -64,26 +59,24 @@ public class SPProcessor{
 		// Write the credentials
 //			System.out.println("Processing quad: " + quad.toString());
 		List<SPTriple> triples = new ArrayList<SPTriple>();
-		if (isinfer){
+		if (isInfer){
 			// infer new triples and add them to the list
 			triples.addAll(reasoner.infer(convert(quad)));
 		} else {
 			triples.addAll(convert(quad));
 		}
-		triples.clear();
 		return RDFWriteUtils.printTriples(triples, prefixMapping, trie, ext);
 	}
 	
 	public String process(Triple triple){
 //		System.out.println("Processing quad: " + quad.toString());
 		List<SPTriple> triples = new ArrayList<SPTriple>();
-		if (isinfer){
+		if (isInfer){
 			// infer new triples and add them to the list
 			triples.addAll(reasoner.infer(convert(triple)));
 		} else {
 			triples.addAll(convert(triple));
 		}
-		triples.clear();
 		return RDFWriteUtils.printTriples(triples, prefixMapping, trie, ext);
 
 	}
@@ -92,10 +85,10 @@ public class SPProcessor{
 		switch (rep.toUpperCase()){
 		
 		case Constants.NANO_REP:
-			return ((NanoPub2SP)converter).transformQuad(writer, quad, ext);
+			return ((NanoPub2SP)converter).transformQuad(quad);
 		
 		case Constants.NG_REP:
-			return ((NamedGraph2SP)converter).transformQuad(writer, quad, ext);
+			return ((NamedGraph2SP)converter).transformQuad(quad);
 		
 		default:
 			return triples;
@@ -106,16 +99,16 @@ public class SPProcessor{
 		switch (rep.toUpperCase()){
 		
 		case Constants.REI_REP:
-			return ((Reification2SP)converter).transformTriple(writer, triple, ext);
+			return ((Reification2SP)converter).transformTriple(triple);
 			
 		case Constants.TRIPLE_REP:
-			return ((Triple2SP)converter).transformTriple(writer, triple, ext);
+			return ((Triple2SP)converter).transformTriple(triple);
 
 		case Constants.NONE_REP:
-			return ((ContextualRepresentationConverter)converter).transformTriple(writer, triple, ext);
+			return ((ContextualRepresentationConverter)converter).transformTriple(triple);
 			
 		default:
-			return ((Triple2SP)converter).transformTriple(writer, triple, ext);
+			return ((Triple2SP)converter).transformTriple(triple);
 		}
 
 	}
@@ -123,52 +116,12 @@ public class SPProcessor{
 	
 	public void finish(){
 		List<SPTriple> triples = new ArrayList<SPTriple>();
- 		if (isinfer) {
+ 		if (isInfer) {
        		// Generate the generic property triples
    			triples.addAll(reasoner.generateGenericPropertyTriplesPerFile());
-   			try {
-				writer.write(RDFWriteUtils.printTriples(triples, prefixMapping, trie, ext));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
    		}
 	}
 	
-	public void close(){
-		try {
-			writer.close();
-			SPStats.reportSystem(start, rep, (isinfer?"infer":"no-infer"), ext, filein, fileout, dsName);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	public String getFilein() {
-		return filein;
-	}
-
-	public void setFilein(String filein) {
-		this.filein = filein;
-	}
-
-	public String getDirout() {
-		return dirout;
-	}
-
-	public void setDirout(String dirout) {
-		this.dirout = dirout;
-	}
-
-	public String getFileout() {
-		return fileout;
-	}
-
-	public void setFileout(String fileout) {
-		this.fileout = fileout;
-	}
-
 	public String getExt() {
 		return ext;
 	}
@@ -185,20 +138,12 @@ public class SPProcessor{
 		this.rep = rep;
 	}
 
-	public boolean isIszip() {
-		return iszip;
+	public boolean isIsInfer() {
+		return isInfer;
 	}
 
-	public void setIszip(boolean iszip) {
-		this.iszip = iszip;
-	}
-
-	public boolean isIsinfer() {
-		return isinfer;
-	}
-
-	public void setIsinfer(boolean isinfer) {
-		this.isinfer = isinfer;
+	public void setIsinfer(boolean _isInfer) {
+		this.isInfer = _isInfer;
 	}
 
 	public String getDsName() {
@@ -207,6 +152,14 @@ public class SPProcessor{
 
 	public void setDsName(String dsName) {
 		this.dsName = dsName;
+	}
+
+	public String getOntoDir() {
+		return ontoDir;
+	}
+
+	public void setOntoDir(String ontoDir) {
+		this.ontoDir = ontoDir;
 	}
 
 

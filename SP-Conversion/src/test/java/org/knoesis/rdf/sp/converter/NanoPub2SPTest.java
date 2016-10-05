@@ -2,19 +2,26 @@ package org.knoesis.rdf.sp.converter;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.knoesis.rdf.sp.parser.QuadParser;
+import org.knoesis.rdf.sp.parser.SPParser;
+import org.knoesis.rdf.sp.parser.SPParserFactory;
 
 public class NanoPub2SPTest {
 
-	QuadParser con1 = null;
+	SPParser con1 = null;
+	SPParser con2 = null;
 	String rep = "nano";
 	@Before
 	public void setUp() throws Exception {
-		con1 = new QuadParser();
+		con1 = SPParserFactory.createParser(rep);
 //		con1.setZip(true);
 		con1.setOntoDir("src/main/resources/onto");
-		con1.setInfer(true);
+		con1.setInfer(false);
 		con1.init();
+		con2 = SPParserFactory.createParser(rep, 10, "str1");
+//		con2.setZip(true);
+		con2.setOntoDir("src/main/resources/onto");
+		con2.setInfer(true);
+		con2.init();
 	}
 
 	@Test
@@ -24,13 +31,13 @@ public class NanoPub2SPTest {
 	@Test
 	public void testConvert() {
 		con1.parse("src/test/resources/test-nano", "nt", rep);
-		con1.parse("src/test/resources/test-nano", "ttl", rep);
+		con2.parse("src/test/resources/test-nano", "ttl", rep);
+		con1.parse("src/test/resources/test-file/test2_nano.nq", "nt", rep);
+		con2.parse("src/test/resources/test-file/test2_nano.nq", "ttl", rep);
 	}
 
 	@Test
 	public void testConvertFile() {
-		con1.parse("src/test/resources/test-file/test2_nano.nq", "ttl", rep);
-		con1.parse("src/test/resources/test-file/test2_nano.nq", "nt", rep);
 	}
 
 	@Test

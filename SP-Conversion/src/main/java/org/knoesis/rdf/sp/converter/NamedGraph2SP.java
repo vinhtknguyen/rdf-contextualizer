@@ -1,6 +1,5 @@
 package org.knoesis.rdf.sp.converter;
 
-import java.io.BufferedWriter;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class NamedGraph2SP extends ContextualRepresentationConverter{
 		super(_uuidInitNum, _uuidInitStr);
 	}
 
-	public List<SPTriple> transformQuad(BufferedWriter writer, Quad quad, String ext){
+	public List<SPTriple> transformQuad(Quad quad){
 
 		List<SPTriple> triples = new LinkedList<SPTriple>();
 		

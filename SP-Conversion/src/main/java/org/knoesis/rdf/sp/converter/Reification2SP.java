@@ -1,10 +1,10 @@
 package org.knoesis.rdf.sp.converter;
 
-import java.io.BufferedWriter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.jena.graph.Triple;
 import org.apache.log4j.Logger;
 import org.knoesis.rdf.sp.model.SPNode;
 import org.knoesis.rdf.sp.model.SPTriple;
@@ -81,7 +81,7 @@ public class Reification2SP extends ContextualRepresentationConverter{
 		object_flag = false;
 	}
 	
-	public List<SPTriple> transformTriple(BufferedWriter writer, org.apache.jena.graph.Triple triple, String ext){
+	public List<SPTriple> transformTriple(Triple triple){
 		List<SPTriple> triples = new LinkedList<SPTriple>();
 		
 		if (triple != null){
@@ -90,7 +90,7 @@ public class Reification2SP extends ContextualRepresentationConverter{
 			if (!addTripleToReifiedPattern(triple)) {
 				
 				// Print the regular triple
-				super.transformTriple(writer, triple, ext);
+				super.transformTriple(triple);
 				return triples;
 			}
 			

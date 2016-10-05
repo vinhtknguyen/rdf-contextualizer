@@ -24,12 +24,12 @@ public class ContextualRepresentationConverterTest {
 	public void testConvert() {
 		con1.parse("src/test/resources/test-default", "ttl", rep);
 		con1.parse("src/test/resources/test-default", "nt", rep);
+		con1.parse("src/test/resources/test-file/yagoFacts.ttl", "ttl", rep);
+		con1.parse("src/test/resources/test-file/yagoFacts.ttl", "nt", rep);
 	}
 
 	@Test
 	public void testConvertFile() {
-		con1.parse("src/test/resources/test-file/yagoFacts.ttl", "ttl", rep);
-		con1.parse("src/test/resources/test-file/yagoFacts.ttl", "nt", rep);
 	}
 
 	@Test

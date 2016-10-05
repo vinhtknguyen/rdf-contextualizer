@@ -151,6 +151,7 @@ public class SPConverter {
 			parser.setOntoDir(getOntoDir());
 			parser.parse(getFileIn(), getExt(), getRep());
 			parser.setDsName(getDsName());
+			parser.init();
 			
 			parser.parse(this.getFileIn(), this.getExt(), this.getRep());
 		}

@@ -8,17 +8,18 @@ import org.apache.jena.riot.lang.PipedRDFStream;
 import org.apache.jena.sparql.core.Quad;
 
 @SuppressWarnings("hiding")
-public class PipedStringStream<String> extends PipedRDFStream<String> {
+public class PipedNodeStream<String> extends PipedRDFStream<String> {
 
 	protected BufferedWriter writer;
 	
-	public PipedStringStream(PipedRDFIterator<String> sink) {
+	public PipedNodeStream(PipedRDFIterator<String> sink) {
 		super(sink);
 		// TODO Auto-generated constructor stub
 	}
 
-	public void string(String string){
-		receive(string);
+	public void node(String node){
+		System.out.println("received node: " + node);
+		receive(node);
 	}
 
 	@Override

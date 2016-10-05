@@ -25,9 +25,6 @@ public abstract class SPParser {
 
 	
 	public void init(){
-		if (this.infer){
-			SPModel.loadModel(this.getOntoDir());
-		}
 
 	}
 	
@@ -65,7 +62,9 @@ public abstract class SPParser {
 				/* PROCESS EACH INPUT FILE & GENERATE OUTPUT FILE */
 				
 				for (Path entry : stream) {
-					parseFile(entry.toString(), ext, rep, RDFWriteUtils.genFileOut(entry.toString(), ext, this.isZip()));
+					String fileOut = dirOut + "/" + RDFWriteUtils.genFileOut(entry.getFileName().toString(), ext, this.isZip());
+					System.out.println("File in: " + entry.toString() + " vs. out " + fileOut);
+					parseFile(entry.toString(), ext, rep, fileOut);
 		        }
 				
 				// Close the pool

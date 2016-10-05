@@ -4,8 +4,6 @@ package org.knoesis.rdf.sp.parser;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
@@ -14,8 +12,6 @@ import org.apache.jena.riot.lang.PipedRDFIterator;
 import org.apache.jena.riot.lang.PipedRDFStream;
 import org.apache.jena.sparql.core.Quad;
 import org.apache.log4j.Logger;
-import org.knoesis.rdf.sp.concurrent.PipedSPTripleIterator;
-import org.knoesis.rdf.sp.concurrent.PipedStringStream;
 import org.knoesis.rdf.sp.runnable.SPProcessor;
 import org.knoesis.rdf.sp.utils.Constants;
 import org.knoesis.rdf.sp.utils.RDFWriteUtils;
@@ -46,15 +42,11 @@ public class QuadParser extends SPParser{
 		final PipedRDFStream<Quad> processorInputStream = new PipedQuadsStream(processorIter);
         final boolean isZip = this.isZip();
         final boolean isInfer = this.isInfer();
-        final String conRep = rep;
-        final String filein = in;
         final String ext = extension;
+        final String conRep = rep;
+        final String ontoDir = this.getOntoDir();
         final String ds = this.getDsName();
-        final String uuidInitStr = this.getUuidInitStr();
-        final long uuidInitNum = this.getUuidInitNum();
-    	PipedSPTripleIterator<String> writerIter = new PipedSPTripleIterator<String>(Constants.BUFFER_SIZE, true);
-    	final PipedStringStream<String> writerInputStream = new PipedStringStream<String>(writerIter);
-		
+
         Runnable parser = new Runnable() {
 
             @Override
@@ -72,54 +64,32 @@ public class QuadParser extends SPParser{
         	public void run(){
         		
           		SPProcessor processor = new SPProcessor(conRep, uuidInitNum, uuidInitStr);
-        		processor.setExt(ext);
-        		processor.setFilein(filein);
         		processor.setIsinfer(isInfer);
-        		processor.setIszip(isZip);
         		processor.setDsName(ds);
+        		processor.setOntoDir(ontoDir);
+        		processor.setExt(ext);
         		processor.start();
         		
-        		writerInputStream.start();
-        	
+    			BufferedWriter buffWriter = RDFWriteUtils.getBufferedWriter(fileout, isZip);
         		while (processorIter.hasNext()){
-        			Quad quad = processorIter.next();
-        			writerInputStream.string(processor.process(quad));
-        			// Put the output to the writerInputStream
+        			try {
+            			// Put the output to the writerInputStream
+						buffWriter.write(processor.process(processorIter.next()));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
         		}
         		
         		processor.finish();
-        		processor.close();
-        		
-        		writerInputStream.finish();
         		
         		processorIter.close();
         		processorInputStream.finish();
+        		
 		
         	}
         };
 		consumerExecutor.submit(transformer);
-
-        Runnable writer = new Runnable(){
-        	@Override
-        	public void run(){
-        		// Read the data from stream to file
-        	}
-        };
-        
-		try{
-			BufferedWriter buffWriter = RDFWriteUtils.getBufferedWriter(fileout, isZip);
-			while (writerIter.hasNext()){
-				buffWriter.write(writerIter.next());
-			}
-			buffWriter.flush();
-			buffWriter.close();
-	 	} catch(IOException e){
-	 		
-	 	}
-       
-//		ExecutorService writerExecutor = Executors.newSingleThreadExecutor();
-//		writerExecutor.submit(writer);
-//		writerExecutor.shutdown();
 
 	}
 }

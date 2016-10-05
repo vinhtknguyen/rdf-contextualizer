@@ -1,10 +1,10 @@
 package org.knoesis.rdf.sp.converter;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.jena.graph.Triple;
 import org.apache.jena.sparql.core.Quad;
 import org.apache.log4j.Logger;
 import org.knoesis.rdf.sp.model.*;
@@ -39,13 +39,13 @@ public class ContextualRepresentationConverter {
 	}
 	
 
-	public List<SPTriple> transformTriple(BufferedWriter writer, org.apache.jena.graph.Triple triple, String ext) {
+	public List<SPTriple> transformTriple(Triple triple) {
 		List<SPTriple> triples = new LinkedList<SPTriple>();
-		triples.add(new SPTriple(triple.getSubject(), triple.getPredicate(), triple.getPredicate(), ext));
+		triples.add(new SPTriple(triple.getSubject(), triple.getPredicate(), triple.getPredicate()));
 		return triples;
 	}
 
-	public List<SPTriple> transformQuad(BufferedWriter writer, Quad triple, String ext) {
+	public List<SPTriple> transformQuad(Quad triple) {
 		List<SPTriple> triples = new LinkedList<SPTriple>();
 		return triples;
 	}

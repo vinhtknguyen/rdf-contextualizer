@@ -28,12 +28,12 @@ public class NamedGraph2SPTest {
 	public void testConvert() {
 		con1.parse("src/test/resources/test-ng", "nt", rep);
 		con2.parse("src/test/resources/test-ng", "ttl", rep);
+//		con1.parse("src/test/resources/test-file/test2_ng.nq", "nt", rep);
+//		con2.parse("src/test/resources/test-file/test2_ng.nq", "ttl", rep);
 	}
 
 	@Test
 	public void testConvertFile() {
-		con1.parse("src/test/resources/test-file/test2_ng.nq", "nt", rep);
-		con2.parse("src/test/resources/test-file/test2_ng.nq", "ttl", rep);
 	}
 
 }

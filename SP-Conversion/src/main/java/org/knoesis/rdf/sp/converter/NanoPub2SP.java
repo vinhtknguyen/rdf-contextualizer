@@ -1,6 +1,5 @@
 package org.knoesis.rdf.sp.converter;
 
-import java.io.BufferedWriter;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,7 +14,7 @@ public class NanoPub2SP extends ContextualRepresentationConverter {
 	final static Logger logger = Logger.getLogger(NanoPub2SP.class);
 
 
-	public List<SPTriple> transformQuad(BufferedWriter writer, Quad quad, String ext){
+	public List<SPTriple> transformQuad(Quad quad){
 		
 		List<SPTriple> triples = new LinkedList<SPTriple>();
 		if (quad.getGraph() != null){
