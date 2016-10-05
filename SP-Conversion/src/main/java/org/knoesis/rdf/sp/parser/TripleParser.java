@@ -95,7 +95,7 @@ public class TripleParser extends SPParser {
         	public void run(){
         		// Read the data from stream to file
     			try {
-            		BufferedWriter buffWriter = RDFWriteUtils.getBufferedWriter(filein, isZip);
+            		BufferedWriter buffWriter = RDFWriteUtils.getBufferedWriter(fileout, isZip);
             		while (writerIter.hasNext()){
             			buffWriter.write(writerIter.next());
             		}
