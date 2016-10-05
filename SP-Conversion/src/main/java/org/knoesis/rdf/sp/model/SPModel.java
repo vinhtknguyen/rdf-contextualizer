@@ -124,12 +124,12 @@ public class SPModel {
 		if (!Files.isDirectory(Paths.get(file))) {
 			// load file
 //			 System.out.println(file);
-			 RDFDataMgr.read(onto, file);
+//			onto.read(file);
+			RDFDataMgr.read(onto, file);
 		} else {
 			// If the input is a directory
 			// Create a new directory for output files
-			try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths
-					.get(file))) {
+			try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(file))) {
 				/* PROCESS EACH INPUT FILE & GENERATE OUTPUT FILE */
 				for (Path entry : stream) {
 //					 System.out.println("file: " + entry.toString());

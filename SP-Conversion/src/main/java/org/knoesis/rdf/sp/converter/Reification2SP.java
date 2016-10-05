@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.knoesis.rdf.sp.model.SPNode;
 import org.knoesis.rdf.sp.model.SPTriple;
+import org.knoesis.rdf.sp.model.SpUUID;
 import org.knoesis.rdf.sp.utils.Constants;
 
 import com.romix.scala.collection.concurrent.TrieMap;
@@ -26,13 +27,6 @@ public class Reification2SP extends ContextualRepresentationConverter{
 	public Reification2SP() {
 		super();
 		
-	}
-
-
-	public Reification2SP(long spPrefixNum, String spPrefixStr,
-			String spDelimiter, String singletonPropertyOfURI) {
-		super(spPrefixNum, spPrefixStr, spDelimiter);
-		// TODO Auto-generated constructor stub
 	}
 
 	private static boolean isReifiedPatternCompleted(){
@@ -84,7 +78,7 @@ public class Reification2SP extends ContextualRepresentationConverter{
 		object_flag = false;
 	}
 	
-	public static List<SPTriple> transformTriple(BufferedWriter writer, org.apache.jena.graph.Triple triple, String ext){
+	public List<SPTriple> transformTriple(BufferedWriter writer, org.apache.jena.graph.Triple triple, String ext){
 		List<SPTriple> triples = new LinkedList<SPTriple>();
 		
 		if (triple != null){
@@ -93,7 +87,7 @@ public class Reification2SP extends ContextualRepresentationConverter{
 			if (!addTripleToReifiedPattern(triple)) {
 				
 				// Print the regular triple
-				ContextualRepresentationConverter.transformTriple(writer, triple, ext);
+				super.transformTriple(writer, triple, ext);
 				return triples;
 			}
 			
@@ -104,8 +98,20 @@ public class Reification2SP extends ContextualRepresentationConverter{
 			}
 			
 			org.apache.jena.graph.Node[] reifiedStatement = reifiedTriples.get(triple.getSubject().toString());
-			
-			SPNode singletonNode = new SPNode(triple.getSubject(), true);
+
+			SPNode singletonNode;
+			if (triple.getSubject().isBlank()){
+				// Constructing a new singleton property
+				StringBuilder singletonBdr = null;
+				singletonBdr = new StringBuilder();
+				singletonBdr.append(reifiedStatement[1].toString());
+				singletonBdr.append(SpUUID.spDelimiter);
+				singletonBdr.append(SpUUID.getNextUUID());
+				
+				singletonNode = new SPNode(singletonBdr.toString(), true);
+			} else{
+				singletonNode = new SPNode(triple.getSubject(), true);
+			}
 			SPTriple singletonTriple = new SPTriple(new SPNode(reifiedStatement[0]), singletonNode, new SPNode(reifiedStatement[2]));
 			singletonTriple.addSingletonInstanceTriple(new SPTriple(singletonNode, singletonPropertyOf, new SPNode(reifiedStatement[1])));
 			

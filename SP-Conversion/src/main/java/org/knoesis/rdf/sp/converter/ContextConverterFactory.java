@@ -6,25 +6,34 @@ public class ContextConverterFactory {
 
 	public static ContextualRepresentationConverter createConverter(String rep){
 		
+		ContextualRepresentationConverter con;
+		
 		switch (rep.toUpperCase()){
 		
 		case Constants.NANO_REP:
-			return new NanoPub2SP();
+			con = new NanoPub2SP();
+			break;
 		
 		case Constants.NG_REP:
-			return new NamedGraph2SP();
+			con = new NamedGraph2SP();
+			break;
 		
 		case Constants.REI_REP:
-			return new Reification2SP();
+			con = new Reification2SP();
+			break;
 			
 		case Constants.TRIPLE_REP:
-			return new Triple2SP();
+			con = new Triple2SP();
+			break;
 
 		case Constants.NONE_REP:
-			return new ContextualRepresentationConverter();
+			con = new ContextualRepresentationConverter();
+			break;
 			
 		default:
-			return new ContextualRepresentationConverter();
+			con = new ContextualRepresentationConverter();
+			break;
 		}
+		return con;
 	}
 }

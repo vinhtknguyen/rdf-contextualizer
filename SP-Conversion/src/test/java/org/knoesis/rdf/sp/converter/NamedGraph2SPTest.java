@@ -7,6 +7,7 @@ import org.knoesis.rdf.sp.parser.QuadParser;
 public class NamedGraph2SPTest {
 
 	QuadParser con1 = null;
+	QuadParser con2 = null;
 	String rep = "ng";
 	@Before
 	public void setUp() throws Exception {
@@ -15,6 +16,11 @@ public class NamedGraph2SPTest {
 		con1.setOntoDir("src/main/resources/onto");
 		con1.setInfer(true);
 		con1.init();
+		con2 = new QuadParser();
+//		con2.setZip(true);
+		con2.setOntoDir("src/main/resources/onto");
+		con2.setInfer(true);
+		con2.init();
 		
 	}
 

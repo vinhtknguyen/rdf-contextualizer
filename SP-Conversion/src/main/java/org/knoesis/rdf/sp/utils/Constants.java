@@ -14,6 +14,7 @@ public class Constants {
 	public static final String TRIPLE_REP = "TRIPLE";
 	public static final String NONE_REP = "NONE";
 
+	public static final String SP_ID = "sp";
 	public static final String SP_SUFFIX = "_sp";
 	public static final String SP_UUID_PREFIX = "sp";
 	public static final String NS_STR = "ns";

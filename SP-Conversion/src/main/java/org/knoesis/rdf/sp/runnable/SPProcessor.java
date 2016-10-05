@@ -37,9 +37,9 @@ public class SPProcessor{
 	
 	static Map<String,String> prefixMapping = new TrieMap<String,String>();
 	static Map<String,String> trie = new TrieMap<String,String>();
-	static BufferedWriter writer;
-	static ContextualInference reasoner = new ContextualInference();
-	static ContextualRepresentationConverter converter;
+	BufferedWriter writer;
+	ContextualInference reasoner = new ContextualInference();
+	ContextualRepresentationConverter converter;
 	
 	public SPProcessor(){
 	}
@@ -102,10 +102,10 @@ public class SPProcessor{
 		switch (rep.toUpperCase()){
 		
 		case Constants.NANO_REP:
-			return NanoPub2SP.transformQuad(writer, quad, ext);
+			return ((NanoPub2SP)converter).transformQuad(writer, quad, ext);
 		
 		case Constants.NG_REP:
-			return NamedGraph2SP.transformQuad(writer, quad, ext);
+			return ((NamedGraph2SP)converter).transformQuad(writer, quad, ext);
 		
 		default:
 			return triples;
@@ -116,16 +116,16 @@ public class SPProcessor{
 		switch (rep.toUpperCase()){
 		
 		case Constants.REI_REP:
-			return Reification2SP.transformTriple(writer, triple, ext);
+			return ((Reification2SP)converter).transformTriple(writer, triple, ext);
 			
 		case Constants.TRIPLE_REP:
-			return Triple2SP.transformTriple(writer, triple, ext);
+			return ((Triple2SP)converter).transformTriple(writer, triple, ext);
 
 		case Constants.NONE_REP:
-			return ContextualRepresentationConverter.transformTriple(writer, triple, ext);
+			return ((ContextualRepresentationConverter)converter).transformTriple(writer, triple, ext);
 			
 		default:
-			return Triple2SP.transformTriple(writer, triple, ext);
+			return ((Triple2SP)converter).transformTriple(writer, triple, ext);
 		}
 
 	}

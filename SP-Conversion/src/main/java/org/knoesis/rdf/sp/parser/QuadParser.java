@@ -24,7 +24,12 @@ public class QuadParser extends SPParser{
 	final static Logger logger = Logger.getLogger(QuadParser.class);
 
 	protected Map<String,String> parserTrie = new TrieMap<String,String>();
-	
+
+	public QuadParser() {
+		super();
+	}
+
+
 	@Override
 	public void parseFile(String in, String extension, String rep, String dirOut) {
 		
@@ -60,7 +65,7 @@ public class QuadParser extends SPParser{
         Runnable transformer = new Runnable(){
         	@Override
         	public void run(){
-        		
+    		
         		SPProcessor processor = new SPProcessor();
         		processor.setDirout(dirout);
         		processor.setExt(ext);
@@ -70,6 +75,7 @@ public class QuadParser extends SPParser{
         		processor.setRep(conRep);
         		processor.setThreadnum(atomicInt.updateAndGet(n -> n + 1));
         		processor.setDsName(ds);
+        		
         		processor.start();
         		
         		while (iter.hasNext()){
@@ -81,7 +87,7 @@ public class QuadParser extends SPParser{
         		
         		iter.close();
         		inputStream.finish();
- 		
+
         	}
         };
 		executor2.submit(transformer);

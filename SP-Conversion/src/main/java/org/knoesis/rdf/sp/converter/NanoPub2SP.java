@@ -9,13 +9,14 @@ import org.apache.jena.sparql.core.Quad;
 import org.apache.log4j.Logger;
 import org.knoesis.rdf.sp.model.SPNode;
 import org.knoesis.rdf.sp.model.SPTriple;
+import org.knoesis.rdf.sp.model.SpUUID;
 
 public class NanoPub2SP extends ContextualRepresentationConverter {
 	
 	final static Logger logger = Logger.getLogger(NanoPub2SP.class);
 
 
-	public static  List<SPTriple> transformQuad(BufferedWriter writer, Quad quad, String ext){
+	public List<SPTriple> transformQuad(BufferedWriter writer, Quad quad, String ext){
 		
 		List<SPTriple> triples = new LinkedList<SPTriple>();
 		if (quad.getGraph() != null){
@@ -23,8 +24,8 @@ public class NanoPub2SP extends ContextualRepresentationConverter {
 			StringBuilder singletonBdr = null;
 			singletonBdr = new StringBuilder();
 			singletonBdr.append(quad.getPredicate().toString());
-			singletonBdr.append(spDelimiter);
-			singletonBdr.append(getNextUUID());
+			singletonBdr.append(SpUUID.spDelimiter);
+			singletonBdr.append(SpUUID.getNextUUID());
 			
 			SPNode singletonNode = new SPNode(NodeFactory.createURI(singletonBdr.toString()), true);
 
@@ -38,15 +39,7 @@ public class NanoPub2SP extends ContextualRepresentationConverter {
 
 	public NanoPub2SP() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-
-
-	public NanoPub2SP(long spPrefixNum, String spPrefixStr, String spDelimiter) {
-		super(spPrefixNum, spPrefixStr, spDelimiter);
-		// TODO Auto-generated constructor stub
-	}
-	
 
 }
 

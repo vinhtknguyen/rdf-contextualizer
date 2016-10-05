@@ -1,6 +1,7 @@
 package org.knoesis.rdf.sp.main;
 
 import org.apache.log4j.Logger;
+import org.knoesis.rdf.sp.model.SpUUID;
 import org.knoesis.rdf.sp.parser.SPParser;
 import org.knoesis.rdf.sp.parser.SPParserFactory;
 import org.knoesis.rdf.sp.utils.Constants;
@@ -19,8 +20,6 @@ public class SPConverter {
 	protected String metaProp = null;
 	protected String metaObj =  null;
 	protected String spProp = null;
-	protected long spInitNum = -1;
-	protected String spInitStr = null;
 	protected boolean zip = false;
 	protected boolean infer = false;
 	protected String ontoDir = null;
@@ -151,6 +150,7 @@ public class SPConverter {
 			parser.setOntoDir(getOntoDir());
 			parser.parse(getFileIn(), getExt(), getRep());
 			parser.setDsName(getDsName());
+			
 			parser.parse(this.getFileIn(), this.getExt(), this.getRep());
 		}
 		
@@ -235,10 +235,10 @@ public class SPConverter {
 			}
 			
 			if (args[i].toLowerCase().equals("-spinitnum")) {
-				this.spInitNum = Long.parseLong(args[i+1]);
+				SpUUID.initUUIDNumber = Long.parseLong(args[i+1]);
 			}
 			if (args[i].toLowerCase().equals("-spinitstr")) {
-				this.spInitStr = args[i+1];
+				SpUUID.initUUIDPrefix = args[i+1];
 			}
 
 		}
@@ -257,22 +257,6 @@ public class SPConverter {
 		
 	}
 	
-	public long getSpInitNum() {
-		return spInitNum;
-	}
-
-	public void setSpInitNum(long spInitNum) {
-		this.spInitNum = spInitNum;
-	}
-
-	public String getSpInitStr() {
-		return spInitStr;
-	}
-
-	public void setSpInitStr(String spInitStr) {
-		this.spInitStr = spInitStr;
-	}
-
 	public void setRep(String rep) {
 		this.rep = rep;
 	}

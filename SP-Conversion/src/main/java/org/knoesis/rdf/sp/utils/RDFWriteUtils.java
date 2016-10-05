@@ -24,6 +24,7 @@ import java.util.zip.GZIPOutputStream;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.riot.RDFDataMgr;
 import org.apache.log4j.Logger;
 import org.knoesis.rdf.sp.model.SPNode;
 import org.knoesis.rdf.sp.model.SPTriple;
@@ -240,7 +241,7 @@ public class RDFWriteUtils {
 	public static void loadPrefixesToTrie(Map<String,String> trie){
 		//read file into stream, try-with-resources
 		Model model = ModelFactory.createDefaultModel();
-		model.read(prefixesFile);
+		RDFDataMgr.read(model, prefixesFile);
 		if (model.getNsPrefixMap() == null) return;
 		else{
 			Iterator<Entry<String, String>> it = model.getNsPrefixMap().entrySet().iterator();

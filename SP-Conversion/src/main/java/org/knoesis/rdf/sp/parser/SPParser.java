@@ -16,7 +16,6 @@ public abstract class SPParser {
 	protected String ontoDir;
 	protected String rep;
 	protected String dsName = null;
-	
 	public void init(){
 		if (this.infer){
 			SPModel.loadModel(this.getOntoDir());
@@ -24,6 +23,10 @@ public abstract class SPParser {
 
 	}
 	
+	public SPParser() {
+		
+	}
+
 	public void parseFile(String file, String ext, String rep, String dir){
 		
 	}
@@ -92,6 +95,4 @@ public abstract class SPParser {
 	public void setDsName(String dsName) {
 		this.dsName = dsName;
 	}
-
-
 }

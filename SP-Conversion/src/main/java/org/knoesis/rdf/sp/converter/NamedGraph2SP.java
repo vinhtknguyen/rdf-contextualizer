@@ -13,18 +13,13 @@ public class NamedGraph2SP extends ContextualRepresentationConverter{
 
 	final static Logger logger = Logger.getLogger(NamedGraph2SP.class);
 
-	public NamedGraph2SP(long spPrefixNum, String spPrefixStr,
-			String spDelimiter) {
-		super(spPrefixNum, spPrefixStr, spDelimiter);
-		// TODO Auto-generated constructor stub
-	}
 	protected static SPNode namedGraphProp = new SPNode(Constants.WAS_DERIVED_FROM);
 
 	public NamedGraph2SP(){
 		super();
 	}
 	
-	public static List<SPTriple> transformQuad(BufferedWriter writer, Quad quad, String ext){
+	public List<SPTriple> transformQuad(BufferedWriter writer, Quad quad, String ext){
 
 		List<SPTriple> triples = new LinkedList<SPTriple>();
 		
@@ -37,8 +32,8 @@ public class NamedGraph2SP extends ContextualRepresentationConverter{
 			StringBuilder singletonBdr = null;
 			singletonBdr = new StringBuilder();
 			singletonBdr.append(quad.getPredicate().toString());
-			singletonBdr.append(spDelimiter);
-			singletonBdr.append(getNextUUID());
+			singletonBdr.append(SpUUID.spDelimiter);
+			singletonBdr.append(SpUUID.getNextUUID());
 			
 			SPNode singletonNode = new SPNode(singletonBdr.toString(), true);
 			

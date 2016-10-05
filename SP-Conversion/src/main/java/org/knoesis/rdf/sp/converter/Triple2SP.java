@@ -8,6 +8,7 @@ import org.apache.jena.graph.NodeFactory;
 import org.apache.log4j.Logger;
 import org.knoesis.rdf.sp.model.SPNode;
 import org.knoesis.rdf.sp.model.SPTriple;
+import org.knoesis.rdf.sp.model.SpUUID;
 
 public class Triple2SP extends ContextualRepresentationConverter {
 	
@@ -39,12 +40,6 @@ public class Triple2SP extends ContextualRepresentationConverter {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Triple2SP(long spPrefixNum, String spPrefixStr, String spDelimiter,
-			String singletonPropertyOfURI) {
-		super(spPrefixNum, spPrefixStr, spDelimiter);
-		// TODO Auto-generated constructor stub
-	}
-
 	public void setMetaObject(SPNode _metaObject) {
 		metaObject = _metaObject;
 	}
@@ -55,7 +50,7 @@ public class Triple2SP extends ContextualRepresentationConverter {
 		}
 	}
 
-	public static List<SPTriple> transformTriple(BufferedWriter writer, org.apache.jena.graph.Triple triple, String ext){
+	public List<SPTriple> transformTriple(BufferedWriter writer, org.apache.jena.graph.Triple triple, String ext){
 		
 		List<SPTriple> triples = new LinkedList<SPTriple>();
 		if (triple != null ){
@@ -65,8 +60,8 @@ public class Triple2SP extends ContextualRepresentationConverter {
 			
 			singletonBdr = new StringBuilder();
 			singletonBdr.append(triple.getSubject().toString());
-			singletonBdr.append(spDelimiter);
-			singletonBdr.append(getNextUUID());
+			singletonBdr.append(SpUUID.spDelimiter);
+			singletonBdr.append(SpUUID.getNextUUID());
 			
 			singletonNode = new SPNode(NodeFactory.createURI(singletonBdr.toString()), true);
 			

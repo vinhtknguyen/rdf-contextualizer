@@ -18,12 +18,11 @@ public class TripleParser extends SPParser {
 	
 	final static Logger logger = Logger.getLogger(TripleParser.class);
 
-
-	public TripleParser(){
+	public TripleParser() {
 	}
-	
+
 	@Override
-	public void parseFile(String in, String ext, String rep, String dirOut) {
+	public void parseFile(String in, String extension, String rep, String dirOut) {
 		// PipedRDFStream and PipedRDFIterator need to be on different threads
 		PipedRDFIterator<org.apache.jena.graph.Triple> iter = new PipedRDFIterator<org.apache.jena.graph.Triple>(Constants.BUFFER_SIZE, true);
 		final PipedRDFStream<org.apache.jena.graph.Triple> inputStream = new PipedTriplesStream(iter);
@@ -47,19 +46,25 @@ public class TripleParser extends SPParser {
         final boolean isZip = this.isZip();
         final boolean isInfer = this.isInfer();
         final String conRep = rep;
+        final String filein = in;
+        final String dirout = dirOut;
+        final String ext = extension;
+        final String ds = this.getDsName();
 
 		ExecutorService executor2 = Executors.newWorkStealingPool();
 		Runnable transformer = new Runnable(){
         	@Override
         	public void run(){
         		SPProcessor processor = new SPProcessor();
-        		processor.setDirout(dirOut);
+        		processor.setDirout(dirout);
         		processor.setExt(ext);
-        		processor.setFilein(in);
+        		processor.setFilein(filein);
         		processor.setIsinfer(isInfer);
         		processor.setIszip(isZip);
         		processor.setRep(conRep);
         		processor.setThreadnum(atomicInt.updateAndGet(n -> n + 1));
+        		processor.setDsName(ds);
+        		
         		processor.start();
 
         		while (iter.hasNext()){
