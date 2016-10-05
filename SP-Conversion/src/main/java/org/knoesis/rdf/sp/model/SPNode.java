@@ -5,7 +5,6 @@ import java.util.Map;
 import org.apache.jena.graph.NodeFactory;
 import org.apache.jena.graph.Node_Literal;
 import org.apache.jena.graph.Node_URI;
-import org.knoesis.rdf.sp.utils.Constants;
 import org.knoesis.rdf.sp.utils.RDFWriteUtils;
 
 public class SPNode {
@@ -59,9 +58,9 @@ public class SPNode {
 	    		out.append("^^");
 	    		SPNode node = new SPNode(jenaNode.getLiteralDatatypeURI());
 	    		node.toN3(prefixMapping, trie);
-	    		out.append(node.getShorten());
-		    	setNamespace(node.getNamespace());
-		    	setPrefix(node.getPrefix());
+	    		out.append(node.getShorten(prefixMapping, trie));
+		    	setNamespace(node.getNamespace(prefixMapping, trie));
+		    	setPrefix(node.getPrefix(prefixMapping, trie));
 	//		    		System.out.println("output datatype: " + toN3(((Literal) in).getDatatype()));
 	    	}
 	    	setShorten(out.toString());
@@ -151,7 +150,8 @@ public class SPNode {
 	}
 
 	
-	public String getNamespace() {
+	public String getNamespace(Map<String,String> prefixMapping, Map<String,String> trie) {
+		if (namespace == null) toN3(prefixMapping, trie);
 		return namespace;
 	}
 
@@ -159,7 +159,8 @@ public class SPNode {
 		this.namespace = namespace;
 	}
 
-	public String getPrefix() {
+	public String getPrefix(Map<String,String> prefixMapping, Map<String,String> trie) {
+		if (prefix == null) toN3(prefixMapping, trie);
 		return prefix;
 	}
 
@@ -189,6 +190,11 @@ public class SPNode {
 
 	public void setSingletonPropertyOf(boolean isSingletonProperty) {
 		this.isSingletonPropertyOf = isSingletonProperty;
+	}
+
+	public String getShorten(Map<String,String> prefixMapping, Map<String,String> trie) {
+		if (prefix == null) toN3(prefixMapping, trie);
+		return shorten;
 	}
 
 	public String getShorten() {

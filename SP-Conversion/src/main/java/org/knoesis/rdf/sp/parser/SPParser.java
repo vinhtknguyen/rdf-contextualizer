@@ -42,7 +42,6 @@ public abstract class SPParser {
 				/* PROCESS EACH INPUT FILE & GENERATE OUTPUT FILE */
 				
 				for (Path entry : stream) {
-					System.out.println("Parsing file " + entry.toString());
 					parseFile(entry.toString(), ext, rep, dirOut);
 		        }
 				

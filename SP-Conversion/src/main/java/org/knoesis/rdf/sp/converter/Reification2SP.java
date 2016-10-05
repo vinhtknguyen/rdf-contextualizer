@@ -16,12 +16,12 @@ public class Reification2SP extends ContextualRepresentationConverter{
 	
 	final static Logger logger = Logger.getLogger(Reification2SP.class);
 
-	private Map<String,org.apache.jena.graph.Node[]> reifiedTriples = new TrieMap<String,org.apache.jena.graph.Node[]>();
+	private static Map<String,org.apache.jena.graph.Node[]> reifiedTriples = new TrieMap<String,org.apache.jena.graph.Node[]>();
 	
-	private boolean type_flag = false;
-	private boolean subject_flag = false;
-	private boolean predicate_flag = false;
-	private boolean object_flag = false;
+	private static boolean type_flag = false;
+	private static boolean subject_flag = false;
+	private static boolean predicate_flag = false;
+	private static boolean object_flag = false;
 	
 	public Reification2SP() {
 		super();
@@ -35,11 +35,11 @@ public class Reification2SP extends ContextualRepresentationConverter{
 		// TODO Auto-generated constructor stub
 	}
 
-	private boolean isReifiedPatternCompleted(){
+	private static boolean isReifiedPatternCompleted(){
 		return (type_flag && subject_flag && predicate_flag && object_flag);
 	}
 	
-	private boolean addTripleToReifiedPattern(org.apache.jena.graph.Triple triple){
+	private static boolean addTripleToReifiedPattern(org.apache.jena.graph.Triple triple){
 		if (triple != null){
 			if (triple.getPredicate().toString().equals(Constants.RDF_TYPE) && triple.getObject().toString().equals(Constants.RDF_STATEMENT)){
 				if (triple.getSubject() != null){
@@ -77,15 +77,14 @@ public class Reification2SP extends ContextualRepresentationConverter{
 		return false;
 	}
 	
-	private void resetReifiedFlags(){
-		this.type_flag = false;
-		this.subject_flag = false;
-		this.predicate_flag = false;
-		this.object_flag = false;
+	private static void resetReifiedFlags(){
+		type_flag = false;
+		subject_flag = false;
+		predicate_flag = false;
+		object_flag = false;
 	}
 	
-	@Override
-	public List<SPTriple> transformTriple(BufferedWriter writer, org.apache.jena.graph.Triple triple, String ext){
+	public static List<SPTriple> transformTriple(BufferedWriter writer, org.apache.jena.graph.Triple triple, String ext){
 		List<SPTriple> triples = new LinkedList<SPTriple>();
 		
 		if (triple != null){
@@ -94,7 +93,7 @@ public class Reification2SP extends ContextualRepresentationConverter{
 			if (!addTripleToReifiedPattern(triple)) {
 				
 				// Print the regular triple
-				super.transformTriple(writer, triple, ext);
+				ContextualRepresentationConverter.transformTriple(writer, triple, ext);
 				return triples;
 			}
 			
@@ -108,7 +107,7 @@ public class Reification2SP extends ContextualRepresentationConverter{
 			
 			SPNode singletonNode = new SPNode(triple.getSubject(), true);
 			SPTriple singletonTriple = new SPTriple(new SPNode(reifiedStatement[0]), singletonNode, new SPNode(reifiedStatement[2]));
-			singletonTriple.addSingletonInstanceTriple(new SPTriple(singletonNode, this.singletonPropertyOf, new SPNode(reifiedStatement[1])));
+			singletonTriple.addSingletonInstanceTriple(new SPTriple(singletonNode, singletonPropertyOf, new SPNode(reifiedStatement[1])));
 			
 			triples.add(singletonTriple);
 			

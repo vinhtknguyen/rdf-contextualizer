@@ -123,13 +123,13 @@ public class SPTriple {
 
 		prefixes.append(this.printTriplePrefix(prefixMapping, trie));
 
-		out.append(this.getSubject().getShorten());
+		out.append(this.getSubject().getShorten(prefixMapping, trie));
 		out.append('\t');
 		
-		out.append(this.getPredicate().getShorten());
+		out.append(this.getPredicate().getShorten(prefixMapping, trie));
 		out.append('\t');
 		
-		out.append(this.getObject().getShorten());
+		out.append(this.getObject().getShorten(prefixMapping, trie));
 		out.append("\t . \n");
 		
 		prefixes.append(out);
@@ -141,9 +141,9 @@ public class SPTriple {
 		
 		StringBuilder out = new StringBuilder();
 			// Print the prefix if not added before
-		out.append(this.subject.printNodePrefix(prefixMapping, trie));
-		out.append(this.predicate.printNodePrefix(prefixMapping, trie));
-		out.append(this.object.printNodePrefix(prefixMapping, trie));
+		if (this.subject != null) out.append(this.subject.printNodePrefix(prefixMapping, trie));
+		if (this.predicate != null) out.append(this.predicate.printNodePrefix(prefixMapping, trie));
+		if (this.object != null) out.append(this.object.printNodePrefix(prefixMapping, trie));
 		return out.toString();
 	}
 
@@ -197,22 +197,28 @@ public class SPTriple {
 	}
 
 	public String toString(){
-		
-		return this.subject.getJenaNode().toString() + "\t" + this.predicate.getJenaNode().toString() + "\t" + this.object.getJenaNode().toString() + " \t . \n";
+		StringBuilder out = new StringBuilder();
+		if (this.subject != null) out.append(this.subject.getJenaNode().toString() + "\t");
+		if (this.predicate != null) out.append(this.predicate.getJenaNode().toString() + "\t");
+		if (this.object != null) out.append(this.object.getJenaNode().toString() + "\t");
+		return  out.append(" \t . \n").toString();
 		
 	}
 	
 	public String printAll(){
 		StringBuilder out = new StringBuilder();
-		out.append(this.toString());
-		for (SPTriple triple : this.singletonInstanceTriples){
-			out.append("\t\t Singleton triples: " + triple.toString());
-		}
-		for (SPTriple triple : this.genericPropertyTriples){
-			out.append("\t\t Generic triples: " + triple.toString());
-		}
-		for (SPTriple triple : this.metaTriples){
-			out.append("\t\t Meta triples: " + triple.toString());
+		if (this.toString() != null){
+			out.append(this.toString());
+			for (SPTriple triple : this.singletonInstanceTriples){
+				out.append("\t\t Singleton triples: " + triple.toString());
+			}
+			for (SPTriple triple : this.genericPropertyTriples){
+				out.append("\t\t Generic triples: " + triple.toString());
+			}
+			for (SPTriple triple : this.metaTriples){
+				out.append("\t\t Meta triples: " + triple.toString());
+			}
+			
 		}
 		return out.toString();
 	}

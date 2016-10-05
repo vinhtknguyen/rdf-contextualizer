@@ -12,21 +12,21 @@ import org.knoesis.rdf.sp.model.SPTriple;
 public class Triple2SP extends ContextualRepresentationConverter {
 	
 	final static Logger logger = Logger.getLogger(NamedGraph2SP.class);
-	protected SPNode metaPredicate = null;
-	protected SPNode metaObject = null;
+	protected static SPNode metaPredicate = null;
+	protected static SPNode metaObject = null;
 	
 	public SPNode getMetaPredicate() {
 		return metaPredicate;
 	}
 
-	public void setMetaPredicate(SPNode metaPredicate) {
-		this.metaPredicate = metaPredicate;
+	public void setMetaPredicate(SPNode _metaPredicate) {
+		metaPredicate = _metaPredicate;
 	}
 
-	public void setMetaPredicate(String metaPredicate) {
-		SPNode sPNode = new SPNode(NodeFactory.createURI(metaPredicate));
+	public void setMetaPredicate(String _metaPredicate) {
+		SPNode sPNode = new SPNode(NodeFactory.createURI(_metaPredicate));
 		if (sPNode != null){
-			this.metaPredicate = sPNode;
+			metaPredicate = sPNode;
 		}
 	}
 
@@ -45,18 +45,17 @@ public class Triple2SP extends ContextualRepresentationConverter {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void setMetaObject(SPNode metaObject) {
-		this.metaObject = metaObject;
+	public void setMetaObject(SPNode _metaObject) {
+		metaObject = _metaObject;
 	}
-	public void setMetaObject(String metaObject) {
-		SPNode sPNode = new SPNode(NodeFactory.createURI(metaObject));
+	public void setMetaObject(String _metaObject) {
+		SPNode sPNode = new SPNode(NodeFactory.createURI(_metaObject));
 		if (sPNode != null){
-			this.metaObject = sPNode;
+			metaObject = sPNode;
 		}
 	}
 
-	@Override
-	public List<SPTriple> transformTriple(BufferedWriter writer, org.apache.jena.graph.Triple triple, String ext){
+	public static List<SPTriple> transformTriple(BufferedWriter writer, org.apache.jena.graph.Triple triple, String ext){
 		
 		List<SPTriple> triples = new LinkedList<SPTriple>();
 		if (triple != null ){
@@ -66,15 +65,15 @@ public class Triple2SP extends ContextualRepresentationConverter {
 			
 			singletonBdr = new StringBuilder();
 			singletonBdr.append(triple.getSubject().toString());
-			singletonBdr.append(this.getSPDelimiter());
-			singletonBdr.append(this.getNextUUID());
+			singletonBdr.append(spDelimiter);
+			singletonBdr.append(getNextUUID());
 			
 			singletonNode = new SPNode(NodeFactory.createURI(singletonBdr.toString()), true);
 			
 			SPTriple singletonTriple = new SPTriple(new SPNode(triple.getSubject()), singletonNode, new SPNode(triple.getObject()));
-			singletonTriple.addSingletonInstanceTriple(new SPTriple(singletonNode, this.singletonPropertyOf, new SPNode(triple.getPredicate())));
-			if (this.getMetaObject() != null && this.getMetaPredicate() != null) 
-				singletonTriple.addMetaTriple(new SPTriple(singletonNode, this.metaPredicate, this.metaObject));
+			singletonTriple.addSingletonInstanceTriple(new SPTriple(singletonNode, singletonPropertyOf, new SPNode(triple.getPredicate())));
+			if (metaObject != null && metaPredicate != null) 
+				singletonTriple.addMetaTriple(new SPTriple(singletonNode, metaPredicate, metaObject));
 				
 		}
 		return triples;

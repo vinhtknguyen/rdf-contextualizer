@@ -48,7 +48,7 @@ public class ContextualInference {
 		List<SPTriple> out = new ArrayList<SPTriple>();
 		out.addAll(infer(triples, RULE_SP.RULE_ALL_SP));
 		
-		SPModel.addGenericPropertyMap(this.genericPropertyMapPerFile);
+//		SPModel.addGenericPropertyMap(this.genericPropertyMapPerFile);
 		
 		return out;
 	}

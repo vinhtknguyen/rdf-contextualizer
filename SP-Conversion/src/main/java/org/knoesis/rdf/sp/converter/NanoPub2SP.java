@@ -15,8 +15,7 @@ public class NanoPub2SP extends ContextualRepresentationConverter {
 	final static Logger logger = Logger.getLogger(NanoPub2SP.class);
 
 
-	@Override
-	public List<SPTriple> transformQuad(BufferedWriter writer, Quad quad, String ext){
+	public static  List<SPTriple> transformQuad(BufferedWriter writer, Quad quad, String ext){
 		
 		List<SPTriple> triples = new LinkedList<SPTriple>();
 		if (quad.getGraph() != null){
@@ -24,13 +23,13 @@ public class NanoPub2SP extends ContextualRepresentationConverter {
 			StringBuilder singletonBdr = null;
 			singletonBdr = new StringBuilder();
 			singletonBdr.append(quad.getPredicate().toString());
-			singletonBdr.append(this.getSPDelimiter());
-			singletonBdr.append(this.getNextUUID());
+			singletonBdr.append(spDelimiter);
+			singletonBdr.append(getNextUUID());
 			
 			SPNode singletonNode = new SPNode(NodeFactory.createURI(singletonBdr.toString()), true);
 
 			SPTriple singletonTriple = new SPTriple(new SPNode(quad.getSubject()), singletonNode, new SPNode(quad.getObject()));
-			singletonTriple.addSingletonInstanceTriple(new SPTriple(singletonNode, this.singletonPropertyOf, new SPNode(quad.getPredicate())));
+			singletonTriple.addSingletonInstanceTriple(new SPTriple(singletonNode, singletonPropertyOf, new SPNode(quad.getPredicate())));
 			triples.add(singletonTriple);
 		}
 		return triples;

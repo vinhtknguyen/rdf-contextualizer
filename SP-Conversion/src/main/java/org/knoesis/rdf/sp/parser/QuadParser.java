@@ -1,13 +1,10 @@
 package org.knoesis.rdf.sp.parser;
 
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.jena.riot.Lang;
@@ -17,13 +14,8 @@ import org.apache.jena.riot.lang.PipedRDFIterator;
 import org.apache.jena.riot.lang.PipedRDFStream;
 import org.apache.jena.sparql.core.Quad;
 import org.apache.log4j.Logger;
-import org.knoesis.rdf.sp.converter.ContextConverterFactory;
-import org.knoesis.rdf.sp.converter.ContextualRepresentationConverter;
-import org.knoesis.rdf.sp.inference.ContextualInference;
-import org.knoesis.rdf.sp.model.SPTriple;
+import org.knoesis.rdf.sp.runnable.SPProcessor;
 import org.knoesis.rdf.sp.utils.Constants;
-import org.knoesis.rdf.sp.utils.RDFWriteUtils;
-import org.knoesis.rdf.sp.utils.SPStats;
 
 import com.romix.scala.collection.concurrent.TrieMap;
 
@@ -31,16 +23,14 @@ public class QuadParser extends SPParser{
 	
 	final static Logger logger = Logger.getLogger(QuadParser.class);
 
-	protected PipedRDFIterator<Quad> iter;
-	protected PipedRDFStream<Quad> inputStream;
 	protected Map<String,String> parserTrie = new TrieMap<String,String>();
 	
 	@Override
-	public void parseFile(String in, String ext, String rep, String dirOut) {
-		System.out.println("Initialize stream for file " + in);
+	public void parseFile(String in, String extension, String rep, String dirOut) {
 		
-        iter = new PipedRDFIterator<Quad>(Constants.BUFFER_SIZE, true);
-        inputStream = new PipedQuadsStream(iter);
+		
+		PipedRDFIterator<Quad> iter = new PipedRDFIterator<Quad>(Constants.BUFFER_SIZE, true);
+		final PipedRDFStream<Quad> inputStream = new PipedQuadsStream(iter);
         // PipedRDFStream and PipedRDFIterator need to be on different threads
         ExecutorService executor1 = Executors.newSingleThreadExecutor();
 
@@ -50,7 +40,6 @@ public class QuadParser extends SPParser{
             @Override
             public void run() {
                 // Call the parsing process.
-        		System.out.println("Started streaming file " + in + " in thread " + Thread.currentThread());
                 RDFDataMgr.parse(inputStream, in, Lang.NQUADS);
             }
         };
@@ -62,56 +51,47 @@ public class QuadParser extends SPParser{
         final boolean isZip = this.isZip();
         final boolean isInfer = this.isInfer();
         final String conRep = rep;
+        final String filein = in;
+        final String dirout = dirOut;
+        final String ext = extension;
         
-        ExecutorService executor2 = Executors.newFixedThreadPool(2);
+        ExecutorService executor2 = Executors.newWorkStealingPool();
         Runnable transformer = new Runnable(){
         	@Override
         	public void run(){
         		
+        		SPProcessor processor = new SPProcessor();
+        		processor.setDirout(dirout);
+        		processor.setExt(ext);
+        		processor.setFilein(filein);
+        		processor.setIsinfer(isInfer);
+        		processor.setIszip(isZip);
+        		processor.setRep(conRep);
+        		processor.setThreadnum(atomicInt.updateAndGet(n -> n + 1));
+        		processor.start();
+        		
+        		while (iter.hasNext()){
+        			Quad quad = iter.next();
+        			processor.process(quad);
+        		}
+        		processor.finish();
+        		processor.report();
+        		processor.close();
+        		
+        		iter.close();
+        		inputStream.finish();
+ 		
         	}
         };
-		int num = atomicInt.updateAndGet(n -> n + 1);
-		String fileOut = RDFWriteUtils.genFileOutForThread(in, dirOut, num, ext, isZip);
-		BufferedWriter writer = RDFWriteUtils.getBufferedWriter(fileOut, isZip);
-		long start = System.currentTimeMillis();
-		// Write the credentials
+		executor2.submit(transformer);
+		executor2.shutdown();
+		executor1.shutdown();
 		try {
-			writer.write(Constants.WRITE_FILE_PREFIX);
-			List<SPTriple> triples = new ArrayList<SPTriple>();
-			Map<String,String> prefixMapping = new TrieMap<String,String>();
-			Map<String,String> trie = new TrieMap<String,String>();
-			RDFWriteUtils.loadPrefixesToTrie(trie);
-
-			ContextualInference reasoner = new ContextualInference();
-			ContextualRepresentationConverter converter = ContextConverterFactory.createConverter(conRep);
-       		while (iter.hasNext()) {
-    		    Quad quad = iter.next();
-    			if (isInfer){
-    				// infer new triples and add them to the list
-    				triples.addAll(reasoner.infer(converter.transformQuad(writer, quad, ext)));
-    			} else {
-        			triples.addAll(converter.transformQuad(writer, quad, ext));
-    			}
-    			writer.write(RDFWriteUtils.printTriples(triples, prefixMapping, trie, ext));
-    			triples.clear();
-    		}
-       		
-       		if (isInfer) {
-	       		// Generate the generic property triples
-       			triples.addAll(reasoner.generateGenericPropertyTriplesPerFile());
-       			writer.write(RDFWriteUtils.printTriples(triples, prefixMapping, trie, ext));
-       		}
-			writer.close();
-			
-    		SPStats.reportSystem(start, rep, (isInfer?"infer":"no-infer"), ext, in, fileOut);
-			} catch (IOException e) {
+			executor2.awaitTermination(Integer.MAX_VALUE, TimeUnit.SECONDS);
+			executor1.awaitTermination(Integer.MAX_VALUE, TimeUnit.SECONDS);
+		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-
-//		executor2.submit(transformer);
-		executor1.shutdown();
-//		executor2.shutdown();
 	}
 }

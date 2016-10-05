@@ -84,8 +84,8 @@ public class RDFWriteUtils {
 	
 	public static Map<String,String> extractPrefixFromNode(SPNode node, Map<String,String> prefixMapping, Map<String,String> trie){
 		if (node != null){
-			String prefix = node.toN3(prefixMapping, trie).getPrefix();
-			if (prefixMapping.get(prefix) == null) prefixMapping.put(prefix, node.getNamespace());
+			String prefix = node.toN3(prefixMapping, trie).getPrefix(prefixMapping, trie);
+			if (prefixMapping.get(prefix) == null) prefixMapping.put(prefix, node.getNamespace(prefixMapping, trie));
 		}
 		return prefixMapping;
 	}
@@ -105,7 +105,7 @@ public class RDFWriteUtils {
 	}
 	
 	public static String printTriples2NT(List<SPTriple> triples){
-		StringBuilder out = new StringBuilder();
+		StringBuilder out = new StringBuilder("");
 		
 		for (SPTriple t:triples){
 			out.append(t.printTriple2NT());
@@ -124,10 +124,10 @@ public class RDFWriteUtils {
 		}
 		
 
-		System.out.println("Input triples");
-		for (SPTriple triple : triples){
-			System.out.println(triple.toString());
-		}
+//		System.out.println("Input triples");
+//		for (SPTriple triple : triples){
+//			System.out.println(triple.printAll());
+//		}
 		
 		/* No sorting as it takes too long to finish
 		// Sort the input triples
@@ -144,7 +144,7 @@ public class RDFWriteUtils {
 		SPTriple cur = null; 
 		SPNode commonSubject = null, commonPredicate = null, commonObject = null;
 		StringBuilder curStr = new StringBuilder();
-		StringBuilder prefixes = new StringBuilder();
+		StringBuilder prefixes = new StringBuilder("");
 	
 		if (triples.size() == 0) return "";
 		if (triples.size() == 1) return triples.get(0).printTriple2N3(prefixMapping, trie);
@@ -155,42 +155,44 @@ public class RDFWriteUtils {
 			
 			if (cur != null){
 
+				SPNode curSub = cur.getSubject().toN3(prefixMapping, trie);
+				SPNode curPred = cur.getPredicate().toN3(prefixMapping, trie);
+				SPNode curObj = cur.getObject().toN3(prefixMapping, trie);
 				// Generate the prefix string
 				prefixes.append(cur.printTriplePrefix(prefixMapping, trie));
-
 				// Print the subject for the current triple 
 				if (commonSubject == null && commonPredicate == null) {
 					
-					curStr.append(cur.getSubject().getShorten());
-					curStr.append("\t" + cur.getPredicate().getShorten());
-					curStr.append("\t" + cur.getObject().getShorten());
+					curStr.append(curSub.getShorten());
+					curStr.append("\t" + curPred.getShorten());
+					curStr.append("\t" + curObj.getShorten());
 					
 				} else if (commonSubject != null && commonPredicate != null ){
 					
-					if (cur.getSubject().getShorten().equals(commonSubject.getShorten())){
+					if (curSub.getShorten().equals(commonSubject.getShorten())){
 						
-						if (cur.getPredicate().getShorten().equals(commonPredicate.getShorten())){
+						if (curPred.getShorten().equals(commonPredicate.getShorten())){
 							
-							if (!cur.getObject().getShorten().equals(commonObject.getShorten())){
+							if (!curObj.getShorten().equals(commonObject.getShorten())){
 								curStr.append(", ");
-								curStr.append(cur.getObject().getShorten());
+								curStr.append(curObj.getShorten());
 							}
 						
 						} else {
 							curStr.append("\t ; \n");
-							curStr.append("\t" + cur.getPredicate().getShorten());
-							curStr.append("\t" + cur.getObject().getShorten());
+							curStr.append("\t" + curPred.getShorten());
+							curStr.append("\t" + curObj.getShorten());
 						}
 					} else {
 						curStr.append("\t . \n");
-						curStr.append(cur.getSubject().getShorten());
-						curStr.append("\t" + cur.getPredicate().getShorten());
-						curStr.append("\t" + cur.getObject().getShorten());
+						curStr.append(curSub.getShorten());
+						curStr.append("\t" + curPred.getShorten());
+						curStr.append("\t" + curObj.getShorten());
 					}
 				}
-				commonSubject = cur.getSubject();
-				commonPredicate = cur.getPredicate();
-				commonObject = cur.getObject();
+				commonSubject = curSub;
+				commonPredicate = curPred;
+				commonObject = curObj;
 			}
 		}
 		
