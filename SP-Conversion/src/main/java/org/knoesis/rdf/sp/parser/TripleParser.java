@@ -1,15 +1,22 @@
 package org.knoesis.rdf.sp.parser;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.apache.jena.graph.Triple;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.lang.PipedRDFIterator;
 import org.apache.jena.riot.lang.PipedRDFStream;
 import org.apache.jena.riot.lang.PipedTriplesStream;
+import org.apache.jena.sparql.core.Quad;
 import org.apache.log4j.Logger;
+import org.knoesis.rdf.sp.concurrent.PipedSPTripleIterator;
+import org.knoesis.rdf.sp.concurrent.PipedStringStream;
 import org.knoesis.rdf.sp.runnable.SPProcessor;
 import org.knoesis.rdf.sp.utils.Constants;
+import org.knoesis.rdf.sp.utils.RDFWriteUtils;
 
 public class TripleParser extends SPParser {
 	
@@ -41,7 +48,6 @@ public class TripleParser extends SPParser {
 		// Start the parser on another thread
 		producerExecutor.submit(parser);
   
-        AtomicInteger atomicInt = new AtomicInteger(0);
         final boolean isZip = this.isZip();
         final boolean isInfer = this.isInfer();
         final String conRep = rep;
@@ -49,6 +55,8 @@ public class TripleParser extends SPParser {
         final String dirout = dirOut;
         final String ext = extension;
         final String ds = this.getDsName();
+    	PipedSPTripleIterator<String> writerIter = new PipedSPTripleIterator<String>(Constants.BUFFER_SIZE, true);
+    	final PipedStringStream<String> writerInputStream = new PipedStringStream<String>(writerIter);
 
 		Runnable transformer = new Runnable(){
         	@Override
@@ -59,23 +67,46 @@ public class TripleParser extends SPParser {
         		processor.setFilein(filein);
         		processor.setIsinfer(isInfer);
         		processor.setIszip(isZip);
-        		processor.setThreadnum(atomicInt.updateAndGet(n -> n + 1));
         		processor.setDsName(ds);
         		
-        		processor.start();
-
+        		writerInputStream.start();
+            	
         		while (iter.hasNext()){
         			Triple triple = iter.next();
-        			processor.process(triple);
+        			writerInputStream.string(processor.process(triple));
+        			// Put the output to the writerInputStream
         		}
         		
         		processor.finish();
         		processor.close();
+        		
+        		writerInputStream.finish();
+
         		iter.close();
         		inputStream.finish();
        	}
 		};
+		
 		consumerExecutor.submit(transformer);
+        Runnable writer = new Runnable(){
+        	@Override
+        	public void run(){
+        		// Read the data from stream to file
+        		BufferedWriter bufWriter = RDFWriteUtils.getBufferedWriter(filein, isZip);
+        		while (writerIter.hasNext()){
+        			try {
+						bufWriter.write(writerIter.next());
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+        		}
+        	}
+        };
+        
+		ExecutorService writerExecutor = Executors.newSingleThreadExecutor();
+		writerExecutor.submit(writer);
+		writerExecutor.shutdown();
 	}
 
 }

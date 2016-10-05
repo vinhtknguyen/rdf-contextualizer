@@ -27,7 +27,6 @@ public class SPProcessor{
 	protected String filein;
 	protected String dirout;
 	protected String fileout;
-	protected int threadnum;
 	protected String ext;
 	protected String rep;
 	protected boolean iszip;
@@ -56,57 +55,36 @@ public class SPProcessor{
 		trie = new TrieMap<String,String>();
 		start = System.currentTimeMillis();
 		RDFWriteUtils.loadPrefixesToTrie(trie);
-		fileout = RDFWriteUtils.genFileOutForThread(filein, dirout, threadnum, ext, iszip);
+		fileout = filein;
 		writer = RDFWriteUtils.getBufferedWriter(fileout, iszip);
-		try {
-			writer.write(Constants.WRITE_FILE_PREFIX);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//			writer.write(Constants.WRITE_FILE_PREFIX);
 	}
 	
-	public void process(Quad quad){
+	public String process(Quad quad){
 		// Write the credentials
-		try {
 //			System.out.println("Processing quad: " + quad.toString());
-			List<SPTriple> triples = new ArrayList<SPTriple>();
-			if (isinfer){
-				// infer new triples and add them to the list
-				triples.addAll(reasoner.infer(convert(quad)));
-			} else {
-				triples.addAll(convert(quad));
-			}
-			if (triples.size() > 0) {
-				writer.write(RDFWriteUtils.printTriples(triples, prefixMapping, trie, ext));
-			}
-			triples.clear();
-       		
-			
-			} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		List<SPTriple> triples = new ArrayList<SPTriple>();
+		if (isinfer){
+			// infer new triples and add them to the list
+			triples.addAll(reasoner.infer(convert(quad)));
+		} else {
+			triples.addAll(convert(quad));
 		}
-
+		triples.clear();
+		return RDFWriteUtils.printTriples(triples, prefixMapping, trie, ext);
 	}
 	
-	public void process(Triple triple){
-		// Write the credentials
-		try {
-			List<SPTriple> triples = new ArrayList<SPTriple>();
-			if (isinfer){
-				// infer new triples and add them to the list
-				triples.addAll(reasoner.infer(convert(triple)));
-			} else {
-				triples.addAll(convert(triple));
-			}
-			writer.write(RDFWriteUtils.printTriples(triples, prefixMapping, trie, ext));
-			triples.clear();
-			
-			} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public String process(Triple triple){
+//		System.out.println("Processing quad: " + quad.toString());
+		List<SPTriple> triples = new ArrayList<SPTriple>();
+		if (isinfer){
+			// infer new triples and add them to the list
+			triples.addAll(reasoner.infer(convert(triple)));
+		} else {
+			triples.addAll(convert(triple));
 		}
+		triples.clear();
+		return RDFWriteUtils.printTriples(triples, prefixMapping, trie, ext);
 
 	}
 	protected List<SPTriple> convert(Quad quad){
@@ -155,7 +133,6 @@ public class SPProcessor{
 				e.printStackTrace();
 			}
    		}
-
 	}
 	
 	public void close(){
@@ -190,14 +167,6 @@ public class SPProcessor{
 
 	public void setFileout(String fileout) {
 		this.fileout = fileout;
-	}
-
-	public int getThreadnum() {
-		return threadnum;
-	}
-
-	public void setThreadnum(int threadnum) {
-		this.threadnum = threadnum;
 	}
 
 	public String getExt() {
@@ -239,5 +208,6 @@ public class SPProcessor{
 	public void setDsName(String dsName) {
 		this.dsName = dsName;
 	}
+
 
 }

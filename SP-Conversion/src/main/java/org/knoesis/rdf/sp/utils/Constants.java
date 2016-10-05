@@ -70,7 +70,7 @@ public class Constants {
 	/**
 	 * I/O config
 	 * */
-	public static int BUFFER_SIZE = 10000;
+	public static int BUFFER_SIZE = 10000000;
 
 }
 
