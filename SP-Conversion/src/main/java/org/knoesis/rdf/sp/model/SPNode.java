@@ -70,14 +70,14 @@ public class SPNode {
 	}
 	
 	public String printNodePrefix(Map<String,String> prefixMapping, Map<String,String> trie){
-		toN3(prefixMapping, trie);
+		SPNode node = toN3(prefixMapping, trie);
 		StringBuilder out = new StringBuilder();
-		if (!prefixMapping.containsKey(prefix)){
-			prefixMapping.put(prefix, namespace);
+		if (!prefixMapping.containsKey(node.getPrefix())){
+			prefixMapping.put(node.getPrefix(), node.getNamespace());
 			out.append("@prefix\t");
-			out.append(prefix);
+			out.append(node.getPrefix());
 			out.append(":\t<");
-			out.append(namespace);
+			out.append(node.getNamespace());
 			out.append(">\t . \n");
 			
 		}
@@ -164,6 +164,13 @@ public class SPNode {
 		return prefix;
 	}
 
+	public String getPrefix(){
+		return prefix;
+	}
+	
+	public String getNamespace(){
+		return namespace;
+	}
 	public void setPrefix(String prefix) {
 		this.prefix = prefix;
 	}

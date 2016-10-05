@@ -54,6 +54,7 @@ public class QuadParser extends SPParser{
         final String filein = in;
         final String dirout = dirOut;
         final String ext = extension;
+        final String ds = this.getDsName();
         
         ExecutorService executor2 = Executors.newWorkStealingPool();
         Runnable transformer = new Runnable(){
@@ -68,6 +69,7 @@ public class QuadParser extends SPParser{
         		processor.setIszip(isZip);
         		processor.setRep(conRep);
         		processor.setThreadnum(atomicInt.updateAndGet(n -> n + 1));
+        		processor.setDsName(ds);
         		processor.start();
         		
         		while (iter.hasNext()){
@@ -75,7 +77,6 @@ public class QuadParser extends SPParser{
         			processor.process(quad);
         		}
         		processor.finish();
-        		processor.report();
         		processor.close();
         		
         		iter.close();

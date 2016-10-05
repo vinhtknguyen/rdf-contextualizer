@@ -33,6 +33,7 @@ public class SPProcessor{
 	protected boolean iszip;
 	protected boolean isinfer;
 	protected long start;
+	protected String dsName;
 	
 	static Map<String,String> prefixMapping = new TrieMap<String,String>();
 	static Map<String,String> trie = new TrieMap<String,String>();
@@ -44,6 +45,7 @@ public class SPProcessor{
 	}
 	
 	public void start(){
+		prefixMapping = new TrieMap<String,String>();
 		start = System.currentTimeMillis();
 		RDFWriteUtils.loadPrefixesToTrie(trie);
 		converter = ContextConverterFactory.createConverter(rep);
@@ -144,13 +146,10 @@ public class SPProcessor{
 
 	}
 	
-	public void report(){
-		SPStats.reportSystem(start, rep, (isinfer?"infer":"no-infer"), ext, filein, fileout);
-	}
-	
 	public void close(){
 		try {
 			writer.close();
+			SPStats.reportSystem(start, rep, (isinfer?"infer":"no-infer"), ext, filein, fileout, dsName);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -219,6 +218,14 @@ public class SPProcessor{
 
 	public void setIsinfer(boolean isinfer) {
 		this.isinfer = isinfer;
+	}
+
+	public String getDsName() {
+		return dsName;
+	}
+
+	public void setDsName(String dsName) {
+		this.dsName = dsName;
 	}
 
 }

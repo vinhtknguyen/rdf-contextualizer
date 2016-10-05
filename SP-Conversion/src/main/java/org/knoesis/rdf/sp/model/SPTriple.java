@@ -141,9 +141,9 @@ public class SPTriple {
 		
 		StringBuilder out = new StringBuilder();
 			// Print the prefix if not added before
-		if (this.subject != null) out.append(this.subject.printNodePrefix(prefixMapping, trie));
-		if (this.predicate != null) out.append(this.predicate.printNodePrefix(prefixMapping, trie));
-		if (this.object != null) out.append(this.object.printNodePrefix(prefixMapping, trie));
+		out.append(this.subject.printNodePrefix(prefixMapping, trie));
+		out.append(this.predicate.printNodePrefix(prefixMapping, trie));
+		out.append(this.object.printNodePrefix(prefixMapping, trie));
 		return out.toString();
 	}
 

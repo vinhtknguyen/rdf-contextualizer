@@ -15,6 +15,7 @@ public abstract class SPParser {
 	protected boolean zip = false;
 	protected String ontoDir;
 	protected String rep;
+	protected String dsName = null;
 	
 	public void init(){
 		if (this.infer){
@@ -74,6 +75,22 @@ public abstract class SPParser {
 
 	public void setZip(boolean zip) {
 		this.zip = zip;
+	}
+
+	public String getRep() {
+		return rep;
+	}
+
+	public void setRep(String rep) {
+		this.rep = rep;
+	}
+
+	public String getDsName() {
+		return dsName;
+	}
+
+	public void setDsName(String dsName) {
+		this.dsName = dsName;
 	}
 
 

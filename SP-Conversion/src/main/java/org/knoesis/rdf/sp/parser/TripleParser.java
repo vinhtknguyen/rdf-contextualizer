@@ -68,7 +68,6 @@ public class TripleParser extends SPParser {
         		}
         		
         		processor.finish();
-        		processor.report();
         		processor.close();
         		iter.close();
         		inputStream.finish();

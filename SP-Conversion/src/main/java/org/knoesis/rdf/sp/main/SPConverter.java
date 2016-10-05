@@ -25,6 +25,7 @@ public class SPConverter {
 	protected boolean infer = false;
 	protected String ontoDir = null;
 	protected String url = null;
+	protected String dsName = null;
 	
 	public String getOntoDir() {
 		return ontoDir;
@@ -149,6 +150,8 @@ public class SPConverter {
 			parser.setZip(isZip());
 			parser.setOntoDir(getOntoDir());
 			parser.parse(getFileIn(), getExt(), getRep());
+			parser.setDsName(getDsName());
+			parser.parse(this.getFileIn(), this.getExt(), this.getRep());
 		}
 		
 	}
@@ -172,6 +175,12 @@ public class SPConverter {
 //				System.out.println("File in: " + args[i + 1]);
 				this.setInfer(true);
 				this.setOntoDir(args[i+1]);
+			}
+			
+			// Get infer para
+			if (args[i].toLowerCase().equals("-dsName")) {
+//				System.out.println("File in: " + args[i + 1]);
+				this.setDsName(args[i+1]);;
 			}
 			
 			// Get url to start with
@@ -295,6 +304,14 @@ public class SPConverter {
 
 	public String getFileIn() {
 		return this.fileIn;
+	}
+
+	public String getDsName() {
+		return dsName;
+	}
+
+	public void setDsName(String dsName) {
+		this.dsName = dsName;
 	}
 
 }
