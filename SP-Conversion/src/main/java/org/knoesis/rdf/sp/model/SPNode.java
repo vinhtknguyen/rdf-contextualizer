@@ -70,14 +70,19 @@ public class SPNode {
 	}
 	
 	public String printNodePrefix(Map<String,String> prefixMapping, Map<String,String> trie){
-		SPNode node = toN3(prefixMapping, trie);
+		if (this.prefix == null || this.namespace == null || this.shorten == null){
+			SPNode node = toN3(prefixMapping, trie);
+			this.prefix = node.getPrefix();
+			this.namespace = node.getNamespace();
+			this.shorten = node.getShorten();
+		}
 		StringBuilder out = new StringBuilder();
-		if (!prefixMapping.containsKey(node.getPrefix())){
-			prefixMapping.put(node.getPrefix(), node.getNamespace());
+		if (!prefixMapping.containsKey(this.prefix)){
+			prefixMapping.put(this.prefix, this.namespace);
 			out.append("@prefix\t");
-			out.append(node.getPrefix());
+			out.append(this.prefix);
 			out.append(":\t<");
-			out.append(node.getNamespace());
+			out.append(this.namespace);
 			out.append(">\t . \n");
 			
 		}
@@ -121,6 +126,7 @@ public class SPNode {
 			shorten.append(prefix + ":");
 			trie.put(ns, prefix);
 		}
+		System.out.println(jenaNode.toString() + " \t " + ns + "\t" + shorten);
 	    return this;
 	}
 

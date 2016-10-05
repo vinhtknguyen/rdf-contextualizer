@@ -19,6 +19,10 @@ public class NamedGraph2SP extends ContextualRepresentationConverter{
 		super();
 	}
 	
+	public NamedGraph2SP(long _uuidInitNum, String _uuidInitStr) {
+		super(_uuidInitNum, _uuidInitStr);
+	}
+
 	public List<SPTriple> transformQuad(BufferedWriter writer, Quad quad, String ext){
 
 		List<SPTriple> triples = new LinkedList<SPTriple>();
@@ -32,8 +36,8 @@ public class NamedGraph2SP extends ContextualRepresentationConverter{
 			StringBuilder singletonBdr = null;
 			singletonBdr = new StringBuilder();
 			singletonBdr.append(quad.getPredicate().toString());
-			singletonBdr.append(SpUUID.spDelimiter);
-			singletonBdr.append(SpUUID.getNextUUID());
+			singletonBdr.append(uuid.getSPDelimiter());
+			singletonBdr.append(uuid.getNextUUID());
 			
 			SPNode singletonNode = new SPNode(singletonBdr.toString(), true);
 			

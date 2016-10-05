@@ -8,7 +8,6 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.knoesis.rdf.sp.model.SPNode;
 import org.knoesis.rdf.sp.model.SPTriple;
-import org.knoesis.rdf.sp.model.SpUUID;
 import org.knoesis.rdf.sp.utils.Constants;
 
 import com.romix.scala.collection.concurrent.TrieMap;
@@ -27,6 +26,10 @@ public class Reification2SP extends ContextualRepresentationConverter{
 	public Reification2SP() {
 		super();
 		
+	}
+
+	public Reification2SP(long _uuidInitNum, String _uuidInitStr) {
+		super(_uuidInitNum, _uuidInitStr);
 	}
 
 	private static boolean isReifiedPatternCompleted(){
@@ -105,8 +108,8 @@ public class Reification2SP extends ContextualRepresentationConverter{
 				StringBuilder singletonBdr = null;
 				singletonBdr = new StringBuilder();
 				singletonBdr.append(reifiedStatement[1].toString());
-				singletonBdr.append(SpUUID.spDelimiter);
-				singletonBdr.append(SpUUID.getNextUUID());
+				singletonBdr.append(uuid.getSPDelimiter());
+				singletonBdr.append(uuid.getNextUUID());
 				
 				singletonNode = new SPNode(singletonBdr.toString(), true);
 			} else{

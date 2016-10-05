@@ -2,9 +2,6 @@ package org.knoesis.rdf.sp.parser;
 
 
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.jena.riot.Lang;
@@ -29,6 +26,9 @@ public class QuadParser extends SPParser{
 		super();
 	}
 
+	public QuadParser(long _uuidInitNum, String _uuidInitStr) {
+		super(_uuidInitNum, _uuidInitStr);
+	}
 
 	@Override
 	public void parseFile(String in, String extension, String rep, String dirOut) {
@@ -37,7 +37,6 @@ public class QuadParser extends SPParser{
 		PipedRDFIterator<Quad> iter = new PipedRDFIterator<Quad>(Constants.BUFFER_SIZE, true);
 		final PipedRDFStream<Quad> inputStream = new PipedQuadsStream(iter);
         // PipedRDFStream and PipedRDFIterator need to be on different threads
-        ExecutorService executor1 = Executors.newSingleThreadExecutor();
 
         // Create a runnable for our parser thread
         Runnable parser = new Runnable() {
@@ -50,7 +49,7 @@ public class QuadParser extends SPParser{
         };
 
         // Start the parser on another thread
-        executor1.submit(parser);
+        producerExecutor.submit(parser);
         AtomicInteger atomicInt = new AtomicInteger(0);
 
         final boolean isZip = this.isZip();
@@ -60,19 +59,18 @@ public class QuadParser extends SPParser{
         final String dirout = dirOut;
         final String ext = extension;
         final String ds = this.getDsName();
+        final String uuidInitStr = this.getUuidInitStr();
+        final long uuidInitNum = this.getUuidInitNum();
         
-        ExecutorService executor2 = Executors.newWorkStealingPool();
         Runnable transformer = new Runnable(){
         	@Override
         	public void run(){
-    		
-        		SPProcessor processor = new SPProcessor();
+           		SPProcessor processor = new SPProcessor(conRep, uuidInitNum, uuidInitStr);
         		processor.setDirout(dirout);
         		processor.setExt(ext);
         		processor.setFilein(filein);
         		processor.setIsinfer(isInfer);
         		processor.setIszip(isZip);
-        		processor.setRep(conRep);
         		processor.setThreadnum(atomicInt.updateAndGet(n -> n + 1));
         		processor.setDsName(ds);
         		
@@ -87,18 +85,10 @@ public class QuadParser extends SPParser{
         		
         		iter.close();
         		inputStream.finish();
-
+  		
         	}
         };
-		executor2.submit(transformer);
-		executor2.shutdown();
-		executor1.shutdown();
-		try {
-			executor2.awaitTermination(Integer.MAX_VALUE, TimeUnit.SECONDS);
-			executor1.awaitTermination(Integer.MAX_VALUE, TimeUnit.SECONDS);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		consumerExecutor.submit(transformer);
 	}
 }

@@ -5,6 +5,9 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import org.knoesis.rdf.sp.model.SPModel;
 import org.knoesis.rdf.sp.utils.Constants;
@@ -16,6 +19,10 @@ public abstract class SPParser {
 	protected String ontoDir;
 	protected String rep;
 	protected String dsName = null;
+	protected String uuidInitStr = null;
+	protected long uuidInitNum;
+
+	
 	public void init(){
 		if (this.infer){
 			SPModel.loadModel(this.getOntoDir());
@@ -24,14 +31,25 @@ public abstract class SPParser {
 	}
 	
 	public SPParser() {
-		
+		uuidInitStr = Constants.SP_UUID_PREFIX;
+		uuidInitNum = System.currentTimeMillis();
+	}
+
+	public SPParser(long _uuidInitNum, String _uuidInitStr) {
+		uuidInitStr = _uuidInitStr;
+		uuidInitNum = _uuidInitNum;
 	}
 
 	public void parseFile(String file, String ext, String rep, String dir){
 		
 	}
 	
+	ExecutorService producerExecutor;
+	ExecutorService consumerExecutor;
+	
 	public void parse(String file, String ext, String rep){
+		producerExecutor = Executors.newWorkStealingPool();
+		consumerExecutor = Executors.newWorkStealingPool();
 		// If the input is a file
 		if (!Files.isDirectory(Paths.get(file))){
 			parseFile(file, ext, rep, null);
@@ -49,8 +67,17 @@ public abstract class SPParser {
 					parseFile(entry.toString(), ext, rep, dirOut);
 		        }
 				
+				// Close the pool
+				producerExecutor.shutdown();
+				consumerExecutor.shutdown();
+				consumerExecutor.awaitTermination(Integer.MAX_VALUE, TimeUnit.SECONDS);
+				producerExecutor.awaitTermination(Integer.MAX_VALUE, TimeUnit.SECONDS);
+				
 		    } catch (IOException e1) {
 				e1.printStackTrace();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 				
 		}
@@ -95,4 +122,22 @@ public abstract class SPParser {
 	public void setDsName(String dsName) {
 		this.dsName = dsName;
 	}
+
+	public String getUuidInitStr() {
+		return uuidInitStr;
+	}
+
+	public void setUuidInitStr(String uuidInitStr) {
+		this.uuidInitStr = uuidInitStr;
+	}
+
+	public long getUuidInitNum() {
+		return uuidInitNum;
+	}
+
+	public void setUuidInitNum(long uuidInitNum) {
+		this.uuidInitNum = uuidInitNum;
+	}
+	
+	
 }

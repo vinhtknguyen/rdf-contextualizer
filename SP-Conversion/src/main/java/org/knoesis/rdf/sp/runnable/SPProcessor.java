@@ -35,20 +35,27 @@ public class SPProcessor{
 	protected long start;
 	protected String dsName;
 	
-	static Map<String,String> prefixMapping = new TrieMap<String,String>();
-	static Map<String,String> trie = new TrieMap<String,String>();
+	Map<String,String> prefixMapping = new TrieMap<String,String>();
+	Map<String,String> trie = new TrieMap<String,String>();
 	BufferedWriter writer;
 	ContextualInference reasoner = new ContextualInference();
 	ContextualRepresentationConverter converter;
 	
-	public SPProcessor(){
+	public SPProcessor(String _rep){
+		rep = _rep;
+		converter = ContextConverterFactory.createConverter(_rep);
 	}
-	
+
+	public SPProcessor(String _rep, long uuidInitNum, String uuidInitStr) {
+		rep = _rep;
+		converter = ContextConverterFactory.createConverter(rep, uuidInitStr, uuidInitNum);
+	}
+
 	public void start(){
 		prefixMapping = new TrieMap<String,String>();
+		trie = new TrieMap<String,String>();
 		start = System.currentTimeMillis();
 		RDFWriteUtils.loadPrefixesToTrie(trie);
-		converter = ContextConverterFactory.createConverter(rep);
 		fileout = RDFWriteUtils.genFileOutForThread(filein, dirout, threadnum, ext, iszip);
 		writer = RDFWriteUtils.getBufferedWriter(fileout, iszip);
 		try {
@@ -62,6 +69,7 @@ public class SPProcessor{
 	public void process(Quad quad){
 		// Write the credentials
 		try {
+//			System.out.println("Processing quad: " + quad.toString());
 			List<SPTriple> triples = new ArrayList<SPTriple>();
 			if (isinfer){
 				// infer new triples and add them to the list

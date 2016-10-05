@@ -1,8 +1,5 @@
 package org.knoesis.rdf.sp.parser;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.jena.graph.Triple;
@@ -21,13 +18,15 @@ public class TripleParser extends SPParser {
 	public TripleParser() {
 	}
 
+	public TripleParser(long uuidInitNum, String _uuidInitStr) {
+		super(uuidInitNum, _uuidInitStr);
+	}
+
 	@Override
 	public void parseFile(String in, String extension, String rep, String dirOut) {
 		// PipedRDFStream and PipedRDFIterator need to be on different threads
 		PipedRDFIterator<org.apache.jena.graph.Triple> iter = new PipedRDFIterator<org.apache.jena.graph.Triple>(Constants.BUFFER_SIZE, true);
 		final PipedRDFStream<org.apache.jena.graph.Triple> inputStream = new PipedTriplesStream(iter);
-
-		ExecutorService executor1 = Executors.newSingleThreadExecutor();
 
 		// Create a runnable for our parser thread
 		Runnable parser = new Runnable() {
@@ -40,7 +39,7 @@ public class TripleParser extends SPParser {
 		};
 
 		// Start the parser on another thread
-		executor1.submit(parser);
+		producerExecutor.submit(parser);
   
         AtomicInteger atomicInt = new AtomicInteger(0);
         final boolean isZip = this.isZip();
@@ -51,17 +50,15 @@ public class TripleParser extends SPParser {
         final String ext = extension;
         final String ds = this.getDsName();
 
-		ExecutorService executor2 = Executors.newWorkStealingPool();
 		Runnable transformer = new Runnable(){
         	@Override
         	public void run(){
-        		SPProcessor processor = new SPProcessor();
+        		SPProcessor processor = new SPProcessor(conRep);
         		processor.setDirout(dirout);
         		processor.setExt(ext);
         		processor.setFilein(filein);
         		processor.setIsinfer(isInfer);
         		processor.setIszip(isZip);
-        		processor.setRep(conRep);
         		processor.setThreadnum(atomicInt.updateAndGet(n -> n + 1));
         		processor.setDsName(ds);
         		
@@ -78,16 +75,7 @@ public class TripleParser extends SPParser {
         		inputStream.finish();
        	}
 		};
-		executor2.submit(transformer);
-		executor2.shutdown();
-		executor1.shutdown();
-		try {
-			executor2.awaitTermination(Integer.MAX_VALUE, TimeUnit.SECONDS);
-			executor1.awaitTermination(Integer.MAX_VALUE, TimeUnit.SECONDS);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		consumerExecutor.submit(transformer);
 	}
 
 }

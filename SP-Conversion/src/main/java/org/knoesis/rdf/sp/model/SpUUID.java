@@ -3,11 +3,25 @@ package org.knoesis.rdf.sp.model;
 import org.knoesis.rdf.sp.utils.Constants;
 
 public class SpUUID {
-	public static long initUUIDNumber = System.currentTimeMillis();
-	public static String initUUIDPrefix = Constants.SP_UUID_PREFIX;
-	public static String spDelimiter = Constants.SP_START_DELIMITER;
+	private long initUUIDNumber = System.currentTimeMillis();;
+	private String initUUIDPrefix = Constants.SP_UUID_PREFIX;
+	private String spDelimiter = Constants.SP_START_DELIMITER;
+	
 	public void setSPDelimiter(String delimiter){
 		if (delimiter != null) spDelimiter = delimiter;
+	}
+	
+	public SpUUID(){
+		initUUIDNumber = System.currentTimeMillis();
+		initUUIDPrefix = Constants.SP_UUID_PREFIX;
+		spDelimiter = Constants.SP_START_DELIMITER;
+		
+	}
+	
+	public SpUUID(long _initUUIDNumber, String _initUUIDPrefix){
+		initUUIDNumber = _initUUIDNumber;
+		initUUIDPrefix = _initUUIDPrefix;
+		spDelimiter = Constants.SP_START_DELIMITER;
 	}
 	
 	public String getSPDelimiter(){
@@ -30,7 +44,7 @@ public class SpUUID {
 		return initUUIDNumber;
 	}
 	
-	public static String getNextUUID(){
+	public String getNextUUID(){
 		StringBuilder uuid = new StringBuilder(spDelimiter);
 		uuid.append(Constants.SP_ID);
 		uuid.append(Constants.SP_MID_DELIMITER);

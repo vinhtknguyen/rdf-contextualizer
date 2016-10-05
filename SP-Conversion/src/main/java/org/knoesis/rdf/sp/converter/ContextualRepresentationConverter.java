@@ -16,8 +16,14 @@ public class ContextualRepresentationConverter {
 
 	protected static SPNode singletonPropertyOf = new SPNode(Constants.SINGLETON_PROPERTY_OF, true);
 
+	protected SpUUID uuid = null;
 
+	public ContextualRepresentationConverter(long _initNum, String _initStr){
+		uuid = new SpUUID(_initNum, _initStr);
+	}
+	
 	public ContextualRepresentationConverter(){
+		uuid = new SpUUID();
 	}
 	
 	public static long directorySize(String in) {

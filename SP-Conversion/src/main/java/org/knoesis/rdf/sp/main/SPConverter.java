@@ -1,7 +1,6 @@
 package org.knoesis.rdf.sp.main;
 
 import org.apache.log4j.Logger;
-import org.knoesis.rdf.sp.model.SpUUID;
 import org.knoesis.rdf.sp.parser.SPParser;
 import org.knoesis.rdf.sp.parser.SPParserFactory;
 import org.knoesis.rdf.sp.utils.Constants;
@@ -25,7 +24,9 @@ public class SPConverter {
 	protected String ontoDir = null;
 	protected String url = null;
 	protected String dsName = null;
-	
+	protected String _uuidInitStr = null;
+	protected long _uuidInitNum = 0;
+
 	public String getOntoDir() {
 		return ontoDir;
 	}
@@ -144,7 +145,7 @@ public class SPConverter {
 		}
 		
 		if (this.getRep() != null){
-			SPParser parser = SPParserFactory.createParser(rep);
+			SPParser parser = SPParserFactory.createParser(rep, this.get_uuidInitNum(), this.get_uuidInitStr());
 			parser.setInfer(isInfer());
 			parser.setZip(isZip());
 			parser.setOntoDir(getOntoDir());
@@ -235,10 +236,10 @@ public class SPConverter {
 			}
 			
 			if (args[i].toLowerCase().equals("-spinitnum")) {
-				SpUUID.initUUIDNumber = Long.parseLong(args[i+1]);
+				this._uuidInitNum = Long.parseLong(args[i+1]);
 			}
 			if (args[i].toLowerCase().equals("-spinitstr")) {
-				SpUUID.initUUIDPrefix = args[i+1];
+				this._uuidInitStr = args[i+1];
 			}
 
 		}
@@ -296,6 +297,22 @@ public class SPConverter {
 
 	public void setDsName(String dsName) {
 		this.dsName = dsName;
+	}
+
+	public String get_uuidInitStr() {
+		return _uuidInitStr;
+	}
+
+	public void set_uuidInitStr(String _uuidInitStr) {
+		this._uuidInitStr = _uuidInitStr;
+	}
+
+	public long get_uuidInitNum() {
+		return _uuidInitNum;
+	}
+
+	public void set_uuidInitNum(long _uuidInitNum) {
+		this._uuidInitNum = _uuidInitNum;
 	}
 
 }

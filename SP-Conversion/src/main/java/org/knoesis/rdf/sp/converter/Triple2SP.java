@@ -8,13 +8,21 @@ import org.apache.jena.graph.NodeFactory;
 import org.apache.log4j.Logger;
 import org.knoesis.rdf.sp.model.SPNode;
 import org.knoesis.rdf.sp.model.SPTriple;
-import org.knoesis.rdf.sp.model.SpUUID;
 
 public class Triple2SP extends ContextualRepresentationConverter {
 	
 	final static Logger logger = Logger.getLogger(NamedGraph2SP.class);
 	protected static SPNode metaPredicate = null;
 	protected static SPNode metaObject = null;
+
+	public Triple2SP() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Triple2SP(long _uuidInitNum, String _uuidInitStr) {
+		super(_uuidInitNum, _uuidInitStr);
+	}
 	
 	public SPNode getMetaPredicate() {
 		return metaPredicate;
@@ -33,11 +41,6 @@ public class Triple2SP extends ContextualRepresentationConverter {
 
 	public SPNode getMetaObject() {
 		return metaObject;
-	}
-
-	public Triple2SP() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public void setMetaObject(SPNode _metaObject) {
@@ -60,8 +63,8 @@ public class Triple2SP extends ContextualRepresentationConverter {
 			
 			singletonBdr = new StringBuilder();
 			singletonBdr.append(triple.getSubject().toString());
-			singletonBdr.append(SpUUID.spDelimiter);
-			singletonBdr.append(SpUUID.getNextUUID());
+			singletonBdr.append(uuid.getSPDelimiter());
+			singletonBdr.append(uuid.getNextUUID());
 			
 			singletonNode = new SPNode(NodeFactory.createURI(singletonBdr.toString()), true);
 			
