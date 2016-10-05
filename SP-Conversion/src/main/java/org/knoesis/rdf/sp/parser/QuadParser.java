@@ -38,7 +38,7 @@ public class QuadParser extends SPParser{
 
 	
 	@Override
-	public void parseFile(String in, String extension, String rep, String dirOut) {
+	public void parseFile(String in, String extension, String rep, String fileout) {
 		
         // PipedRDFStream and PipedRDFIterator need to be on different threads
 		
@@ -48,7 +48,6 @@ public class QuadParser extends SPParser{
         final boolean isInfer = this.isInfer();
         final String conRep = rep;
         final String filein = in;
-        final String dirout = dirOut;
         final String ext = extension;
         final String ds = this.getDsName();
         final String uuidInitStr = this.getUuidInitStr();
@@ -73,7 +72,6 @@ public class QuadParser extends SPParser{
         	public void run(){
         		
           		SPProcessor processor = new SPProcessor(conRep, uuidInitNum, uuidInitStr);
-        		processor.setDirout(dirout);
         		processor.setExt(ext);
         		processor.setFilein(filein);
         		processor.setIsinfer(isInfer);
@@ -105,21 +103,23 @@ public class QuadParser extends SPParser{
         	@Override
         	public void run(){
         		// Read the data from stream to file
-        		BufferedWriter bufWriter = RDFWriteUtils.getBufferedWriter(filein, isZip);
-        		while (writerIter.hasNext()){
-        			try {
-						bufWriter.write(writerIter.next());
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-        		}
         	}
         };
         
-		ExecutorService writerExecutor = Executors.newSingleThreadExecutor();
-		writerExecutor.submit(writer);
-		writerExecutor.shutdown();
+		try{
+			BufferedWriter buffWriter = RDFWriteUtils.getBufferedWriter(fileout, isZip);
+			while (writerIter.hasNext()){
+				buffWriter.write(writerIter.next());
+			}
+			buffWriter.flush();
+			buffWriter.close();
+	 	} catch(IOException e){
+	 		
+	 	}
+       
+//		ExecutorService writerExecutor = Executors.newSingleThreadExecutor();
+//		writerExecutor.submit(writer);
+//		writerExecutor.shutdown();
 
 	}
 }

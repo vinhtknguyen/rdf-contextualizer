@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.knoesis.rdf.sp.model.SPModel;
 import org.knoesis.rdf.sp.utils.Constants;
+import org.knoesis.rdf.sp.utils.RDFWriteUtils;
 
 public abstract class SPParser {
 	
@@ -48,8 +49,8 @@ public abstract class SPParser {
 	ExecutorService consumerExecutor;
 	
 	public void parse(String file, String ext, String rep){
-		producerExecutor = Executors.newWorkStealingPool();
-		consumerExecutor = Executors.newWorkStealingPool();
+		producerExecutor = Executors.newWorkStealingPool(1);
+		consumerExecutor = Executors.newWorkStealingPool(1);
 		// If the input is a file
 		if (!Files.isDirectory(Paths.get(file))){
 			parseFile(file, ext, rep, null);
@@ -64,7 +65,7 @@ public abstract class SPParser {
 				/* PROCESS EACH INPUT FILE & GENERATE OUTPUT FILE */
 				
 				for (Path entry : stream) {
-					parseFile(entry.toString(), ext, rep, dirOut);
+					parseFile(entry.toString(), ext, rep, RDFWriteUtils.genFileOut(entry.toString(), ext, this.isZip()));
 		        }
 				
 				// Close the pool

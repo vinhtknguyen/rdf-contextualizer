@@ -1,0 +1,32 @@
+https://raw.githubusercontent.com/bio2rdf/bio2rdf-mapping/master/2/ctd/bio2rdf_ctd_sio_mapping.owl
+https://raw.githubusercontent.com/bio2rdf/bio2rdf-mapping/master/2/goa/bio2rdf_interpro_sio_mapping.owl
+https://raw.githubusercontent.com/bio2rdf/bio2rdf-mapping/master/2/goa/bio2rdf_goa_sio_mapping.owl
+https://raw.githubusercontent.com/bio2rdf/bio2rdf-mapping/master/2/pharmgkb/bio2rdf_pharmgkb_sio_mapping.owl
+https://raw.githubusercontent.com/bio2rdf/bio2rdf-mapping/master/2/mesh/bio2rdf_mesh_sio_mapping.owl
+https://raw.githubusercontent.com/bio2rdf/bio2rdf-mapping/master/2/orphanet/bio2rdf_orphanet_sio_mapping.owl
+https://raw.githubusercontent.com/bio2rdf/bio2rdf-mapping/master/2/taxonomy/bio2rdf_taxonomy_sio_mapping.owl
+https://raw.githubusercontent.com/bio2rdf/bio2rdf-mapping/master/2/ncbo/bio2rdf_ncbo_vocabulary.owl
+https://raw.githubusercontent.com/bio2rdf/bio2rdf-mapping/master/2/hgnc/bio2rdf_hgnc_vocabulary.owl
+
+https://raw.githubusercontent.com/bio2rdf/bio2rdf-mapping/master/2/goa/bio2rdf_irefindex_sio_mapping.owl
+https://raw.githubusercontent.com/bio2rdf/bio2rdf-mapping/master/2/goa/bio2rdf_irefindex_ontology.owl
+
+
+DS			SubProp		SizeGB
+affymetrix	15			1.1
+biomodels	21			0.018
+ctd			9			2.5
+drugbank	63			0.043
+goa			7			0.5
+hgnc		49			0.027
+homologene	24			0.057
+interpro	40			0.031
+irefindex	6			2.3
+mesh		46			0.072
+ncbigene	0			23
+ndc			8			0.059
+omim		65			0.124	
+pharmgkb	8			2.5
+sabiork		22			0.029	
+sgd			40			0.098
+taxonomy	16			0.17

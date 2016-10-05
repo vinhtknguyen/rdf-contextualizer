@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.jena.graph.Triple;
 import org.apache.jena.riot.RDFDataMgr;
@@ -88,25 +89,32 @@ public class TripleParser extends SPParser {
 		};
 		
 		consumerExecutor.submit(transformer);
+		ExecutorService writerExecutor = Executors.newSingleThreadExecutor();
         Runnable writer = new Runnable(){
         	@Override
         	public void run(){
         		// Read the data from stream to file
-        		BufferedWriter bufWriter = RDFWriteUtils.getBufferedWriter(filein, isZip);
-        		while (writerIter.hasNext()){
-        			try {
-						bufWriter.write(writerIter.next());
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-        		}
+    			try {
+            		BufferedWriter buffWriter = RDFWriteUtils.getBufferedWriter(filein, isZip);
+            		while (writerIter.hasNext()){
+            			buffWriter.write(writerIter.next());
+            		}
+            		buffWriter.close();
+            	} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
         	}
         };
         
-		ExecutorService writerExecutor = Executors.newSingleThreadExecutor();
 		writerExecutor.submit(writer);
 		writerExecutor.shutdown();
+		try {
+			writerExecutor.awaitTermination(Integer.MAX_VALUE, TimeUnit.SECONDS);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
