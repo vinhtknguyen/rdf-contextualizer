@@ -13,6 +13,7 @@ import org.knoesis.rdf.sp.converter.NanoPub2SP;
 import org.knoesis.rdf.sp.converter.Reification2SP;
 import org.knoesis.rdf.sp.converter.Triple2SP;
 import org.knoesis.rdf.sp.inference.ContextualInference;
+import org.knoesis.rdf.sp.model.PrefixTrie;
 import org.knoesis.rdf.sp.model.SPModel;
 import org.knoesis.rdf.sp.model.SPTriple;
 import org.knoesis.rdf.sp.utils.Constants;
@@ -28,8 +29,12 @@ public class SPProcessor{
 	protected String ontoDir;
 	protected long start;
 	protected String dsName;
+	protected boolean shortenURI = false;
+	protected String prefix;
 	
-	Map<String,String> prefixMapping = new TrieMap<String,String>();
+	// For all already-printed prefixes and namespaces
+	PrefixTrie prefixMapping = new PrefixTrie();
+	// For all possible prefixes and namespaces
 	Map<String,String> trie = new TrieMap<String,String>();
 	ContextualInference reasoner = new ContextualInference();
 	ContextualRepresentationConverter converter;
@@ -43,16 +48,14 @@ public class SPProcessor{
 		rep = _rep;
 		converter = ContextConverterFactory.createConverter(rep, uuidInitStr, uuidInitNum);
 	}
-
+	
 	public void start(){
+		start = System.currentTimeMillis();
+		trie = RDFWriteUtils.loadPrefixesToTrie(trie);
+		if (this.prefix != null) RDFWriteUtils.loadPrefixesToTrie(trie, this.prefix);
 		if (isInfer){
 			SPModel.loadModel(this.getOntoDir());
 		}
-		prefixMapping = new TrieMap<String,String>();
-		trie = new TrieMap<String,String>();
-		start = System.currentTimeMillis();
-		RDFWriteUtils.loadPrefixesToTrie(trie);
-//			writer.write(Constants.WRITE_FILE_PREFIX);
 	}
 	
 	public String process(Quad quad){
@@ -65,7 +68,7 @@ public class SPProcessor{
 		} else {
 			triples.addAll(convert(quad));
 		}
-		return RDFWriteUtils.printTriples(triples, prefixMapping, trie, ext);
+		return RDFWriteUtils.printTriples(triples, prefixMapping, trie, ext, this.isShortenURI());
 	}
 	
 	public String process(Triple triple){
@@ -77,7 +80,7 @@ public class SPProcessor{
 		} else {
 			triples.addAll(convert(triple));
 		}
-		return RDFWriteUtils.printTriples(triples, prefixMapping, trie, ext);
+		return RDFWriteUtils.printTriples(triples, prefixMapping, trie, ext, this.shortenURI);
 
 	}
 	protected List<SPTriple> convert(Quad quad){
@@ -160,6 +163,30 @@ public class SPProcessor{
 
 	public void setOntoDir(String ontoDir) {
 		this.ontoDir = ontoDir;
+	}
+
+	public boolean isInfer() {
+		return isInfer;
+	}
+
+	public void setInfer(boolean isInfer) {
+		this.isInfer = isInfer;
+	}
+
+	public boolean isShortenURI() {
+		return shortenURI;
+	}
+
+	public void setShortenURI(boolean shortenURI) {
+		this.shortenURI = shortenURI;
+	}
+
+	public String getPrefix() {
+		return prefix;
+	}
+
+	public void setPrefix(String prefix) {
+		this.prefix = prefix;
 	}
 
 

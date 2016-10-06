@@ -32,8 +32,8 @@ public class NanoPub2SPTest {
 	public void testConvert() {
 		con1.parse("src/test/resources/test-nano", "nt", rep);
 		con2.parse("src/test/resources/test-nano", "ttl", rep);
-		con1.parse("src/test/resources/test-file/test2_nano.nq", "nt", rep);
-		con2.parse("src/test/resources/test-file/test2_nano.nq", "ttl", rep);
+//		con1.parse("src/test/resources/test-file/test2_nano.nq", "nt", rep);
+//		con2.parse("src/test/resources/test-file/test2_nano.nq", "ttl", rep);
 	}
 
 	@Test

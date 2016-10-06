@@ -116,20 +116,20 @@ public class SPTriple {
 		this.singletonInstanceTriples = singletonPropertyTriples;
 	}
 
-	public String printTriple2N3(Map<String,String> prefixMapping, Map<String,String> trie){
+	public String printTriple2N3(PrefixTrie prefixMapping, Map<String,String> trie, boolean shortenAllURIs){
 		
 		StringBuilder out = new StringBuilder();
 		StringBuilder prefixes = new StringBuilder();
 
-		prefixes.append(this.printTriplePrefix(prefixMapping, trie));
+		if (shortenAllURIs) prefixes.append(this.printTriplePrefix(prefixMapping, trie, shortenAllURIs));
 
-		out.append(this.getSubject().getShorten(prefixMapping, trie));
+		out.append(this.getSubject().getShorten(prefixMapping, trie, shortenAllURIs));
 		out.append('\t');
 		
-		out.append(this.getPredicate().getShorten(prefixMapping, trie));
+		out.append(this.getPredicate().getShorten(prefixMapping, trie, shortenAllURIs));
 		out.append('\t');
 		
-		out.append(this.getObject().getShorten(prefixMapping, trie));
+		out.append(this.getObject().getShorten(prefixMapping, trie, shortenAllURIs));
 		out.append("\t . \n");
 		
 		prefixes.append(out);
@@ -137,13 +137,13 @@ public class SPTriple {
 		return prefixes.toString();
 	}
 	
-	public String printTriplePrefix(Map<String,String> prefixMapping, Map<String,String> trie){
+	public String printTriplePrefix(PrefixTrie prefixMapping, Map<String,String> trie, boolean shortenAllURIs){
 		
 		StringBuilder out = new StringBuilder();
 			// Print the prefix if not added before
-		out.append(this.subject.printNodePrefix(prefixMapping, trie));
-		out.append(this.predicate.printNodePrefix(prefixMapping, trie));
-		out.append(this.object.printNodePrefix(prefixMapping, trie));
+		out.append(this.subject.printNodePrefix(prefixMapping, trie, shortenAllURIs));
+		out.append(this.predicate.printNodePrefix(prefixMapping, trie, shortenAllURIs));
+		out.append(this.object.printNodePrefix(prefixMapping, trie, shortenAllURIs));
 		return out.toString();
 	}
 

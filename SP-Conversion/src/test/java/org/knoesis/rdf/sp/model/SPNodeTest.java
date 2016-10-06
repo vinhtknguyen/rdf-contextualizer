@@ -29,8 +29,9 @@ public class SPNodeTest {
 
 	@Test
 	public void testToN3() {
-		assertEquals(new SPNode("http://www.w3.org/2003/01/geo/wgs84_pos#lat_sp/123").toN3(new TrieMap<String,String>(), trie).getShorten(), "geol:123");
-		assertTrue(new SPNode("http://www.w3.org/2003/01/geo/wgs84_pos#long.sp.123").toN3(new TrieMap<String,String>(), trie).getShorten().contains("sp%2E123"));
+		assertEquals(new SPNode("http://www.w3.org/2003/01/geo/wgs84_pos#lat_sp/123").toN3(new PrefixTrie(), trie, true).getShorten(), "geol:123");
+		assertEquals(new SPNode("http://www.w3.org/2003/01/geo/wgs84_pos#lat_sp/123").toN3(new PrefixTrie(), trie, false).getShorten(), "http://www.w3.org/2003/01/geo/wgs84_pos#lat_sp/123");
+		assertTrue(new SPNode("http://www.w3.org/2003/01/geo/wgs84_pos#long.sp.123").toN3(new PrefixTrie(), trie, true).getShorten().contains("sp%2E123"));
 	}
 
 

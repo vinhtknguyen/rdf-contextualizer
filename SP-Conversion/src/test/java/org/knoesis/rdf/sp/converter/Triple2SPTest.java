@@ -32,8 +32,8 @@ public class Triple2SPTest {
 	public void testConvert() {
 		con1.parse("src/test/resources/test-triple", "nt", rep);
 		con2.parse("src/test/resources/test-triple", "ttl", rep);
-		con1.parse("src/test/resources/test-file/test2_triple.nt", "nt", rep);
-		con2.parse("src/test/resources/test-file/test2_triple.nt", "ttl", rep);
+//		con1.parse("src/test/resources/test-file/test2_triple.nt", "nt", rep);
+//		con2.parse("src/test/resources/test-file/test2_triple.nt", "ttl", rep);
 	}
 
 	@Test

@@ -2,9 +2,9 @@ package org.knoesis.rdf.sp.concurrent;
 
 import org.apache.jena.riot.lang.PipedRDFIterator;
 
-public class PipedNodeIterator<T> extends PipedRDFIterator<T> {
+public class PipedNodesIterator<T> extends PipedRDFIterator<T> {
 
-	public PipedNodeIterator(int BUFFER_SIZE, boolean b) {
+	public PipedNodesIterator(int BUFFER_SIZE, boolean b) {
 		super(BUFFER_SIZE, b);
 	}
 

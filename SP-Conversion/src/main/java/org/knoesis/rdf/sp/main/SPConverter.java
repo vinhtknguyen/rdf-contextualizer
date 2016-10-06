@@ -15,6 +15,7 @@ public class SPConverter {
 
 	protected String rep = null;
 	protected String ext = null;
+	protected String prefix = null;
 	protected String fileIn = null;
 	protected String metaProp = null;
 	protected String metaObj =  null;
@@ -26,54 +27,7 @@ public class SPConverter {
 	protected String dsName = null;
 	protected String _uuidInitStr = null;
 	protected long _uuidInitNum = 0;
-
-	public String getOntoDir() {
-		return ontoDir;
-	}
-
-	public void setOntoDir(String ontoDir) {
-		this.ontoDir = ontoDir;
-	}
-
-	public boolean isInfer() {
-		return infer;
-	}
-
-	public void setInfer(boolean infer) {
-		this.infer = infer;
-	}
-
-	public boolean isZip() {
-		return zip;
-	}
-
-	public void setZip(boolean zip) {
-		this.zip = zip;
-	}
-
-	public String getMetaProp() {
-		return metaProp;
-	}
-
-	public void setMetaProp(String metaProp) {
-		this.metaProp = metaProp;
-	}
-
-	public String getMetaObj() {
-		return metaObj;
-	}
-
-	public void setMetaObj(String metaObj) {
-		this.metaObj = metaObj;
-	}
-
-	public String getSpProp() {
-		return spProp;
-	}
-
-	public void setSpProp(String spProp) {
-		this.spProp = spProp;
-	}
+	protected boolean shortenURI = false;
 
 	
 	/**
@@ -90,6 +44,8 @@ public class SPConverter {
 	 * -zip
 	 * -infer 		Ontology file or directory
 	 * -url
+	 * -prefix		
+	 * -shorternURI
 	 */
 	
 	/** Examples for testing
@@ -148,6 +104,9 @@ public class SPConverter {
 			SPParser parser = SPParserFactory.createParser(rep, this.get_uuidInitNum(), this.get_uuidInitStr());
 			parser.setInfer(isInfer());
 			parser.setZip(isZip());
+			parser.setExt(this.getExt());
+			parser.setPrefix(this.getPrefix());
+			parser.setShortenURI(this.isShortenURI());
 			parser.setOntoDir(getOntoDir());
 			parser.parse(getFileIn(), getExt(), getRep());
 			parser.setDsName(getDsName());
@@ -181,6 +140,16 @@ public class SPConverter {
 			
 			// Get infer para
 			if (args[i].toLowerCase().equals("-dsName")) {
+//				System.out.println("File in: " + args[i + 1]);
+				this.setDsName(args[i+1]);;
+			}
+			// Get prefix para
+			if (args[i].toLowerCase().equals("-prefix")) {
+//				System.out.println("File in: " + args[i + 1]);
+				this.setDsName(args[i+1]);;
+			}
+			// Get shortenURI para
+			if (args[i].toLowerCase().equals("-shortenURI")) {
 //				System.out.println("File in: " + args[i + 1]);
 				this.setDsName(args[i+1]);;
 			}
@@ -315,5 +284,69 @@ public class SPConverter {
 	public void set_uuidInitNum(long _uuidInitNum) {
 		this._uuidInitNum = _uuidInitNum;
 	}
+
+	public String getPrefix() {
+		return prefix;
+	}
+
+	public void setPrefix(String prefix) {
+		this.prefix = prefix;
+	}
+	public String getOntoDir() {
+		return ontoDir;
+	}
+
+	public void setOntoDir(String ontoDir) {
+		this.ontoDir = ontoDir;
+	}
+
+	public boolean isInfer() {
+		return infer;
+	}
+
+	public void setInfer(boolean infer) {
+		this.infer = infer;
+	}
+
+	public boolean isZip() {
+		return zip;
+	}
+
+	public void setZip(boolean zip) {
+		this.zip = zip;
+	}
+
+	public String getMetaProp() {
+		return metaProp;
+	}
+
+	public void setMetaProp(String metaProp) {
+		this.metaProp = metaProp;
+	}
+
+	public String getMetaObj() {
+		return metaObj;
+	}
+
+	public void setMetaObj(String metaObj) {
+		this.metaObj = metaObj;
+	}
+
+	public String getSpProp() {
+		return spProp;
+	}
+
+	public void setSpProp(String spProp) {
+		this.spProp = spProp;
+	}
+
+	public boolean isShortenURI() {
+		return shortenURI;
+	}
+
+	public void setShortenURI(boolean shortenURI) {
+		this.shortenURI = shortenURI;
+	}
+
 
 }

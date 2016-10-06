@@ -36,15 +36,15 @@ public class SPNode {
 		this.setSingletonProperty(false);
 	}
 
-	public SPNode toN3(Map<String,String> prefixMapping, Map<String,String> trie){
+	public SPNode toN3(PrefixTrie prefixMapping, Map<String,String> trie, boolean shortenAllURIs){
 		
-		if (shorten != null & namespace != null && prefix != null) return this;
+		if (shorten != null) return this;
 		
 		if (jenaNode == null) return null;
 		
 	    if (jenaNode.isURI()) {
 			// shorten the whole URI with prefix 
-			return shortenURI(prefixMapping, trie);
+			return shortenURI(prefixMapping, trie, shortenAllURIs);
 	    }
 	    
 	    if (jenaNode.isLiteral()) {
@@ -57,10 +57,10 @@ public class SPNode {
 	    	if (!jenaNode.getLiteralDatatypeURI().equals("")){
 	    		out.append("^^");
 	    		SPNode node = new SPNode(jenaNode.getLiteralDatatypeURI());
-	    		node.toN3(prefixMapping, trie);
-	    		out.append(node.getShorten(prefixMapping, trie));
-		    	setNamespace(node.getNamespace(prefixMapping, trie));
-		    	setPrefix(node.getPrefix(prefixMapping, trie));
+	    		node.toN3(prefixMapping, trie, shortenAllURIs);
+	    		out.append(node.getShorten(prefixMapping, trie, shortenAllURIs));
+		    	setNamespace(node.getNamespace(prefixMapping, trie, shortenAllURIs));
+		    	setPrefix(node.getPrefix(prefixMapping, trie, shortenAllURIs));
 	//		    		System.out.println("output datatype: " + toN3(((Literal) in).getDatatype()));
 	    	}
 	    	setShorten(out.toString());
@@ -69,16 +69,16 @@ public class SPNode {
 	    
 	}
 	
-	public String printNodePrefix(Map<String,String> prefixMapping, Map<String,String> trie){
-		if (this.prefix == null || this.namespace == null || this.shorten == null){
-			SPNode node = toN3(prefixMapping, trie);
+	public String printNodePrefix(PrefixTrie prefixMapping, Map<String,String> trie, boolean shortenAllURIs){
+		if (this.shorten == null){
+			SPNode node = toN3(prefixMapping, trie, shortenAllURIs);
 			this.prefix = node.getPrefix();
 			this.namespace = node.getNamespace();
 			this.shorten = node.getShorten();
 		}
 		StringBuilder out = new StringBuilder();
-		if (!prefixMapping.containsKey(this.prefix)){
-			prefixMapping.put(this.prefix, this.namespace);
+		if (shortenAllURIs && prefixMapping.searchPrefix(this.prefix) == null){
+			prefixMapping.insert(this.namespace, this.prefix);
 			out.append("@prefix\t");
 			out.append(this.prefix);
 			out.append(":\t<");
@@ -89,12 +89,18 @@ public class SPNode {
 		return out.toString();
 	}
 
-	public SPNode shortenURI(Map<String,String> prefixMapping, Map<String,String> trie){
+	public SPNode shortenURI(PrefixTrie prefixMapping, Map<String,String> trie, boolean shortenAllURIs){
 		// shorten the whole URI with prefix 
 		// shorten the whole URI with prefix 
 		int len = jenaNode.toString().length();
 		String ns = null, prefix = null;
 		StringBuilder shorten = new StringBuilder();
+		
+		if (!shortenAllURIs) {
+			SPNode node = prefixMapping.shortenURI(this);
+			setShorten(node.getShorten());
+			return this;
+		}
 		
 		if (trie.containsKey(jenaNode.toString())){
 			prefix = trie.get(jenaNode.toString());
@@ -110,8 +116,11 @@ public class SPNode {
 		if (lastNsInd > 2 && jenaNode.toString().charAt(lastNsInd-1) != '/' && jenaNode.toString().charAt(lastNsInd-2) != ':' ) {
 			ns = jenaNode.toString().substring(0, lastNsInd + 1);
 			prefix = trie.get(ns);
-			if (prefix == null) prefix = RDFWriteUtils.getNextPrefixNs();
-			trie.put(ns, prefix);
+			if (prefix == null) {
+				prefix = RDFWriteUtils.getNextPrefixNs();
+				trie.put(ns, prefix);
+				System.out.println("Prefix: " + ns + " \t " + prefix);
+			}
 
 			shorten.append(prefix + ":");
 			if (!jenaNode.toString().substring(lastNsInd+1, len).isEmpty()){
@@ -125,8 +134,8 @@ public class SPNode {
 			prefix = RDFWriteUtils.getNextPrefixNs();
 			shorten.append(prefix + ":");
 			trie.put(ns, prefix);
+			System.out.println(jenaNode.toString() + " \t " + ns + "\t" + shorten);
 		}
-		System.out.println(jenaNode.toString() + " \t " + ns + "\t" + shorten);
 	    return this;
 	}
 
@@ -156,8 +165,8 @@ public class SPNode {
 	}
 
 	
-	public String getNamespace(Map<String,String> prefixMapping, Map<String,String> trie) {
-		if (namespace == null) toN3(prefixMapping, trie);
+	public String getNamespace(PrefixTrie prefixMapping, Map<String,String> trie, boolean shortenAllURIs) {
+		if (namespace == null) toN3(prefixMapping, trie, shortenAllURIs);
 		return namespace;
 	}
 
@@ -165,8 +174,8 @@ public class SPNode {
 		this.namespace = namespace;
 	}
 
-	public String getPrefix(Map<String,String> prefixMapping, Map<String,String> trie) {
-		if (prefix == null) toN3(prefixMapping, trie);
+	public String getPrefix(PrefixTrie prefixMapping, Map<String,String> trie, boolean shortenAllURIs) {
+		if (prefix == null) toN3(prefixMapping, trie, shortenAllURIs);
 		return prefix;
 	}
 
@@ -205,8 +214,8 @@ public class SPNode {
 		this.isSingletonPropertyOf = isSingletonProperty;
 	}
 
-	public String getShorten(Map<String,String> prefixMapping, Map<String,String> trie) {
-		if (prefix == null) toN3(prefixMapping, trie);
+	public String getShorten(PrefixTrie prefixMapping, Map<String,String> trie, boolean shortenAllURIs) {
+		if (prefix == null) toN3(prefixMapping, trie, shortenAllURIs);
 		return shorten;
 	}
 

@@ -78,6 +78,58 @@ public class PrefixTrie {
 		return node;
 	}
 	
+	
+	// Return the whole string if the prefix does not exist
+	public SPNode shortenURI(SPNode uri) {
+
+		Map<Character, PrefixTrieNode> children = root.children;
+		String ns = null, prefix = null;
+		
+		PrefixTrieNode curnode = null, latestLeaf = null;
+		int i = 0, lastNsInd = 0;
+		
+		final String uriStr = uri.getJenaNode().toString();
+		int len = uriStr.length();
+		StringBuilder shorten = new StringBuilder();
+		
+		for (i = 0; i < len; i++) {
+			
+			char c = uriStr.charAt(i);
+			
+			if (children.containsKey(c)) {
+				
+				curnode = children.get(c);
+				children = curnode.children;
+
+				if (curnode.isPrefix) {
+					latestLeaf = curnode;
+					lastNsInd = i+1;
+//					logger.trace("found ns " + curnode.prefix + " at " + c +" with " + uriStr.substring(i, len));
+				}
+				
+			} else {
+//				lastNsInd = i;
+				break;
+			}
+		}
+		
+		if (latestLeaf != null){
+			// Construct the shorted uri
+			ns = uriStr.substring(0, lastNsInd);
+			prefix = latestLeaf.prefix;
+//			logger.trace(uriStr + " has prefix" + prefix);
+			shorten.append(prefix + ":");
+			shorten.append(RDFWriteUtils.normalizeN3(uriStr.substring(lastNsInd, len)));
+			uri.setShorten(shorten.toString());
+		} else {
+			uri.setShorten(uri.toString());
+		}
+		uri.setNamespace(ns);
+		uri.setPrefix(prefix);
+		return uri;
+
+	}
+	
 	/**
 	 * Return a triplet of <shortenURI, prefix, namespace>
 	 * */

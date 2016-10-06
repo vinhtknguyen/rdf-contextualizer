@@ -28,8 +28,8 @@ public class Reification2SPTest {
 	public void testConvert() {
 		con1.parse("src/test/resources/test-rei", "nt", rep);
 		con2.parse("src/test/resources/test-rei", "ttl", rep);
-		con1.parse("src/test/resources/test-file/test2_rei.ttl", "nt", rep);
-		con2.parse("src/test/resources/test-file/test2_rei.ttl", "ttl", rep);
+//		con1.parse("src/test/resources/test-file/test2_rei.ttl", "nt", rep);
+//		con2.parse("src/test/resources/test-file/test2_rei.ttl", "ttl", rep);
 	}
 
 	@Test

@@ -31,7 +31,7 @@ public class RDFWriteUtilsTest {
 	@Test
 	public void testPrintTriples2N3(){
 		
-		String out = RDFWriteUtils.printTriples2N3(triples, new TrieMap<String,String>(), new TrieMap<String,String>());		
+		String out = RDFWriteUtils.printTriples2N3(triples, new PrefixTrie(), new TrieMap<String,String>(), true);		
 		System.out.println(out);
 		
 		

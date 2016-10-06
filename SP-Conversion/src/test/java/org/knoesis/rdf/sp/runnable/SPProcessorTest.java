@@ -27,6 +27,7 @@ public class SPProcessorTest {
 		tripleProcessor.setOntoDir("src/main/resources/onto");
 		tripleProcessor.setDsName("ds1");
 		tripleProcessor.setExt("ttl");
+		tripleProcessor.setShortenURI(true);
 		
 		quadProcessor.start();
 

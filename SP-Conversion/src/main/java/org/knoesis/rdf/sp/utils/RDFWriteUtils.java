@@ -26,6 +26,7 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.log4j.Logger;
+import org.knoesis.rdf.sp.model.PrefixTrie;
 import org.knoesis.rdf.sp.model.SPNode;
 import org.knoesis.rdf.sp.model.SPTriple;
 
@@ -73,36 +74,19 @@ public class RDFWriteUtils {
 		return expanded;
 	}
 	
-	public static Map<String,String> extractPrefixesfromTriples(List<SPTriple> triples, Map<String,String> prefixMapping, Map<String,String> trie){
-		for (SPTriple triple:triples){
-			prefixMapping = extractPrefixFromNode(triple.getSubject(), prefixMapping, trie);
-			prefixMapping = extractPrefixFromNode(triple.getSubject(), prefixMapping, trie);
-			prefixMapping = extractPrefixFromNode(triple.getSubject(), prefixMapping, trie);
-			
-		}
-		return prefixMapping;
-	}
-	
-	public static Map<String,String> extractPrefixFromNode(SPNode node, Map<String,String> prefixMapping, Map<String,String> trie){
-		if (node != null){
-			String prefix = node.toN3(prefixMapping, trie).getPrefix(prefixMapping, trie);
-			if (prefixMapping.get(prefix) == null) prefixMapping.put(prefix, node.getNamespace(prefixMapping, trie));
-		}
-		return prefixMapping;
-	}
 	/**
 	 * Print a list of triples
 	 * 
 	 * */
-	public static String printTriples(List<SPTriple> in, Map<String,String> prefixMapping, Map<String,String> trie, String ext){
+	public static String printTriples(List<SPTriple> in, PrefixTrie prefixMapping, Map<String,String> trie, String ext, boolean shortenAllURIs){
 		List<SPTriple> triples = new ArrayList<SPTriple>();
 		triples.addAll(expandSingletonTriples(in));
 		if (ext.toLowerCase().equals(Constants.TURTLE_EXT)){
-			return printTriples2N3(triples, prefixMapping, trie);
+			return printTriples2N3(triples, prefixMapping, trie, shortenAllURIs);
 		} else if (ext.toLowerCase().equals(Constants.NTRIPLE_EXT)){
 			return printTriples2NT(triples);
 		}
-		return printTriples2N3(triples, prefixMapping, trie);
+		return printTriples2N3(triples, prefixMapping, trie, shortenAllURIs);
 	}
 	
 	public static String printTriples2NT(List<SPTriple> triples){
@@ -119,7 +103,7 @@ public class RDFWriteUtils {
 	 * By shorting them into common subject, common predicate, and object
 	 * */
 	
-	public static String printTriples2N3(List<SPTriple> triples, Map<String,String> prefixMapping, Map<String,String> trie){
+	public static String printTriples2N3(List<SPTriple> triples, PrefixTrie prefixMapping, Map<String,String> trie, boolean shortenAllURIs){
 		if (triples == null){
 			return "";
 		}
@@ -148,7 +132,7 @@ public class RDFWriteUtils {
 		StringBuilder prefixes = new StringBuilder("");
 	
 		if (triples.size() == 0) return "";
-		if (triples.size() == 1) return triples.get(0).printTriple2N3(prefixMapping, trie);
+		if (triples.size() == 1) return triples.get(0).printTriple2N3(prefixMapping, trie, shortenAllURIs);
 		
 		for (int i = 0; i < triples.size(); i++){
 			
@@ -156,11 +140,11 @@ public class RDFWriteUtils {
 			
 			if (cur != null){
 
-				SPNode curSub = cur.getSubject().toN3(prefixMapping, trie);
-				SPNode curPred = cur.getPredicate().toN3(prefixMapping, trie);
-				SPNode curObj = cur.getObject().toN3(prefixMapping, trie);
+				SPNode curSub = cur.getSubject().toN3(prefixMapping, trie, shortenAllURIs);
+				SPNode curPred = cur.getPredicate().toN3(prefixMapping, trie, shortenAllURIs);
+				SPNode curObj = cur.getObject().toN3(prefixMapping, trie, shortenAllURIs);
 				// Generate the prefix string
-				prefixes.append(cur.printTriplePrefix(prefixMapping, trie));
+				if (shortenAllURIs) prefixes.append(cur.printTriplePrefix(prefixMapping, trie, shortenAllURIs));
 				// Print the subject for the current triple 
 				if (commonSubject == null && commonPredicate == null) {
 					
@@ -238,18 +222,22 @@ public class RDFWriteUtils {
 		return map;
 	}
 	
-	public static void loadPrefixesToTrie(Map<String,String> trie){
+	public static Map<String,String> loadPrefixesToTrie(Map<String,String> trie){
+		return loadPrefixesToTrie(trie, prefixesFile);
+	}
+	
+	public static Map<String,String> loadPrefixesToTrie(Map<String,String> trie, String file){
 		//read file into stream, try-with-resources
 		Model model = ModelFactory.createDefaultModel();
-		RDFDataMgr.read(model, prefixesFile);
-		if (model.getNsPrefixMap() == null) return;
-		else{
+		RDFDataMgr.read(model, file);
+		if (model.getNsPrefixMap() != null){
 			Iterator<Entry<String, String>> it = model.getNsPrefixMap().entrySet().iterator();
 			while (it.hasNext()) {
 			    Map.Entry<String,String> pair = (Map.Entry<String,String>)it.next();
 			    trie.put(pair.getValue(), pair.getKey());
 			}
 		}
+		return trie;
 	}
 	
 	public static int getLastIndexOfDelimiter(String uri){

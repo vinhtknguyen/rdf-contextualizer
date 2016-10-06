@@ -9,7 +9,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import org.knoesis.rdf.sp.model.SPModel;
 import org.knoesis.rdf.sp.utils.Constants;
 import org.knoesis.rdf.sp.utils.RDFWriteUtils;
 
@@ -22,6 +21,9 @@ public abstract class SPParser {
 	protected String dsName = null;
 	protected String uuidInitStr = null;
 	protected long uuidInitNum;
+	protected String prefix = null;
+	protected String ext = null;
+	protected boolean shortenURI = false;
 
 	
 	public void init(){
@@ -43,11 +45,9 @@ public abstract class SPParser {
 	}
 	
 	ExecutorService producerExecutor;
-	ExecutorService consumerExecutor;
 	
 	public void parse(String file, String ext, String rep){
-		producerExecutor = Executors.newWorkStealingPool(1);
-		consumerExecutor = Executors.newWorkStealingPool(1);
+		producerExecutor = Executors.newWorkStealingPool();
 		// If the input is a file
 		if (!Files.isDirectory(Paths.get(file))){
 			parseFile(file, ext, rep, null);
@@ -69,9 +69,8 @@ public abstract class SPParser {
 				
 				// Close the pool
 				producerExecutor.shutdown();
-				consumerExecutor.shutdown();
-				consumerExecutor.awaitTermination(Integer.MAX_VALUE, TimeUnit.SECONDS);
 				producerExecutor.awaitTermination(Integer.MAX_VALUE, TimeUnit.SECONDS);
+				System.out.println("Done processing.");
 				
 		    } catch (IOException e1) {
 				e1.printStackTrace();
@@ -137,6 +136,30 @@ public abstract class SPParser {
 
 	public void setUuidInitNum(long uuidInitNum) {
 		this.uuidInitNum = uuidInitNum;
+	}
+
+	public String getPrefix() {
+		return prefix;
+	}
+
+	public void setPrefix(String prefix) {
+		this.prefix = prefix;
+	}
+
+	public String getExt() {
+		return ext;
+	}
+
+	public void setExt(String ext) {
+		this.ext = ext;
+	}
+
+	public boolean isShortenURI() {
+		return shortenURI;
+	}
+
+	public void setShortenURI(boolean shortenURI) {
+		this.shortenURI = shortenURI;
 	}
 	
 	
