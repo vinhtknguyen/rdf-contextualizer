@@ -117,6 +117,7 @@ public class SPModel {
 	
 	
 	public static void loadModel(String file) {
+		if (file == null) return;
 		// Load ontologies from ontoDir to the model
 		// If the input is a file
 		Model onto = ModelFactory.createDefaultModel();

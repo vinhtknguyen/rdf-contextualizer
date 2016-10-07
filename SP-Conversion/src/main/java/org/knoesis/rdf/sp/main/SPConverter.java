@@ -28,6 +28,7 @@ public class SPConverter {
 	protected String _uuidInitStr = null;
 	protected long _uuidInitNum = 0;
 	protected boolean shortenURI = false;
+	protected int parallel = 1;
 
 	
 	/**
@@ -74,12 +75,12 @@ public class SPConverter {
 	 * 
 	 * 12)	-f resources/test-reing -ext NT -rep ReificationNG -spInitNum 1 -spInitStr str12
 	 * 
-	 * java -jar ~/rdf-context-converter-0.0.1-SNAPSHOT.jar -zip -f ncbo/nq -ext TTL -rep NG -spInitNum 1 -spInitStr ncbo_sp_092016 > ncbo_results.txt 
-	 * java -jar ~/rdf-context-converter-0.0.1-SNAPSHOT.jar -zip -f mesh/nq -ext TTL -rep NG -spInitNum 1 -spInitStr mesh_sp_092016 > mesh_results.txt 
-	 * java -jar ~/rdf-context-converter-0.0.1-SNAPSHOT.jar -zip -f goa/nq -ext TTL -rep NG -spInitNum 1 -spInitStr goa_sp_092016 > goa_results.txt 
-	 * java -jar ~/rdf-context-converter-0.0.1-SNAPSHOT.jar -zip -f pharmkgb/nq -ext TTL -rep NG -spInitNum 1 -spInitStr pharmkgb_sp_092016 > pharmkgb_results.txt 
-	 * java -jar ~/rdf-context-converter-0.0.1-SNAPSHOT.jar -zip -f ncbigenes/nq -ext TTL -rep NG -spInitNum 1 -spInitStr ncbigenes_sp_092016 > ncbigenes_results.txt
-	 * java -jar ~/rdf-context-converter-0.0.1-SNAPSHOT.jar -zip -f ncbo/nq -ext TTL -rep NG -spInitNum 1 -spInitStr ncbo_sp_092016 > ncbo_results.txt && java -jar ~/rdf-conversion-0.0.1-SNAPSHOT.jar -f mesh/nq -ext TTL -rep NG -spInitNum 1 -spInitStr mesh_sp_092016 > mesh_results.txt && java -jar ~/rdf-conversion-0.0.1-SNAPSHOT.jar -f goa/nq -ext TTL -rep NG -spInitNum 1 -spInitStr goa_sp_092016 > goa_results.txt && java -jar ~/rdf-conversion-0.0.1-SNAPSHOT.jar -f pharmgkb/nq -ext TTL -rep NG -spInitNum 1 -spInitStr pharmgkb_sp_092016 > pharmgkb_results.txt && java -jar ~/rdf-conversion-0.0.1-SNAPSHOT.jar -f ncbigenes/nq -ext TTL -rep NG -spInitNum 1 -spInitStr ncbigenes_sp_092016 > ncbigenes_results.txt	 
+	 * java -jar ~/rdf-context-converter-0.0.1-SNAPSHOT.jar -zip -shortenURI -f ncbo/nq -ext TTL -rep NG -spInitNum 1 -spInitStr ncbo_sp_092016 > ncbo_results.txt 
+	 * java -jar ~/rdf-context-converter-0.0.1-SNAPSHOT.jar -zip -shortenURI -f mesh/nq -ext TTL -rep NG -spInitNum 1 -spInitStr mesh_sp_092016 > mesh_results.txt 
+	 * java -jar ~/rdf-context-converter-0.0.1-SNAPSHOT.jar -zip -shortenURI -f goa/nq -ext TTL -rep NG -spInitNum 1 -spInitStr goa_sp_092016 > goa_results.txt 
+	 * java -jar ~/rdf-context-converter-0.0.1-SNAPSHOT.jar -zip -shortenURI -f pharmkgb/nq -ext TTL -rep NG -spInitNum 1 -spInitStr pharmkgb_sp_092016 > pharmkgb_results.txt 
+	 * java -jar ~/rdf-context-converter-0.0.1-SNAPSHOT.jar -zip -shortenURI -f ncbigenes/nq -ext TTL -rep NG -spInitNum 1 -spInitStr ncbigenes_sp_092016 > ncbigenes_results.txt
+	 * java -jar ~/rdf-context-converter-0.0.1-SNAPSHOT.jar -zip -shortenURI -f ncbo/nq -ext TTL -rep NG -spInitNum 1 -spInitStr ncbo_sp_092016 > ncbo_results.txt && java -jar ~/rdf-conversion-0.0.1-SNAPSHOT.jar -f mesh/nq -ext TTL -rep NG -spInitNum 1 -spInitStr mesh_sp_092016 > mesh_results.txt && java -jar ~/rdf-conversion-0.0.1-SNAPSHOT.jar -f goa/nq -ext TTL -rep NG -spInitNum 1 -spInitStr goa_sp_092016 > goa_results.txt && java -jar ~/rdf-conversion-0.0.1-SNAPSHOT.jar -f pharmgkb/nq -ext TTL -rep NG -spInitNum 1 -spInitStr pharmgkb_sp_092016 > pharmgkb_results.txt && java -jar ~/rdf-conversion-0.0.1-SNAPSHOT.jar -f ncbigenes/nq -ext TTL -rep NG -spInitNum 1 -spInitStr ncbigenes_sp_092016 > ncbigenes_results.txt	 
 	 * */
 	
 	public static void main(String[] args) {
@@ -94,22 +95,24 @@ public class SPConverter {
 	public void start(){
 		
 		// Prepare the data from url
-		if (this.getUrl() != null){
-			String dir = "ori";
-			RDFReadUtils.processUrl(url, dir);
-			this.setFileIn(dir);
+		if (this.getUrl() != null && this.getDsName() != null){
+			RDFReadUtils.fetchLinks(url, dsName);
+			return;
 		}
 		
 		if (this.getRep() != null){
+
 			SPParser parser = SPParserFactory.createParser(rep, this.get_uuidInitNum(), this.get_uuidInitStr());
+
 			parser.setInfer(isInfer());
 			parser.setZip(isZip());
 			parser.setExt(this.getExt());
 			parser.setPrefix(this.getPrefix());
 			parser.setShortenURI(this.isShortenURI());
-			parser.setOntoDir(getOntoDir());
-			parser.parse(getFileIn(), getExt(), getRep());
-			parser.setDsName(getDsName());
+			parser.setOntoDir(this.getOntoDir());
+			parser.setDsName(this.getDsName());
+			parser.setParallel(this.getParallel());
+			
 			parser.init();
 			
 			parser.parse(this.getFileIn(), this.getExt(), this.getRep());
@@ -139,7 +142,7 @@ public class SPConverter {
 			}
 			
 			// Get infer para
-			if (args[i].toLowerCase().equals("-dsName")) {
+			if (args[i].toLowerCase().equals("-dsname")) {
 //				System.out.println("File in: " + args[i + 1]);
 				this.setDsName(args[i+1]);;
 			}
@@ -149,14 +152,19 @@ public class SPConverter {
 				this.setDsName(args[i+1]);;
 			}
 			// Get shortenURI para
-			if (args[i].toLowerCase().equals("-shortenURI")) {
-//				System.out.println("File in: " + args[i + 1]);
-				this.setDsName(args[i+1]);;
+			if (args[i].toLowerCase().equals("-shortenuri")) {
+				this.setShortenURI(true);
+//				System.out.println("Shorten URI commandline: " + this.isShortenURI());
 			}
 			
 			// Get url to start with
 			if (args[i].toLowerCase().equals("-url")){
 				this.setUrl(args[i+1]);
+			}
+
+			// Get url to start with
+			if (args[i].toLowerCase().equals("-parallel")){
+				this.setParallel(Integer.parseInt(args[i+1]));
 			}
 
 			// Get input file extension
@@ -215,13 +223,13 @@ public class SPConverter {
 		}
 
 		// Check if input file is provided
-		if (this.getFileIn() == null) {
+		if (this.getFileIn() == null && this.getUrl() == null) {
 			System.out.println("Input file or folder must be provided.");
 			return;
 		}
 
 		// Check if input file is provided
-		if (this.getExt() == null) {
+		if (this.getExt() == null && this.getUrl() == null) {
 			System.out.println("Input file extension must be provided.");
 			return;
 		}
@@ -346,6 +354,14 @@ public class SPConverter {
 
 	public void setShortenURI(boolean shortenURI) {
 		this.shortenURI = shortenURI;
+	}
+
+	public int getParallel() {
+		return parallel;
+	}
+
+	public void setParallel(int parallel) {
+		this.parallel = parallel;
 	}
 
 

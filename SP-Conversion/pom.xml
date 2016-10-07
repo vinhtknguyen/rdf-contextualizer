@@ -54,7 +54,7 @@ Proceedings of 23th International Conference on the World Wide Web.</description
 									<mainClass>org.knoesis.rdf.sp.main.SPConverter</mainClass>
 								</transformer>
 								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+									implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
 							</transformers>
 						</configuration>
 					</execution>
@@ -72,7 +72,7 @@ Proceedings of 23th International Conference on the World Wide Web.</description
 		<dependency>
 			<groupId>org.apache.jena</groupId>
 			<artifactId>apache-jena-libs</artifactId>
-			<version>3.0.1</version>
+			<version>3.1.0</version>
 			<type>pom</type>
 		</dependency>
 		<dependency>

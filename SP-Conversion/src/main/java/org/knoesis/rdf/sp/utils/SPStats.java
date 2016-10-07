@@ -15,17 +15,13 @@ import org.jfree.chart.ChartUtilities;
 
 public class SPStats {
 	
-	public static void reportSystem(long start, String rep, String isInfer, String ext, String fileIn, String fileOut, String ds) {
-		long end = System.currentTimeMillis() - start;
+	public static void reportSystem(long start, long end, String rep, String isInfer, String ext, String fileIn, String fileOut, String ds, String step) {
 		
 		DecimalFormat time_formatter = new DecimalFormat("#,###.00");
-		DecimalFormat size_formatter = new DecimalFormat("#,###");
 		
 		BufferedWriter report = RDFWriteUtils.getReportWriter(Constants.STAT_FILE);
 		try {
-			report.write("Time\t\t" + time_formatter.format(end) + "\t" + rep + "\t" + isInfer + "\t" + ext + "\t" + ds + "\t" + fileOut + "\t" + "\n");
-			report.write("Diskspace\t" + size_formatter.format(Paths.get(fileOut).toFile().length()) + "\t" + rep + "\t" + isInfer + "\t" + ext + "\t" + ds + "\t" +fileOut + "\t" + "\n");
-			report.write("Diskspace\t" + size_formatter.format(Paths.get(fileIn).toFile().length()) + "\t ORI \t" + isInfer + "\t" + ext + "\t" + ds + "\t" +fileIn + "\t" + "\n");
+			report.write("Time\t\t" + time_formatter.format(end-start) + "\t" + rep + "\t" + isInfer + "\t" + ext + "\t" + ds + "\t" + step + "_"+ start + "\t" + fileOut + "\t" +  "\n");
 			report.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

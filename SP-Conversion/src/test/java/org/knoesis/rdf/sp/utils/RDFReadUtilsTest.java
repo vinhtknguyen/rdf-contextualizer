@@ -11,7 +11,7 @@ public class RDFReadUtilsTest {
 
 	@Test
 	public void testReadUrl() {
-		RDFReadUtils.readUrl("http://download.bio2rdf.org/release/4/mesh/");
+//		RDFReadUtils.readUrl("http://download.bio2rdf.org/release/3/goa");
 	}
 	@Test
 	public void testProcessUrl() {

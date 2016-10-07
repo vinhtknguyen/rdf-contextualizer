@@ -46,6 +46,7 @@ public class PrefixTrie {
 
 	// Returns if the uri is a prefix in the trie.
 	public String searchPrefix(String uri) {
+		if (uri == null) return null;
 		PrefixTrieNode node = searchNode(uri);
 
 		if (node != null && node.isLeaf)
@@ -122,7 +123,8 @@ public class PrefixTrie {
 			shorten.append(RDFWriteUtils.normalizeN3(uriStr.substring(lastNsInd, len)));
 			uri.setShorten(shorten.toString());
 		} else {
-			uri.setShorten(uri.toString());
+//			System.out.println("Full: " + uri.toString());
+			uri.setShorten("<" + uri.toString() + ">");
 		}
 		uri.setNamespace(ns);
 		uri.setPrefix(prefix);
@@ -199,7 +201,7 @@ public class PrefixTrie {
 				shorten.append(prefix + ":");
 				prefix = RDFWriteUtils.getNextPrefixNs();
 			}
-			System.out.println(uriStr + "\t" + ns + "\t" + prefix + "\t" + shorten.toString());
+			logger.trace(uriStr + "\t" + ns + "\t" + prefix + "\t" + shorten.toString());
 			insert(ns, prefix);
 		}
 		uri.setShorten(shorten.toString());

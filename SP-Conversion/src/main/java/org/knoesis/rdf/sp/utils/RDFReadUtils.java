@@ -1,5 +1,7 @@
 package org.knoesis.rdf.sp.utils;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -35,7 +37,22 @@ public class RDFReadUtils {
 		}
 		
 	}
-	
+	public static void fetchLinks(String url_in, String name){
+		List<String> urls = readUrl(url_in);
+	    BufferedWriter out;
+		try {
+			out = new BufferedWriter(new FileWriter(name + "_links.txt"));
+			for (String url: urls){
+				System.out.println(url);
+				out.write(url + "\n");
+			}
+			out.close();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+	}
 	public static void downloadFile(String url, String target){
 		try {
 			URL website = new URL(url);
@@ -58,8 +75,10 @@ public class RDFReadUtils {
 	        Elements links = doc.select("a[href]");
 	
 	        for (Element link : links) {
-	            if (link.attr("abs:href").contains(".gz")) {
+	            if (link.attr("abs:href").contains(".nq") || link.attr("abs:href").contains(".owl") || link.attr("abs:href").contains(".nt") || link.attr("abs:href").contains(".ttl")) {
+
 	            	urls.add(link.attr("abs:href").toString());
+	            	System.out.println(link.attr("abs:href").toString());
 	            }
 	        }
         } catch (IOException e){

@@ -21,6 +21,7 @@ public class Reification2SPTest {
 //		con2.setZip(true);
 		con2.setOntoDir("src/main/resources/onto");
 		con2.setInfer(true);
+		con2.setShortenURI(true);
 		con2.init();
 	}
 

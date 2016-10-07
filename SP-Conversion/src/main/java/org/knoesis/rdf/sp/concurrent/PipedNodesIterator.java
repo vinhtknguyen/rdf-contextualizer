@@ -15,6 +15,6 @@ public class PipedNodesIterator<T> extends PipedRDFIterator<T> {
 	
 	@Override
 	public void finish(){
-		
+		super.finish();
 	}
 }

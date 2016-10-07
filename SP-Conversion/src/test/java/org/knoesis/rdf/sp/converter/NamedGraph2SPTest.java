@@ -21,19 +21,25 @@ public class NamedGraph2SPTest {
 //		con2.setZip(true);
 		con2.setOntoDir("src/main/resources/onto");
 		con2.setInfer(true);
+		con2.setShortenURI(true);
+		con2.setPrefix("src/main/resources/bio2rdf_prefixes.ttl");
 		con2.init();
 	}
 
 	@Test
-	public void testConvert() {
+	public void testConvert1() {
 		con1.parse("src/test/resources/test-ng", "nt", rep);
-		con2.parse("src/test/resources/test-ng", "ttl", rep);
-//		con1.parse("src/test/resources/test-file/test2_ng.nq", "nt", rep);
-//		con2.parse("src/test/resources/test-file/test2_ng.nq", "ttl", rep);
+		con1.parse("src/test/resources/test-file/test2_ng.nq", "nt", rep);
+		
+		// Testing the case in which URIs are shortened with the pre-existing prefixes
+		con1.parse("src/test/resources/test-file/test2_ng.nq", "ttl", rep);
+		
 	}
 
 	@Test
-	public void testConvertFile() {
+	public void testConvert2() {
+		// Testing the case in which URIs are shortened with all possible prefixes
+		con2.parse("src/test/resources/test-ng", "ttl", rep);
 	}
 
 }

@@ -116,7 +116,7 @@ public class SPTriple {
 		this.singletonInstanceTriples = singletonPropertyTriples;
 	}
 
-	public String printTriple2N3(PrefixTrie prefixMapping, Map<String,String> trie, boolean shortenAllURIs){
+	public String printTriple2N3(PrefixTrie prefixMapping, PrefixTrie trie, boolean shortenAllURIs){
 		
 		StringBuilder out = new StringBuilder();
 		StringBuilder prefixes = new StringBuilder();
@@ -137,7 +137,7 @@ public class SPTriple {
 		return prefixes.toString();
 	}
 	
-	public String printTriplePrefix(PrefixTrie prefixMapping, Map<String,String> trie, boolean shortenAllURIs){
+	public String printTriplePrefix(PrefixTrie prefixMapping, PrefixTrie trie, boolean shortenAllURIs){
 		
 		StringBuilder out = new StringBuilder();
 			// Print the prefix if not added before

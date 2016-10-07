@@ -24,6 +24,7 @@ import java.util.zip.GZIPOutputStream;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.log4j.Logger;
 import org.knoesis.rdf.sp.model.PrefixTrie;
@@ -78,7 +79,7 @@ public class RDFWriteUtils {
 	 * Print a list of triples
 	 * 
 	 * */
-	public static String printTriples(List<SPTriple> in, PrefixTrie prefixMapping, Map<String,String> trie, String ext, boolean shortenAllURIs){
+	public static String printTriples(List<SPTriple> in, PrefixTrie prefixMapping, PrefixTrie trie, String ext, boolean shortenAllURIs){
 		List<SPTriple> triples = new ArrayList<SPTriple>();
 		triples.addAll(expandSingletonTriples(in));
 		if (ext.toLowerCase().equals(Constants.TURTLE_EXT)){
@@ -103,7 +104,7 @@ public class RDFWriteUtils {
 	 * By shorting them into common subject, common predicate, and object
 	 * */
 	
-	public static String printTriples2N3(List<SPTriple> triples, PrefixTrie prefixMapping, Map<String,String> trie, boolean shortenAllURIs){
+	public static String printTriples2N3(List<SPTriple> triples, PrefixTrie prefixMapping, PrefixTrie trie, boolean shortenAllURIs){
 		if (triples == null){
 			return "";
 		}
@@ -144,7 +145,7 @@ public class RDFWriteUtils {
 				SPNode curPred = cur.getPredicate().toN3(prefixMapping, trie, shortenAllURIs);
 				SPNode curObj = cur.getObject().toN3(prefixMapping, trie, shortenAllURIs);
 				// Generate the prefix string
-				if (shortenAllURIs) prefixes.append(cur.printTriplePrefix(prefixMapping, trie, shortenAllURIs));
+				prefixes.append(cur.printTriplePrefix(prefixMapping, trie, shortenAllURIs));
 				// Print the subject for the current triple 
 				if (commonSubject == null && commonPredicate == null) {
 					
@@ -222,22 +223,21 @@ public class RDFWriteUtils {
 		return map;
 	}
 	
-	public static Map<String,String> loadPrefixesToTrie(Map<String,String> trie){
-		return loadPrefixesToTrie(trie, prefixesFile);
+	public static void loadPrefixesToTrie(PrefixTrie trie){
+		loadPrefixesToTrie(trie, prefixesFile);
 	}
 	
-	public static Map<String,String> loadPrefixesToTrie(Map<String,String> trie, String file){
+	public static void loadPrefixesToTrie(PrefixTrie trie, String file){
 		//read file into stream, try-with-resources
 		Model model = ModelFactory.createDefaultModel();
-		RDFDataMgr.read(model, file);
+		RDFDataMgr.read(model,file, Lang.N3);
 		if (model.getNsPrefixMap() != null){
 			Iterator<Entry<String, String>> it = model.getNsPrefixMap().entrySet().iterator();
 			while (it.hasNext()) {
 			    Map.Entry<String,String> pair = (Map.Entry<String,String>)it.next();
-			    trie.put(pair.getValue(), pair.getKey());
+			    trie.insert(pair.getValue(), pair.getKey());
 			}
 		}
-		return trie;
 	}
 	
 	public static int getLastIndexOfDelimiter(String uri){
@@ -295,6 +295,7 @@ public class RDFWriteUtils {
 		}
 		return in;
 	}
+	
 	public static String genFileOut(String in, String ext, boolean isZip){
 		if (in != null && !isZip) {
 			
@@ -302,6 +303,9 @@ public class RDFWriteUtils {
 		}
 		return in.split("\\.")[0] + Constants.SP_SUFFIX + "." + ext.toLowerCase() + ".gz";
 		
+	}
+	public static String genDirOut(String in){
+		return in + Constants.SP_SUFFIX;
 	}
 
 	public static String genFileOutForThread(String in, String dirOut, int num, String ext, boolean isZip){

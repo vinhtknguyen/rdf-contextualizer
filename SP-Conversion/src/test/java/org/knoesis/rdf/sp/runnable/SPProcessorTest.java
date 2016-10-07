@@ -19,6 +19,9 @@ public class SPProcessorTest {
 		quadProcessor.setOntoDir("src/main/resources/onto");
 		quadProcessor.setDsName("ds1");
 		quadProcessor.setExt("ttl");
+		quadProcessor.setShortenURI(false);
+		quadProcessor.setPrefix("src/main/resources/bio2rdf_prefixes.ttl");
+		
 		
 		quadProcessor.start();
 
@@ -29,15 +32,14 @@ public class SPProcessorTest {
 		tripleProcessor.setExt("ttl");
 		tripleProcessor.setShortenURI(true);
 		
-		quadProcessor.start();
-
+		tripleProcessor.start();
 	}
 
 	@Test
 	public void testProcessQuad() {
 		String out = quadProcessor.process(new Quad(NodeFactory.createURI("http://example.com/s1"), 
 				NodeFactory.createURI("http://example.com/p1"), 
-				NodeFactory.createURI("http://example.com/o1"), 
+				NodeFactory.createURI("http://www.w3.org/1999/02/22-rdf-syntax-ns#singletonPropertyOf"), 
 				NodeFactory.createURI("http://example.com/g1")));
 		System.out.println("Quad processing output ======= \n " + out);
 	}
@@ -45,7 +47,7 @@ public class SPProcessorTest {
 	@Test
 	public void testProcessTriple() {
 		String out = tripleProcessor.process(new Triple(NodeFactory.createURI("http://example.com/s1"), 
-				NodeFactory.createURI("http://example.com/p1"), 
+				NodeFactory.createURI("http://www.w3.org/1999/02/22-rdf-syntax-ns#singletonPropertyOf"), 
 				NodeFactory.createURI("http://example.com/o1")));
 		System.out.println("Triple processing output ======= \n " + out);
 	}

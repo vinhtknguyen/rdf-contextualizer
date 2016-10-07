@@ -2,7 +2,6 @@ package org.knoesis.rdf.sp.runnable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.jena.graph.Triple;
 import org.apache.jena.sparql.core.Quad;
@@ -19,8 +18,6 @@ import org.knoesis.rdf.sp.model.SPTriple;
 import org.knoesis.rdf.sp.utils.Constants;
 import org.knoesis.rdf.sp.utils.RDFWriteUtils;
 
-import com.romix.scala.collection.concurrent.TrieMap;
-
 public class SPProcessor{
 
 	protected String ext;
@@ -29,13 +26,13 @@ public class SPProcessor{
 	protected String ontoDir;
 	protected long start;
 	protected String dsName;
-	protected boolean shortenURI = false;
+	protected boolean shortenURI = true;
 	protected String prefix;
 	
 	// For all already-printed prefixes and namespaces
 	PrefixTrie prefixMapping = new PrefixTrie();
 	// For all possible prefixes and namespaces
-	Map<String,String> trie = new TrieMap<String,String>();
+	PrefixTrie trie = new PrefixTrie();
 	ContextualInference reasoner = new ContextualInference();
 	ContextualRepresentationConverter converter;
 	
@@ -51,10 +48,17 @@ public class SPProcessor{
 	
 	public void start(){
 		start = System.currentTimeMillis();
-		trie = RDFWriteUtils.loadPrefixesToTrie(trie);
-		if (this.prefix != null) RDFWriteUtils.loadPrefixesToTrie(trie, this.prefix);
+//		RDFWriteUtils.loadPrefixesToTrie(trie);
+		if (this.prefix != null) {
+			System.out.println("Loading prefixes ..." + prefix);
+			RDFWriteUtils.loadPrefixesToTrie(trie, this.prefix);
+			System.out.println("Done loading prefixes.");
+		}
+
 		if (isInfer){
+			System.out.println("Loading ontologies from " + this.getOntoDir());
 			SPModel.loadModel(this.getOntoDir());
+			System.out.println("Done loading ontologies.");
 		}
 	}
 	
@@ -117,12 +121,14 @@ public class SPProcessor{
 	}
 	
 	
-	public void finish(){
+	public String finish(){
 		List<SPTriple> triples = new ArrayList<SPTriple>();
  		if (isInfer) {
        		// Generate the generic property triples
    			triples.addAll(reasoner.generateGenericPropertyTriplesPerFile());
+   			return RDFWriteUtils.printTriples(triples, prefixMapping, trie, ext, this.shortenURI);
    		}
+ 		return "";
 	}
 	
 	public String getExt() {
