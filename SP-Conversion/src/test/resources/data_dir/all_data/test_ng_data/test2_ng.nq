@@ -1,0 +1,10 @@
+<http://bio2rdf.org/mesh:D000001> <http://purl.org/dc/terms/identifier> "mesh:D000001"^^<http://www.w3.org/2001/XMLSchema#string> <http://bio2rdf.org/mesh_resource:bio2rdf.dataset.mesh.R4> .
+<http://bio2rdf.org/mesh:D000001> <http://bio2rdf.org/bio2rdf_vocabulary:namespace> "mesh"^^<http://www.w3.org/2001/XMLSchema#string> <http://bio2rdf.org/mesh_resource:bio2rdf.dataset.mesh.R4> .
+<http://bio2rdf.org/mesh:D000001> <http://bio2rdf.org/bio2rdf_vocabulary:identifier> "D000001"^^<http://www.w3.org/2001/XMLSchema#string> <http://bio2rdf.org/mesh_resource:bio2rdf.dataset.mesh.R4> .
+<http://bio2rdf.org/mesh:D000001> <http://bio2rdf.org/bio2rdf_vocabulary:uri> "http://bio2rdf.org/mesh:D000001"^^<http://www.w3.org/2001/XMLSchema#string> <http://bio2rdf.org/mesh_resource:bio2rdf.dataset.mesh.R4> .
+<http://bio2rdf.org/bio2rdf_vocabulary:namespace> <http://www.w3.org/2000/01/rdf-schema#label> "Bio2RDF namespace" <http://bio2rdf.org/mesh_resource:bio2rdf.dataset.mesh.R4> .
+<http://bio2rdf.org/bio2rdf_vocabulary:namespace> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> <http://bio2rdf.org/mesh_resource:bio2rdf.dataset.mesh.R4> .
+<http://bio2rdf.org/bio2rdf_vocabulary:identifier> <http://www.w3.org/2000/01/rdf-schema#label> "Bio2RDF identifier" <http://bio2rdf.org/mesh_resource:bio2rdf.dataset.mesh.R4> .
+<http://bio2rdf.org/bio2rdf_vocabulary:identifier> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> <http://bio2rdf.org/mesh_resource:bio2rdf.dataset.mesh.R4> .
+<http://bio2rdf.org/bio2rdf_vocabulary:uri> <http://www.w3.org/2000/01/rdf-schema#label> "Bio2RDF uri" <http://bio2rdf.org/mesh_resource:bio2rdf.dataset.mesh.R4> .
+<http://bio2rdf.org/bio2rdf_vocabulary:uri> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> <http://bio2rdf.org/mesh_resource:bio2rdf.dataset.mesh.R4> .

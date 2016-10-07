@@ -1,5 +1,8 @@
 package org.knoesis.rdf.sp.main;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import org.apache.log4j.Logger;
 import org.knoesis.rdf.sp.parser.SPParser;
 import org.knoesis.rdf.sp.parser.SPParserFactory;
@@ -32,7 +35,7 @@ public class SPConverter {
 
 	
 	/**
-	 * java -jar Conversion.jar -r NQUAD/TRIPLE/REI -e TTL/NT -f file/folder 
+	 * java -jar ~/rdf-context-converter-0.0.1-SNAPSHOT.jar -zip -shortenURI -f datasets -ext TTL -rep NG -spInitNum 1 -spInitStr ncbo_sp_092016 > ncbo_results.txt
 	 * 
 	 * @param args
 	 * -rep 		NQUAD/NANO/TRIPLE/REI as input file representation
@@ -110,7 +113,6 @@ public class SPConverter {
 			parser.setPrefix(this.getPrefix());
 			parser.setShortenURI(this.isShortenURI());
 			parser.setOntoDir(this.getOntoDir());
-			parser.setDsName(this.getDsName());
 			parser.setParallel(this.getParallel());
 			
 			parser.init();
@@ -127,7 +129,12 @@ public class SPConverter {
 			// Get input file
 			if (args[i].toLowerCase().equals("-f")) {
 //				System.out.println("File in: " + args[i + 1]);
-				this.setFileIn(args[i + 1]);
+				String filename = args[i + 1];
+				if (!Files.exists(Paths.get(filename))){
+					System.out.println("File " + filename + " does not exist.\n");
+					return;
+				}
+				this.setFileIn(filename);
 			}
 			// Get zip para
 			if (args[i].toLowerCase().equals("-zip")) {
@@ -149,7 +156,12 @@ public class SPConverter {
 			// Get prefix para
 			if (args[i].toLowerCase().equals("-prefix")) {
 //				System.out.println("File in: " + args[i + 1]);
-				this.setDsName(args[i+1]);;
+				String filename = args[i + 1];
+				if (!Files.exists(Paths.get(filename))){
+					System.out.println("File " + filename + " does not exist.\n");
+					return;
+				}
+				this.setPrefix(filename);
 			}
 			// Get shortenURI para
 			if (args[i].toLowerCase().equals("-shortenuri")) {

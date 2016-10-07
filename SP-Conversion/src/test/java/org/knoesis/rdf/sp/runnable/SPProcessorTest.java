@@ -6,6 +6,8 @@ import org.apache.jena.graph.Triple;
 import org.apache.jena.sparql.core.Quad;
 import org.junit.Before;
 import org.junit.Test;
+import org.knoesis.rdf.sp.utils.Constants;
+import org.knoesis.rdf.sp.utils.ConstantsTest;
 
 public class SPProcessorTest {
 
@@ -14,20 +16,20 @@ public class SPProcessorTest {
 
 	@Before
 	public void setUp() throws Exception {
-		quadProcessor = new SPProcessor("ng");
+		quadProcessor = new SPProcessor(Constants.NG_REP);
 		quadProcessor.setIsinfer(true);
-		quadProcessor.setOntoDir("src/main/resources/onto");
+		quadProcessor.setOntoDir(ConstantsTest.test_data_onto);
 		quadProcessor.setDsName("ds1");
 		quadProcessor.setExt("ttl");
 		quadProcessor.setShortenURI(false);
-		quadProcessor.setPrefix("src/main/resources/bio2rdf_prefixes.ttl");
+		quadProcessor.setPrefix(ConstantsTest.test_data_prefix + "/bio2rdf_prefixes.ttl");
 		
 		
 		quadProcessor.start();
 
-		tripleProcessor = new SPProcessor("triple");
+		tripleProcessor = new SPProcessor(Constants.TRIPLE_REP);
 		tripleProcessor.setIsinfer(true);
-		tripleProcessor.setOntoDir("src/main/resources/onto");
+		tripleProcessor.setOntoDir(ConstantsTest.test_data_onto);
 		tripleProcessor.setDsName("ds1");
 		tripleProcessor.setExt("ttl");
 		tripleProcessor.setShortenURI(true);
