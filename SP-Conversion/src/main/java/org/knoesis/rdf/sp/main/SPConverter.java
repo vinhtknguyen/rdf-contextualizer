@@ -5,7 +5,6 @@ import java.nio.file.Paths;
 
 import org.apache.log4j.Logger;
 import org.knoesis.rdf.sp.parser.SPParser;
-import org.knoesis.rdf.sp.parser.SPParserFactory;
 import org.knoesis.rdf.sp.utils.Constants;
 import org.knoesis.rdf.sp.utils.RDFReadUtils;
 
@@ -108,7 +107,7 @@ public class SPConverter {
 		
 		if (this.getRep() != null){
 
-			SPParser parser = SPParserFactory.createParser(rep, this.get_uuidInitNum(), this.get_uuidInitStr());
+			SPParser parser = new SPParser(rep, this.get_uuidInitNum(), this.get_uuidInitStr());
 
 			parser.setInfer(isInfer());
 			parser.setZip(isZip());
@@ -118,8 +117,6 @@ public class SPConverter {
 			parser.setShortenURI(this.isShortenURI());
 			parser.setOntoDir(this.getOntoDir());
 			parser.setParallel(this.getParallel());
-			
-			parser.init();
 			
 			parser.parse(this.getFileIn(), this.getExt(), this.getRep());
 		}

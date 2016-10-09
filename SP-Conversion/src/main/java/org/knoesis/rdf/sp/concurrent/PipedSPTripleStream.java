@@ -30,5 +30,4 @@ public class PipedSPTripleStream extends PipedRDFStream<SPTriple> implements Str
 		// TODO Auto-generated method stub
 		
 	}
-	
 }

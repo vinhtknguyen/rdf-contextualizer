@@ -3,7 +3,6 @@ package org.knoesis.rdf.sp.inference;
 import org.junit.Before;
 import org.junit.Test;
 import org.knoesis.rdf.sp.parser.SPParser;
-import org.knoesis.rdf.sp.parser.SPParserFactory;
 import org.knoesis.rdf.sp.utils.Constants;
 import org.knoesis.rdf.sp.utils.ConstantsTest;
 
@@ -14,11 +13,10 @@ public class ContextualInferenceTest {
 	String rep = Constants.NG_REP;
 	@Before
 	public void setUp() throws Exception {
-		con = SPParserFactory.createParser(rep);
+		con = new SPParser(rep);
 		con.setOntoDir(ConstantsTest.test_data_onto);
 		con.setInfer(true);
 		con.setShortenURI(true);
-		con.init();
 	}
 
 	@Test

@@ -1,20 +1,20 @@
-package org.knoesis.rdf.sp.runnable;
+package org.knoesis.rdf.sp.callable;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.concurrent.Callable;
 
-import org.apache.jena.riot.lang.PipedRDFIterator;
+import org.knoesis.rdf.sp.concurrent.PipedNodesIterator;
 import org.knoesis.rdf.sp.utils.Constants;
 import org.knoesis.rdf.sp.utils.RDFWriteUtils;
 import org.knoesis.rdf.sp.utils.Reporter;
 
 public class CallableWriter implements Callable<String> {
 
-	PipedRDFIterator<String> transformerIter;
+	PipedNodesIterator transformerIter;
 	Reporter reporter;
 
-    public CallableWriter(PipedRDFIterator<String> transformerIter, Reporter reporter) {
+    public CallableWriter(PipedNodesIterator transformerIter, Reporter reporter) {
 		super();
 		this.transformerIter = transformerIter;
 		this.reporter = reporter;
@@ -23,21 +23,24 @@ public class CallableWriter implements Callable<String> {
 	@Override
     public String call() {
 		long start = System.currentTimeMillis();
-        // Call the parsing process.
+		reporter.reportStartStatus(Constants.PROCESSING_STEP_WRITE);
+       // Call the parsing process.
 		
         BufferedWriter buffWriter = RDFWriteUtils.getBufferedWriter(reporter.getFileout(), reporter.isZip(), reporter.getBufferSizeWriter());
 		try {
+			transformerIter.start();
  			while (transformerIter.hasNext()){
 				// Put the output to the writerInputStream
- 				String out = transformerIter.next();
-				if (out != null) buffWriter.write(out.toString());
+ 				Object out = transformerIter.next();
+ 				if (out instanceof String){
+ 					if (out != null) buffWriter.write(out.toString());
+ 				}
 			}
- 			buffWriter.close();
+ 			transformerIter.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally{
- 			transformerIter.close();
 			try {
     			buffWriter.close();
 			} catch (IOException e) {

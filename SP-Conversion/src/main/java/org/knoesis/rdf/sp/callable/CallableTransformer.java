@@ -1,4 +1,4 @@
-package org.knoesis.rdf.sp.runnable;
+package org.knoesis.rdf.sp.callable;
 
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -6,6 +6,7 @@ import java.util.concurrent.Callable;
 import org.apache.jena.riot.lang.PipedRDFIterator;
 import org.apache.jena.riot.lang.PipedRDFStream;
 import org.knoesis.rdf.sp.concurrent.PipedNodesStream;
+import org.knoesis.rdf.sp.concurrent.PipedSPTripleIterator;
 import org.knoesis.rdf.sp.model.SPTriple;
 import org.knoesis.rdf.sp.utils.Constants;
 import org.knoesis.rdf.sp.utils.RDFWriteUtils;
@@ -14,12 +15,12 @@ import org.knoesis.rdf.sp.utils.Reporter;
 import com.romix.scala.collection.concurrent.TrieMap;
 
 public class CallableTransformer implements Callable<String>{
-	PipedRDFStream<String> transformerInputStream;
-    PipedRDFIterator<SPTriple> converterIter;
+	PipedNodesStream transformerInputStream;
+    PipedSPTripleIterator converterIter;
 	Reporter reporter;
 
-    public CallableTransformer(PipedRDFStream<String> transformerInputStream,
-			PipedRDFIterator<SPTriple> converterIter, Reporter reporter) {
+    public CallableTransformer(PipedNodesStream transformerInputStream,
+    		PipedSPTripleIterator converterIter, Reporter reporter) {
 		super();
 		this.transformerInputStream = transformerInputStream;
 		this.converterIter = converterIter;
@@ -29,7 +30,8 @@ public class CallableTransformer implements Callable<String>{
 	@Override
     public String call() {
 		long start = System.currentTimeMillis();
-        Map<String,String> prefixMapping = new TrieMap<String,String>();
+		reporter.reportStartStatus(Constants.PROCESSING_STEP_TRANFORM);
+		Map<String,String> prefixMapping = new TrieMap<String,String>();
         Map<String,String> trie = new TrieMap<String,String>();
 		
         transformerInputStream.start();
@@ -45,7 +47,9 @@ public class CallableTransformer implements Callable<String>{
 				}
 			}
         } finally{
-	        transformerInputStream.finish();
+        	converterIter.close();
+        	transformerInputStream.finish();
+        	
 			reporter.reportSystem(start, Constants.PROCESSING_STEP_TRANFORM);
         }
 		return reporter.getFilename();
@@ -56,7 +60,7 @@ public class CallableTransformer implements Callable<String>{
 	}
 
 	public void setTransformerInputStream(
-			PipedRDFStream<String> transformerInputStream) {
+			PipedNodesStream transformerInputStream) {
 		this.transformerInputStream = transformerInputStream;
 	}
 
@@ -64,7 +68,7 @@ public class CallableTransformer implements Callable<String>{
 		return converterIter;
 	}
 
-	public void setConverterIter(PipedRDFIterator<SPTriple> converterIter) {
+	public void setConverterIter(PipedSPTripleIterator converterIter) {
 		this.converterIter = converterIter;
 	}
 

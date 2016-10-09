@@ -6,6 +6,7 @@ import org.apache.jena.graph.Triple;
 import org.apache.jena.sparql.core.Quad;
 import org.junit.Before;
 import org.junit.Test;
+import org.knoesis.rdf.sp.callable.SPProcessor;
 import org.knoesis.rdf.sp.utils.Constants;
 import org.knoesis.rdf.sp.utils.ConstantsTest;
 
@@ -20,7 +21,7 @@ public class SPProcessorTest {
 		quadProcessor.setIsinfer(true);
 		quadProcessor.setOntoDir(ConstantsTest.test_data_onto);
 		quadProcessor.setDsName("ds1");
-		quadProcessor.setExt("ttl");
+		quadProcessor.setExt("nt");
 		quadProcessor.setShortenURI(false);
 		quadProcessor.setPrefix(ConstantsTest.test_data_prefix + "/bio2rdf_prefixes.ttl");
 		
@@ -31,7 +32,7 @@ public class SPProcessorTest {
 		tripleProcessor.setIsinfer(true);
 		tripleProcessor.setOntoDir(ConstantsTest.test_data_onto);
 		tripleProcessor.setDsName("ds1");
-		tripleProcessor.setExt("ttl");
+		tripleProcessor.setExt("nt");
 		tripleProcessor.setShortenURI(true);
 		
 		tripleProcessor.start();

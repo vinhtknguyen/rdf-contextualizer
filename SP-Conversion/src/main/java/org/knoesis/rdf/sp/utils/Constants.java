@@ -68,10 +68,11 @@ public class Constants {
 	public static final String ORIGINAL_DIRECTORY = "ori";
 	public static final String REPORTS_DIRECTORY = "reports";
 	public static final String STAT_FILE = "sp_stat.txt";
-	public static final String PROCESSING_STEP_PARSE = "parse";
-	public static final String PROCESSING_STEP_CONVERT = "convert";
-	public static final String PROCESSING_STEP_TRANFORM = "transform";
-	public static final String PROCESSING_STEP_WRITE = "write";
+	public static final String PROCESSING_STEP_PARSE = "parsing";
+	public static final String PROCESSING_STEP_CONVERT = "converting";
+	public static final String PROCESSING_STEP_TRANFORM = "transforming";
+	public static final String PROCESSING_STEP_SPLITTING = "splitting";
+	public static final String PROCESSING_STEP_WRITE = "writing";
 	public static final String OPTIONS_INFER = "infer";
 	public static final String OPTIONS_NO_INFER = "no_infer";
 	public static final String DATA_DIR = "data";

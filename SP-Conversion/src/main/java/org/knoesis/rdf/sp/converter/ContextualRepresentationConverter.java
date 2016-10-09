@@ -43,8 +43,9 @@ public class ContextualRepresentationConverter {
 		return new SPTriple(triple.getSubject(), triple.getPredicate(), triple.getPredicate());
 	}
 
-	public SPTriple transformQuad(Quad triple) {
-		return null;
+	public SPTriple transformQuad(Quad quad) {
+		NamedGraph2SP ng = new NamedGraph2SP();
+		return ng.transformQuad(quad);
 	}
 
 	public SPNode getSingletonPropertyOf() {

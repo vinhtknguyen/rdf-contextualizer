@@ -8,8 +8,8 @@ public class PipedNodesIterator extends PipedRDFIterator<String> {
 		super(BUFFER_SIZE, b);
 	}
 
-	public PipedNodesIterator(int BUFFER_SIZE, boolean b, int i, int j) {
-		super(BUFFER_SIZE, b, i, j);
+	public PipedNodesIterator(int bufferSizeStream) {
+		super(bufferSizeStream);
 	}
 
 	/* 
@@ -22,21 +22,12 @@ public class PipedNodesIterator extends PipedRDFIterator<String> {
 	
 	@Override 
 	public void finish(){
-		registered--;
-		if (registered == 0){
-			super.finish();
-			isClosed = true;
-			close();
-		}
+		super.finish();
 	}
 	
 	@Override 
 	public void start(){
-		registered++;
-		if (registered == 1){
-			super.start();
-			isClosed = false;
-		}
+		super.start();
 	}
 	
 	public boolean isClose(){

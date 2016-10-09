@@ -15,11 +15,13 @@ public class Reporter {
 	boolean shortenURI;
 	boolean zip;
 	int bufferSizeWriter;
-	
+	long uuidInitNum;
+	String uuidInitStr;
+	String ontoDir;
 	
 	public Reporter(String rep, boolean infer, String ext,
 			String filename, String filein ,String fileout,
-			String dsName, boolean shortenURI, boolean zip, int bufferSizeWriter) {
+			String dsName, boolean shortenURI, boolean zip, int bufferSizeWriter, long uuidInitNum, String uuidInitStr, String ontoDir) {
 		super();
 		this.rep = rep;
 		this.infer = infer;
@@ -31,13 +33,20 @@ public class Reporter {
 		this.shortenURI = shortenURI;
 		this.zip = zip;
 		this.bufferSizeWriter = bufferSizeWriter;
+		this.ontoDir = ontoDir;
+		this.uuidInitNum = uuidInitNum;
+		this.uuidInitStr = uuidInitStr;
 	}
 	
 	public void reportSystem(long start, String step){
 		this.step = step;
 		long end = System.currentTimeMillis();
-	    System.out.println(filename + ": pthread " + Thread.currentThread().getId() + " " + step + " the file in " + (end-start) + " ms.");
+	    System.out.println(filename + ": pthread " + Thread.currentThread().getId() + " " + step + " in " + (end-start) + " ms.");
 		SPStats.reportSystem(start, end, rep, (infer?Constants.OPTIONS_INFER:Constants.OPTIONS_NO_INFER), ext, filename, Paths.get(filein).toFile().length(), Paths.get(fileout).toFile().length(), fileout, dsName, step);
+	}
+	
+	public void reportStartStatus(String step){
+	    System.out.println(filename + ": pthread " + Thread.currentThread().getId() + " started " + step);
 	}
 
 	public long getStart() {
@@ -134,6 +143,30 @@ public class Reporter {
 
 	public void setBufferSizeWriter(int bufferSizeWriter) {
 		this.bufferSizeWriter = bufferSizeWriter;
+	}
+
+	public long getUuidInitNum() {
+		return uuidInitNum;
+	}
+
+	public void setUuidInitNum(long uuidInitNum) {
+		this.uuidInitNum = uuidInitNum;
+	}
+
+	public String getUuidInitStr() {
+		return uuidInitStr;
+	}
+
+	public void setUuidInitStr(String uuidInitStr) {
+		this.uuidInitStr = uuidInitStr;
+	}
+
+	public String getOntoDir() {
+		return ontoDir;
+	}
+
+	public void setOntoDir(String ontoDir) {
+		this.ontoDir = ontoDir;
 	}
 
 }

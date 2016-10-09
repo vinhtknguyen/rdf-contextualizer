@@ -9,14 +9,8 @@ public class PipedSPTripleIterator extends PipedRDFIterator<SPTriple> {
 		super(BUFFER_SIZE, b);
 	}
 
-	@Override 
-	public void finish(){
-		super.finish();
-	}
-	
-	@Override 
-	public void start(){
-		super.start();
+	public PipedSPTripleIterator(int BUFFER_SIZE) {
+		super(BUFFER_SIZE);
 	}
 	
 }

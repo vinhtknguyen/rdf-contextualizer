@@ -13,11 +13,26 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.jena.riot.lang.PipedRDFIterator;
+import org.apache.jena.riot.lang.PipedRDFStream;
+import org.knoesis.rdf.sp.callable.CallableConverter;
+import org.knoesis.rdf.sp.callable.CallableParser;
+import org.knoesis.rdf.sp.callable.CallableStreamSplitter;
+import org.knoesis.rdf.sp.callable.CallableTransformer;
+import org.knoesis.rdf.sp.callable.CallableWriter;
+import org.knoesis.rdf.sp.callable.SPProcessor;
+import org.knoesis.rdf.sp.concurrent.PipedNodesIterator;
+import org.knoesis.rdf.sp.concurrent.PipedNodesStream;
+import org.knoesis.rdf.sp.concurrent.PipedQuadTripleIterator;
+import org.knoesis.rdf.sp.concurrent.PipedQuadTripleStream;
+import org.knoesis.rdf.sp.concurrent.PipedSPTripleIterator;
+import org.knoesis.rdf.sp.concurrent.PipedSPTripleStream;
 import org.knoesis.rdf.sp.model.SPModel;
 import org.knoesis.rdf.sp.utils.Constants;
 import org.knoesis.rdf.sp.utils.RDFWriteUtils;
+import org.knoesis.rdf.sp.utils.Reporter;
 
-public abstract class SPParser {
+public class SPParser {
 	
 	protected boolean infer = false;
 	protected boolean zip = false;
@@ -34,24 +49,106 @@ public abstract class SPParser {
 	protected int bufferSizeWriter = Constants.BUFFER_SIZE_WRITER;
 
 	
-	public void init(){
-		
-	}
-	
-	public SPParser() {
+	public SPParser(String rep) {
+		this.rep = rep;
 		uuidInitStr = Constants.SP_UUID_PREFIX;
 		uuidInitNum = System.currentTimeMillis();
 	}
 
-	public SPParser(long _uuidInitNum, String _uuidInitStr) {
+	public SPParser(String rep, long _uuidInitNum, String _uuidInitStr) {
+		this.rep = rep;
 		uuidInitStr = _uuidInitStr;
 		uuidInitNum = _uuidInitNum;
 	}
 
-	public void parseFile(String file, String ext, String rep, String fileout){
+	public void parseFile(String filein, String ext, String rep, String fileout){
+		// Check the condition before submitting new tasks
+        while (!canSubmitTask(futureParserList)) {
+        	// Wait until the parser and writer of the same task finish, then start a new task
+//        	checkFutures(futureConverterList);
+        }
+
+        PipedQuadTripleIterator processorIter = new PipedQuadTripleIterator(bufferSizeStream, false);
+		final PipedQuadTripleStream processorInputStream = new PipedQuadTripleStream(processorIter);
+
+		final String filename = RDFWriteUtils.getPrettyName(filein);
+
+		Reporter reporter = new Reporter(rep, infer, ext, filename, filein, fileout, dsName, this.shortenURI, zip, bufferSizeWriter, uuidInitNum, uuidInitStr, ontoDir);
 		
+    	int round = findConverterNum(filein);
+    	
+    	if (round == 1){
+    		// One thread for each task
+    		CallableParser<Object> parser = new CallableParser<Object>(processorInputStream, reporter);
+        	futureParserList.add(parserExecutor.submit(parser));
+
+        	PipedSPTripleIterator converterIter = new PipedSPTripleIterator(bufferSizeStream, false);
+    		PipedSPTripleStream converterInputStream = new PipedSPTripleStream(converterIter);
+    		PipedNodesIterator transformerIter = new PipedNodesIterator(bufferSizeStream, false);
+    		PipedNodesStream transformerInputStream = new PipedNodesStream(transformerIter);
+
+    		CallableConverter<Object> converter = new CallableConverter<Object>(processorIter, converterInputStream, reporter);
+            CallableTransformer transformer = new CallableTransformer(transformerInputStream, converterIter, reporter);
+            CallableWriter writer = new CallableWriter(transformerIter, reporter);
+            
+    		futureConverterList.add(converterExecutor.submit(converter));
+    		futureConverterList.add(converterExecutor.submit(transformer));
+    		futureConverterList.add(converterExecutor.submit(writer));
+   		
+    	} else {
+    		// Split the input stream into N sub-stream with N = round
+        	List<PipedQuadTripleStream> subProcessorStreams = new ArrayList<PipedQuadTripleStream>();
+        	List<PipedQuadTripleIterator> subProcessorIters = new ArrayList<PipedQuadTripleIterator>();
+        	for (int i = 0; i < round - 1; i++){
+        		PipedQuadTripleIterator subProcessorIter = new  PipedQuadTripleIterator(bufferSizeStream, false);
+        		PipedQuadTripleStream subProcessorStream = new PipedQuadTripleStream(subProcessorIter);
+        		subProcessorStreams.add(subProcessorStream);
+        		subProcessorIters.add(subProcessorIter);
+        	}
+    		// Start the parser
+    		CallableParser<Object> parser = new CallableParser<Object>(processorInputStream, reporter);
+        	futureParserList.add(parserExecutor.submit(parser));
+        	
+        	CallableStreamSplitter splitter = new CallableStreamSplitter(processorIter, subProcessorStreams, reporter);
+        	futureConverterList.add(converterExecutor.submit(splitter));
+        	
+        	// For each stream, create a set of tasks with the sub-stream input
+        	for (int i = 0; i < round - 1; i++){
+        		
+                PipedSPTripleIterator converterIter = new PipedSPTripleIterator(bufferSizeStream, false);
+        		PipedSPTripleStream converterInputStream = new PipedSPTripleStream(converterIter);
+        		PipedNodesIterator transformerIter = new PipedNodesIterator(bufferSizeStream, false);
+        		PipedNodesStream transformerInputStream = new PipedNodesStream(transformerIter);
+
+        		CallableConverter<Object> converter = new CallableConverter<Object>(subProcessorIters.get(i), converterInputStream, reporter);
+                CallableTransformer transformer = new CallableTransformer(transformerInputStream, converterIter, reporter);
+                CallableWriter writer = new CallableWriter(transformerIter, reporter);
+                
+        		futureConverterList.add(converterExecutor.submit(converter));
+        		futureConverterList.add(converterExecutor.submit(transformer));
+        		futureConverterList.add(converterExecutor.submit(writer));
+        	}
+    		
+    	}
+
 	}
-	
+	public int findConverterNum(String filein){
+        boolean zipfile = filein.endsWith(".gz");
+        int num = 1;
+		if (zipfile){ 
+			if (Paths.get(filein).toFile().length() > Constants.FILE_ZIP_SIZE_MEDIUM){
+				num = 2;
+			}
+			if (Paths.get(filein).toFile().length() > Constants.FILE_ZIP_SIZE_LARGE){
+				num = 3;
+			}
+		} else if (Paths.get(filein).toFile().length() > Constants.FILE_REGULAR_SIZE_LARGE){
+			num = 3;
+		}
+		return num;
+
+	}
+
 	public void parseDir(String filein, String ext, String rep, String fileout){
 
 		if (!Files.isDirectory(Paths.get(filein))){
@@ -89,7 +186,7 @@ public abstract class SPParser {
 	ExecutorService parserExecutor;
 	List<Future<String>> futureConverterList = new ArrayList<Future<String>>();
 	List<Future<String>> futureParserList = new ArrayList<Future<String>>();
-	
+
 	public void parse(String file, String ext, String rep){
 		long start = System.currentTimeMillis();
 		parserExecutor = Executors.newFixedThreadPool(parallel);
@@ -141,7 +238,7 @@ public abstract class SPParser {
     		long end = System.currentTimeMillis();
         	System.out.println("Time processed (ms): " + (end-start) );
         	System.out.println("Done processing." );
-        } catch (ExecutionException | InterruptedException ex) {
+        } catch (InterruptedException | ExecutionException ex) {
            ex.getCause().printStackTrace();
         }
 
@@ -199,23 +296,6 @@ public abstract class SPParser {
 				}
 			}
 		}
-	}
-	
-	public int findConverterNum(String filein){
-        boolean zipfile = filein.endsWith(".gz");
-        int num = 1;
-		if (zipfile){ 
-			if (Paths.get(filein).toFile().length() > Constants.FILE_ZIP_SIZE_MEDIUM){
-				num = 2;
-			}
-			if (Paths.get(filein).toFile().length() > Constants.FILE_ZIP_SIZE_LARGE){
-				num = 3;
-			}
-		} else if (Paths.get(filein).toFile().length() > Constants.FILE_REGULAR_SIZE_LARGE){
-			num = 3;
-		}
-		return num;
-
 	}
 	
 	public boolean isInfer() {

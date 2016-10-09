@@ -1,4 +1,4 @@
-package org.knoesis.rdf.sp.runnable;
+package org.knoesis.rdf.sp.callable;
 
 import java.util.ArrayList;
 import java.util.List;

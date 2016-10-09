@@ -13,8 +13,6 @@ import org.knoesis.rdf.sp.converter.NamedGraph2SP;
 import org.knoesis.rdf.sp.model.*;
 import org.knoesis.rdf.sp.utils.RDFWriteUtils;
 
-import com.romix.scala.collection.concurrent.TrieMap;
-
 public class RDFWriteUtilsTest {
 
 	List<SPTriple> triples = new ArrayList<SPTriple>();

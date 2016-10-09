@@ -8,11 +8,10 @@ import org.apache.jena.graph.NodeFactory;
 import org.apache.jena.graph.Node_Literal;
 import org.apache.jena.graph.Node_URI;
 import org.apache.log4j.Logger;
-import org.knoesis.rdf.sp.parser.TripleParser;
 import org.knoesis.rdf.sp.utils.RDFWriteUtils;
 
 public class SPNode {
-	final static Logger logger = Logger.getLogger(TripleParser.class);
+	final static Logger logger = Logger.getLogger(SPNode.class);
 	
 	protected Node jenaNode = null;
 	protected boolean isSingletonPropertyOf = false;
