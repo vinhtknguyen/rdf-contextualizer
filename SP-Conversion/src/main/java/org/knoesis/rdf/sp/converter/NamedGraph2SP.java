@@ -1,8 +1,5 @@
 package org.knoesis.rdf.sp.converter;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import org.apache.jena.sparql.core.Quad;
 import org.apache.log4j.Logger;
 import org.knoesis.rdf.sp.model.*;
@@ -22,15 +19,14 @@ public class NamedGraph2SP extends ContextualRepresentationConverter{
 		super(_uuidInitNum, _uuidInitStr);
 	}
 
-	public List<SPTriple> transformQuad(Quad quad){
-
-		List<SPTriple> triples = new LinkedList<SPTriple>();
+	@Override
+	public SPTriple transformQuad(Quad quad){
 		
 		if (quad == null){
 			return null;
 		}
 		
-		if (quad.getGraph() != null ){
+		if (quad.getGraph() != null && !quad.getPredicate().toString().equals(singletonPropertyOf.toString())){
 
 			StringBuilder singletonBdr = null;
 			singletonBdr = new StringBuilder();
@@ -43,13 +39,9 @@ public class NamedGraph2SP extends ContextualRepresentationConverter{
 			SPTriple singletonTriple = new SPTriple(new SPNode(quad.getSubject()), singletonNode, new SPNode(quad.getObject()));
 			singletonTriple.addSingletonInstanceTriple(new SPTriple(singletonNode, singletonPropertyOf, new SPNode(quad.getPredicate())));
 			singletonTriple.addMetaTriple(new SPTriple(singletonNode, namedGraphProp, new SPNode(quad.getGraph())));
-			
-			triples.add(singletonTriple);
-
-		} else {
-			triples.add(new SPTriple(new SPNode(quad.getSubject()), new SPNode(quad.getPredicate()), new SPNode(quad.getObject())));
+			return singletonTriple;
 		}
-		return triples;
+		return new SPTriple(quad.getSubject(), quad.getPredicate(), quad.getObject());
 	}
 
 	public SPNode getNamedGraphProp() {

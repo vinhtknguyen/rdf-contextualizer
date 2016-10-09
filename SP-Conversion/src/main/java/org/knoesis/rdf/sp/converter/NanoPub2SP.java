@@ -1,8 +1,5 @@
 package org.knoesis.rdf.sp.converter;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import org.apache.jena.graph.NodeFactory;
 import org.apache.jena.sparql.core.Quad;
 import org.apache.log4j.Logger;
@@ -14,10 +11,10 @@ public class NanoPub2SP extends ContextualRepresentationConverter {
 	final static Logger logger = Logger.getLogger(NanoPub2SP.class);
 
 
-	public List<SPTriple> transformQuad(Quad quad){
+	@Override
+	public SPTriple transformQuad(Quad quad){
 		
-		List<SPTriple> triples = new LinkedList<SPTriple>();
-		if (quad.getGraph() != null){
+		if (quad.getGraph() != null && !quad.getPredicate().toString().equals(singletonPropertyOf.toString())){
 		
 			StringBuilder singletonBdr = null;
 			singletonBdr = new StringBuilder();
@@ -29,9 +26,9 @@ public class NanoPub2SP extends ContextualRepresentationConverter {
 
 			SPTriple singletonTriple = new SPTriple(new SPNode(quad.getSubject()), singletonNode, new SPNode(quad.getObject()));
 			singletonTriple.addSingletonInstanceTriple(new SPTriple(singletonNode, singletonPropertyOf, new SPNode(quad.getPredicate())));
-			triples.add(singletonTriple);
+			return singletonTriple;
 		}
-		return triples;
+		return new SPTriple(quad.getSubject(), quad.getPredicate(), quad.getObject());
 	}
 
 

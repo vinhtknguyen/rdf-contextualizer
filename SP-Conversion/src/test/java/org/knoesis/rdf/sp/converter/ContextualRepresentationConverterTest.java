@@ -17,16 +17,16 @@ public class ContextualRepresentationConverterTest {
 		con1 = SPParserFactory.createParser(rep);
 //		con1.setZip(true);
 		con1.setOntoDir(ConstantsTest.test_data_onto);
-		con1.setInfer(true);
+		con1.setInfer(false);
 		con1.init();
 	}
 
 	@Test
 	public void testConvert() {
-		con1.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_default, "ttl", rep);
-		con1.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_default, "nt", rep);
-		con1.parse(ConstantsTest.test_data_file + "/yagoFacts.ttl", "ttl", rep);
-		con1.parse(ConstantsTest.test_data_file + "/yagoFacts.ttl", "nt", rep);
+//		con1.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_default, "ttl", rep);
+//		con1.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_default, "nt", rep);
+//		con1.parse(ConstantsTest.test_data_file + "/yagoFacts.ttl", "ttl", rep);
+//		con1.parse(ConstantsTest.test_data_file + "/yagoFacts.ttl", "nt", rep);
 	}
 
 	@Test

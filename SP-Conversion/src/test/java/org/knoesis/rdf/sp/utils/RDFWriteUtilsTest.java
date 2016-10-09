@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +32,7 @@ public class RDFWriteUtilsTest {
 	@Test
 	public void testPrintTriples2N3(){
 		
-		String out = RDFWriteUtils.printTriples2N3(triples, new PrefixTrie(), new PrefixTrie(), true);		
+		String out = RDFWriteUtils.printTriples2N3(triples, new ConcurrentHashMap<String,String>(), new ConcurrentHashMap<String,String>(), true);		
 		System.out.println(out);
 		
 		

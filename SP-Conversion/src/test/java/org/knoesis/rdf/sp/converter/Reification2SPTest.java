@@ -29,8 +29,8 @@ public class Reification2SPTest {
 
 	@Test
 	public void testConvert() {
-		con1.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_rei, "nt", rep);
-		con2.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_rei, "ttl", rep);
+//		con1.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_rei, "nt", rep);
+//		con2.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_rei, "ttl", rep);
 //		con1.parse("src/test/resources/test-file/test2_rei.ttl", "nt", rep);
 //		con2.parse("src/test/resources/test-file/test2_rei.ttl", "ttl", rep);
 	}

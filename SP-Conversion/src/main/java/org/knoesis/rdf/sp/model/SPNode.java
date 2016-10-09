@@ -1,41 +1,46 @@
 package org.knoesis.rdf.sp.model;
 
 
+import java.util.Map;
+
 import org.apache.jena.graph.Node;
 import org.apache.jena.graph.NodeFactory;
 import org.apache.jena.graph.Node_Literal;
 import org.apache.jena.graph.Node_URI;
+import org.apache.log4j.Logger;
+import org.knoesis.rdf.sp.parser.TripleParser;
+import org.knoesis.rdf.sp.utils.RDFWriteUtils;
 
 public class SPNode {
+	final static Logger logger = Logger.getLogger(TripleParser.class);
 	
 	protected Node jenaNode = null;
 	protected boolean isSingletonPropertyOf = false;
-	protected boolean isSingletonProperty = false;
+	protected boolean isSingletonPropertyNode = false;
 	protected String shorten = null;
 	protected String namespace = null;
 	protected String prefix = null;
 	
-	public SPNode(Node node, boolean isSP) {
+	public SPNode(Node node, boolean isSPNode) {
 		this.setJenaNode(node);
-		this.setSingletonPropertyOf(isSP);
+		this.setSingletonPropertyNode(isSPNode);
 	}
 	
 	public SPNode(Node node){
 		this.setJenaNode(node);
-		this.setSingletonProperty(false);
 	}
 
-	public SPNode(String uri, boolean isSP){
+	public SPNode(String uri, boolean isSPNode){
 		this.setJenaNode(NodeFactory.createURI(uri));
-		this.setSingletonProperty(isSP);
+		this.setSingletonPropertyNode(isSPNode);
 	}
 
 	public SPNode(String uri){
 		this.setJenaNode(NodeFactory.createURI(uri));
-		this.setSingletonProperty(false);
+		this.setSingletonPropertyNode(false);
 	}
 
-	public SPNode toN3(PrefixTrie prefixMapping, PrefixTrie trie, boolean shortenAllURIs){
+	public SPNode toN3(Map<String,String> prefixMapping, Map<String,String> trie, boolean shortenAllURIs){
 		
 		if (shorten != null) return this;
 		
@@ -43,7 +48,7 @@ public class SPNode {
 		
 	    if (jenaNode.isURI()) {
 			// shorten the whole URI with prefix 
-			return shortenURI(prefixMapping, trie, shortenAllURIs);
+			return shortenURIWithConcurrentTrieMap(prefixMapping, trie, shortenAllURIs);
 	    }
 	    
 	    if (jenaNode.isLiteral()) {
@@ -68,7 +73,7 @@ public class SPNode {
 	    
 	}
 	
-	public String printNodePrefix(PrefixTrie prefixMapping, PrefixTrie trie, boolean shortenAllURIs){
+	public String printNodePrefix(Map<String,String> prefixMapping, Map<String,String> trie, boolean shortenAllURIs){
 		StringBuilder out = new StringBuilder();
 		if (this.shorten == null){
 			SPNode node = toN3(prefixMapping, trie, shortenAllURIs);
@@ -77,8 +82,8 @@ public class SPNode {
 			this.shorten = node.getShorten();
 		}
 		if (this.prefix != null & this.namespace != null){
-			if (prefixMapping.searchPrefix(this.namespace) == null){
-				prefixMapping.insert(this.namespace, this.prefix);
+			if (prefixMapping.get(this.namespace) == null){
+				prefixMapping.put(this.namespace, this.prefix);
 				out.append("@prefix\t");
 				out.append(this.prefix);
 				out.append(":\t<");
@@ -89,7 +94,7 @@ public class SPNode {
 		return out.toString();
 	}
 
-	public SPNode shortenURI(PrefixTrie prefixMapping, PrefixTrie trie, boolean shortenAllURIs){
+	public SPNode shortenURIWithPrefixTrie(PrefixTrie prefixMapping, PrefixTrie trie, boolean shortenAllURIs){
 		// shorten the whole URI with prefix 
 		SPNode node;
 		if (!shortenAllURIs) {
@@ -141,6 +146,47 @@ public class SPNode {
 	    return this;
 */	}
 
+	public SPNode shortenURIWithConcurrentTrieMap(Map<String,String> prefixMapping, Map<String,String> trie, boolean shortenAllURIs){
+		// shorten the whole URI with prefix 
+		StringBuilder shorten = new StringBuilder();
+		String ns, prefix;
+		int len = jenaNode.toString().length();
+//		if (!shortenAllURIs){
+//			setShorten("<" + jenaNode.toString() + ">");
+//			return this;
+//		}
+//		
+		int lastNsInd;
+		if (shortenAllURIs){
+			lastNsInd = RDFWriteUtils.getLastIndexOfDelimiter(jenaNode.toString());
+		} else {
+			lastNsInd = RDFWriteUtils.getLastIndexOfDelimiterWithSecondPeriod(jenaNode.toString());
+		}
+		if (lastNsInd > 2 && jenaNode.toString().charAt(lastNsInd-1) != '/' && jenaNode.toString().charAt(lastNsInd-2) != ':' ) {
+			ns = jenaNode.toString().substring(0, lastNsInd + 1);
+			prefix = trie.get(ns);
+			if (prefix == null) {
+				prefix = RDFWriteUtils.getNextPrefixNs();
+				trie.put(ns, prefix);
+				logger.trace("Prefix: " + ns + " \t " + prefix);
+			}
+
+			shorten.append(prefix + ":");
+			if (!jenaNode.toString().substring(lastNsInd+1, len).isEmpty()){
+				shorten.append(RDFWriteUtils.normalizeN3(jenaNode.toString().substring(lastNsInd+1, len)));
+			}
+			this.setNamespace(ns);
+			this.setPrefix(prefix);
+			this.setShorten(shorten.toString());
+		} else {
+			ns = jenaNode.toString();
+			prefix = RDFWriteUtils.getNextPrefixNs();
+			shorten.append(prefix + ":");
+			trie.put(ns, prefix);
+			logger.trace(jenaNode.toString() + " \t " + ns + "\t" + shorten);
+		}
+	    return this;
+	}
 
 	public String toNT(){
 		
@@ -167,7 +213,7 @@ public class SPNode {
 	}
 
 	
-	public String getNamespace(PrefixTrie prefixMapping, PrefixTrie trie, boolean shortenAllURIs) {
+	public String getNamespace(Map<String,String> prefixMapping, Map<String,String> trie, boolean shortenAllURIs) {
 		if (namespace == null) toN3(prefixMapping, trie, shortenAllURIs);
 		return namespace;
 	}
@@ -176,7 +222,7 @@ public class SPNode {
 		this.namespace = namespace;
 	}
 
-	public String getPrefix(PrefixTrie prefixMapping, PrefixTrie trie, boolean shortenAllURIs) {
+	public String getPrefix(Map<String,String> prefixMapping, Map<String,String> trie, boolean shortenAllURIs) {
 		if (prefix == null) toN3(prefixMapping, trie, shortenAllURIs);
 		return prefix;
 	}
@@ -200,12 +246,12 @@ public class SPNode {
 		this.jenaNode = jenaNode;
 	}
 
-	public boolean isSingletonProperty() {
-		return isSingletonProperty;
+	public boolean isSingletonPropertyNode() {
+		return isSingletonPropertyNode;
 	}
 
-	public void setSingletonProperty(boolean isSingletonProperty) {
-		this.isSingletonProperty = isSingletonProperty;
+	public void setSingletonPropertyNode(boolean isSingletonPropertyNode) {
+		this.isSingletonPropertyNode = isSingletonPropertyNode;
 	}
 
 	public boolean isSingletonPropertyOf() {
@@ -216,7 +262,7 @@ public class SPNode {
 		this.isSingletonPropertyOf = isSingletonProperty;
 	}
 
-	public String getShorten(PrefixTrie prefixMapping, PrefixTrie trie, boolean shortenAllURIs) {
+	public String getShorten(Map<String,String> prefixMapping, Map<String,String> trie, boolean shortenAllURIs) {
 		if (prefix == null) toN3(prefixMapping, trie, shortenAllURIs);
 		return shorten;
 	}
@@ -230,11 +276,7 @@ public class SPNode {
 	}
 	
 	public boolean equalsTo(SPNode node){
-		if (this.shorten != null && node.shorten != null){
-			return this.shorten.equals(node.shorten);
-		} else {
-			return this.getJenaNode().toString().equals(node.jenaNode.toString());
-		}
+		return this.getJenaNode().toString().equals(node.jenaNode.toString());
 	}
 	
 	public String toString(){

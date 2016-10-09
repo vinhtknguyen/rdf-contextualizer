@@ -11,6 +11,7 @@ public class ConstantsTest {
 	public static String test_triple = "test_triple_data";
 	public static String test_default = "test_default_data";
 	public static String test_onto = "test_onto_data";
+	public static String test_all = "all_data";
 	
 
 }

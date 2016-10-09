@@ -30,12 +30,15 @@ public class SPConverter {
 	protected String dsName = null;
 	protected String _uuidInitStr = null;
 	protected long _uuidInitNum = 0;
-	protected boolean shortenURI = false;
+	protected boolean shortenURI = true;
 	protected int parallel = 1;
+	protected int bufferSizeStream = Constants.BUFFER_SIZE_STREAM;
+	protected int bufferSizeWriter = Constants.BUFFER_SIZE_WRITER;
 
 	
-	/**
-	 * java -jar ~/rdf-context-converter-0.0.1-SNAPSHOT.jar -zip -shortenURI -f datasets -ext TTL -rep NG -spInitNum 1 -spInitStr ncbo_sp_092016 > ncbo_results.txt
+	/**	cd /semweb1/datasets
+	 * java -jar ~/rdf-context-converter-0.0.1-SNAPSHOT.jar -zip -parallel 4 -f bio2rdf_R3_data -ext TTL -rep NG -shortenURI -spInitNum 1 -spInitStr b2r_r3 > log/bio2rdf_noinfer_results.txt
+	 * java -jar ~/rdf-context-converter-0.0.1-SNAPSHOT.jar -zip -parallel 4 -f bio2rdf_R3_data -infer onto -ext TTL -rep NG -shortenURI -spInitNum 1 -spInitStr b2r_r3 > log/bio2rdf_infer_results.txt
 	 * 
 	 * @param args
 	 * -rep 		NQUAD/NANO/TRIPLE/REI as input file representation
@@ -110,6 +113,7 @@ public class SPConverter {
 			parser.setInfer(isInfer());
 			parser.setZip(isZip());
 			parser.setExt(this.getExt());
+			parser.setDsName(this.getDsName());
 			parser.setPrefix(this.getPrefix());
 			parser.setShortenURI(this.isShortenURI());
 			parser.setOntoDir(this.getOntoDir());
@@ -177,6 +181,12 @@ public class SPConverter {
 			// Get url to start with
 			if (args[i].toLowerCase().equals("-parallel")){
 				this.setParallel(Integer.parseInt(args[i+1]));
+			}
+
+			// Get url to start with
+			if (args[i].toLowerCase().equals("-buffersize")){
+				this.setBufferSizeStream(Integer.parseInt(args[i+1]));
+				this.setBufferSizeWriter(Integer.parseInt(args[i+1]));
 			}
 
 			// Get input file extension
@@ -374,6 +384,22 @@ public class SPConverter {
 
 	public void setParallel(int parallel) {
 		this.parallel = parallel;
+	}
+
+	public int getBufferSizeStream() {
+		return bufferSizeStream;
+	}
+
+	public void setBufferSizeStream(int bufferSizeStream) {
+		this.bufferSizeStream = bufferSizeStream;
+	}
+
+	public int getBufferSizeWriter() {
+		return bufferSizeWriter;
+	}
+
+	public void setBufferSizeWriter(int bufferSizeWriter) {
+		this.bufferSizeWriter = bufferSizeWriter;
 	}
 
 

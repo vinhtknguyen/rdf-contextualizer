@@ -1,10 +1,7 @@
 package org.knoesis.rdf.sp.converter;
 
-import java.io.BufferedWriter;
-import java.util.LinkedList;
-import java.util.List;
-
 import org.apache.jena.graph.NodeFactory;
+import org.apache.jena.graph.Triple;
 import org.apache.log4j.Logger;
 import org.knoesis.rdf.sp.model.SPNode;
 import org.knoesis.rdf.sp.model.SPTriple;
@@ -52,11 +49,11 @@ public class Triple2SP extends ContextualRepresentationConverter {
 			metaObject = sPNode;
 		}
 	}
-
-	public List<SPTriple> transformTriple(BufferedWriter writer, org.apache.jena.graph.Triple triple, String ext){
+	
+	@Override
+	public SPTriple transformTriple(Triple triple){
 		
-		List<SPTriple> triples = new LinkedList<SPTriple>();
-		if (triple != null ){
+		if (triple != null && !triple.getPredicate().toString().equals(singletonPropertyOf.toString())){
 		
 			SPNode singletonNode = null;
 			StringBuilder singletonBdr = null;
@@ -72,9 +69,10 @@ public class Triple2SP extends ContextualRepresentationConverter {
 			singletonTriple.addSingletonInstanceTriple(new SPTriple(singletonNode, singletonPropertyOf, new SPNode(triple.getPredicate())));
 			if (metaObject != null && metaPredicate != null) 
 				singletonTriple.addMetaTriple(new SPTriple(singletonNode, metaPredicate, metaObject));
+			return singletonTriple;
 				
 		}
-		return triples;
+		return new SPTriple(triple.getSubject(), triple.getPredicate(), triple.getObject());
 	}
 
 }

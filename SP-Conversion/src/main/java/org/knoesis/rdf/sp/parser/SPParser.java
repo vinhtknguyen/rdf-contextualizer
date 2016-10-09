@@ -13,6 +13,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
+import org.knoesis.rdf.sp.model.SPModel;
 import org.knoesis.rdf.sp.utils.Constants;
 import org.knoesis.rdf.sp.utils.RDFWriteUtils;
 
@@ -28,7 +29,9 @@ public abstract class SPParser {
 	protected String prefix = null;
 	protected String ext = null;
 	protected boolean shortenURI = true;
-	protected int parallel = 1;
+	protected int parallel = 3;
+	protected int bufferSizeStream = Constants.BUFFER_SIZE_STREAM;
+	protected int bufferSizeWriter = Constants.BUFFER_SIZE_WRITER;
 
 	
 	public void init(){
@@ -49,32 +52,31 @@ public abstract class SPParser {
 		
 	}
 	
-	public void parseDir(String file, String ext, String rep, String fileout){
-		if (!Files.isDirectory(Paths.get(file))){
-			parseFile(file, ext, rep, RDFWriteUtils.genFileOut(file, ext, this.isZip()));
-			
+	public void parseDir(String filein, String ext, String rep, String fileout){
+
+		if (!Files.isDirectory(Paths.get(filein))){
+			parseFile(filein, ext, rep, RDFWriteUtils.genFileOut(filein, ext, this.isZip()));
 		} else {
 			// If the input is a directory
 			// Create a new directory for output files
-			try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(file))) {
+			try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(filein))) {
 				String dirOut;
 				if (this.infer){
-					dirOut = file + (ext.equals(Constants.NTRIPLE_EXT)?Constants.CONVERTED_TO_SP_INF_NT:Constants.CONVERTED_TO_SP_INF_TTL);
+					dirOut = fileout + (ext.equals(Constants.NTRIPLE_EXT)?Constants.CONVERTED_TO_SP_INF_NT:Constants.CONVERTED_TO_SP_INF_TTL);
 				} else {
-					dirOut = file + (ext.equals(Constants.NTRIPLE_EXT)?Constants.CONVERTED_TO_SP_NT:Constants.CONVERTED_TO_SP_TTL);
+					dirOut = fileout + (ext.equals(Constants.NTRIPLE_EXT)?Constants.CONVERTED_TO_SP_NT:Constants.CONVERTED_TO_SP_TTL);
 				}
 				Files.createDirectories(Paths.get(dirOut));
-				
 				/* PROCESS EACH INPUT FILE & GENERATE OUTPUT FILE */
 				
 				for (Path entry : stream) {
-					if (!Files.isDirectory(entry.getFileName())){
+					if (!Files.isDirectory(entry)){
 						String fileOut = dirOut + "/" + RDFWriteUtils.genFileOut(entry.getFileName().toString(), ext, this.isZip());
 						System.out.println("File in: " + entry.toString() + " vs. out " + fileOut);
 						parseFile(entry.toString(), ext, rep, fileOut);
 					} else {
 						if (entry.getFileName().toString().toLowerCase().contains(Constants.DATA_DIR)) 
-							parseDir(entry.toString(), ext, rep, entry.toString());
+							parseDir(entry.toString(), ext, rep, dirOut + "/" + RDFWriteUtils.genDirOut(entry.getFileName().toString()));
 					}
 		        }
 		    } catch (IOException e1) {
@@ -85,15 +87,24 @@ public abstract class SPParser {
 	
 	ExecutorService converterExecutor;
 	ExecutorService parserExecutor;
-	ExecutorService writerExecutor;
-	List<Future<Long>> futureList = new ArrayList<Future<Long>>();
+	List<Future<String>> futureConverterList = new ArrayList<Future<String>>();
+	List<Future<String>> futureParserList = new ArrayList<Future<String>>();
 	
 	public void parse(String file, String ext, String rep){
 		long start = System.currentTimeMillis();
-		converterExecutor = Executors.newFixedThreadPool(parallel);
 		parserExecutor = Executors.newFixedThreadPool(parallel);
-		writerExecutor = Executors.newFixedThreadPool(parallel);
-		
+		converterExecutor = Executors.newWorkStealingPool();
+
+		if (this.infer){
+			System.out.println("Loading ontologies from " + this.getOntoDir());
+			SPModel.loadModel(this.getOntoDir());
+			System.out.println("Done loading ontologies.");
+		}
+		if (this.prefix != null) {
+			System.out.println("Loading prefixes ..." + prefix);
+			RDFWriteUtils.loadPrefixesToTrie(RDFWriteUtils.trie, this.prefix);
+			System.out.println("Done loading prefixes.");
+		}
 		/*
 		 * If input is a file, parse it
 		 * If input is a directory, parse its files and sub-directories named DATA recursively
@@ -101,33 +112,109 @@ public abstract class SPParser {
 		if (!Files.isDirectory(Paths.get(file))){
 			parseFile(file, ext, rep, RDFWriteUtils.genFileOut(file, ext, this.isZip()));
 		} else {
+			System.out.println("Directory in: " + file);
 			parseDir(file, ext, rep, RDFWriteUtils.genDirOut(file));
 		}
 		
 		try {
-    		converterExecutor.shutdown();
-    		parserExecutor.shutdown();
-    		writerExecutor.shutdown();
-    		converterExecutor.awaitTermination(Integer.MAX_VALUE, TimeUnit.MICROSECONDS);
-    		parserExecutor.awaitTermination(Integer.MAX_VALUE, TimeUnit.MICROSECONDS);
-    		writerExecutor.awaitTermination(Integer.MAX_VALUE, TimeUnit.MICROSECONDS);
 
-    		int size = futureList.size();
-        	int count = 0;
-        	while (count < size){
-	        	for (Future<Long> future:futureList){
-        			future.get();
+        	boolean isDone = false;
+        	while (!isDone){
+	        	for (Future<String> future:futureParserList){
 	        		if (future.isDone()) {
-	        			count++;
+	        			future.get();
 	        		}
 	        	}
+	        	for (Future<String> future:futureConverterList){
+	        		if (future.isDone()) {
+	        			future.get();
+	        		}
+	        	}
+	        	isDone = true;
         	}
-        	long end = System.currentTimeMillis();
+        	
+    		converterExecutor.shutdown();
+    		parserExecutor.shutdown();
+    		converterExecutor.awaitTermination(Integer.MAX_VALUE, TimeUnit.MICROSECONDS);
+    		parserExecutor.awaitTermination(Integer.MAX_VALUE, TimeUnit.MICROSECONDS);
+
+    		long end = System.currentTimeMillis();
         	System.out.println("Time processed (ms): " + (end-start) );
         	System.out.println("Done processing." );
         } catch (ExecutionException | InterruptedException ex) {
            ex.getCause().printStackTrace();
         }
+
+	}
+	
+	public boolean canSubmitTask(List<Future<String>> futures){
+		// Guarantee no more tasks submitted after encountering a big file
+		String filename = null;
+		if (futures.size() < parallel) return true;
+		try {
+			for (int i = 0; i < futures.size(); i++){
+				Future<String> future = futures.get(i);
+				if (future.isDone()) {
+					futures.remove(i); 
+					filename = future.get();
+					System.out.println(filename + ": done processing!");
+					return true;
+				}
+			}
+			if (futures.size() < parallel) return true;
+		} catch (InterruptedException | ExecutionException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Error while reading file: " + filename + ":" + e.getCause().toString());
+			e.getCause().printStackTrace();
+		}
+		return false;
+	}
+	
+	public void checkFutures(List<Future<String>> futures){
+		try {
+			for (int i = 0; i < futures.size(); i++){
+				Future<String> future = futures.get(i);
+					if (future.isDone()) {
+						futures.remove(i);
+						future.get();
+					}
+			}
+		} catch (InterruptedException | ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.getCause().printStackTrace();
+		}
+		
+	}
+	
+	public void waitForFutureTask(Future<String> future){
+		boolean isDone = false;
+		while (!isDone){
+			if (future.isDone()){
+				try {
+					isDone = true;
+					future.get();
+				} catch (InterruptedException | ExecutionException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	public int findConverterNum(String filein){
+        boolean zipfile = filein.endsWith(".gz");
+        int num = 1;
+		if (zipfile){ 
+			if (Paths.get(filein).toFile().length() > Constants.FILE_ZIP_SIZE_MEDIUM){
+				num = 2;
+			}
+			if (Paths.get(filein).toFile().length() > Constants.FILE_ZIP_SIZE_LARGE){
+				num = 3;
+			}
+		} else if (Paths.get(filein).toFile().length() > Constants.FILE_REGULAR_SIZE_LARGE){
+			num = 3;
+		}
+		return num;
 
 	}
 	
@@ -217,6 +304,22 @@ public abstract class SPParser {
 
 	public void setParallel(int parallel) {
 		this.parallel = parallel;
+	}
+
+	public int getBufferSizeStream() {
+		return bufferSizeStream;
+	}
+
+	public void setBufferSizeStream(int bufferSizeStream) {
+		this.bufferSizeStream = bufferSizeStream;
+	}
+
+	public int getBufferSizeWriter() {
+		return bufferSizeWriter;
+	}
+
+	public void setBufferSizeWriter(int bufferSizeWriter) {
+		this.bufferSizeWriter = bufferSizeWriter;
 	}
 	
 	

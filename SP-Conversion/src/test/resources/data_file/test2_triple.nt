@@ -14,7 +14,6 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-<id_1bcczro_1s2_pc2dz5> 	 rdf:singletonPropertyOf 	 <isAffiliatedTo> . 
 <Lenílson_Porto_Peixoto> 	 <id_1bcczro_1s2_pc2dz5> 	 <América_Futebol_Clube_(SP)> .
 <id_jqyg1z_zkl_1xi58gi> 	 rdf:type 	 <owns> . 
 <Jefferson_County,_Texas> 	 <id_jqyg1z_zkl_1xi58gi> 	 <Jack_Brooks_Regional_Airport> .

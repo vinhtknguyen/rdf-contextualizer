@@ -15,13 +15,14 @@ import org.jfree.chart.ChartUtilities;
 
 public class SPStats {
 	
-	public static void reportSystem(long start, long end, String rep, String isInfer, String ext, String fileIn, String fileOut, String ds, String step) {
+	public static void reportSystem(long start, long end, String rep, String isInfer, String ext, String fileIn, long orisize, long newsize, String fileOut, String ds, String step) {
 		
 		DecimalFormat time_formatter = new DecimalFormat("#,###.00");
-		
+		DecimalFormat size_formatter = new DecimalFormat("#,###");
+
 		BufferedWriter report = RDFWriteUtils.getReportWriter(Constants.STAT_FILE);
 		try {
-			report.write("Time\t\t" + time_formatter.format(end-start) + "\t" + rep + "\t" + isInfer + "\t" + ext + "\t" + ds + "\t" + step + "_"+ start + "\t" + fileOut + "\t" +  "\n");
+			report.write("Time\t\t" + time_formatter.format(end-start) + "\t\t" + step + " \t\t" +  size_formatter.format(orisize) + "\t" +  size_formatter.format(newsize) + "\t\t\t" + fileIn +"\t\t" +  rep + "\t\t" + isInfer + "\t\t" + ext + "\t" + ds + "\t" +  "\n");
 			report.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

@@ -25,7 +25,7 @@ public class SPTriple {
 	 * */
 	protected ArrayList<SPTriple> singletonInstanceTriples = new ArrayList<SPTriple>();
 	/* *
-	 * This contains all the meta triples of this singleton triple
+	 * This contains all the generic triples of this singleton triple
 	 * */
 	protected ArrayList<SPTriple> genericPropertyTriples = new ArrayList<SPTriple>();
 
@@ -69,7 +69,7 @@ public class SPTriple {
 	public void addSingletonInstanceTriple(SPTriple triple){
 		if (this.isSingletonTriple() && predicate.equalsTo(triple.subject)){
 			singletonInstanceTriples.add(triple);
-		}
+		} 
 	}
 	
 	public void addGenericPropertyTriple(SPTriple triple){
@@ -116,7 +116,7 @@ public class SPTriple {
 		this.singletonInstanceTriples = singletonPropertyTriples;
 	}
 
-	public String printTriple2N3(PrefixTrie prefixMapping, PrefixTrie trie, boolean shortenAllURIs){
+	public String printTriple2N3(Map<String,String> prefixMapping, Map<String,String> trie, boolean shortenAllURIs){
 		
 		StringBuilder out = new StringBuilder();
 		StringBuilder prefixes = new StringBuilder();
@@ -137,7 +137,7 @@ public class SPTriple {
 		return prefixes.toString();
 	}
 	
-	public String printTriplePrefix(PrefixTrie prefixMapping, PrefixTrie trie, boolean shortenAllURIs){
+	public String printTriplePrefix(Map<String,String> prefixMapping, Map<String,String> trie, boolean shortenAllURIs){
 		
 		StringBuilder out = new StringBuilder();
 			// Print the prefix if not added before
@@ -186,7 +186,7 @@ public class SPTriple {
 	}
 	
 	public boolean isSingletonTriple() {
-		return this.predicate.isSingletonProperty();
+		return this.predicate.isSingletonPropertyNode();
 	}
 	public ArrayList<SPTriple> getGenericPropertyTriples() {
 		return genericPropertyTriples;
@@ -218,7 +218,6 @@ public class SPTriple {
 			for (SPTriple triple : this.metaTriples){
 				out.append("\t\t Meta triples: " + triple.toString());
 			}
-			
 		}
 		return out.toString();
 	}

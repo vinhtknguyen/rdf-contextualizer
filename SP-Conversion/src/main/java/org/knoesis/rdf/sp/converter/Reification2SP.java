@@ -1,9 +1,8 @@
 package org.knoesis.rdf.sp.converter;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
+import org.apache.jena.graph.Node;
 import org.apache.jena.graph.Triple;
 import org.apache.log4j.Logger;
 import org.knoesis.rdf.sp.model.SPNode;
@@ -81,26 +80,25 @@ public class Reification2SP extends ContextualRepresentationConverter{
 		object_flag = false;
 	}
 	
-	public List<SPTriple> transformTriple(Triple triple){
-		List<SPTriple> triples = new LinkedList<SPTriple>();
+	public SPTriple transformTriple(Triple triple){
 		
-		if (triple != null){
+		if (triple != null  && !triple.getPredicate().toString().equals(singletonPropertyOf.toString())){
 			
 			// Trying to add the current triple to the Reified Statement
 			if (!addTripleToReifiedPattern(triple)) {
 				
 				// Print the regular triple
 				super.transformTriple(triple);
-				return triples;
+				return null;
 			}
 			
 			// Check if the reified statement is completed
 			
 			if (!isReifiedPatternCompleted()){
-				return triples;
+				return null;
 			}
 			
-			org.apache.jena.graph.Node[] reifiedStatement = reifiedTriples.get(triple.getSubject().toString());
+			Node[] reifiedStatement = reifiedTriples.get(triple.getSubject().toString());
 
 			SPNode singletonNode;
 			if (triple.getSubject().isBlank()){
@@ -117,14 +115,15 @@ public class Reification2SP extends ContextualRepresentationConverter{
 			}
 			SPTriple singletonTriple = new SPTriple(new SPNode(reifiedStatement[0]), singletonNode, new SPNode(reifiedStatement[2]));
 			singletonTriple.addSingletonInstanceTriple(new SPTriple(singletonNode, singletonPropertyOf, new SPNode(reifiedStatement[1])));
-			
-			triples.add(singletonTriple);
-			
+
 			// Reset the flasg and remove the reified statement
 			resetReifiedFlags();
 			reifiedTriples.remove(triple.getSubject());
+			
+			return singletonTriple;
+			
 		}
-		return triples;
+		return new SPTriple(triple.getSubject(), triple.getPredicate(), triple.getObject());
 	}
 
 }

@@ -39,19 +39,19 @@ public class SPProcessorTest {
 
 	@Test
 	public void testProcessQuad() {
-		String out = quadProcessor.process(new Quad(NodeFactory.createURI("http://example.com/s1"), 
+		String triple = quadProcessor.processQuad(new Quad(NodeFactory.createURI("http://example.com/s1"), 
 				NodeFactory.createURI("http://example.com/p1"), 
 				NodeFactory.createURI("http://www.w3.org/1999/02/22-rdf-syntax-ns#singletonPropertyOf"), 
 				NodeFactory.createURI("http://example.com/g1")));
-		System.out.println("Quad processing output ======= \n " + out);
+		System.out.println("Quad processing output ======= \n " + triple);
 	}
 
 	@Test
 	public void testProcessTriple() {
-		String out = tripleProcessor.process(new Triple(NodeFactory.createURI("http://example.com/s1"), 
-				NodeFactory.createURI("http://www.w3.org/1999/02/22-rdf-syntax-ns#singletonPropertyOf"), 
+		String triple = tripleProcessor.processTriple(new Triple(NodeFactory.createURI("http://example.com/s1"), 
+				NodeFactory.createURI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"), 
 				NodeFactory.createURI("http://example.com/o1")));
-		System.out.println("Triple processing output ======= \n " + out);
+		System.out.println("Triple processing output ======= \n " + triple);
 	}
 
 }

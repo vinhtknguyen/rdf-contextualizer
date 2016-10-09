@@ -27,7 +27,6 @@ import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.log4j.Logger;
-import org.knoesis.rdf.sp.model.PrefixTrie;
 import org.knoesis.rdf.sp.model.SPNode;
 import org.knoesis.rdf.sp.model.SPTriple;
 
@@ -38,9 +37,9 @@ public class RDFWriteUtils {
 	final static Logger logger = Logger.getLogger(RDFWriteUtils.class);
 	public final static String prefixesFile = "prefixes.ttl";
 
-	public static Map<String,String> prefixMapping = new TrieMap<String,String>();
+	public static TrieMap<String,String> prefixMapping = new TrieMap<String,String>();
 //	public static PrefixTrie trie = new PrefixTrie();
-	public static Map<String,String> trie = new TrieMap<String,String>();
+	public static TrieMap<String,String> trie = new TrieMap<String,String>();
 	private static int currentAutoPrefixNsNum = 0;
  
 	public static int getCurrentAutoPrefixNsNum() {
@@ -56,30 +55,49 @@ public class RDFWriteUtils {
      */
     
     public static void resetPrefixMapping(){
-    	prefixMapping = new HashMap<String,String>();
+    	prefixMapping = new TrieMap<String,String>();
     }
 
+	
+	public static List<SPTriple> expandSingletonTriples(SPTriple triple){
+		List<SPTriple> expanded = new ArrayList<SPTriple>();
+		
+		if (triple == null) return expanded;
+			// Singleton instance
+			if (triple.getSingletonInstanceTriples().size() > 0) {
+				expanded.addAll(expandSingletonTriples(triple.getSingletonInstanceTriples()));
+			}
+			if (triple.getMetaTriples().size() > 0) {
+				expanded.addAll(expandSingletonTriples(triple.getMetaTriples()));
+			}
+			// Inferred generic property triple
+			expanded.add(new SPTriple(triple.getSubject(), triple.getPredicate(), triple.getObject()));
+			// Meta property triple
+			if (triple.getGenericPropertyTriples().size() > 0) {
+				expanded.addAll(expandSingletonTriples(triple.getGenericPropertyTriples()));
+			}
+		return expanded;
+	}
 	
 	public static List<SPTriple> expandSingletonTriples(List<SPTriple> in){
 		List<SPTriple> expanded = new ArrayList<SPTriple>();
 		
 		for (SPTriple triple : in){
-			// Singleton instance
-			expanded.addAll(triple.getSingletonInstanceTriples());
-			expanded.addAll(triple.getMetaTriples());
-			// Inferred generic property triple
-			expanded.add(new SPTriple(triple.getSubject(), triple.getPredicate(), triple.getObject()));
-			// Meta property triple
-			expanded.addAll(triple.getGenericPropertyTriples());
+			expanded.addAll(expandSingletonTriples(triple));
 		}
 		return expanded;
 	}
 	
+	public static String printTriples(SPTriple in, Map<String,String> prefixMapping, Map<String,String> trie, String ext, boolean shortenAllURIs){
+		List<SPTriple> triples = new ArrayList<SPTriple>();
+		triples.addAll(expandSingletonTriples(in));
+		return printTriples(triples, prefixMapping, trie, ext, shortenAllURIs);
+	}
 	/**
 	 * Print a list of triples
 	 * 
 	 * */
-	public static String printTriples(List<SPTriple> in, PrefixTrie prefixMapping, PrefixTrie trie, String ext, boolean shortenAllURIs){
+	public static String printTriples(List<SPTriple> in, Map<String,String> prefixMapping, Map<String,String> trie, String ext, boolean shortenAllURIs){
 		List<SPTriple> triples = new ArrayList<SPTriple>();
 		triples.addAll(expandSingletonTriples(in));
 		if (ext.toLowerCase().equals(Constants.TURTLE_EXT)){
@@ -90,6 +108,16 @@ public class RDFWriteUtils {
 		return printTriples2N3(triples, prefixMapping, trie, shortenAllURIs);
 	}
 	
+	public static String printTriplesWithoutExpanding(List<SPTriple> triples, Map<String,String> prefixMapping, Map<String,String> trie, String ext, boolean shortenAllURIs){
+		if (ext.toLowerCase().equals(Constants.TURTLE_EXT)){
+			return printTriples2N3(triples, prefixMapping, trie, shortenAllURIs);
+		} else if (ext.toLowerCase().equals(Constants.NTRIPLE_EXT)){
+			return printTriples2NT(triples);
+		}
+		return printTriples2N3(triples, prefixMapping, trie, shortenAllURIs);
+	}
+	
+
 	public static String printTriples2NT(List<SPTriple> triples){
 		StringBuilder out = new StringBuilder("");
 		
@@ -98,13 +126,13 @@ public class RDFWriteUtils {
 		}
 		return out.toString();
 	}
-
+	
 	/**
 	 * Shorten the two triples with common subject
 	 * By shorting them into common subject, common predicate, and object
 	 * */
 	
-	public static String printTriples2N3(List<SPTriple> triples, PrefixTrie prefixMapping, PrefixTrie trie, boolean shortenAllURIs){
+	public static String printTriples2N3(List<SPTriple> triples, Map<String,String> prefixMapping, Map<String,String> trie, boolean shortenAllURIs){
 		if (triples == null){
 			return "";
 		}
@@ -223,11 +251,11 @@ public class RDFWriteUtils {
 		return map;
 	}
 	
-	public static void loadPrefixesToTrie(PrefixTrie trie){
+	public static void loadPrefixesToTrie(Map<String,String> trie){
 		loadPrefixesToTrie(trie, prefixesFile);
 	}
 	
-	public static void loadPrefixesToTrie(PrefixTrie trie, String file){
+	public static void loadPrefixesToTrie(Map<String,String> trie, String file){
 		//read file into stream, try-with-resources
 		Model model = ModelFactory.createDefaultModel();
 		RDFDataMgr.read(model,file, Lang.N3);
@@ -235,7 +263,7 @@ public class RDFWriteUtils {
 			Iterator<Entry<String, String>> it = model.getNsPrefixMap().entrySet().iterator();
 			while (it.hasNext()) {
 			    Map.Entry<String,String> pair = (Map.Entry<String,String>)it.next();
-			    trie.insert(pair.getValue(), pair.getKey());
+			    trie.put(pair.getValue(), pair.getKey());
 			}
 		}
 	}
@@ -319,8 +347,17 @@ public class RDFWriteUtils {
 		return dirOut + "/" + filename + Constants.SP_SUFFIX + num + "." + ext.toLowerCase() + ".gz";
 		
 	}
+	
+	public static String getPrettyName(String filein){
+		int pos = filein.lastIndexOf("/");
+		String name = filein;
+		if (pos > 0) {
+		    name = filein.substring(pos+1, filein.length());
+		}		
+		return name;
+	}
 
-	public static BufferedWriter getBufferedWriter(String file, boolean isZip){
+	public static BufferedWriter getBufferedWriter(String file, boolean isZip, int buffer){
 		BufferedWriter writer = null;
 	    OutputStream outStream = null;
 	    try {
@@ -331,7 +368,7 @@ public class RDFWriteUtils {
 		    	outStream = new FileOutputStream(new File(file));
 		    }
 		    writer = new BufferedWriter(
-		            new OutputStreamWriter(outStream, "UTF-8"));
+		            new OutputStreamWriter(outStream, "UTF-8"), buffer);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -340,6 +377,23 @@ public class RDFWriteUtils {
 	    return writer;
 		  
 	}
+	
+	public static void initOutputFile(String fileout, boolean zip, int bufferSizeWriter){
+        BufferedWriter buffWriter = RDFWriteUtils.getBufferedWriter(fileout, zip, bufferSizeWriter);
+		try {
+			buffWriter.write(Constants.WRITE_FILE_PREFIX);
+			buffWriter.close();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			try {
+				buffWriter.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public static BufferedWriter getReportWriter(String file){
 		BufferedWriter writer = null;
 	    OutputStream outStream = null;

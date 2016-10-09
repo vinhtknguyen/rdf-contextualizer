@@ -1,8 +1,6 @@
 package org.knoesis.rdf.sp.converter;
 
 import java.io.File;
-import java.util.LinkedList;
-import java.util.List;
 
 import org.apache.jena.graph.Triple;
 import org.apache.jena.sparql.core.Quad;
@@ -14,16 +12,18 @@ public class ContextualRepresentationConverter {
 	
 	final static Logger logger = Logger.getLogger(ContextualRepresentationConverter.class);
 
-	protected static SPNode singletonPropertyOf = new SPNode(Constants.SINGLETON_PROPERTY_OF, true);
+	protected static SPNode singletonPropertyOf = new SPNode(Constants.SINGLETON_PROPERTY_OF, false);
 
 	protected SpUUID uuid = null;
 
 	public ContextualRepresentationConverter(long _initNum, String _initStr){
 		uuid = new SpUUID(_initNum, _initStr);
+		singletonPropertyOf.setSingletonPropertyOf(true);
 	}
 	
 	public ContextualRepresentationConverter(){
 		uuid = new SpUUID();
+		singletonPropertyOf.setSingletonPropertyOf(true);
 	}
 	
 	public static long directorySize(String in) {
@@ -39,15 +39,12 @@ public class ContextualRepresentationConverter {
 	}
 	
 
-	public List<SPTriple> transformTriple(Triple triple) {
-		List<SPTriple> triples = new LinkedList<SPTriple>();
-		triples.add(new SPTriple(triple.getSubject(), triple.getPredicate(), triple.getPredicate()));
-		return triples;
+	public SPTriple transformTriple(Triple triple) {
+		return new SPTriple(triple.getSubject(), triple.getPredicate(), triple.getPredicate());
 	}
 
-	public List<SPTriple> transformQuad(Quad triple) {
-		List<SPTriple> triples = new LinkedList<SPTriple>();
-		return triples;
+	public SPTriple transformQuad(Quad triple) {
+		return null;
 	}
 
 	public SPNode getSingletonPropertyOf() {

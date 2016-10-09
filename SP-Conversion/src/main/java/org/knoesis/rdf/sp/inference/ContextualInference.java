@@ -19,8 +19,17 @@ public class ContextualInference {
 
 	// Store the hashmap of a generic property to its number of singleton properties obtained from the data
 	protected Map<String, Integer> genericPropertyMapPerFile = new TrieMap<String, Integer>();
+	RULE_SP[] rules = RULE_SP.values();
 
 	public ContextualInference() {
+		Comparator<RULE_SP> comparator1 = new Comparator<RULE_SP>() {
+			  public int compare(RULE_SP e1, RULE_SP e2) {
+			     //your magic happens here
+				  return e1.getNum() - e2.getNum();
+			  }
+		};
+		
+		Arrays.sort(rules, comparator1);
 	}
 	
 	public void addGenericPropertyMap(String prop1){
@@ -53,21 +62,14 @@ public class ContextualInference {
 		return out;
 	}
 
-	public List<SPTriple> infer(SPTriple triple, RULE_SP[] rules){
-		List<SPTriple> inferred = new ArrayList<SPTriple>();
+	public SPTriple infer(SPTriple triple){
 		
-		return inferred;
-	}
-	
-	public List<SPTriple> infer(List<SPTriple> triples, RULE_SP[] rules){
-		List<SPTriple> inferred = new ArrayList<SPTriple>();
-		for (RULE_SP rule : rules){
-			inferred.addAll(infer(triples, rule));
+		for (RULE_SP r: rules ){
+//					System.out.println("rules: " + r.toString());
+			triple = infer(triple, r);
 		}
-		
-		// Extract the triples
-		
-		return inferred;
+		// Run the rules RULE_OWL_SP_3 and RULE_RDFS_SP_5
+		return triple;
 	}
 	
 	public List<SPTriple> infer(List<SPTriple> triples, RULE_SP rule){
@@ -242,6 +244,15 @@ public class ContextualInference {
 		return out;
 	}
 	
+	public Map<String, Integer> getGenericPropertyMapPerFile() {
+		return genericPropertyMapPerFile;
+	}
+
+	public void setGenericPropertyMapPerFile(
+			Map<String, Integer> genericPropertyMapPerFile) {
+		this.genericPropertyMapPerFile = genericPropertyMapPerFile;
+	}
+
 	public void clearGenericPropMap() {
 		genericPropertyMapPerFile.clear();
 	}

@@ -17,12 +17,14 @@ public class NanoPub2SPTest {
 		con1 = SPParserFactory.createParser(rep);
 //		con1.setZip(true);
 		con1.setOntoDir(ConstantsTest.test_data_onto);
+		con1.setShortenURI(true);
 		con1.setInfer(false);
 		con1.init();
 		con2 = SPParserFactory.createParser(rep, 10, "str1");
 //		con2.setZip(true);
 		con2.setOntoDir(ConstantsTest.test_data_onto);
 		con2.setInfer(true);
+		con1.setShortenURI(true);
 		con2.init();
 	}
 

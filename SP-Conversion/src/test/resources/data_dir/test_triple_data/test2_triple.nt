@@ -1,5 +1,0 @@
-<http://dbpedia.org/resource/Alphonse,_Count_of_Poitiers> <http://xmlns.com/foaf/0.1/name> "Count of Poitiers Alphonse"@en  .
-<http://dbpedia.org/resource/Alphonse,_Count_of_Poitiers> <http://xmlns.com/foaf/0.1/surname> "Alphonse"@en  .
-<http://dbpedia.org/resource/Alphonse,_Count_of_Poitiers> <http://xmlns.com/foaf/0.1/givenName> "Count of Poitiers"@en  .
-<http://dbpedia.org/resource/Alphonse,_Count_of_Poitiers> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>  .
-<http://dbpedia.org/resource/Alphonse,_Count_of_Poitiers> <http://purl.org/dc/elements/1.1/description> "Count of Poitou"@en .

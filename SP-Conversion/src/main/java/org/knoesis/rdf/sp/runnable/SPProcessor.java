@@ -2,6 +2,8 @@ package org.knoesis.rdf.sp.runnable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.jena.graph.Triple;
 import org.apache.jena.sparql.core.Quad;
@@ -12,8 +14,6 @@ import org.knoesis.rdf.sp.converter.NanoPub2SP;
 import org.knoesis.rdf.sp.converter.Reification2SP;
 import org.knoesis.rdf.sp.converter.Triple2SP;
 import org.knoesis.rdf.sp.inference.ContextualInference;
-import org.knoesis.rdf.sp.model.PrefixTrie;
-import org.knoesis.rdf.sp.model.SPModel;
 import org.knoesis.rdf.sp.model.SPTriple;
 import org.knoesis.rdf.sp.utils.Constants;
 import org.knoesis.rdf.sp.utils.RDFWriteUtils;
@@ -30,9 +30,9 @@ public class SPProcessor{
 	protected String prefix;
 	
 	// For all already-printed prefixes and namespaces
-	PrefixTrie prefixMapping = new PrefixTrie();
+	static Map<String,String> prefixMapping = new ConcurrentHashMap<String,String>();
 	// For all possible prefixes and namespaces
-	PrefixTrie trie = new PrefixTrie();
+	static Map<String,String> trie = new ConcurrentHashMap<String,String>();
 	ContextualInference reasoner = new ContextualInference();
 	ContextualRepresentationConverter converter;
 	
@@ -48,47 +48,56 @@ public class SPProcessor{
 	
 	public void start(){
 		start = System.currentTimeMillis();
-//		RDFWriteUtils.loadPrefixesToTrie(trie);
-		if (this.prefix != null) {
-			System.out.println("Loading prefixes ..." + prefix);
-			RDFWriteUtils.loadPrefixesToTrie(trie, this.prefix);
-			System.out.println("Done loading prefixes.");
-		}
-
+	}
+	
+	public SPTriple process(Quad quad){
+//		System.out.println("Processing quad: " + quad.toString());
 		if (isInfer){
-			System.out.println("Loading ontologies from " + this.getOntoDir());
-			SPModel.loadModel(this.getOntoDir());
-			System.out.println("Done loading ontologies.");
+			// infer new triples and add them to the list
+			return reasoner.infer(convert(quad));
+		} else {
+			return convert(quad);
 		}
 	}
 	
-	public String process(Quad quad){
+	public SPTriple process(Triple triple){
+//		System.out.println("Processing quad: " + quad.toString());
+		if (isInfer){
+			// infer new triples and add them to the list
+			return reasoner.infer(convert(triple));
+		} else {
+			return convert(triple);
+		}
+
+	}
+	
+	public String processQuad(Quad quad){
 		// Write the credentials
 //			System.out.println("Processing quad: " + quad.toString());
 		List<SPTriple> triples = new ArrayList<SPTriple>();
 		if (isInfer){
 			// infer new triples and add them to the list
-			triples.addAll(reasoner.infer(convert(quad)));
+			triples.add(reasoner.infer(convert(quad)));
 		} else {
-			triples.addAll(convert(quad));
+			triples.add(convert(quad));
 		}
 		return RDFWriteUtils.printTriples(triples, prefixMapping, trie, ext, this.isShortenURI());
 	}
 	
-	public String process(Triple triple){
+	public String processTriple(Triple triple){
 //		System.out.println("Processing quad: " + quad.toString());
 		List<SPTriple> triples = new ArrayList<SPTriple>();
 		if (isInfer){
 			// infer new triples and add them to the list
-			triples.addAll(reasoner.infer(convert(triple)));
+			triples.add(reasoner.infer(convert(triple)));
 		} else {
-			triples.addAll(convert(triple));
+			triples.add(convert(triple));
 		}
 		return RDFWriteUtils.printTriples(triples, prefixMapping, trie, ext, this.shortenURI);
 
 	}
-	protected List<SPTriple> convert(Quad quad){
-		List<SPTriple> triples = new ArrayList<SPTriple>();
+	
+	protected SPTriple convert(Quad quad){
 		switch (rep.toUpperCase()){
 		
 		case Constants.NANO_REP:
@@ -97,12 +106,11 @@ public class SPProcessor{
 		case Constants.NG_REP:
 			return ((NamedGraph2SP)converter).transformQuad(quad);
 		
-		default:
-			return triples;
 		}
+		return null;
 
 	}
-	protected List<SPTriple> convert(Triple triple){
+	protected SPTriple convert(Triple triple){
 		switch (rep.toUpperCase()){
 		
 		case Constants.REI_REP:
@@ -121,16 +129,24 @@ public class SPProcessor{
 	}
 	
 	
-	public String finish(){
+	public List<SPTriple> finish(){
 		List<SPTriple> triples = new ArrayList<SPTriple>();
  		if (isInfer) {
        		// Generate the generic property triples
    			triples.addAll(reasoner.generateGenericPropertyTriplesPerFile());
-   			return RDFWriteUtils.printTriples(triples, prefixMapping, trie, ext, this.shortenURI);
+   			return triples;
    		}
- 		return "";
+ 		return null;
 	}
 	
+	public ContextualInference getReasoner() {
+		return reasoner;
+	}
+
+	public void setReasoner(ContextualInference reasoner) {
+		this.reasoner = reasoner;
+	}
+
 	public String getExt() {
 		return ext;
 	}
