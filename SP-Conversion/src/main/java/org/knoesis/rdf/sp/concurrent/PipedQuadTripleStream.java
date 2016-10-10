@@ -18,6 +18,11 @@ public class PipedQuadTripleStream  extends PipedRDFStream<Object> implements St
 		if (node != null) receive(node);
 	}
 
+	public void node(String node){
+//		System.out.println("received node: " + node);
+		if (node != null) receive(node);
+	}
+
 	@Override
 	public void triple(Triple triple) {
 		// TODO Auto-generated method stub

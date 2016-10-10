@@ -13,14 +13,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.jena.riot.lang.PipedRDFIterator;
-import org.apache.jena.riot.lang.PipedRDFStream;
 import org.knoesis.rdf.sp.callable.CallableConverter;
 import org.knoesis.rdf.sp.callable.CallableParser;
 import org.knoesis.rdf.sp.callable.CallableStreamSplitter;
 import org.knoesis.rdf.sp.callable.CallableTransformer;
 import org.knoesis.rdf.sp.callable.CallableWriter;
-import org.knoesis.rdf.sp.callable.SPProcessor;
 import org.knoesis.rdf.sp.concurrent.PipedNodesIterator;
 import org.knoesis.rdf.sp.concurrent.PipedNodesStream;
 import org.knoesis.rdf.sp.concurrent.PipedQuadTripleIterator;
@@ -218,12 +215,12 @@ public class SPParser {
         	boolean isDone = false;
         	while (!isDone){
 	        	for (Future<String> future:futureParserList){
-	        		if (future.isDone()) {
+	        		if (future.isDone() || future.isCancelled()) {
 	        			future.get();
 	        		}
 	        	}
 	        	for (Future<String> future:futureConverterList){
-	        		if (future.isDone()) {
+	        		if (future.isDone() || future.isCancelled()) {
 	        			future.get();
 	        		}
 	        	}

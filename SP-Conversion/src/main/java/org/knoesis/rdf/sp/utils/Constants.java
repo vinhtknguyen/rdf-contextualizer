@@ -79,13 +79,19 @@ public class Constants {
 	
 
 	/**
-	 * I/O config
+	 * Performance tuning
+	 * 
 	 * */
 	public static int BUFFER_SIZE_STREAM = 1048576; // 10MB
 	public static int BUFFER_SIZE_WRITER = 1048576;	// 10MB		
+	
 	public static long FILE_ZIP_SIZE_MEDIUM = 10737418; // 10MB
 	public static long FILE_ZIP_SIZE_LARGE = 107374182; // 100MB
-	public static long FILE_REGULAR_SIZE_LARGE = 1073741824; // 1GB
+	public static long FILE_ZIP_SIZE_VERY_LARGE = 1073741820; // 1GB
+	public static long FILE_REGULAR_SIZE_LARGE = 1073741824; // 10GB
 
+	public static int FILE_ZIP_SIZE_MEDIUM_CONVERTERS = 2; // 10MB
+	public static int FILE_ZIP_SIZE_LARGE_CONVERTERS = 3; // 100MB
+	public static int FILE_ZIP_SIZE_VERY_LARGE_CONVERTERS = 4; // 100MB
 }
 

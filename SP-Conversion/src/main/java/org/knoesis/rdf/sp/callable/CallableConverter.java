@@ -6,7 +6,6 @@ import java.util.Map.Entry;
 import java.util.concurrent.Callable;
 
 import org.apache.jena.graph.Triple;
-import org.apache.jena.riot.lang.PipedRDFIterator;
 import org.apache.jena.riot.lang.PipedRDFStream;
 import org.apache.jena.sparql.core.Quad;
 import org.knoesis.rdf.sp.concurrent.PipedQuadTripleIterator;
@@ -65,8 +64,8 @@ public class CallableConverter<T> implements Callable<String>{
 			    ((PipedSPTripleStream)converterInputStream).sptriple(new SPTriple(new SPNode(pair.getKey()), SPModel.rdfType, SPModel.genericPropertyClass));
 			}
 		} finally {
-			processorIter.close();
 			converterInputStream.finish();
+			processorIter.close();
 			reporter.reportSystem(start, Constants.PROCESSING_STEP_CONVERT);
 		}
 		

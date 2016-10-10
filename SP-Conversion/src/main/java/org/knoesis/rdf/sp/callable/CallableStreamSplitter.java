@@ -39,6 +39,9 @@ public class CallableStreamSplitter implements Callable<String>{
 			if (index==len-1) index = 0;
 			else index++;
 		}
+		for (PipedQuadTripleStream stream: outputStreams){
+			stream.finish();
+		}
 		
 		inputIter.close();
 		

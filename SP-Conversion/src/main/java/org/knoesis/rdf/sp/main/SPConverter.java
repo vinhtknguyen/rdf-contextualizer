@@ -30,9 +30,10 @@ public class SPConverter {
 	protected String _uuidInitStr = null;
 	protected long _uuidInitNum = 0;
 	protected boolean shortenURI = true;
-	protected int parallel = 1;
+	protected int converters = 4; //
 	protected int bufferSizeStream = Constants.BUFFER_SIZE_STREAM;
 	protected int bufferSizeWriter = Constants.BUFFER_SIZE_WRITER;
+	protected int parallel = 3;
 
 	
 	/**	cd /semweb1/datasets
@@ -52,6 +53,7 @@ public class SPConverter {
 	 * -url
 	 * -prefix		
 	 * -shorternURI
+	 * -converters
 	 */
 	
 	/** Examples for testing

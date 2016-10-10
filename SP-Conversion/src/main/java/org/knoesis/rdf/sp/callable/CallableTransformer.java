@@ -47,9 +47,8 @@ public class CallableTransformer implements Callable<String>{
 				}
 			}
         } finally{
-        	converterIter.close();
         	transformerInputStream.finish();
-        	
+        	converterIter.close();
 			reporter.reportSystem(start, Constants.PROCESSING_STEP_TRANFORM);
         }
 		return reporter.getFilename();

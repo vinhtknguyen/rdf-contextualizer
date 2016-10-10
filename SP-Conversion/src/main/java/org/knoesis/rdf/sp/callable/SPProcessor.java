@@ -34,16 +34,28 @@ public class SPProcessor{
 	// For all possible prefixes and namespaces
 	static Map<String,String> trie = new ConcurrentHashMap<String,String>();
 	ContextualInference reasoner = new ContextualInference();
+	NamedGraph2SP converterNG2SP;
+	Reification2SP converterRei2SP;
+	NanoPub2SP converterNano2SP;
+	Triple2SP converterTriple2SP;
 	ContextualRepresentationConverter converter;
 	
 	public SPProcessor(String _rep){
 		rep = _rep;
-		converter = ContextConverterFactory.createConverter(_rep);
+		converterNG2SP = new NamedGraph2SP();
+		converterRei2SP = new Reification2SP();
+		converterNano2SP = new NanoPub2SP();
+		converterTriple2SP = new Triple2SP();
+		converter = new ContextualRepresentationConverter();
 	}
 
 	public SPProcessor(String _rep, long uuidInitNum, String uuidInitStr) {
 		rep = _rep;
-		converter = ContextConverterFactory.createConverter(rep, uuidInitStr, uuidInitNum);
+		converterNG2SP = new NamedGraph2SP(uuidInitNum, uuidInitStr);
+		converterRei2SP = new Reification2SP(uuidInitNum, uuidInitStr);
+		converterNano2SP = new NanoPub2SP(uuidInitNum, uuidInitStr);
+		converterTriple2SP = new Triple2SP(uuidInitNum, uuidInitStr);
+		converter = new ContextualRepresentationConverter(uuidInitNum, uuidInitStr);
 	}
 	
 	public void start(){
@@ -98,33 +110,40 @@ public class SPProcessor{
 	}
 	
 	protected SPTriple convert(Quad quad){
+		SPTriple sptriple = null;
 		switch (rep.toUpperCase()){
 		
 		case Constants.NANO_REP:
-			return ((NanoPub2SP)converter).transformQuad(quad);
-		
+			sptriple = converterNano2SP.transformQuad(quad);
+			break;
 		case Constants.NG_REP:
-			return ((NamedGraph2SP)converter).transformQuad(quad);
-		
+			sptriple = converterNG2SP.transformQuad(quad);
+			break;
+		default:
+			sptriple = converterNG2SP.transformQuad(quad);
+			break;
 		}
-		return null;
+		return sptriple;
 
 	}
 	protected SPTriple convert(Triple triple){
+		SPTriple sptriple = null;
 		switch (rep.toUpperCase()){
 		
 		case Constants.REI_REP:
-			return ((Reification2SP)converter).transformTriple(triple);
-			
+			sptriple = converterRei2SP.transformTriple(triple);
+			break;
 		case Constants.TRIPLE_REP:
-			return ((Triple2SP)converter).transformTriple(triple);
-
+			sptriple = converterTriple2SP.transformTriple(triple);
+			break;
 		case Constants.NONE_REP:
-			return ((ContextualRepresentationConverter)converter).transformTriple(triple);
-			
+			sptriple = converter.transformTriple(triple);
+			break;
 		default:
-			return ((Triple2SP)converter).transformTriple(triple);
+			sptriple = converterTriple2SP.transformTriple(triple);
+			break;
 		}
+		return sptriple;
 
 	}
 	

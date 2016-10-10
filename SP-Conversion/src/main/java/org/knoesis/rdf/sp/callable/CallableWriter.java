@@ -28,7 +28,6 @@ public class CallableWriter implements Callable<String> {
 		
         BufferedWriter buffWriter = RDFWriteUtils.getBufferedWriter(reporter.getFileout(), reporter.isZip(), reporter.getBufferSizeWriter());
 		try {
-			transformerIter.start();
  			while (transformerIter.hasNext()){
 				// Put the output to the writerInputStream
  				Object out = transformerIter.next();
