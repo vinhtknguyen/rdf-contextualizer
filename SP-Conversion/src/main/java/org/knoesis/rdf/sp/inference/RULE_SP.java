@@ -1,4 +1,4 @@
-package org.knoesis.rdf.sp.utils;
+package org.knoesis.rdf.sp.inference;
 
 public enum RULE_SP{
    

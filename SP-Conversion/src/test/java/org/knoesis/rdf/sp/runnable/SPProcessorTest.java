@@ -6,7 +6,7 @@ import org.apache.jena.graph.Triple;
 import org.apache.jena.sparql.core.Quad;
 import org.junit.Before;
 import org.junit.Test;
-import org.knoesis.rdf.sp.callable.SPProcessor;
+import org.knoesis.rdf.sp.supplier.SPProcessor;
 import org.knoesis.rdf.sp.utils.Constants;
 import org.knoesis.rdf.sp.utils.ConstantsTest;
 

@@ -369,6 +369,7 @@ public class RDFWriteUtils {
 		    }
 		    writer = new BufferedWriter(
 		            new OutputStreamWriter(outStream, "UTF-8"), buffer);
+		    System.out.println("Buffer: " + buffer);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

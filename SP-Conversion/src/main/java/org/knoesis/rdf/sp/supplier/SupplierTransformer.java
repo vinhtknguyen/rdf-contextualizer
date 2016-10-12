@@ -1,36 +1,41 @@
-package org.knoesis.rdf.sp.callable;
+package org.knoesis.rdf.sp.supplier;
 
 import java.util.Map;
-import java.util.concurrent.Callable;
+import java.util.function.Supplier;
 
+import org.apache.jena.riot.RiotException;
 import org.apache.jena.riot.lang.PipedRDFIterator;
 import org.apache.jena.riot.lang.PipedRDFStream;
-import org.knoesis.rdf.sp.concurrent.PipedNodesStream;
-import org.knoesis.rdf.sp.concurrent.PipedSPTripleIterator;
+import org.knoesis.rdf.sp.exception.SPException;
 import org.knoesis.rdf.sp.model.SPTriple;
+import org.knoesis.rdf.sp.parser.ParserElement;
+import org.knoesis.rdf.sp.parser.Reporter;
+import org.knoesis.rdf.sp.pipeline.PipedNodesStream;
+import org.knoesis.rdf.sp.pipeline.PipedSPTripleIterator;
 import org.knoesis.rdf.sp.utils.Constants;
 import org.knoesis.rdf.sp.utils.RDFWriteUtils;
-import org.knoesis.rdf.sp.utils.Reporter;
 
 import com.romix.scala.collection.concurrent.TrieMap;
 
-public class CallableTransformer implements Callable<String>{
+public class SupplierTransformer implements Supplier<ParserElement>{
 	PipedNodesStream transformerInputStream;
     PipedSPTripleIterator converterIter;
 	Reporter reporter;
+	ParserElement element;
 
-    public CallableTransformer(PipedNodesStream transformerInputStream,
-    		PipedSPTripleIterator converterIter, Reporter reporter) {
+    public SupplierTransformer(PipedNodesStream transformerInputStream,
+    		PipedSPTripleIterator converterIter, ParserElement element, Reporter reporter) {
 		super();
 		this.transformerInputStream = transformerInputStream;
 		this.converterIter = converterIter;
 		this.reporter = reporter;
+		this.element = element;
 	}
 
 	@Override
-    public String call() {
+    public ParserElement get() {
 		long start = System.currentTimeMillis();
-		reporter.reportStartStatus(Constants.PROCESSING_STEP_TRANFORM);
+		reporter.reportStartStatus(element, Constants.PROCESSING_STEP_TRANFORM);
 		Map<String,String> prefixMapping = new TrieMap<String,String>();
         Map<String,String> trie = new TrieMap<String,String>();
 		
@@ -46,12 +51,15 @@ public class CallableTransformer implements Callable<String>{
 					if (node != null) ((PipedNodesStream) transformerInputStream).node(node);
 				}
 			}
-        } finally{
+			
+			reporter.reportSystem(start, element, Constants.PROCESSING_STEP_TRANFORM);
         	transformerInputStream.finish();
         	converterIter.close();
-			reporter.reportSystem(start, Constants.PROCESSING_STEP_TRANFORM);
-        }
-		return reporter.getFilename();
+       } catch (RiotException e){
+			throw new SPException("File " + element.getFilein() + ": encounter streaming exception in transformer", e);
+			
+		} 
+        return element;
     }
 
 	public PipedRDFStream<String> getTransformerInputStream() {

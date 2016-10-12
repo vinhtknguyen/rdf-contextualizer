@@ -1,20 +1,19 @@
-package org.knoesis.rdf.sp.concurrent;
+package org.knoesis.rdf.sp.pipeline;
 
 import org.apache.jena.graph.Triple;
 import org.apache.jena.riot.lang.PipedRDFIterator;
 import org.apache.jena.riot.lang.PipedRDFStream;
 import org.apache.jena.riot.system.StreamRDF;
 import org.apache.jena.sparql.core.Quad;
-import org.knoesis.rdf.sp.model.SPTriple;
 
-public class PipedSPTripleStream extends PipedRDFStream<SPTriple> implements StreamRDF{
+public class PipedNodesStream extends PipedRDFStream<String> implements StreamRDF{
 
-	public PipedSPTripleStream(PipedRDFIterator<SPTriple> sink) {
+	public PipedNodesStream(PipedRDFIterator<String> sink) {
 		super(sink);
 		// TODO Auto-generated constructor stub
 	}
 
-	public void sptriple(SPTriple node){
+	public void node(String node){
 //		System.out.println("received node: " + node);
 		if (node != null) receive(node);
 	}

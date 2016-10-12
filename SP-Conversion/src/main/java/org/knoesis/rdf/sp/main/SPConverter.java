@@ -4,6 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import org.apache.log4j.Logger;
+import org.knoesis.rdf.sp.parser.Reporter;
 import org.knoesis.rdf.sp.parser.SPParser;
 import org.knoesis.rdf.sp.utils.Constants;
 import org.knoesis.rdf.sp.utils.RDFReadUtils;
@@ -14,26 +15,13 @@ public class SPConverter {
 	
 	final static Logger logger = Logger.getLogger(SPConverter.class);
 
+	Reporter reporter;
 
-	protected String rep = null;
-	protected String ext = null;
-	protected String prefix = null;
 	protected String fileIn = null;
 	protected String metaProp = null;
 	protected String metaObj =  null;
 	protected String spProp = null;
-	protected boolean zip = false;
-	protected boolean infer = false;
-	protected String ontoDir = null;
 	protected String url = null;
-	protected String dsName = null;
-	protected String _uuidInitStr = null;
-	protected long _uuidInitNum = 0;
-	protected boolean shortenURI = true;
-	protected int converters = 4; //
-	protected int bufferSizeStream = Constants.BUFFER_SIZE_STREAM;
-	protected int bufferSizeWriter = Constants.BUFFER_SIZE_WRITER;
-	protected int parallel = 3;
 
 	
 	/**	cd /semweb1/datasets
@@ -94,33 +82,30 @@ public class SPConverter {
 
 		SPConverter conversion = new SPConverter();
 		conversion.parseParameters(args);
-		System.out.println(conversion.getExt() + "\t" + conversion.getFileIn() + "\t" + conversion.getRep());
+		System.out.println(conversion.getReporter().getExt() + "\t" + conversion.getFileIn() + "\t" + conversion.getReporter().getRep());
 		
 		conversion.start();
 	}
 	
+	
+	
+	public SPConverter() {
+		reporter = new Reporter();
+	}
+
 	public void start(){
 		
 		// Prepare the data from url
-		if (this.getUrl() != null && this.getDsName() != null){
-			RDFReadUtils.fetchLinks(url, dsName);
+		if (this.getUrl() != null && reporter.getDsName() != null){
+			RDFReadUtils.fetchLinks(url, reporter.getDsName());
 			return;
 		}
 		
-		if (this.getRep() != null){
+		if (reporter.getRep() != null){
 
-			SPParser parser = new SPParser(rep, this.get_uuidInitNum(), this.get_uuidInitStr());
+			SPParser parser = new SPParser(reporter);
 
-			parser.setInfer(isInfer());
-			parser.setZip(isZip());
-			parser.setExt(this.getExt());
-			parser.setDsName(this.getDsName());
-			parser.setPrefix(this.getPrefix());
-			parser.setShortenURI(this.isShortenURI());
-			parser.setOntoDir(this.getOntoDir());
-			parser.setParallel(this.getParallel());
-			
-			parser.parse(this.getFileIn(), this.getExt(), this.getRep());
+			parser.parse(this.fileIn, reporter.getExt(), reporter.getRep());
 		}
 		
 	}
@@ -142,19 +127,19 @@ public class SPConverter {
 			// Get zip para
 			if (args[i].toLowerCase().equals("-zip")) {
 //				System.out.println("File in: " + args[i + 1]);
-				this.setZip(true);;
+				reporter.setZip(true);;
 			}
 			// Get infer para
 			if (args[i].toLowerCase().equals("-infer")) {
 //				System.out.println("File in: " + args[i + 1]);
-				this.setInfer(true);
-				this.setOntoDir(args[i+1]);
+				reporter.setInfer(true);
+				reporter.setOntoDir(args[i+1]);
 			}
 			
 			// Get infer para
 			if (args[i].toLowerCase().equals("-dsname")) {
 //				System.out.println("File in: " + args[i + 1]);
-				this.setDsName(args[i+1]);;
+				reporter.setDsName(args[i+1]);;
 			}
 			// Get prefix para
 			if (args[i].toLowerCase().equals("-prefix")) {
@@ -164,11 +149,11 @@ public class SPConverter {
 					System.out.println("File " + filename + " does not exist.\n");
 					return;
 				}
-				this.setPrefix(filename);
+				reporter.setPrefix(filename);
 			}
 			// Get shortenURI para
 			if (args[i].toLowerCase().equals("-shortenuri")) {
-				this.setShortenURI(true);
+				reporter.setShortenURI(true);
 //				System.out.println("Shorten URI commandline: " + this.isShortenURI());
 			}
 			
@@ -178,46 +163,40 @@ public class SPConverter {
 			}
 
 			// Get url to start with
-			if (args[i].toLowerCase().equals("-parallel")){
-				this.setParallel(Integer.parseInt(args[i+1]));
-			}
-
-			// Get url to start with
-			if (args[i].toLowerCase().equals("-buffersize")){
-				this.setBufferSizeStream(Integer.parseInt(args[i+1]));
-				this.setBufferSizeWriter(Integer.parseInt(args[i+1]));
+			if (args[i].toLowerCase().equals("-ratio")){
+				reporter.setRatio(Double.parseDouble(args[i+1]));
 			}
 
 			// Get input file extension
 			if (args[i].toLowerCase().equals("-rep")) {
 				switch (args[i + 1].toUpperCase()) {
 					case Constants.REI_REP:
-						this.rep = Constants.REI_REP;
+						reporter.setRep(Constants.REI_REP);
 						break;
 					case Constants.NANO_REP:
-						this.rep = Constants.NANO_REP;
+						reporter.setRep(Constants.NANO_REP);
 						break;
 					case Constants.NG_REP:
-						this.rep = Constants.NG_REP;
+						reporter.setRep(Constants.NG_REP);
 						break;
 					case Constants.TRIPLE_REP:
-						this.rep = Constants.TRIPLE_REP;
+						reporter.setRep(Constants.TRIPLE_REP);
 						break;
 					default:
-						this.rep = Constants.NONE_REP;
+						reporter.setRep(Constants.NONE_REP);
 						break;
 				}
 			}
 			if (args[i].toLowerCase().equals("-ext")) {
 				switch (args[i + 1].toLowerCase()) {
 					case Constants.NTRIPLE_EXT:
-						this.ext = Constants.NTRIPLE_EXT;
+						reporter.setExt(Constants.NTRIPLE_EXT);
 						break;
 					case Constants.TURTLE_EXT:
-						this.ext = Constants.TURTLE_EXT;
+						reporter.setExt(Constants.TURTLE_EXT);
 						break;
 					default:
-						this.ext = Constants.TURTLE_EXT;
+						reporter.setExt(Constants.TURTLE_EXT);
 						break;
 				}
 			}
@@ -235,10 +214,10 @@ public class SPConverter {
 			}
 			
 			if (args[i].toLowerCase().equals("-spinitnum")) {
-				this._uuidInitNum = Long.parseLong(args[i+1]);
+				reporter.setUuidInitNum(Long.parseLong(args[i+1]));
 			}
 			if (args[i].toLowerCase().equals("-spinitstr")) {
-				this._uuidInitStr = args[i+1];
+				reporter.setUuidInitStr(args[i+1]);
 			}
 
 		}
@@ -250,22 +229,13 @@ public class SPConverter {
 		}
 
 		// Check if input file is provided
-		if (this.getExt() == null && this.getUrl() == null) {
+		if (reporter.getExt() == null && this.getUrl() == null) {
 			System.out.println("Input file extension must be provided.");
 			return;
 		}
 		
 	}
 	
-	public void setRep(String rep) {
-		this.rep = rep;
-	}
-
-	public String getRep() {
-		return this.rep;
-	}
-
-
 	public String getUrl() {
 		return url;
 	}
@@ -274,75 +244,12 @@ public class SPConverter {
 		this.url = url;
 	}
 
-	public void setExt(String ext) {
-		this.ext = ext;
-	}
-
-	public String getExt() {
-		return this.ext;
-	}
-
 	public void setFileIn(String filename) {
 		this.fileIn = filename;
 	}
 
 	public String getFileIn() {
 		return this.fileIn;
-	}
-
-	public String getDsName() {
-		return dsName;
-	}
-
-	public void setDsName(String dsName) {
-		this.dsName = dsName;
-	}
-
-	public String get_uuidInitStr() {
-		return _uuidInitStr;
-	}
-
-	public void set_uuidInitStr(String _uuidInitStr) {
-		this._uuidInitStr = _uuidInitStr;
-	}
-
-	public long get_uuidInitNum() {
-		return _uuidInitNum;
-	}
-
-	public void set_uuidInitNum(long _uuidInitNum) {
-		this._uuidInitNum = _uuidInitNum;
-	}
-
-	public String getPrefix() {
-		return prefix;
-	}
-
-	public void setPrefix(String prefix) {
-		this.prefix = prefix;
-	}
-	public String getOntoDir() {
-		return ontoDir;
-	}
-
-	public void setOntoDir(String ontoDir) {
-		this.ontoDir = ontoDir;
-	}
-
-	public boolean isInfer() {
-		return infer;
-	}
-
-	public void setInfer(boolean infer) {
-		this.infer = infer;
-	}
-
-	public boolean isZip() {
-		return zip;
-	}
-
-	public void setZip(boolean zip) {
-		this.zip = zip;
 	}
 
 	public String getMetaProp() {
@@ -369,37 +276,12 @@ public class SPConverter {
 		this.spProp = spProp;
 	}
 
-	public boolean isShortenURI() {
-		return shortenURI;
+	public Reporter getReporter() {
+		return reporter;
 	}
 
-	public void setShortenURI(boolean shortenURI) {
-		this.shortenURI = shortenURI;
+	public void setReporter(Reporter reporter) {
+		this.reporter = reporter;
 	}
-
-	public int getParallel() {
-		return parallel;
-	}
-
-	public void setParallel(int parallel) {
-		this.parallel = parallel;
-	}
-
-	public int getBufferSizeStream() {
-		return bufferSizeStream;
-	}
-
-	public void setBufferSizeStream(int bufferSizeStream) {
-		this.bufferSizeStream = bufferSizeStream;
-	}
-
-	public int getBufferSizeWriter() {
-		return bufferSizeWriter;
-	}
-
-	public void setBufferSizeWriter(int bufferSizeWriter) {
-		this.bufferSizeWriter = bufferSizeWriter;
-	}
-
 
 }

@@ -11,7 +11,6 @@ import java.util.Map.Entry;
 import org.knoesis.rdf.sp.model.SPModel;
 import org.knoesis.rdf.sp.model.SPNode;
 import org.knoesis.rdf.sp.model.SPTriple;
-import org.knoesis.rdf.sp.utils.RULE_SP;
 
 import com.romix.scala.collection.concurrent.TrieMap;
 
@@ -99,6 +98,7 @@ public class ContextualInference {
 	}
 	
 	public SPTriple infer(SPTriple triple, RULE_SP rule){
+		if (triple == null) return null;
 		SPTriple out = new SPTriple(triple);
 		if (triple.isSingletonTriple()){
 			

@@ -7,170 +7,148 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import org.knoesis.rdf.sp.callable.CallableConverter;
-import org.knoesis.rdf.sp.callable.CallableParser;
-import org.knoesis.rdf.sp.callable.CallableStreamSplitter;
-import org.knoesis.rdf.sp.callable.CallableTransformer;
-import org.knoesis.rdf.sp.callable.CallableWriter;
-import org.knoesis.rdf.sp.concurrent.PipedNodesIterator;
-import org.knoesis.rdf.sp.concurrent.PipedNodesStream;
-import org.knoesis.rdf.sp.concurrent.PipedQuadTripleIterator;
-import org.knoesis.rdf.sp.concurrent.PipedQuadTripleStream;
-import org.knoesis.rdf.sp.concurrent.PipedSPTripleIterator;
-import org.knoesis.rdf.sp.concurrent.PipedSPTripleStream;
 import org.knoesis.rdf.sp.model.SPModel;
+import org.knoesis.rdf.sp.pipeline.PipedNodesIterator;
+import org.knoesis.rdf.sp.pipeline.PipedNodesStream;
+import org.knoesis.rdf.sp.pipeline.PipedQuadTripleIterator;
+import org.knoesis.rdf.sp.pipeline.PipedQuadTripleStream;
+import org.knoesis.rdf.sp.pipeline.PipedSPTripleIterator;
+import org.knoesis.rdf.sp.pipeline.PipedSPTripleStream;
+import org.knoesis.rdf.sp.supplier.SupplierConverter;
+import org.knoesis.rdf.sp.supplier.SupplierParser;
+import org.knoesis.rdf.sp.supplier.SupplierStreamSplitter;
+import org.knoesis.rdf.sp.supplier.SupplierTransformer;
+import org.knoesis.rdf.sp.supplier.SupplierWriter;
 import org.knoesis.rdf.sp.utils.Constants;
 import org.knoesis.rdf.sp.utils.RDFWriteUtils;
-import org.knoesis.rdf.sp.utils.Reporter;
+import org.knoesis.rdf.sp.exception.*;
+
 
 public class SPParser {
 	
-	protected boolean infer = false;
-	protected boolean zip = false;
-	protected String ontoDir;
-	protected String rep;
-	protected String dsName = null;
-	protected String uuidInitStr = null;
-	protected long uuidInitNum;
-	protected String prefix = null;
-	protected String ext = null;
-	protected boolean shortenURI = true;
-	protected int parallel = 3;
-	protected int bufferSizeStream = Constants.BUFFER_SIZE_STREAM;
-	protected int bufferSizeWriter = Constants.BUFFER_SIZE_WRITER;
+	Reporter reporter;
+	ResourceManager manager;
+	ExecutorService executor;
 
-	
-	public SPParser(String rep) {
-		this.rep = rep;
-		uuidInitStr = Constants.SP_UUID_PREFIX;
-		uuidInitNum = System.currentTimeMillis();
+	public SPParser(Reporter _reporter) {
+		reporter = _reporter;
+		manager = new ResourceManager(reporter.getRatio());
+		executor = Executors.newWorkStealingPool();
 	}
 
-	public SPParser(String rep, long _uuidInitNum, String _uuidInitStr) {
-		this.rep = rep;
-		uuidInitStr = _uuidInitStr;
-		uuidInitNum = _uuidInitNum;
-	}
-
-	public void parseFile(String filein, String ext, String rep, String fileout){
+	public void parseFile(ParserElement element){
 		// Check the condition before submitting new tasks
-        while (!canSubmitTask(futureParserList)) {
-        	// Wait until the parser and writer of the same task finish, then start a new task
-//        	checkFutures(futureConverterList);
-        }
-
-        PipedQuadTripleIterator processorIter = new PipedQuadTripleIterator(bufferSizeStream, false);
+		if (element == null) return;
+		
+        PipedQuadTripleIterator processorIter = new PipedQuadTripleIterator(element.getBufferStream(), false, 5000, 20);
 		final PipedQuadTripleStream processorInputStream = new PipedQuadTripleStream(processorIter);
 
-		final String filename = RDFWriteUtils.getPrettyName(filein);
-
-		Reporter reporter = new Reporter(rep, infer, ext, filename, filein, fileout, dsName, this.shortenURI, zip, bufferSizeWriter, uuidInitNum, uuidInitStr, ontoDir);
-		
-    	int round = findConverterNum(filein);
+    	int converters = element.getnConverters();
     	
-    	if (round == 1){
+		CompletableFuture<ParserElement> finishedElement = null;
+		if (converters == 1){
     		// One thread for each task
-    		CallableParser<Object> parser = new CallableParser<Object>(processorInputStream, reporter);
-        	futureParserList.add(parserExecutor.submit(parser));
-
-        	PipedSPTripleIterator converterIter = new PipedSPTripleIterator(bufferSizeStream, false);
+    		CompletableFuture<ParserElement> parserCompletableFuture = CompletableFuture.supplyAsync(new SupplierParser(processorInputStream, element, reporter), executor);
+    		
+        	PipedSPTripleIterator converterIter = new PipedSPTripleIterator(element.getBufferStream(), false, 5000, 20);
     		PipedSPTripleStream converterInputStream = new PipedSPTripleStream(converterIter);
-    		PipedNodesIterator transformerIter = new PipedNodesIterator(bufferSizeStream, false);
+    		PipedNodesIterator transformerIter = new PipedNodesIterator(element.getBufferStream(), false, 5000, 20);
     		PipedNodesStream transformerInputStream = new PipedNodesStream(transformerIter);
 
-    		CallableConverter<Object> converter = new CallableConverter<Object>(processorIter, converterInputStream, reporter);
-            CallableTransformer transformer = new CallableTransformer(transformerInputStream, converterIter, reporter);
-            CallableWriter writer = new CallableWriter(transformerIter, reporter);
-            
-    		futureConverterList.add(converterExecutor.submit(converter));
-    		futureConverterList.add(converterExecutor.submit(transformer));
-    		futureConverterList.add(converterExecutor.submit(writer));
+    		CompletableFuture<ParserElement> converter = CompletableFuture.supplyAsync(new SupplierConverter(processorIter, converterInputStream, element, reporter), executor);
+    		CompletableFuture<ParserElement> transformer = CompletableFuture.supplyAsync(new SupplierTransformer(transformerInputStream, converterIter, element, reporter), executor);
+    		CompletableFuture<ParserElement> writer = CompletableFuture.supplyAsync(new SupplierWriter(transformerIter, element, reporter), executor);
    		
+    		finishedElement = parserCompletableFuture.thenCombineAsync(converter, this::updateFinishedTasks)
+    								.thenCombineAsync(transformer, this::updateFinishedTasks)
+    								.thenCombineAsync(writer, this::updateFinishedTasks);
     	} else {
     		// Split the input stream into N sub-stream with N = round
         	List<PipedQuadTripleStream> subProcessorStreams = new ArrayList<PipedQuadTripleStream>();
         	List<PipedQuadTripleIterator> subProcessorIters = new ArrayList<PipedQuadTripleIterator>();
-        	for (int i = 0; i < round - 1; i++){
-        		PipedQuadTripleIterator subProcessorIter = new  PipedQuadTripleIterator(bufferSizeStream, false);
+        	for (int i = 0; i < converters; i++){
+        		PipedQuadTripleIterator subProcessorIter = new  PipedQuadTripleIterator(element.getBufferStream(), false, 5000, 20);
         		PipedQuadTripleStream subProcessorStream = new PipedQuadTripleStream(subProcessorIter);
         		subProcessorStreams.add(subProcessorStream);
         		subProcessorIters.add(subProcessorIter);
         	}
     		// Start the parser
-    		CallableParser<Object> parser = new CallableParser<Object>(processorInputStream, reporter);
-        	futureParserList.add(parserExecutor.submit(parser));
-        	
-        	CallableStreamSplitter splitter = new CallableStreamSplitter(processorIter, subProcessorStreams, reporter);
-        	futureConverterList.add(converterExecutor.submit(splitter));
-        	
+    		CompletableFuture<ParserElement> parser = CompletableFuture.supplyAsync(new SupplierParser(processorInputStream, element, reporter), executor);
+    		CompletableFuture<ParserElement> splitter = CompletableFuture.supplyAsync(new SupplierStreamSplitter(processorIter, subProcessorStreams, element, reporter), executor);
+
+    		CompletableFuture<ParserElement> combiner = parser.thenCombineAsync(splitter, this::updateFinishedTasks);
+
         	// For each stream, create a set of tasks with the sub-stream input
-        	for (int i = 0; i < round - 1; i++){
+        	for (int i = 0; i < converters; i++){
         		
-                PipedSPTripleIterator converterIter = new PipedSPTripleIterator(bufferSizeStream, false);
+                PipedSPTripleIterator converterIter = new PipedSPTripleIterator(element.getBufferStreamSubStream(), false, 5000, 20);
         		PipedSPTripleStream converterInputStream = new PipedSPTripleStream(converterIter);
-        		PipedNodesIterator transformerIter = new PipedNodesIterator(bufferSizeStream, false);
+        		PipedNodesIterator transformerIter = new PipedNodesIterator(element.getBufferStreamSubStream(), false, 5000, 20);
         		PipedNodesStream transformerInputStream = new PipedNodesStream(transformerIter);
 
-        		CallableConverter<Object> converter = new CallableConverter<Object>(subProcessorIters.get(i), converterInputStream, reporter);
-                CallableTransformer transformer = new CallableTransformer(transformerInputStream, converterIter, reporter);
-                CallableWriter writer = new CallableWriter(transformerIter, reporter);
-                
-        		futureConverterList.add(converterExecutor.submit(converter));
-        		futureConverterList.add(converterExecutor.submit(transformer));
-        		futureConverterList.add(converterExecutor.submit(writer));
+        		CompletableFuture<ParserElement> converter = CompletableFuture.supplyAsync(new SupplierConverter(subProcessorIters.get(i), converterInputStream, element, reporter), executor);
+        		CompletableFuture<ParserElement> transformer = CompletableFuture.supplyAsync(new SupplierTransformer(transformerInputStream, converterIter, element, reporter), executor);
+               	CompletableFuture<ParserElement> writer = CompletableFuture.supplyAsync(new SupplierWriter(transformerIter, element, reporter), executor);
+               	
+        		finishedElement = combiner.thenCombineAsync(converter, this::updateFinishedTasks)
+						.thenCombineAsync(transformer, this::updateFinishedTasks)
+						.thenCombineAsync(writer, this::updateFinishedTasks);
+        		
         	}
-    		
     	}
-
-	}
-	public int findConverterNum(String filein){
-        boolean zipfile = filein.endsWith(".gz");
-        int num = 1;
-		if (zipfile){ 
-			if (Paths.get(filein).toFile().length() > Constants.FILE_ZIP_SIZE_MEDIUM){
-				num = 2;
+		
+		finishedElement.handleAsync((ok, ex) ->{
+			Runtime.getRuntime().gc();
+			if (ok != null){
+				System.out.println("File " + element.getFilein() + ": done processing.");
+			} else {
+				this.updateCancelledTasks(element);
+				throw new SPException(ex);
 			}
-			if (Paths.get(filein).toFile().length() > Constants.FILE_ZIP_SIZE_LARGE){
-				num = 3;
-			}
-		} else if (Paths.get(filein).toFile().length() > Constants.FILE_REGULAR_SIZE_LARGE){
-			num = 3;
-		}
-		return num;
-
+			return ok;
+		});
+		
 	}
 
-	public void parseDir(String filein, String ext, String rep, String fileout){
+	public void parseDir(String filein, String fileout){
 
 		if (!Files.isDirectory(Paths.get(filein))){
-			parseFile(filein, ext, rep, RDFWriteUtils.genFileOut(filein, ext, this.isZip()));
+			
+			manager.put(filein, fileout);
+//			parseFile(filein, RDFWriteUtils.genFileOut(filein, reporter.getExt(), reporter.isZip()));
+			
 		} else {
 			// If the input is a directory
 			// Create a new directory for output files
 			try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(filein))) {
+				
 				String dirOut;
-				if (this.infer){
-					dirOut = fileout + (ext.equals(Constants.NTRIPLE_EXT)?Constants.CONVERTED_TO_SP_INF_NT:Constants.CONVERTED_TO_SP_INF_TTL);
+				if (reporter.isInfer()){
+					dirOut = fileout + (reporter.getExt().equals(Constants.NTRIPLE_EXT)?Constants.CONVERTED_TO_SP_INF_NT:Constants.CONVERTED_TO_SP_INF_TTL);
 				} else {
-					dirOut = fileout + (ext.equals(Constants.NTRIPLE_EXT)?Constants.CONVERTED_TO_SP_NT:Constants.CONVERTED_TO_SP_TTL);
+					dirOut = fileout + (reporter.getExt().equals(Constants.NTRIPLE_EXT)?Constants.CONVERTED_TO_SP_NT:Constants.CONVERTED_TO_SP_TTL);
 				}
 				Files.createDirectories(Paths.get(dirOut));
 				/* PROCESS EACH INPUT FILE & GENERATE OUTPUT FILE */
 				
 				for (Path entry : stream) {
 					if (!Files.isDirectory(entry)){
-						String fileOut = dirOut + "/" + RDFWriteUtils.genFileOut(entry.getFileName().toString(), ext, this.isZip());
-						System.out.println("File in: " + entry.toString() + " vs. out " + fileOut);
-						parseFile(entry.toString(), ext, rep, fileOut);
+						
+						String fileOut = dirOut + "/" + RDFWriteUtils.genFileOut(entry.getFileName().toString(), reporter.getExt(), reporter.isZip());
+//						System.out.println("File in: " + entry.toString() + " vs. out " + fileOut);
+						
+						manager.put(entry.toString(), fileOut);
+//						parseFile(entry.toString(), fileOut);
+						
 					} else {
+						
 						if (entry.getFileName().toString().toLowerCase().contains(Constants.DATA_DIR)) 
-							parseDir(entry.toString(), ext, rep, dirOut + "/" + RDFWriteUtils.genDirOut(entry.getFileName().toString()));
+							parseDir(entry.toString(), dirOut + "/" + RDFWriteUtils.genDirOut(entry.getFileName().toString()));
 					}
 		        }
 		    } catch (IOException e1) {
@@ -179,225 +157,126 @@ public class SPParser {
 		}
 	}
 	
-	ExecutorService converterExecutor;
-	ExecutorService parserExecutor;
-	List<Future<String>> futureConverterList = new ArrayList<Future<String>>();
-	List<Future<String>> futureParserList = new ArrayList<Future<String>>();
-
-	public void parse(String file, String ext, String rep){
-		long start = System.currentTimeMillis();
-		parserExecutor = Executors.newFixedThreadPool(parallel);
-		converterExecutor = Executors.newWorkStealingPool();
-
-		if (this.infer){
-			System.out.println("Loading ontologies from " + this.getOntoDir());
-			SPModel.loadModel(this.getOntoDir());
-			System.out.println("Done loading ontologies.");
-		}
-		if (this.prefix != null) {
-			System.out.println("Loading prefixes ..." + prefix);
-			RDFWriteUtils.loadPrefixesToTrie(RDFWriteUtils.trie, this.prefix);
-			System.out.println("Done loading prefixes.");
-		}
+	public void genFileList(String filein){
 		/*
 		 * If input is a file, parse it
 		 * If input is a directory, parse its files and sub-directories named DATA recursively
 		 * */
-		if (!Files.isDirectory(Paths.get(file))){
-			parseFile(file, ext, rep, RDFWriteUtils.genFileOut(file, ext, this.isZip()));
+		String fileout;
+		if (!Files.isDirectory(Paths.get(filein))){
+			//parseFile(filein, RDFWriteUtils.genFileOut(filein, ext, reporter.isZip()));
+			fileout = RDFWriteUtils.genFileOut(filein, reporter.getExt(), reporter.isZip());
+			manager.put(filein, fileout);
 		} else {
-			System.out.println("Directory in: " + file);
-			parseDir(file, ext, rep, RDFWriteUtils.genDirOut(file));
+			System.out.println("Directory in: " + filein);
+			fileout = RDFWriteUtils.genDirOut(filein);
+			parseDir(filein, fileout);
+		}
+		reporter.setFilein(filein);
+		reporter.setFileout(fileout);
+		
+	}
+	
+	public void parse(String filein, String ext, String rep){
+		
+		reporter.setExt(ext);
+		reporter.setRep(rep);
+
+		long start = System.currentTimeMillis();
+
+		if (reporter.isInfer()){
+			System.out.println("Loading ontologies from " + reporter.getOntoDir());
+			SPModel.loadModel(reporter.getOntoDir());
+			System.out.println("Done loading ontologies.");
+		}
+		if (reporter.getPrefix() != null) {
+			System.out.println("Loading prefixes ..." + reporter.getPrefix());
+			RDFWriteUtils.loadPrefixesToTrie(RDFWriteUtils.trie, reporter.getPrefix());
+			System.out.println("Done loading prefixes.");
 		}
 		
-		try {
-
-        	boolean isDone = false;
-        	while (!isDone){
-	        	for (Future<String> future:futureParserList){
-	        		if (future.isDone() || future.isCancelled()) {
-	        			future.get();
-	        		}
-	        	}
-	        	for (Future<String> future:futureConverterList){
-	        		if (future.isDone() || future.isCancelled()) {
-	        			future.get();
-	        		}
-	        	}
-	        	isDone = true;
-        	}
-        	
-    		converterExecutor.shutdown();
-    		parserExecutor.shutdown();
-    		converterExecutor.awaitTermination(Integer.MAX_VALUE, TimeUnit.MICROSECONDS);
-    		parserExecutor.awaitTermination(Integer.MAX_VALUE, TimeUnit.MICROSECONDS);
-
-    		long end = System.currentTimeMillis();
-        	System.out.println("Time processed (ms): " + (end-start) );
-        	System.out.println("Done processing." );
-        } catch (InterruptedException | ExecutionException ex) {
-           ex.getCause().printStackTrace();
-        }
-
-	}
-	
-	public boolean canSubmitTask(List<Future<String>> futures){
-		// Guarantee no more tasks submitted after encountering a big file
-		String filename = null;
-		if (futures.size() < parallel) return true;
-		try {
-			for (int i = 0; i < futures.size(); i++){
-				Future<String> future = futures.get(i);
-				if (future.isDone()) {
-					futures.remove(i); 
-					filename = future.get();
-					System.out.println(filename + ": done processing!");
-					return true;
-				}
+		genFileList(filein);
+		System.out.println("Files to be processed:");
+		manager.printParserElements();
+		
+		// Already obtained the file names and sizes in the queue, now start processing them
+		boolean cont = true;
+		boolean doneFiles = false;
+		boolean doneTasks = false;
+		boolean shutdown = false;
+		while (cont){
+			if (!doneFiles){
+				if (manager.canExecuteNextElement()){
+					ParserElement element = manager.next();
+					manager.startParserElement(element);
+					parseFile(element);
+					if (!manager.hasNext()) doneFiles = true;
+				} 
 			}
-			if (futures.size() < parallel) return true;
-		} catch (InterruptedException | ExecutionException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Error while reading file: " + filename + ":" + e.getCause().toString());
-			e.getCause().printStackTrace();
-		}
-		return false;
-	}
-	
-	public void checkFutures(List<Future<String>> futures){
-		try {
-			for (int i = 0; i < futures.size(); i++){
-				Future<String> future = futures.get(i);
-					if (future.isDone()) {
-						futures.remove(i);
-						future.get();
+			if (doneFiles){
+				if (manager.freeResources()) doneTasks = true;
+				if (!shutdown) {
+					shutdown = true;
+					executor.shutdown();
+					try {
+						executor.awaitTermination(Integer.MAX_VALUE, TimeUnit.NANOSECONDS);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-			}
-		} catch (InterruptedException | ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.getCause().printStackTrace();
-		}
-		
-	}
-	
-	public void waitForFutureTask(Future<String> future){
-		boolean isDone = false;
-		while (!isDone){
-			if (future.isDone()){
-				try {
-					isDone = true;
-					future.get();
-				} catch (InterruptedException | ExecutionException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
 			}
+			if (doneFiles && doneTasks){
+				cont = false;
+			}
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		reporter.reportFinish(start);
+		// Shutdown the executor pool
+		return;
 	}
 	
-	public boolean isInfer() {
-		return infer;
+	public ParserElement updateFinishedTasks(ParserElement element1, ParserElement element2){
+		if (element1.getFilein().equals(element2.getFilein())){
+			element1.updateFinishedTasks(1);
+			manager.deregisterNumTasks(1);
+			if (element1.isFinished()){
+				manager.finishParserElemnet(element1);
+				reporter.reportEndStatus(element1);
+			}
+		}
+		return element1;
 	}
 
-	public void setInfer(boolean infer) {
-		this.infer = infer;
+	public ParserElement updateCancelledTasks(ParserElement element1){
+		if (element1 != null){
+			manager.deregisterNumTasks(element1.getnTasksDefault()-1);
+			manager.finishParserElemnet(element1);
+			reporter.reportEndStatus(element1);
+		}
+		return element1;
 	}
 
-	public String getOntoDir() {
-		return ontoDir;
+
+	public ResourceManager getManager() {
+		return manager;
 	}
 
-	public void setOntoDir(String ontoDir) {
-		this.ontoDir = ontoDir;
+	public void setManager(ResourceManager manager) {
+		this.manager = manager;
 	}
 
-	public boolean isZip() {
-		return zip;
+	public Reporter getReporter() {
+		return reporter;
 	}
 
-	public void setZip(boolean zip) {
-		this.zip = zip;
+	public void setReporter(Reporter reporter) {
+		this.reporter = reporter;
 	}
-
-	public String getRep() {
-		return rep;
-	}
-
-	public void setRep(String rep) {
-		this.rep = rep;
-	}
-
-	public String getDsName() {
-		return dsName;
-	}
-
-	public void setDsName(String dsName) {
-		this.dsName = dsName;
-	}
-
-	public String getUuidInitStr() {
-		return uuidInitStr;
-	}
-
-	public void setUuidInitStr(String uuidInitStr) {
-		this.uuidInitStr = uuidInitStr;
-	}
-
-	public long getUuidInitNum() {
-		return uuidInitNum;
-	}
-
-	public void setUuidInitNum(long uuidInitNum) {
-		this.uuidInitNum = uuidInitNum;
-	}
-
-	public String getPrefix() {
-		return prefix;
-	}
-
-	public void setPrefix(String prefix) {
-		this.prefix = prefix;
-	}
-
-	public String getExt() {
-		return ext;
-	}
-
-	public void setExt(String ext) {
-		this.ext = ext;
-	}
-
-	public boolean isShortenURI() {
-		return shortenURI;
-	}
-
-	public void setShortenURI(boolean shortenURI) {
-		this.shortenURI = shortenURI;
-	}
-
-	public int getParallel() {
-		return parallel;
-	}
-
-	public void setParallel(int parallel) {
-		this.parallel = parallel;
-	}
-
-	public int getBufferSizeStream() {
-		return bufferSizeStream;
-	}
-
-	public void setBufferSizeStream(int bufferSizeStream) {
-		this.bufferSizeStream = bufferSizeStream;
-	}
-
-	public int getBufferSizeWriter() {
-		return bufferSizeWriter;
-	}
-
-	public void setBufferSizeWriter(int bufferSizeWriter) {
-		this.bufferSizeWriter = bufferSizeWriter;
-	}
-	
 	
 }

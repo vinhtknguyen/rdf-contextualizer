@@ -1,4 +1,4 @@
-package org.knoesis.rdf.sp.concurrent;
+package org.knoesis.rdf.sp.pipeline;
 
 import org.apache.jena.graph.Triple;
 import org.apache.jena.riot.lang.PipedRDFIterator;

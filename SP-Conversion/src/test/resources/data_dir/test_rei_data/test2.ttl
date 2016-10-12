@@ -17,18 +17,19 @@
 @prefix dcat:	 <http://www.w3.org/ns/dcat#> 	 .
 @prefix prov:	 <http://www.w3.org/ns/prov#> 	 .
 @prefix foaf:	 <http://xmlns.com/foaf/0.1/> 	 .
-foaf:statement1 	rdf:type	rdf:Statement	.
-foaf:statement1.	rdf:subject	dbr:Algol	.
-foaf:statement1		rdf:predicate	.	foaf:gender		.
-foaf:statement1		rdf:object		.	"male"@en	.
 
 foaf:statement1 	rdf:type	rdf:Statement	.
-foaf:statement1.	rdf:subject	dbr:Abraham	.
-foaf:statement1		rdf:predicate	.	foaf:gender		.
-foaf:statement1		rdf:object		.	"male"@en	.
+foaf:statement1	rdf:subject	dbr:Algol	.
+foaf:statement1		rdf:predicate	foaf:gender		.
+foaf:statement1		rdf:object	"male"@en	.
 
 foaf:statement1 	rdf:type	rdf:Statement	.
-foaf:statement1.	rdf:subject	dbr:Albertus_Magnus	.
-foaf:statement1		rdf:predicate	.	foaf:gender		.
-foaf:statement1		rdf:object		.	"male"@en	.
+foaf:statement1	rdf:subject	dbr:Abraham	.
+foaf:statement1		rdf:predicate	foaf:gender		.
+foaf:statement1		rdf:object	"male"@en	.
+
+foaf:statement1 	rdf:type	rdf:Statement	.
+foaf:statement1	rdf:subject	dbr:Albertus_Magnus	.
+foaf:statement1		rdf:predicate	foaf:gender		.
+foaf:statement1		rdf:object		"male"@en	.
 

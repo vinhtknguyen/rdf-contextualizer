@@ -1,4 +1,4 @@
-package org.knoesis.rdf.sp.callable;
+package org.knoesis.rdf.sp.supplier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.jena.graph.Triple;
 import org.apache.jena.sparql.core.Quad;
-import org.knoesis.rdf.sp.converter.ContextConverterFactory;
 import org.knoesis.rdf.sp.converter.ContextualRepresentationConverter;
 import org.knoesis.rdf.sp.converter.NamedGraph2SP;
 import org.knoesis.rdf.sp.converter.NanoPub2SP;

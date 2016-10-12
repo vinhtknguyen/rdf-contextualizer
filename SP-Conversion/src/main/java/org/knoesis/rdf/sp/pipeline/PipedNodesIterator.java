@@ -1,4 +1,4 @@
-package org.knoesis.rdf.sp.concurrent;
+package org.knoesis.rdf.sp.pipeline;
 
 import org.apache.jena.riot.lang.PipedRDFIterator;
 
@@ -10,6 +10,10 @@ public class PipedNodesIterator extends PipedRDFIterator<String> {
 
 	public PipedNodesIterator(int bufferSizeStream) {
 		super(bufferSizeStream);
+	}
+
+	public PipedNodesIterator(int bufferStream, boolean b, int i, int j) {
+		super(bufferStream, b, i, j);
 	}
 
 	/* 

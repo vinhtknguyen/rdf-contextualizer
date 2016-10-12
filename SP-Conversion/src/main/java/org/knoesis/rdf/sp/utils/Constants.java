@@ -68,11 +68,14 @@ public class Constants {
 	public static final String ORIGINAL_DIRECTORY = "ori";
 	public static final String REPORTS_DIRECTORY = "reports";
 	public static final String STAT_FILE = "sp_stat.txt";
+	
 	public static final String PROCESSING_STEP_PARSE = "parsing";
 	public static final String PROCESSING_STEP_CONVERT = "converting";
 	public static final String PROCESSING_STEP_TRANFORM = "transforming";
 	public static final String PROCESSING_STEP_SPLITTING = "splitting";
 	public static final String PROCESSING_STEP_WRITE = "writing";
+	public static final String PROCESSING_STEP_ALL = "all";
+
 	public static final String OPTIONS_INFER = "infer";
 	public static final String OPTIONS_NO_INFER = "no_infer";
 	public static final String DATA_DIR = "data";
@@ -82,16 +85,26 @@ public class Constants {
 	 * Performance tuning
 	 * 
 	 * */
-	public static int BUFFER_SIZE_STREAM = 1048576; // 10MB
-	public static int BUFFER_SIZE_WRITER = 1048576;	// 10MB		
+	
+	public static double CPU_UTILIZATION_RATIO = 1;
+	public static int BUFFER_SIZE_SMALL = 10485760; // 10MB
+	public static int BUFFER_SIZE_MEDIUM = 104857600; // 100MB
+	public static int BUFFER_SIZE_LARGE = 104857600; // 200MB
 	
 	public static long FILE_ZIP_SIZE_MEDIUM = 10737418; // 10MB
 	public static long FILE_ZIP_SIZE_LARGE = 107374182; // 100MB
 	public static long FILE_ZIP_SIZE_VERY_LARGE = 1073741820; // 1GB
-	public static long FILE_REGULAR_SIZE_LARGE = 1073741824; // 10GB
+	public static long FILE_ZIP_SIZE_HUGE = 5368709120L; // 5GB
+	public static long FILE_REGULAR_SIZE_MEDIUM = 1073741824L; // 1GB
+	public static long FILE_REGULAR_SIZE_LARGE = 10737418240L; // 10GB
+	public static long FILE_REGULAR_SIZE_VERY_LARGE = 107374182400L; // 100GB
 
 	public static int FILE_ZIP_SIZE_MEDIUM_CONVERTERS = 2; // 10MB
 	public static int FILE_ZIP_SIZE_LARGE_CONVERTERS = 3; // 100MB
-	public static int FILE_ZIP_SIZE_VERY_LARGE_CONVERTERS = 4; // 100MB
+	public static int FILE_ZIP_SIZE_VERY_LARGE_CONVERTERS = 4; // 1GB
+	public static int FILE_ZIP_SIZE_HUGE_CONVERTERS = 5; // 5GB
+	public static int FILE_REGULAR_SIZE_MEDIUM_CONVERTERS = 2; // 10GB
+	public static int FILE_REGULAR_SIZE_LARGE_CONVERTERS = 3; // 10GB
+	public static int FILE_REGULAR_SIZE_VERY_LARGE_CONVERTERS = 4; // 10GB
 }
 
