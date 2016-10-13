@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.knoesis.rdf.sp.utils.Constants;
 import org.knoesis.rdf.sp.utils.ConstantsTest;
 
 public class ResourceManagerTest {
@@ -11,7 +12,7 @@ public class ResourceManagerTest {
 	ResourceManager manager;
 	@Before
 	public void setUp() throws Exception {
-		manager = new ResourceManager(1);
+		manager = new ResourceManager(1, Constants.PROCESSING_TASK_GENERATE);
 	}
 
 	@Test

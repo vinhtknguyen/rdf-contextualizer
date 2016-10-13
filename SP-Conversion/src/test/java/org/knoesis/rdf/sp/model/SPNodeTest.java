@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.jena.graph.Node;
+import org.apache.jena.graph.NodeFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.knoesis.rdf.sp.model.SPNode;
@@ -58,9 +60,17 @@ public class SPNodeTest {
 		
 	}
 
+	@Test
+	public void testGetPrefixes(){
+		
+//		assertEquals(new SPNode("http://www.w3.org/2003/01/geo/wgs84_pos#lat_sp/123").getNodePrefix(), "http://www.w3.org/2003/01/geo/wgs84_pos#lat_sp/");
+//		assertEquals(new SPNode("http://www.w3.org/2003/01/geo/wgs84_pos#123").getNodeSuffix(), "123");
+	}
 
 	@Test
 	public void testToNT() {
+		Node node = NodeFactory.createLiteral("male\"", "<http://www.w3.org/2001/XMLSchema#string>");
+		System.out.println(node.toString());
 	}
 
 }

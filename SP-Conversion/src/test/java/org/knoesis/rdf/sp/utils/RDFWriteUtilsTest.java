@@ -47,5 +47,10 @@ public class RDFWriteUtilsTest {
 		assertEquals(RDFWriteUtils.getLastIndexOfDelimiter("http://xmlns.com/foaf/0.1/gender.sp/123"),35);
 		assertEquals(RDFWriteUtils.getLastIndexOfDelimiter("http://xmlns.com/foaf/0.1/gender.sp:123"),35);
 	}
+	
+	@Test
+	public void testName(){
+		assertEquals(RDFWriteUtils.appendIndexToFileName("goa_arabidopsis_sp.nt.gz", 1), "goa_arabidopsis_sp_1.nt.gz");
+	}
 
 }

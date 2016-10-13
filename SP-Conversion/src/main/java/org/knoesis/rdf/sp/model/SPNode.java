@@ -8,6 +8,7 @@ import org.apache.jena.graph.NodeFactory;
 import org.apache.jena.graph.Node_Literal;
 import org.apache.jena.graph.Node_URI;
 import org.apache.log4j.Logger;
+import org.knoesis.rdf.sp.exception.SPException;
 import org.knoesis.rdf.sp.utils.RDFWriteUtils;
 
 public class SPNode {
@@ -19,24 +20,57 @@ public class SPNode {
 	protected String shorten = null;
 	protected String namespace = null;
 	protected String prefix = null;
+
+	protected String nodePrefix = null;
+	protected String nodeSuffix = null;
+	protected String datatypePrefix = null;
+	protected String datatypeSuffix = null;
 	
 	public SPNode(Node node, boolean isSPNode) {
 		this.setJenaNode(node);
 		this.setSingletonPropertyNode(isSPNode);
+//		getNodePrefixes();
+//		getDataTypePrefixes();
 	}
 	
 	public SPNode(Node node){
 		this.setJenaNode(node);
+//		getNodePrefixes();
+//		getDataTypePrefixes();
 	}
 
 	public SPNode(String uri, boolean isSPNode){
 		this.setJenaNode(NodeFactory.createURI(uri));
 		this.setSingletonPropertyNode(isSPNode);
+//		getNodePrefixes();
+//		getDataTypePrefixes();
 	}
 
 	public SPNode(String uri){
 		this.setJenaNode(NodeFactory.createURI(uri));
 		this.setSingletonPropertyNode(false);
+//		getNodePrefixes();
+//		getDataTypePrefixes();
+	}
+	
+	public void getNodePrefixes(){
+		int lastNsInd = RDFWriteUtils.getLastIndexOfDelimiterWithSecondPeriod(jenaNode.toString());
+		if (lastNsInd > 2 && jenaNode.toString().charAt(lastNsInd-1) != '/' && jenaNode.toString().charAt(lastNsInd-2) != ':' ) {
+			nodePrefix = jenaNode.toString().substring(0, lastNsInd + 1);
+			nodeSuffix = RDFWriteUtils.normalizeN3(jenaNode.toString().substring(lastNsInd+1, jenaNode.toString().length()));
+		}
+	}
+	
+	public void getDataTypePrefixes(){
+		if (jenaNode.isLiteral()){
+			String datatype = jenaNode.getLiteralDatatypeURI();
+			int lastNsInd = RDFWriteUtils.getLastIndexOfDelimiterWithSecondPeriod(datatype);
+			if (lastNsInd > 2 && datatype.charAt(lastNsInd-1) != '/' && datatype.charAt(lastNsInd-2) != ':' ) {
+				datatypePrefix = datatype.substring(0, lastNsInd + 1);
+				datatypeSuffix = RDFWriteUtils.normalizeN3(datatype.substring(lastNsInd+1, datatype.length()));
+			}
+		}
+		
 	}
 
 	public SPNode toN3(Map<String,String> prefixMapping, Map<String,String> trie, boolean shortenAllURIs){
@@ -76,6 +110,10 @@ public class SPNode {
 		StringBuilder out = new StringBuilder();
 		if (this.shorten == null){
 			SPNode node = toN3(prefixMapping, trie, shortenAllURIs);
+			String existingPrefix = prefixMapping.get(node.getNamespace());
+			if ( existingPrefix != null){
+				
+			}
 			this.prefix = node.getPrefix();
 			this.namespace = node.getNamespace();
 			this.shorten = node.getShorten();
@@ -88,6 +126,10 @@ public class SPNode {
 				out.append(":\t<");
 				out.append(this.namespace);
 				out.append(">\t . \n");
+			} else {
+				if (!prefixMapping.get(this.namespace).equals(this.prefix)){
+					System.out.println("New prefix" + prefixMapping.get(this.namespace)+ " being created for the existing namespace " + this.prefix);
+				}
 			}
 		}
 		return out.toString();
@@ -197,7 +239,7 @@ public class SPNode {
 	    if (jenaNode instanceof Node_Literal) {
 	    	StringBuilder out = new StringBuilder();
 	    	out.append("\"");
-	    	out.append(jenaNode.getLiteralLexicalForm());
+	    	out.append(jenaNode.getLiteralLexicalForm().replaceAll("\"", "'"));
 	    	out.append("\"");
 
 	    	// shorten the whole URI with prefix for data type
@@ -280,6 +322,45 @@ public class SPNode {
 	
 	public String toString(){
 		return this.getJenaNode().toString();
+	}
+	public String getLongPrefix() {
+		return nodePrefix;
+	}
+
+	public void setLongPrefix(String longPrefix) {
+		this.nodePrefix = longPrefix;
+	}
+
+	public String getNodePrefix() {
+		return nodePrefix;
+	}
+
+	public void setNodePrefix(String nodePrefix) {
+		this.nodePrefix = nodePrefix;
+	}
+
+	public String getNodeSuffix() {
+		return nodeSuffix;
+	}
+
+	public void setNodeSuffix(String nodeSuffix) {
+		this.nodeSuffix = nodeSuffix;
+	}
+
+	public String getDatatypePrefix() {
+		return datatypePrefix;
+	}
+
+	public void setDatatypePrefix(String datatypePrefix) {
+		this.datatypePrefix = datatypePrefix;
+	}
+
+	public String getDatatypeSuffix() {
+		return datatypeSuffix;
+	}
+
+	public void setDatatypeSuffix(String datatypeSuffix) {
+		this.datatypeSuffix = datatypeSuffix;
 	}
 
 }

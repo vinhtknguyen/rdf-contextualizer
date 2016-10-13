@@ -3,6 +3,7 @@ package org.knoesis.rdf.sp.converter;
 import org.junit.Before;
 import org.junit.Test;
 import org.knoesis.rdf.sp.parser.Reporter;
+import org.knoesis.rdf.sp.parser.SPAnalyzer;
 import org.knoesis.rdf.sp.parser.SPParser;
 import org.knoesis.rdf.sp.utils.Constants;
 import org.knoesis.rdf.sp.utils.ConstantsTest;
@@ -69,6 +70,22 @@ public class NamedGraph2SPTest {
 	public void testDir(){
 		con2 = new SPParser(reporter2);
 		con2.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_all, "ttl", rep);
+		con2 = new SPParser(reporter2);
+		con2.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_all, "ttl", rep);
 	}
 
+	@Test
+	public void testParserAnalyzer(){
+		reporter2.setDsName("testNG-infer");
+		con2 = new SPParser(reporter2);
+		con2.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_all, "nt", rep);
+		SPAnalyzer analyzer = new SPAnalyzer(reporter2);
+		analyzer.analyze(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_all, true);
+		reporter2.setInfer(false);
+		reporter2.setDsName("testNG-noinfer");
+		con2 = new SPParser(reporter2);
+		con2.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_all, "nt", rep);
+		analyzer = new SPAnalyzer(reporter2);
+		analyzer.analyze(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_all, true);
+	}
 }

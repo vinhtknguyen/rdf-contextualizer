@@ -1,7 +1,10 @@
 package org.knoesis.rdf.sp.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
+
+import org.knoesis.rdf.sp.exception.SPException;
 
 /**
  * This class represents a singleton triple with its associated triples in the singleton property pattern
@@ -29,6 +32,8 @@ public class SPTriple {
 	 * */
 	protected ArrayList<SPTriple> genericPropertyTriples = new ArrayList<SPTriple>();
 
+	protected HashMap<String,String> shareSingletonSubjectMap = new HashMap<String,String>();
+	
 	public SPTriple(SPNode s, SPNode p, SPNode o) {
 		subject = s;
 		predicate = p;
@@ -62,7 +67,12 @@ public class SPTriple {
 	
 	public void addMetaTriple(SPTriple triple){
 		if (this.isSingletonTriple() && predicate.equalsTo(triple.subject)){
-			metaTriples.add(triple);
+			if (!shareSingletonSubjectMap.containsKey(triple.getObject().toString())) {
+				metaTriples.add(triple);
+				shareSingletonSubjectMap.put(triple.getObject().toString(), triple.getPredicate().toString());
+			} else if (!shareSingletonSubjectMap.get(triple.getObject().toString()).equals(triple.getPredicate().toString())){
+				metaTriples.add(triple);
+			}
 		}
 	}
 	
@@ -77,12 +87,16 @@ public class SPTriple {
 			genericPropertyTriples.add(triple);
 		}
 	}
+	
 	public void addMetaTriple(SPNode s, SPNode p, SPNode o){
 //		System.out.println("adding meta triples" + s.toString() + "\t" + p.toString() + "\t" + o.toString());
 //		System.out.println("for " + this.toString());
 //		System.out.println(this.isSingletonTriple() + " and " + predicate.equalsTo(s));
 		if (this.isSingletonTriple() && predicate.equalsTo(s)){
-			metaTriples.add(new SPTriple(s, p, o));
+			if (!shareSingletonSubjectMap.containsKey(o.toString())) {
+				metaTriples.add(new SPTriple(s, p, o));
+				shareSingletonSubjectMap.put(o.toString(), p.toString());
+			}
 		}
 	}
 	
@@ -141,9 +155,13 @@ public class SPTriple {
 		
 		StringBuilder out = new StringBuilder();
 			// Print the prefix if not added before
-		out.append(this.subject.printNodePrefix(prefixMapping, trie, shortenAllURIs));
-		out.append(this.predicate.printNodePrefix(prefixMapping, trie, shortenAllURIs));
-		out.append(this.object.printNodePrefix(prefixMapping, trie, shortenAllURIs));
+		try {
+			out.append(this.subject.printNodePrefix(prefixMapping, trie, shortenAllURIs));
+			out.append(this.predicate.printNodePrefix(prefixMapping, trie, shortenAllURIs));
+			out.append(this.object.printNodePrefix(prefixMapping, trie, shortenAllURIs));
+		} catch (SPException ex){
+			ex.getCause().printStackTrace();
+		}
 		return out.toString();
 	}
 
@@ -196,6 +214,7 @@ public class SPTriple {
 		this.genericPropertyTriples = genericPropertyTriples;
 	}
 
+	@Override
 	public String toString(){
 		StringBuilder out = new StringBuilder();
 		if (this.subject != null) out.append(this.subject.getJenaNode().toString() + "\t");
@@ -228,5 +247,15 @@ public class SPTriple {
 		
 	}
 	
+    @Override
+    public boolean equals(Object object)
+    {
+        boolean sameSame = false;
 
+        if (object != null && object instanceof SPTriple){
+            sameSame = (this.toString().equals(((SPTriple) object).toString()));
+        }
+
+        return sameSame;
+    }
 }

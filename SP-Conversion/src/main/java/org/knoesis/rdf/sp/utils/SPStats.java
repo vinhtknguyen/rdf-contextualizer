@@ -12,40 +12,104 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.chart.ChartUtilities;
+import org.knoesis.rdf.sp.parser.ParserElement;
 
 public class SPStats {
 	
-	public static void reportSystem(long start, long end, String rep, String isInfer, String ext, String fileIn, long orisize, long newsize, String fileOut, String ds, String step) {
+	public static void reportSystem(long start, long end, String rep, String dsType, String ext, String fileIn, String fileOut, String ds, String step) {
 		
 		DecimalFormat time_formatter = new DecimalFormat("#,###.00");
-		DecimalFormat size_formatter = new DecimalFormat("#,###");
 
-		BufferedWriter report = RDFWriteUtils.getReportWriter(Constants.STAT_FILE);
+		BufferedWriter report = RDFWriteUtils.getReportWriter(Constants.STAT_FILE_TIME_STEP);
 		try {
-			report.write("Time\t\t" + time_formatter.format(end-start) + "\t\t" + step + " \t\t" +  size_formatter.format(orisize) + "\t" +  size_formatter.format(newsize) + "\t\t\t" + fileIn +"\t\t" +  rep + "\t\t" + isInfer + "\t\t" + ext + "\t" + ds + "\t" +  "\n");
+			report.write(ds + "\t" + dsType + "\t" +time_formatter.format(end-start) + "\t" + step + "\t" + fileIn +"\t" +  rep + "\t" +  ext + "\n");
 			report.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	public static void reportData(long start, String rep, String isInfer, String ext, String fileIn, String fileOut ) {
-		long end = System.currentTimeMillis() - start;
-		
-		DecimalFormat time_formatter = new DecimalFormat("#,###.00");
-		DecimalFormat size_formatter = new DecimalFormat("#,###");
-		
-		BufferedWriter report = RDFWriteUtils.getReportWriter(Constants.STAT_FILE);
+	public static void reportSystemTotal(String dsName, String dsType, long time, String ext) {
+		BufferedWriter report = RDFWriteUtils.getReportWriter(Constants.STAT_FILE_TIME);
 		try {
-			report.write("Time\t\t" + time_formatter.format(end) + "\t" + rep + "\t" + isInfer + "\t" + ext + "\t" + fileOut + "\t" + "\n");
-			report.write("Diskspace\t" + size_formatter.format(Paths.get(fileOut).toFile().length()) + "\t" + rep + "\t" + isInfer + "\t" + ext + "\t" + fileOut + "\t" + "\n");
-			report.write("Diskspace\t" + size_formatter.format(Paths.get(fileIn).toFile().length()) + "\t ORI \t" + isInfer + "\t" + ext + "\t" + fileIn + "\t" + "\n");
+			report.write(time + "\t" + dsType + "\t" + dsName + "\t" + ext + "\n");
+//			report.write(time + "\t" + dsName + "\t" + dsType + "_" + ext + "\n");
+			report.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void reportData(String dsName, String dsType, String filename, long countItem, long countSingletonProp, long totalSingInstantiation, long countGenericProp, double average, String ext){
+		BufferedWriter report = RDFWriteUtils.getReportWriter(Constants.STAT_FILE_DATA_STEP);
+		try {
+			report.write(dsName + "\t" + dsType + "\t" + filename + "\t" + countItem + "\t" + countSingletonProp + "\t" + countGenericProp +  "\t" + ext +"\n");
+			report.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void reportDataTotal(String dsName, String dsType,  long countItem, long countSingletonProp, long totalSingInstantiation, long countGenericProp, double average, String ext){
+		BufferedWriter report1 = RDFWriteUtils.getReportWriter(Constants.STAT_FILE_DATA);
+		try {
+//			report.write(dsName + "\t" + dsType + "\t" + countItem + "\t" + countSingletonProp + "\t" + countGenericProp  + "\n");
+			report1.write(countItem + "\t" + dsType + "\t" + dsName + "\t" + ext + "\n");
+			report1.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		report1 = RDFWriteUtils.getReportWriter(Constants.STAT_FILE_SINGLETON);
+		try {
+//			report.write(dsName + "\t" + dsType + "\t" + countItem + "\t" + countSingletonProp + "\t" + countGenericProp  + "\n");
+			report1.write(countSingletonProp + "\t" + dsType + "\t" + dsName + "\t" + ext + "\n");
+			report1.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		report1 = RDFWriteUtils.getReportWriter(Constants.STAT_FILE_SINGLETON_INSTANTIATION);
+		try {
+//			report.write(dsName + "\t" + dsType + "\t" + countItem + "\t" + countSingletonProp + "\t" + countGenericProp  + "\n");
+			report1.write(totalSingInstantiation + "\t" + dsType + "\t" + dsName + "\t" + ext + "\n");
+			report1.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void reportDiskTotal(String dsName, String dsType,  long size, String ext ){
+		BufferedWriter report = RDFWriteUtils.getReportWriter(Constants.STAT_FILE_DISK);
+		try {
+			report.write(size + "\t" + dsType + "_" + ext.toUpperCase() + "\t" + dsName + "\t" + ext + "\n");
+			report.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public static void reportGenericProp(String dsName, String genericprop, long num){
+		BufferedWriter report = RDFWriteUtils.getReportWriter(Constants.REPORTS_DIRECTORY + "/" + dsName + "_generic_properties.txt");
+		try {
+			report.write(genericprop + "\t" + num + "\n");
+			report.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public static void reportDisk(String dsName, String dsType,  long size, String ext, String filename){
+		BufferedWriter report = RDFWriteUtils.getReportWriter(Constants.STAT_FILE_DATA);
+		try {
+			report.write(size + "\t" + dsName + "\t" + dsType + "\t" + ext + "\t" + filename + "\n");
 			report.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
+	
 	public static void genBarPlot() {
 
 		final String fiat = "FIAT";
@@ -148,5 +212,6 @@ public class SPStats {
 			e.printStackTrace();
 		}
 	}
+
 
 }

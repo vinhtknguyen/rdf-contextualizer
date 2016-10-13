@@ -17,12 +17,14 @@ public class SupplierWriter implements Supplier<ParserElement> {
 	PipedNodesIterator transformerIter;
 	Reporter reporter;
 	ParserElement element;
+	int ind;
 	
-    public SupplierWriter(PipedNodesIterator transformerIter, ParserElement element, Reporter reporter) {
+    public SupplierWriter(PipedNodesIterator transformerIter, ParserElement element, Reporter reporter, int ind) {
 		super();
 		this.transformerIter = transformerIter;
 		this.reporter = reporter;
 		this.element = element;
+		this.ind = ind;
 	}
 
 	@Override
@@ -30,7 +32,13 @@ public class SupplierWriter implements Supplier<ParserElement> {
 		long start = System.currentTimeMillis();
 		reporter.reportStartStatus(element, Constants.PROCESSING_STEP_WRITE);
        // Call the parsing process.
-		BufferedWriter buffWriter = RDFWriteUtils.getBufferedWriter(element.getFileout(), reporter.isZip(), element.getBufferWriter());
+		String filename;
+		if (ind >= 0){
+			filename = RDFWriteUtils.appendIndexToFileName(element.getFileout(), ind);
+		} else {
+			filename = element.getFileout();
+		}
+		BufferedWriter buffWriter = RDFWriteUtils.getBufferedWriter(filename, reporter.isZip(), element.getBufferWriter());
 		try {
 			while (transformerIter.hasNext()){
 // 				System.out.println("printing");

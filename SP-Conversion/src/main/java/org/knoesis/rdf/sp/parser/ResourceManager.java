@@ -19,18 +19,19 @@ public class ResourceManager {
 	int curNumTasks = 0;
 	int curParserElements = 0;
 	double cpu_ratio;
+	int parallel = Constants.PARALLEL_LEVEL;
 	
 	long totalMem;
 	
+	private String task = Constants.PROCESSING_TASK_GENERATE;
 	
-	public ResourceManager(double ratio) {
+	public ResourceManager(double ratio, String _task) {
 		cpu_ratio = ratio;
+		task = _task;
 		maxCores = Runtime.getRuntime().availableProcessors();
 		maxNumTasks = (int) Math.round(maxCores * cpu_ratio);
 		
 		totalMem = Runtime.getRuntime().totalMemory();
-		
-		
 		
 		Runtime.getRuntime().freeMemory();
 		
@@ -50,7 +51,11 @@ public class ResourceManager {
 	
 	public void startParserElement(ParserElement element){
 		if (element != null){
-			curNumTasks += element.getnTasksDefault();
+			if (task.equals(Constants.PROCESSING_TASK_GENERATE)){
+				curNumTasks += element.getnTasksDefault();
+			} else {
+				curNumTasks += element.getnAnalyzerTasks();
+			}
 			curParserElements += 1;
 		}
 	}
@@ -63,11 +68,15 @@ public class ResourceManager {
 			System.out.println("current files running now is: " + curParserElements);
 		}
 	}
-	public void deregisterNumTasks(int numTasks){
+	
+	public void deregisterNumTasks(int numTasks, ParserElement element){
+		System.out.println("current tasks running now is: " + curNumTasks);
 		if (numTasks > 0)
 			curNumTasks -= numTasks;
-		if (curNumTasks < 0) curNumTasks = 0;
-		System.out.println("current tasks running now is: " + curNumTasks);
+		if (curNumTasks < 0) {
+			System.out.println("Numtask is negative: " + curNumTasks + " from file " + element.getFilein());
+			curNumTasks = 0;
+		}
 	}
 	
 	public boolean freeResources(){
@@ -106,8 +115,9 @@ public class ResourceManager {
 	}
 	
 	public boolean canExecuteNextElement(){
-		if (curParserElements >= 2) return false;
-		
+		if (curParserElements >= parallel && task.equals(Constants.PROCESSING_TASK_GENERATE)) return false;
+		if (curParserElements >= parallel*2 && task.equals(Constants.PROCESSING_TASK_ANALYZE)) return false;
+
 		int availableTasks = maxNumTasks - curNumTasks;
 		
 		if (!queueHuge.isEmpty() && availableTasks >= getNeededTasks(queueHuge)){
@@ -129,6 +139,7 @@ public class ResourceManager {
 	}
 	
 	private int getNeededTasks(PriorityQueue<ParserElement> queue){
+		if (task.equals(Constants.PROCESSING_TASK_ANALYZE)) return queue.peek().getnAnalyzerTasks();
 		return queue.peek().getnTasksDefault();
 	}
 	
@@ -215,5 +226,21 @@ public class ResourceManager {
 
 	public void setCpu_ratio(double cpu_ratio) {
 		this.cpu_ratio = cpu_ratio;
+	}
+
+	public String getTask() {
+		return task;
+	}
+
+	public void setTask(String task) {
+		this.task = task;
+	}
+
+	public int getParallel() {
+		return parallel;
+	}
+
+	public void setParallel(int parallel) {
+		this.parallel = parallel;
 	}
 }

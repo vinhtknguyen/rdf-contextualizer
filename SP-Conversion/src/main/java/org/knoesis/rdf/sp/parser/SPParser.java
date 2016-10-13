@@ -37,7 +37,8 @@ public class SPParser {
 
 	public SPParser(Reporter _reporter) {
 		reporter = _reporter;
-		manager = new ResourceManager(reporter.getRatio());
+		manager = new ResourceManager(reporter.getRatio(), Constants.PROCESSING_TASK_GENERATE);
+		manager.setParallel(reporter.getParallel());
 		executor = Executors.newWorkStealingPool();
 	}
 
@@ -62,7 +63,7 @@ public class SPParser {
 
     		CompletableFuture<ParserElement> converter = CompletableFuture.supplyAsync(new SupplierConverter(processorIter, converterInputStream, element, reporter), executor);
     		CompletableFuture<ParserElement> transformer = CompletableFuture.supplyAsync(new SupplierTransformer(transformerInputStream, converterIter, element, reporter), executor);
-    		CompletableFuture<ParserElement> writer = CompletableFuture.supplyAsync(new SupplierWriter(transformerIter, element, reporter), executor);
+    		CompletableFuture<ParserElement> writer = CompletableFuture.supplyAsync(new SupplierWriter(transformerIter, element, reporter, -1), executor);
    		
     		finishedElement = parserCompletableFuture.thenCombineAsync(converter, this::updateFinishedTasks)
     								.thenCombineAsync(transformer, this::updateFinishedTasks)
@@ -93,7 +94,7 @@ public class SPParser {
 
         		CompletableFuture<ParserElement> converter = CompletableFuture.supplyAsync(new SupplierConverter(subProcessorIters.get(i), converterInputStream, element, reporter), executor);
         		CompletableFuture<ParserElement> transformer = CompletableFuture.supplyAsync(new SupplierTransformer(transformerInputStream, converterIter, element, reporter), executor);
-               	CompletableFuture<ParserElement> writer = CompletableFuture.supplyAsync(new SupplierWriter(transformerIter, element, reporter), executor);
+               	CompletableFuture<ParserElement> writer = CompletableFuture.supplyAsync(new SupplierWriter(transformerIter, element, reporter, i), executor);
                	
         		finishedElement = combiner.thenCombineAsync(converter, this::updateFinishedTasks)
 						.thenCombineAsync(transformer, this::updateFinishedTasks)
@@ -127,19 +128,13 @@ public class SPParser {
 			// Create a new directory for output files
 			try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(filein))) {
 				
-				String dirOut;
-				if (reporter.isInfer()){
-					dirOut = fileout + (reporter.getExt().equals(Constants.NTRIPLE_EXT)?Constants.CONVERTED_TO_SP_INF_NT:Constants.CONVERTED_TO_SP_INF_TTL);
-				} else {
-					dirOut = fileout + (reporter.getExt().equals(Constants.NTRIPLE_EXT)?Constants.CONVERTED_TO_SP_NT:Constants.CONVERTED_TO_SP_TTL);
-				}
-				Files.createDirectories(Paths.get(dirOut));
+				Files.createDirectories(Paths.get(fileout));
 				/* PROCESS EACH INPUT FILE & GENERATE OUTPUT FILE */
 				
 				for (Path entry : stream) {
 					if (!Files.isDirectory(entry)){
 						
-						String fileOut = dirOut + "/" + RDFWriteUtils.genFileOut(entry.getFileName().toString(), reporter.getExt(), reporter.isZip());
+						String fileOut = fileout + "/" + RDFWriteUtils.genFileOut(entry.getFileName().toString(), reporter.getExt(), reporter.isZip());
 //						System.out.println("File in: " + entry.toString() + " vs. out " + fileOut);
 						
 						manager.put(entry.toString(), fileOut);
@@ -147,8 +142,15 @@ public class SPParser {
 						
 					} else {
 						
-						if (entry.getFileName().toString().toLowerCase().contains(Constants.DATA_DIR)) 
-							parseDir(entry.toString(), dirOut + "/" + RDFWriteUtils.genDirOut(entry.getFileName().toString()));
+						if (entry.getFileName().toString().toLowerCase().contains(Constants.DATA_DIR)) {
+							String dirOut;
+							if (reporter.isInfer()){
+								dirOut = fileout + "/" + entry.getFileName().toString();
+							} else {
+								dirOut = fileout + "/" + entry.getFileName().toString();
+							}
+							parseDir(entry.toString(), dirOut );
+						}
 					}
 		        }
 		    } catch (IOException e1) {
@@ -170,6 +172,11 @@ public class SPParser {
 		} else {
 			System.out.println("Directory in: " + filein);
 			fileout = RDFWriteUtils.genDirOut(filein);
+			if (reporter.isInfer()){
+				fileout += (reporter.getExt().equals(Constants.NTRIPLE_EXT)?Constants.CONVERTED_TO_SP_INF_NT:Constants.CONVERTED_TO_SP_INF_TTL);
+			} else {
+				fileout += (reporter.getExt().equals(Constants.NTRIPLE_EXT)?Constants.CONVERTED_TO_SP_NT:Constants.CONVERTED_TO_SP_TTL);
+			}
 			parseDir(filein, fileout);
 		}
 		reporter.setFilein(filein);
@@ -236,15 +243,17 @@ public class SPParser {
 				e.printStackTrace();
 			}
 		}
+		String dsType = reporter.isInfer()?Constants.DS_TYPE_SPR:Constants.DS_TYPE_SP;
+		reporter.reportSystemTotal(start, reporter.getDsName(), dsType, reporter.getExt());
 		reporter.reportFinish(start);
 		// Shutdown the executor pool
 		return;
 	}
 	
-	public ParserElement updateFinishedTasks(ParserElement element1, ParserElement element2){
+	public synchronized ParserElement updateFinishedTasks(ParserElement element1, ParserElement element2){
 		if (element1.getFilein().equals(element2.getFilein())){
 			element1.updateFinishedTasks(1);
-			manager.deregisterNumTasks(1);
+			manager.deregisterNumTasks(1, element1);
 			if (element1.isFinished()){
 				manager.finishParserElemnet(element1);
 				reporter.reportEndStatus(element1);
@@ -253,9 +262,9 @@ public class SPParser {
 		return element1;
 	}
 
-	public ParserElement updateCancelledTasks(ParserElement element1){
+	public synchronized ParserElement updateCancelledTasks(ParserElement element1){
 		if (element1 != null){
-			manager.deregisterNumTasks(element1.getnTasksDefault()-1);
+			manager.deregisterNumTasks(element1.getnTasksDefault()-1, element1);
 			manager.finishParserElemnet(element1);
 			reporter.reportEndStatus(element1);
 		}

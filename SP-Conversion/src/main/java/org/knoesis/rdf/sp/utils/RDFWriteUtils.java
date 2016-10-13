@@ -35,7 +35,7 @@ import com.romix.scala.collection.concurrent.TrieMap;
 public class RDFWriteUtils {
     
 	final static Logger logger = Logger.getLogger(RDFWriteUtils.class);
-	public final static String prefixesFile = "prefixes.ttl";
+	public final static String prefixesFile = "/prefixes/prefixes.ttl";
 
 	public static TrieMap<String,String> prefixMapping = new TrieMap<String,String>();
 //	public static PrefixTrie trie = new PrefixTrie();
@@ -46,7 +46,7 @@ public class RDFWriteUtils {
 		return currentAutoPrefixNsNum;
 	}
 
-	public static String getNextPrefixNs(){
+	public synchronized static String getNextPrefixNs(){
 		currentAutoPrefixNsNum++;
 		return Constants.NS_STR + currentAutoPrefixNsNum;
 	}
@@ -121,9 +121,9 @@ public class RDFWriteUtils {
 	public static String printTriples2NT(List<SPTriple> triples){
 		StringBuilder out = new StringBuilder("");
 		
-		for (SPTriple t:triples){
-			out.append(t.printTriple2NT());
-		}
+			for (SPTriple t:triples){
+				out.append(t.printTriple2NT());
+			}
 		return out.toString();
 	}
 	
@@ -258,7 +258,7 @@ public class RDFWriteUtils {
 	public static void loadPrefixesToTrie(Map<String,String> trie, String file){
 		//read file into stream, try-with-resources
 		Model model = ModelFactory.createDefaultModel();
-		RDFDataMgr.read(model,file, Lang.N3);
+		RDFDataMgr.read(model, file, Lang.N3);
 		if (model.getNsPrefixMap() != null){
 			Iterator<Entry<String, String>> it = model.getNsPrefixMap().entrySet().iterator();
 			while (it.hasNext()) {
@@ -348,6 +348,18 @@ public class RDFWriteUtils {
 		
 	}
 	
+	public static String appendIndexToFileName(String filein, int ind){
+		String[] tmp = filein.split("\\.");
+		StringBuilder filename = new StringBuilder(tmp[0]);
+		filename.append('_');
+		filename.append(ind);
+		for (int i = 1; i < tmp.length; i++){
+			filename.append('.');
+			filename.append(tmp[i]);
+		}
+		return filename.toString();
+	}
+	
 	public static String getPrettyName(String filein){
 		int pos = filein.lastIndexOf("/");
 		String name = filein;
@@ -396,9 +408,11 @@ public class RDFWriteUtils {
 	}
 	
 	public static BufferedWriter getReportWriter(String file){
+
 		BufferedWriter writer = null;
 	    OutputStream outStream = null;
 	    try {
+			Files.createDirectories(Paths.get(Constants.REPORTS_DIRECTORY));
 		    outStream = new FileOutputStream(new File(file), true);
 		    writer = new BufferedWriter(
 		            new OutputStreamWriter(outStream, "UTF-8"));

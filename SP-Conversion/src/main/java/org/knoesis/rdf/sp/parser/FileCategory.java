@@ -9,8 +9,8 @@ public enum FileCategory {
 	FILE_SIZE_SMALL(1),
 	FILE_SIZE_MEDIUM(2),
 	FILE_SIZE_LARGE(3),
-	FILE_SIZE_VERY_LARGE(3),
-	FILE_SIZE_HUGE(3);
+	FILE_SIZE_VERY_LARGE(7),
+	FILE_SIZE_HUGE(7);
 	
 	int category;
 

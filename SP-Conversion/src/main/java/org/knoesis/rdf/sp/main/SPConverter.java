@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 
 import org.apache.log4j.Logger;
 import org.knoesis.rdf.sp.parser.Reporter;
+import org.knoesis.rdf.sp.parser.SPAnalyzer;
 import org.knoesis.rdf.sp.parser.SPParser;
 import org.knoesis.rdf.sp.utils.Constants;
 import org.knoesis.rdf.sp.utils.RDFReadUtils;
@@ -22,6 +23,8 @@ public class SPConverter {
 	protected String metaObj =  null;
 	protected String spProp = null;
 	protected String url = null;
+	
+	protected String task = null;
 
 	
 	/**	cd /semweb1/datasets
@@ -84,7 +87,8 @@ public class SPConverter {
 		conversion.parseParameters(args);
 		System.out.println(conversion.getReporter().getExt() + "\t" + conversion.getFileIn() + "\t" + conversion.getReporter().getRep());
 		
-		conversion.start();
+		conversion.startParser();
+		conversion.startAnalyzer();
 	}
 	
 	
@@ -93,7 +97,7 @@ public class SPConverter {
 		reporter = new Reporter();
 	}
 
-	public void start(){
+	public void startAnalyzer(){
 		
 		// Prepare the data from url
 		if (this.getUrl() != null && reporter.getDsName() != null){
@@ -101,7 +105,24 @@ public class SPConverter {
 			return;
 		}
 		
-		if (reporter.getRep() != null){
+		if (reporter.getRep() != null && (this.task.equals(Constants.PROCESSING_TASK_ANALYZE) || this.task.equals(Constants.PROCESSING_TASK_BOTH))){
+
+			SPAnalyzer analyzer = new SPAnalyzer(reporter);
+
+			analyzer.analyze(this.fileIn, true);
+			
+		}
+		
+	}
+	public void startParser(){
+		
+		// Prepare the data from url
+		if (this.getUrl() != null && reporter.getDsName() != null){
+			RDFReadUtils.fetchLinks(url, reporter.getDsName());
+			return;
+		}
+		
+		if (reporter.getRep() != null && (this.task.equals(Constants.PROCESSING_TASK_GENERATE) || this.task.equals(Constants.PROCESSING_TASK_BOTH))){
 
 			SPParser parser = new SPParser(reporter);
 
@@ -136,11 +157,34 @@ public class SPConverter {
 				reporter.setOntoDir(args[i+1]);
 			}
 			
+			if (args[i].toLowerCase().equals("-parallel")) {
+//				System.out.println("File in: " + args[i + 1]);
+				reporter.setParallel(Integer.parseInt(args[i+1]));
+			}
+			
+			
 			// Get infer para
 			if (args[i].toLowerCase().equals("-dsname")) {
 //				System.out.println("File in: " + args[i + 1]);
 				reporter.setDsName(args[i+1]);;
 			}
+			
+			if (args[i].toLowerCase().equals("-task")) {
+//				System.out.println("File in: " + args[i + 1]);
+				switch (args[i+1].toLowerCase()){
+				case Constants.PROCESSING_TASK_ANALYZE:
+					this.task = Constants.PROCESSING_TASK_ANALYZE;
+					break;
+				case Constants.PROCESSING_TASK_GENERATE:
+					this.task = Constants.PROCESSING_TASK_GENERATE;
+					break;
+				default:
+					this.task = Constants.PROCESSING_TASK_BOTH;
+					break;
+					
+				}
+			}
+
 			// Get prefix para
 			if (args[i].toLowerCase().equals("-prefix")) {
 //				System.out.println("File in: " + args[i + 1]);
