@@ -19,26 +19,28 @@ public class ResourceManager {
 	int curNumTasks = 0;
 	int curParserElements = 0;
 	double cpu_ratio;
+	int parallel = Constants.PARALLEL_LEVEL;
 	
 	long totalMem;
 	
+	private String task = Constants.PROCESSING_TASK_GENERATE;
 	
-	public ResourceManager(double ratio) {
+	public ResourceManager(double ratio, String _task) {
 		cpu_ratio = ratio;
+		task = _task;
 		maxCores = Runtime.getRuntime().availableProcessors();
 		maxNumTasks = (int) Math.round(maxCores * cpu_ratio);
 		
 		totalMem = Runtime.getRuntime().totalMemory();
 		
-		
-		
 		Runtime.getRuntime().freeMemory();
 		
 		Comparator<ParserElement> comparator = new Comparator<ParserElement>() {
-			  public int compare(ParserElement e1, ParserElement e2) {
-			     //your magic happens here
-				  return (e1.getFileSize() > e2.getFileSize())?1:0;
-			  }
+			@Override
+			public int compare(ParserElement e1, ParserElement e2) {
+			    //your magic happens here
+				return new Long(e2.getFileSize()).compareTo(new Long(e1.getFileSize()));
+			}
 		};
 		
 		queueSmall = new PriorityQueue<ParserElement>(comparator);
@@ -63,11 +65,15 @@ public class ResourceManager {
 			System.out.println("current files running now is: " + curParserElements);
 		}
 	}
-	public void deregisterNumTasks(int numTasks){
+	
+	public void deregisterNumTasks(int numTasks, ParserElement element){
+		System.out.println("current tasks running now is: " + curNumTasks);
 		if (numTasks > 0)
 			curNumTasks -= numTasks;
-		if (curNumTasks < 0) curNumTasks = 0;
-		System.out.println("current tasks running now is: " + curNumTasks);
+		if (curNumTasks < 0) {
+			System.out.println("Numtask is negative: " + curNumTasks + " from file " + element.getFilein());
+			curNumTasks = 0;
+		}
 	}
 	
 	public boolean freeResources(){
@@ -106,8 +112,8 @@ public class ResourceManager {
 	}
 	
 	public boolean canExecuteNextElement(){
-		if (curParserElements >= 2) return false;
-		
+		if (curParserElements >= parallel) return false;
+
 		int availableTasks = maxNumTasks - curNumTasks;
 		
 		if (!queueHuge.isEmpty() && availableTasks >= getNeededTasks(queueHuge)){
@@ -134,32 +140,32 @@ public class ResourceManager {
 	
 	private ParserElement nextElement(int availableTasks){
 		System.out.println("available tasks: " + availableTasks);
-		if (!queueHuge.isEmpty() && availableTasks > getNeededTasks(queueHuge)){
+		if (!queueHuge.isEmpty() && availableTasks >= getNeededTasks(queueHuge)){
 			System.out.println("needed tasks: " + getNeededTasks(queueHuge));
 			return queueHuge.poll();
 		}
-		if (!queueVeryLarge.isEmpty() && availableTasks > getNeededTasks(queueVeryLarge)){
+		if (!queueVeryLarge.isEmpty() && availableTasks >= getNeededTasks(queueVeryLarge)){
 			System.out.println("needed tasks: " + getNeededTasks(queueVeryLarge));
 			return queueVeryLarge.poll();
 		}
-		if (!queueLarge.isEmpty() && availableTasks > getNeededTasks(queueLarge)){
+		if (!queueLarge.isEmpty() && availableTasks >= getNeededTasks(queueLarge)){
 			System.out.println("needed tasks: " + getNeededTasks(queueLarge));
 			return queueLarge.poll();
 		}
-		if (!queueMedium.isEmpty() && availableTasks > getNeededTasks(queueMedium)){
+		if (!queueMedium.isEmpty() && availableTasks >= getNeededTasks(queueMedium)){
 			System.out.println("needed tasks: " + getNeededTasks(queueMedium));
 			return queueMedium.poll();
 		}
-		if (!queueSmall.isEmpty() && availableTasks > getNeededTasks(queueSmall)){
+		if (!queueSmall.isEmpty() && availableTasks >= getNeededTasks(queueSmall)){
 			System.out.println("needed tasks: " + getNeededTasks(queueSmall));
 			return queueSmall.poll();
 		}
 		return queueSmall.poll();
 	}
 	
-	public void put(String filein, String fileout){
+	public void put(String filein, String fileout, String task, String ext){
 		if (Paths.get(filein).toFile().exists()){
-			ParserElement element = new ParserElement(filein, fileout);
+			ParserElement element = new ParserElement(filein, fileout, task, ext);
 			switch(element.getFileCategory()){
 			case FILE_SIZE_SMALL:
 				queueSmall.add(element);
@@ -215,5 +221,21 @@ public class ResourceManager {
 
 	public void setCpu_ratio(double cpu_ratio) {
 		this.cpu_ratio = cpu_ratio;
+	}
+
+	public String getTask() {
+		return task;
+	}
+
+	public void setTask(String task) {
+		this.task = task;
+	}
+
+	public int getParallel() {
+		return parallel;
+	}
+
+	public void setParallel(int parallel) {
+		this.parallel = parallel;
 	}
 }

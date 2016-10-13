@@ -46,7 +46,7 @@ public class NanoPub2SPTest {
 	@Test
 	public void testConvert() {
 		con1 = new SPParser(reporter1);
-		con1.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_nano, "nt", rep);
+		con1.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_nano, null, "nt", rep);
 //		con1.parse("src/test/resources/test-file/test2_nano.nq", "nt", rep);
 //		con2.parse("src/test/resources/test-file/test2_nano.nq", "ttl", rep);
 	}
@@ -54,7 +54,7 @@ public class NanoPub2SPTest {
 	@Test
 	public void testConvertFile() {
 		con2 = new SPParser(reporter2);
-		con2.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_nano, "ttl", rep);
+		con2.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_nano, null, "ttl", rep);
 	}
 
 	@Test

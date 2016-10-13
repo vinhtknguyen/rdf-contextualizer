@@ -11,28 +11,31 @@ public class ParserElement {
 	private long fileSize;
 	private FileCategory fileCategory;
 	private int nConverters;
-	private int nTasksDefault;
+	private int nDefaultTasks;
 	private int finishedTasks = 1;
 	private boolean finished;
-	private int bufferStream;
-	private int bufferWriter;
-	private int bufferStreamSubStream;
-	private int bufferWriterSubStream;
+	private int bufferStream = Constants.BUFFER_SIZE_SMALL;
+	private int bufferWriter = Constants.BUFFER_SIZE_SMALL;
+	private int bufferStreamSubStream = Constants.BUFFER_SIZE_SMALL;
+	private int bufferWriterSubStream = Constants.BUFFER_SIZE_SMALL;
 	
-	public ParserElement(String filein, String fileout) {
+	public ParserElement(String filein, String fileout, String task, String ext) {
 		super();
 		this.filein = filein;
 		this.fileout = fileout;
-		this.fileCategory = FileCategory.getCategory(filein);
+		this.fileCategory = FileCategory.getCategory(filein, ext);
 		this.nConverters = this.fileCategory.category;
 		this.fileSize = Paths.get(filein).toFile().length();
-		this.nTasksDefault = (fileCategory.category==1)?fileCategory.category*3 + 1:fileCategory.category*3 + 2;
+		if (task.equals(Constants.PROCESSING_TASK_GENERATE))
+			this.nDefaultTasks = (fileCategory.category==1)?fileCategory.category*3 + 1:fileCategory.category*3 + 2;
+		else 
+			this.nDefaultTasks = (fileCategory.category==1)?fileCategory.category + 1:fileCategory.category + 2;
 		this.finishedTasks = 1; // for itself
 
 		// Setup buffer stream size
-//		if (fileCategory.category >= 3) this.bufferStream = Constants.BUFFER_SIZE_LARGE;
-		 if (fileCategory.category > 1) this.bufferStream = Constants.BUFFER_SIZE_MEDIUM;
-		else  this.bufferStream = Constants.BUFFER_SIZE_SMALL;
+		if (fileCategory.category >= 3) this.bufferStream = Constants.BUFFER_SIZE_LARGE;
+		else if (fileCategory.category > 1) this.bufferStream = Constants.BUFFER_SIZE_MEDIUM;
+		else this.bufferStream = Constants.BUFFER_SIZE_SMALL;
 		
 		if (fileCategory.category >= 3) this.bufferWriter = Constants.BUFFER_SIZE_LARGE;
 		else if (fileCategory.category > 1) this.bufferWriter = Constants.BUFFER_SIZE_MEDIUM;
@@ -44,9 +47,9 @@ public class ParserElement {
 	
 	public void updateFinishedTasks(int num){
 		finishedTasks += num;
-		System.out.println("finished " + finishedTasks + " out of " + nTasksDefault);
+		System.out.println("finished " + finishedTasks + " out of " + nDefaultTasks);
 		// One is for itself
-		if (finishedTasks == nTasksDefault) {
+		if (finishedTasks == nDefaultTasks) {
 			finished = true;
 		}
 		else finished = false;
@@ -124,11 +127,11 @@ public class ParserElement {
 	}
 
 	public int getnTasksDefault() {
-		return nTasksDefault;
+		return nDefaultTasks;
 	}
 
 	public void setnTasksDefault(int nTasksDefault) {
-		this.nTasksDefault = nTasksDefault;
+		this.nDefaultTasks = nTasksDefault;
 	}
 
 	public int getFinishedTasks() {

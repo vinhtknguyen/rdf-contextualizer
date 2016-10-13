@@ -13,5 +13,12 @@ public class ConstantsTest {
 	public static String test_onto = "test_onto_data";
 	public static String test_all = "all_data";
 	
+	public static String test_nano_output = "test_nano_data_output";
+	public static String test_rei_output = "test_rei_data_output";
+	public static String test_ng_output = "test_ng_data_output";
+	public static String test_triple_output = "test_triple_data_output";
+	public static String test_default_output = "test_default_data_output";
+	public static String test_onto_output = "test_onto_data_output";
+	public static String test_all_output = "all_data_output";
 
 }

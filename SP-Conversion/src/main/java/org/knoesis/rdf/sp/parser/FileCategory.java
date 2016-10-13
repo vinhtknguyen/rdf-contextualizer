@@ -8,9 +8,9 @@ public enum FileCategory {
 	
 	FILE_SIZE_SMALL(1),
 	FILE_SIZE_MEDIUM(2),
-	FILE_SIZE_LARGE(3),
-	FILE_SIZE_VERY_LARGE(3),
-	FILE_SIZE_HUGE(3);
+	FILE_SIZE_LARGE(2),
+	FILE_SIZE_VERY_LARGE(2),
+	FILE_SIZE_HUGE(2);
 	
 	int category;
 
@@ -18,8 +18,7 @@ public enum FileCategory {
 		this.category = cat;
 	}
 
-	public static FileCategory getCategory(String filein) {
-		
+	public static FileCategory getCategory(String filein, String ext) {
         boolean zipfile = filein.endsWith(".gz");
 		if (zipfile){ 
 			if (Paths.get(filein).toFile().length() > Constants.FILE_ZIP_SIZE_HUGE){

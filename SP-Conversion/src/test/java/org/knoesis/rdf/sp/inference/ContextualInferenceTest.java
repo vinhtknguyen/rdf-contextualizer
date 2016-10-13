@@ -27,7 +27,7 @@ public class ContextualInferenceTest {
 
 	@Test
 	public void testInfer() {
-		con.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_onto, "ttl", rep);
+		con.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_onto, null, "ttl", rep);
 	}
 
 }

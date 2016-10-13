@@ -3,6 +3,7 @@ package org.knoesis.rdf.sp.converter;
 import org.junit.Before;
 import org.junit.Test;
 import org.knoesis.rdf.sp.parser.Reporter;
+import org.knoesis.rdf.sp.parser.SPAnalyzer;
 import org.knoesis.rdf.sp.parser.SPParser;
 import org.knoesis.rdf.sp.utils.Constants;
 import org.knoesis.rdf.sp.utils.ConstantsTest;
@@ -29,7 +30,7 @@ public class NamedGraph2SPTest {
 		reporter2.setZip(false);
 		reporter2.setOntoDir(ConstantsTest.test_data_onto);
 		reporter2.setInfer(true);
-		reporter2.setShortenURI(true);
+		reporter2.setShortenURI(false);
 		reporter2.setDsName("testNG2");
 		reporter2.setParallel(1);
 		reporter2.setPrefix(ConstantsTest.test_data_prefix + "/bio2rdf_prefixes.ttl");
@@ -42,7 +43,7 @@ public class NamedGraph2SPTest {
 	@Test
 	public void testConvert1() {
 		con1 = new SPParser(reporter1);
-		con1.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_ng, "ttl", rep);
+		con1.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_ng, null, "ttl", rep);
 		
 		// Testing the case in which URIs are shortened with the pre-existing prefixes
 		
@@ -50,11 +51,11 @@ public class NamedGraph2SPTest {
 	@Test
 	public void testConvert3(){
 		con1 = new SPParser(reporter1);
-		con1.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_ng, "nt", rep);
+		con1.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_ng, null, "nt", rep);
 		con1 = new SPParser(reporter1);
-		con1.parse(ConstantsTest.test_data_file + "/test2_ng.nq", "nt", rep);
+		con1.parse(ConstantsTest.test_data_file + "/test2_ng.nq", null, "nt", rep);
 		con1 = new SPParser(reporter1);
-		con1.parse(ConstantsTest.test_data_file + "/test2_ng.nq", "ttl", rep);
+		con1.parse(ConstantsTest.test_data_file + "/test2_ng.nq", null, "ttl", rep);
 		
 	}
 
@@ -62,13 +63,37 @@ public class NamedGraph2SPTest {
 	public void testConvert2() {
 		// Testing the case in which URIs are shortened with all possible prefixes
 		con2 = new SPParser(reporter2);
-		con2.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_ng, "ttl", rep);
+		con2.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_ng, null, "ttl", rep);
 	}
 	
 	@Test
 	public void testDir(){
+		reporter2.setDsName("testNG-noinfer");
+		reporter2.setInfer(false);
 		con2 = new SPParser(reporter2);
-		con2.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_all, "ttl", rep);
+		con2.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_all, null, "ttl", rep);
+		SPAnalyzer analyzer = new SPAnalyzer(reporter2);
+		analyzer.analyze(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_all + "_sp_ttl");
+		reporter2.setDsName("testNG-noinfer");
+		con2 = new SPParser(reporter2);
+		con2.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_all, null, "nt", rep);
+		analyzer = new SPAnalyzer(reporter2);
+		analyzer.analyze(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_all + "_sp_nt");
 	}
 
+	@Test
+	public void testParserAnalyzer(){
+		reporter2.setInfer(true);
+		reporter2.setDsName("testNG-infer");
+		con2 = new SPParser(reporter2);
+		con2.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_all, null, "nt", rep);
+		SPAnalyzer analyzer = new SPAnalyzer(reporter2);
+		analyzer.analyze(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_all + "_sp_inf_nt");
+		reporter2.setInfer(true);
+		reporter2.setDsName("testNG-infer");
+		con2 = new SPParser(reporter2);
+		con2.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_all, null, "ttl", rep);
+		analyzer = new SPAnalyzer(reporter2);
+		analyzer.analyze(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_all + "_sp_inf_ttl");
+	}
 }

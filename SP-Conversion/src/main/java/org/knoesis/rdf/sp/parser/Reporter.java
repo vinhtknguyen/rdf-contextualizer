@@ -1,6 +1,5 @@
 package org.knoesis.rdf.sp.parser;
 
-import java.nio.file.Paths;
 import java.text.DecimalFormat;
 
 import org.knoesis.rdf.sp.utils.Constants;
@@ -17,48 +16,72 @@ public class Reporter {
 	String filein;
 	String dsName;
 	String step;
-	boolean shortenURI;
+	boolean shortenURI = false;
 	boolean zip = false;
 	String uuidInitStr = Constants.SP_UUID_PREFIX;
 	long uuidInitNum = System.currentTimeMillis();
 	String ontoDir;
 	String prefix;
-	int parallel = 3;
+	int parallel = Constants.PARALLEL_LEVEL;
 	double ratio = Constants.CPU_UTILIZATION_RATIO;
 	
 	public Reporter() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void reportSystem(long start, ParserElement element, String step){
+	public synchronized void reportSystem(long start, ParserElement element, String step){
 		this.step = step;
 		long end = System.currentTimeMillis();
 		String filename = RDFWriteUtils.getPrettyName(element.getFilein());
 	    System.out.println(filename + ": pthread " + Thread.currentThread().getId() + " " + step + " in " + (end-start) + " ms.");
-		SPStats.reportSystem(start, end, rep, (infer?Constants.OPTIONS_INFER:Constants.OPTIONS_NO_INFER), ext, filename, Paths.get(element.getFilein()).toFile().length(), Paths.get(element.getFileout()).toFile().length(), element.getFileout(), dsName, step);
+		SPStats.reportSystem(start, end, rep, (infer?Constants.DS_TYPE_SPR:Constants.DS_TYPE_SP), ext, filename, element.getFileout(), dsName, step);
+	}
+	public synchronized void reportSystemTotal(long start, String dsName, String dsType, String ext){
+		long end = System.currentTimeMillis();
+	    System.out.println(dsName + ": pthread " + Thread.currentThread().getId() + " finished in " + (end-start) + " ms.");
+		SPStats.reportSystemTotal(dsName, dsType, end-start, ext);
 	}
 	
-	public void reportStartStatus(ParserElement element, String step){
+	public synchronized void reportData(long start, String dsName, String dsType, String filein, long countItem, long countSingletonProp, long totalSingInstantiation, long countGenericProp, double average) {
+		long end = System.currentTimeMillis();
+		String filename = RDFWriteUtils.getPrettyName(filein);
+	    System.out.println(filename + ": pthread " + Thread.currentThread().getId() + " " + step + " in " + (end-start) + " ms.");
+		SPStats.reportData(dsName, dsType, filename, countItem, countSingletonProp, totalSingInstantiation, countGenericProp, average, ext);
+	}
+	
+	public synchronized void reportDataTotal(long start, String dsName, String dsType, long countItem, long countSingletonProp, long totalSingInstantiation, long countGenericProp, double average) {
+		long end = System.currentTimeMillis();
+	    System.out.println(dsName + ": pthread " + Thread.currentThread().getId() + " " + step + " in " + (end-start) + " ms.");
+		SPStats.reportDataTotal(dsName, dsType,  countItem, countSingletonProp, totalSingInstantiation, countGenericProp, average, ext);
+	}
+	
+	public void reportGenericProp(String dsName, String genericprop, long num){
+		SPStats.reportGenericProp(dsName, genericprop, num);
+	}
+	public synchronized void reportDiskTotal(String dsName, String dsType,  long size, String ext ){
+		SPStats.reportDiskTotal(dsName, dsType, size, ext );
+
+	}
+
+	public synchronized void reportStartStatus(ParserElement element, String step){
 		String filename = RDFWriteUtils.getPrettyName(element.getFilein());
 	    System.out.println(filename + ": pthread " + Thread.currentThread().getId() + " started " + step + " with buffer stream " + element.getBufferStream() + " buffer writer " + element.getBufferWriter());
 	}
 
-	public void reportEndStatus(ParserElement element){
+	public synchronized void reportEndStatus(ParserElement element){
 		String filename = RDFWriteUtils.getPrettyName(element.getFilein());
 	    System.out.println(filename + ": done processing. ");
 	}
-	public void reportCancelledStatus(ParserElement element){
+	public synchronized void reportCancelledStatus(ParserElement element){
 		String filename = RDFWriteUtils.getPrettyName(element.getFilein());
 	    System.out.println(filename + ": is cancelled processing. ");
 	}
 	
-	public void reportFinish(long start){
+	public synchronized void reportFinish(String dsName, long start){
 		long end = System.currentTimeMillis();
 		DecimalFormat time_formatter = new DecimalFormat("#,###.00");
-		String filename = RDFWriteUtils.getPrettyName(filein);
-		SPStats.reportSystem(start, end, rep, (infer?Constants.OPTIONS_INFER:Constants.OPTIONS_NO_INFER), ext, filename, Paths.get(filein).toFile().length(), Paths.get(fileout).toFile().length(), fileout, dsName, Constants.PROCESSING_STEP_ALL);
 	    System.out.println("Time: " + time_formatter.format(end-start) + " in ms.");
-	    System.out.println(filename + ": done processing. ");
+	    System.out.println(dsName + ": done processing. ");
 	}
 
 	public long getStart() {

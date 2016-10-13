@@ -57,3 +57,13 @@ shopt -s nullglob dotglob     # To include hidden files
 files=(./*)
 if [ ${#files[@]} -gt 0 ]; then echo "huzzah"; fi
 
+
+for name in dbpedia ctd goa interpro mesh ncbigene ncbo orphanet pharmgkb taxonomy
+do
+java -Xmx60g -jar ~/rdf-contextualizer-0.0.1-SNAPSHOT.jar -spInitNum 1  -zip -rep NG -task both -fileout output  -f /semweb2/datasets/data/"$name"_data -dsName "$name" -spInitStr "$name" -parallel 6 -ratio 1.4 -prefix ~/bio2rdf_prefixes.ttl -ext ttl > log/"$name"_noinfer_ttl.txt  
+java -Xmx60g -jar ~/rdf-contextualizer-0.0.1-SNAPSHOT.jar -spInitNum 1  -zip -rep NG -task both -fileout output  -f /semweb2/datasets/data/"$name"_data -dsName "$name" -spInitStr "$name" -parallel 6 -ratio 1.4 -prefix ~/bio2rdf_prefixes.ttl -ext ttl -infer onto > log/"$name"_infer_ttl.txt  
+java -Xmx60g -jar ~/rdf-contextualizer-0.0.1-SNAPSHOT.jar -spInitNum 1  -zip -rep NG -task generating -fileout output  -f /semweb2/datasets/data/"$name"_data -dsName "$name" -spInitStr "$name" -parallel 6 -ratio 1.4 -prefix ~/bio2rdf_prefixes.ttl -ext nt > log/"$name"_noinfer_nt.txt  
+java -Xmx60g -jar ~/rdf-contextualizer-0.0.1-SNAPSHOT.jar -spInitNum 1  -zip -rep NG -task generating -fileout output  -f /semweb2/datasets/data/"$name"_data -dsName "$name" -spInitStr "$name" -parallel 6 -ratio 1.4 -prefix ~/bio2rdf_prefixes.ttl -ext nt -infer onto > log/"$name"_infer_nt.txt  
+done
+
+

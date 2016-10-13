@@ -46,7 +46,7 @@ public class Triple2SPTest {
 	@Test
 	public void testConvert() {
 		con1 = new SPParser(reporter1);
-		con1.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_triple, "nt", rep);
+		con1.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_triple, null, "nt", rep);
 //		con1.parse("src/test/resources/test-file/test2_triple.nt", "nt", rep);
 //		con2.parse("src/test/resources/test-file/test2_triple.nt", "ttl", rep);
 	}
@@ -54,7 +54,7 @@ public class Triple2SPTest {
 	@Test
 	public void testConvertFile() {
 		con2 = new SPParser(reporter2);
-		con2.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_triple, "ttl", rep);
+		con2.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_triple, null, "ttl", rep);
 	}
 
 }

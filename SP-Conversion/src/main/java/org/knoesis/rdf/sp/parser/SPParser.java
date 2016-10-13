@@ -37,7 +37,8 @@ public class SPParser {
 
 	public SPParser(Reporter _reporter) {
 		reporter = _reporter;
-		manager = new ResourceManager(reporter.getRatio());
+		manager = new ResourceManager(reporter.getRatio(), Constants.PROCESSING_TASK_GENERATE);
+		manager.setParallel(reporter.getParallel());
 		executor = Executors.newWorkStealingPool();
 	}
 
@@ -62,7 +63,7 @@ public class SPParser {
 
     		CompletableFuture<ParserElement> converter = CompletableFuture.supplyAsync(new SupplierConverter(processorIter, converterInputStream, element, reporter), executor);
     		CompletableFuture<ParserElement> transformer = CompletableFuture.supplyAsync(new SupplierTransformer(transformerInputStream, converterIter, element, reporter), executor);
-    		CompletableFuture<ParserElement> writer = CompletableFuture.supplyAsync(new SupplierWriter(transformerIter, element, reporter), executor);
+    		CompletableFuture<ParserElement> writer = CompletableFuture.supplyAsync(new SupplierWriter(transformerIter, element, reporter, -1), executor);
    		
     		finishedElement = parserCompletableFuture.thenCombineAsync(converter, this::updateFinishedTasks)
     								.thenCombineAsync(transformer, this::updateFinishedTasks)
@@ -93,7 +94,7 @@ public class SPParser {
 
         		CompletableFuture<ParserElement> converter = CompletableFuture.supplyAsync(new SupplierConverter(subProcessorIters.get(i), converterInputStream, element, reporter), executor);
         		CompletableFuture<ParserElement> transformer = CompletableFuture.supplyAsync(new SupplierTransformer(transformerInputStream, converterIter, element, reporter), executor);
-               	CompletableFuture<ParserElement> writer = CompletableFuture.supplyAsync(new SupplierWriter(transformerIter, element, reporter), executor);
+               	CompletableFuture<ParserElement> writer = CompletableFuture.supplyAsync(new SupplierWriter(transformerIter, element, reporter, i), executor);
                	
         		finishedElement = combiner.thenCombineAsync(converter, this::updateFinishedTasks)
 						.thenCombineAsync(transformer, this::updateFinishedTasks)
@@ -115,11 +116,11 @@ public class SPParser {
 		
 	}
 
-	public void parseDir(String filein, String fileout){
+	public void parseDir(String filein, String fileout, String task){
 
 		if (!Files.isDirectory(Paths.get(filein))){
 			
-			manager.put(filein, fileout);
+			manager.put(filein, fileout, task, reporter.getExt());
 //			parseFile(filein, RDFWriteUtils.genFileOut(filein, reporter.getExt(), reporter.isZip()));
 			
 		} else {
@@ -127,28 +128,29 @@ public class SPParser {
 			// Create a new directory for output files
 			try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(filein))) {
 				
-				String dirOut;
-				if (reporter.isInfer()){
-					dirOut = fileout + (reporter.getExt().equals(Constants.NTRIPLE_EXT)?Constants.CONVERTED_TO_SP_INF_NT:Constants.CONVERTED_TO_SP_INF_TTL);
-				} else {
-					dirOut = fileout + (reporter.getExt().equals(Constants.NTRIPLE_EXT)?Constants.CONVERTED_TO_SP_NT:Constants.CONVERTED_TO_SP_TTL);
-				}
-				Files.createDirectories(Paths.get(dirOut));
+				Files.createDirectories(Paths.get(fileout));
 				/* PROCESS EACH INPUT FILE & GENERATE OUTPUT FILE */
 				
 				for (Path entry : stream) {
 					if (!Files.isDirectory(entry)){
 						
-						String fileOut = dirOut + "/" + RDFWriteUtils.genFileOut(entry.getFileName().toString(), reporter.getExt(), reporter.isZip());
+						String fileOut = fileout + "/" + RDFWriteUtils.genFileOut(entry.getFileName().toString(), reporter.getExt(), reporter.isZip());
 //						System.out.println("File in: " + entry.toString() + " vs. out " + fileOut);
 						
-						manager.put(entry.toString(), fileOut);
+						manager.put(entry.toString(), fileOut, task, reporter.getExt());
 //						parseFile(entry.toString(), fileOut);
 						
 					} else {
 						
-						if (entry.getFileName().toString().toLowerCase().contains(Constants.DATA_DIR)) 
-							parseDir(entry.toString(), dirOut + "/" + RDFWriteUtils.genDirOut(entry.getFileName().toString()));
+						if (entry.getFileName().toString().toLowerCase().contains(Constants.DATA_DIR)) {
+							String dirOut;
+							if (reporter.isInfer()){
+								dirOut = fileout + "/" + entry.getFileName().toString();
+							} else {
+								dirOut = fileout + "/" + entry.getFileName().toString();
+							}
+							parseDir(entry.toString(), dirOut, task);
+						}
 					}
 		        }
 		    } catch (IOException e1) {
@@ -157,31 +159,39 @@ public class SPParser {
 		}
 	}
 	
-	public void genFileList(String filein){
+	public void genFileList(String filein, String fileout, String task){
 		/*
 		 * If input is a file, parse it
 		 * If input is a directory, parse its files and sub-directories named DATA recursively
 		 * */
-		String fileout;
 		if (!Files.isDirectory(Paths.get(filein))){
 			//parseFile(filein, RDFWriteUtils.genFileOut(filein, ext, reporter.isZip()));
-			fileout = RDFWriteUtils.genFileOut(filein, reporter.getExt(), reporter.isZip());
-			manager.put(filein, fileout);
+			if (fileout == null){
+				fileout = RDFWriteUtils.genFileOut(filein, reporter.getExt(), reporter.isZip());
+			}
+			manager.put(filein, fileout, task, reporter.getExt());
 		} else {
 			System.out.println("Directory in: " + filein);
-			fileout = RDFWriteUtils.genDirOut(filein);
-			parseDir(filein, fileout);
+			if (fileout == null) fileout = RDFWriteUtils.genDirOut(filein);
+			else fileout += "/" + RDFWriteUtils.genDirOut(filein);
+			if (reporter.isInfer()){
+				fileout += (reporter.getExt().equals(Constants.NTRIPLE_EXT)?Constants.CONVERTED_TO_SP_INF_NT:Constants.CONVERTED_TO_SP_INF_TTL);
+			} else {
+				fileout += (reporter.getExt().equals(Constants.NTRIPLE_EXT)?Constants.CONVERTED_TO_SP_NT:Constants.CONVERTED_TO_SP_TTL);
+			}
+			parseDir(filein, fileout, task);
 		}
 		reporter.setFilein(filein);
 		reporter.setFileout(fileout);
 		
 	}
 	
-	public void parse(String filein, String ext, String rep){
+	public void parse(String filein, String fileout, String ext, String rep){
 		
 		reporter.setExt(ext);
 		reporter.setRep(rep);
 
+		if (filein == null) return;
 		long start = System.currentTimeMillis();
 
 		if (reporter.isInfer()){
@@ -189,13 +199,16 @@ public class SPParser {
 			SPModel.loadModel(reporter.getOntoDir());
 			System.out.println("Done loading ontologies.");
 		}
+		RDFWriteUtils.loadPrefixesToPrefixTrie(RDFWriteUtils.trie);
+		RDFWriteUtils.loadPrefixesToTrieMap(RDFWriteUtils.prefixMapping);
 		if (reporter.getPrefix() != null) {
 			System.out.println("Loading prefixes ..." + reporter.getPrefix());
-			RDFWriteUtils.loadPrefixesToTrie(RDFWriteUtils.trie, reporter.getPrefix());
+			RDFWriteUtils.loadPrefixesToPrefixTrie(RDFWriteUtils.trie, reporter.getPrefix());
+			RDFWriteUtils.loadPrefixesToTrieMap(RDFWriteUtils.prefixMapping, reporter.getPrefix());
 			System.out.println("Done loading prefixes.");
 		}
 		
-		genFileList(filein);
+		genFileList(filein, fileout, Constants.PROCESSING_TASK_GENERATE);
 		System.out.println("Files to be processed:");
 		manager.printParserElements();
 		
@@ -236,15 +249,17 @@ public class SPParser {
 				e.printStackTrace();
 			}
 		}
-		reporter.reportFinish(start);
+		String dsType = reporter.isInfer()?Constants.DS_TYPE_SPR:Constants.DS_TYPE_SP;
+		reporter.reportSystemTotal(start, reporter.getDsName(), dsType, reporter.getExt());
+		reporter.reportFinish(reporter.getDsName(), start);
 		// Shutdown the executor pool
 		return;
 	}
 	
-	public ParserElement updateFinishedTasks(ParserElement element1, ParserElement element2){
+	public synchronized ParserElement updateFinishedTasks(ParserElement element1, ParserElement element2){
 		if (element1.getFilein().equals(element2.getFilein())){
 			element1.updateFinishedTasks(1);
-			manager.deregisterNumTasks(1);
+			manager.deregisterNumTasks(1, element1);
 			if (element1.isFinished()){
 				manager.finishParserElemnet(element1);
 				reporter.reportEndStatus(element1);
@@ -253,9 +268,9 @@ public class SPParser {
 		return element1;
 	}
 
-	public ParserElement updateCancelledTasks(ParserElement element1){
+	public synchronized ParserElement updateCancelledTasks(ParserElement element1){
 		if (element1 != null){
-			manager.deregisterNumTasks(element1.getnTasksDefault()-1);
+			manager.deregisterNumTasks(element1.getnTasksDefault()-1, element1);
 			manager.finishParserElemnet(element1);
 			reporter.reportEndStatus(element1);
 		}

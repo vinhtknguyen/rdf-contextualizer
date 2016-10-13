@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.jena.graph.Node;
+import org.apache.jena.graph.NodeFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.knoesis.rdf.sp.model.SPNode;
@@ -51,16 +53,26 @@ public class SPNodeTest {
 
 		assertEquals(new SPNode("http://www.w3.org/2003/01/geo/wgs84_pos#lat_sp/123").toN3(new ConcurrentHashMap<String,String>(), trie, true).getShorten(), "geol:123");
 		assertEquals(new SPNode("http://www.w3.org/2003/01/geo/wgs84_pos#lat_sp/123").toN3(new ConcurrentHashMap<String,String>(), trie, true).getShorten(), "geol:123");
-		assertTrue(new SPNode("http://www.w3.org/2003/01/geo/wgs84_pos#long.sp.123").toN3(new ConcurrentHashMap<String,String>(), trie, true).getShorten().contains("123"));
+		assertTrue(new SPNode("http://www.w3.org/2003/01/geo/wgs84_pos#long.sp.123").toN3(new ConcurrentHashMap<String,String>(), trie, false).getShorten().contains("123"));
 		
 		// Test with the 
 		assertEquals(new SPNode("http://www.w3.org/1999/02/22-rdf-syntax-ns#singletonPropertyOf").toN3(new ConcurrentHashMap<String,String>(), trie, true).getShorten(), "rdf:singletonPropertyOf");
-		
+	
+		System.out.println(new SPNode("http://www.w3.org/2003/01/geo/wgs84_pos#long.sp.123").toN3(new ConcurrentHashMap<String,String>(), trie2, false).getShorten());
+		System.out.println(new SPNode("http://www.w3.org/1999/02/22-rdf-syntax-ns#singletonPropertyOf").toN3(new ConcurrentHashMap<String,String>(), trie2, false).getShorten());
 	}
 
+	@Test
+	public void testGetPrefixes(){
+		
+//		assertEquals(new SPNode("http://www.w3.org/2003/01/geo/wgs84_pos#lat_sp/123").getNodePrefix(), "http://www.w3.org/2003/01/geo/wgs84_pos#lat_sp/");
+//		assertEquals(new SPNode("http://www.w3.org/2003/01/geo/wgs84_pos#123").getNodeSuffix(), "123");
+	}
 
 	@Test
 	public void testToNT() {
+		Node node = NodeFactory.createLiteral("male\"", "<http://www.w3.org/2001/XMLSchema#string>");
+		System.out.println(node.toString());
 	}
 
 }

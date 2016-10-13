@@ -23,27 +23,27 @@ public class ContextualRepresentationConverterTest {
 		reporter.setParallel(2);
 		
 		con1 = new SPParser(reporter);
-		con1.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_default, "ttl", rep);
+		con1.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_default, null, "ttl", rep);
 	}
 
 	@Test
 	public void testConvert() {
 		
 		con1 = new SPParser(reporter);
-		con1.parse(ConstantsTest.test_data_file + "/yagoFacts.ttl", "nt", rep);
+		con1.parse(ConstantsTest.test_data_file + "/yagoFacts.ttl", null, "nt", rep);
 		
 	}
 
 	@Test
 	public void testConvertFile() {
 		con1 = new SPParser(reporter);
-		con1.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_default, "nt", rep);
+		con1.parse(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_default, null, "nt", rep);
 	}
 
 	@Test
 	public void testTransform() {
 		con1 = new SPParser(reporter);
-		con1.parse(ConstantsTest.test_data_file + "/yagoFacts.ttl", "ttl", rep);
+		con1.parse(ConstantsTest.test_data_file + "/yagoFacts.ttl", null, "ttl", rep);
 	}
 
 }
