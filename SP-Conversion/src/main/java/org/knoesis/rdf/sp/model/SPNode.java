@@ -8,6 +8,7 @@ import org.apache.jena.graph.NodeFactory;
 import org.apache.jena.graph.Node_Literal;
 import org.apache.jena.graph.Node_URI;
 import org.apache.log4j.Logger;
+import org.knoesis.rdf.sp.exception.SPException;
 import org.knoesis.rdf.sp.utils.RDFWriteUtils;
 
 public class SPNode {
@@ -141,6 +142,10 @@ public class SPNode {
 		StringBuilder out = new StringBuilder();
 		if (this.shorten == null){
 			SPNode node = toN3(prefixMapping, trie, shortenAllURIs);
+			String existingPrefix = prefixMapping.get(node.getNamespace());
+			if ( existingPrefix != null){
+				
+			}
 			this.prefix = node.getPrefix();
 			this.namespace = node.getNamespace();
 			this.shorten = node.getShorten();

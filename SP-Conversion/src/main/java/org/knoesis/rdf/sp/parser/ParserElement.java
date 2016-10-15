@@ -12,6 +12,7 @@ public class ParserElement {
 	private FileCategory fileCategory;
 	private int nConverters;
 	private int nDefaultTasks;
+	private int nAnalyzerTasks;
 	private int finishedTasks = 1;
 	private boolean finished;
 	private int bufferStream = Constants.BUFFER_SIZE_SMALL;
@@ -31,6 +32,7 @@ public class ParserElement {
 		else 
 			this.nDefaultTasks = (fileCategory.category==1)?fileCategory.category + 1:fileCategory.category + 2;
 		this.finishedTasks = 1; // for itself
+		this.nAnalyzerTasks = 2;
 
 		// Setup buffer stream size
 		if (fileCategory.category >= 3) this.bufferStream = Constants.BUFFER_SIZE_LARGE;
@@ -132,6 +134,14 @@ public class ParserElement {
 
 	public void setnTasksDefault(int nTasksDefault) {
 		this.nDefaultTasks = nTasksDefault;
+	}
+
+	public int getnAnalyzerTasks() {
+		return nAnalyzerTasks;
+	}
+
+	public void setnAnalyzerTasks(int nAnalyzerTasks) {
+		this.nAnalyzerTasks = nAnalyzerTasks;
 	}
 
 	public int getFinishedTasks() {

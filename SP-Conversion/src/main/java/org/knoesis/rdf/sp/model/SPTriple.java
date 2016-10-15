@@ -184,6 +184,7 @@ public class SPTriple {
 		}
 		return out.toString();
 	}
+	
 	public String printTriplePrefix(Map<String,String> prefixMapping, PrefixTrie trie, boolean shortenAllURIs){
 		
 		StringBuilder out = new StringBuilder();
