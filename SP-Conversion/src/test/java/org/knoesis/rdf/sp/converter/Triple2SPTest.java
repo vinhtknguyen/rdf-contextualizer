@@ -29,10 +29,8 @@ public class Triple2SPTest {
 		reporter2.setZip(false);
 		reporter2.setOntoDir(ConstantsTest.test_data_onto);
 		reporter2.setInfer(true);
-		reporter2.setShortenURI(true);
 		reporter2.setDsName("testNG2");
 		reporter2.setParallel(1);
-		reporter2.setPrefix(ConstantsTest.test_data_prefix + "/bio2rdf_prefixes.ttl");
 		reporter2.setRep(rep);
 		reporter2.setUuidInitNum(10);
 		reporter2.setUuidInitStr("str1");

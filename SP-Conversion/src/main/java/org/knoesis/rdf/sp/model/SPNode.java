@@ -3,12 +3,12 @@ package org.knoesis.rdf.sp.model;
 
 import java.util.Map;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.jena.graph.Node;
 import org.apache.jena.graph.NodeFactory;
 import org.apache.jena.graph.Node_Literal;
 import org.apache.jena.graph.Node_URI;
 import org.apache.log4j.Logger;
-import org.knoesis.rdf.sp.exception.SPException;
 import org.knoesis.rdf.sp.utils.RDFWriteUtils;
 
 public class SPNode {
@@ -29,28 +29,20 @@ public class SPNode {
 	public SPNode(Node node, boolean isSPNode) {
 		this.setJenaNode(node);
 		this.setSingletonPropertyNode(isSPNode);
-//		getNodePrefixes();
-//		getDataTypePrefixes();
 	}
 	
 	public SPNode(Node node){
 		this.setJenaNode(node);
-//		getNodePrefixes();
-//		getDataTypePrefixes();
 	}
 
 	public SPNode(String uri, boolean isSPNode){
 		this.setJenaNode(NodeFactory.createURI(uri));
 		this.setSingletonPropertyNode(isSPNode);
-//		getNodePrefixes();
-//		getDataTypePrefixes();
 	}
 
 	public SPNode(String uri){
 		this.setJenaNode(NodeFactory.createURI(uri));
 		this.setSingletonPropertyNode(false);
-//		getNodePrefixes();
-//		getDataTypePrefixes();
 	}
 	
 	public void getNodePrefixes(){
@@ -87,7 +79,7 @@ public class SPNode {
 	    if (jenaNode.isLiteral()) {
 	    	StringBuilder out = new StringBuilder();
 	    	out.append("\"");
-	    	out.append(jenaNode.getLiteralLexicalForm());
+	    	out.append(StringEscapeUtils.escapeJava(jenaNode.getLiteralLexicalForm()));
 	    	out.append("\"");
 	    	
 			// shorten the whole URI with prefix for data type
@@ -119,7 +111,7 @@ public class SPNode {
 	    if (jenaNode.isLiteral()) {
 	    	StringBuilder out = new StringBuilder();
 	    	out.append("\"");
-	    	out.append(jenaNode.getLiteralLexicalForm().replaceAll("\"", ""));
+	    	out.append(StringEscapeUtils.escapeJava(jenaNode.getLiteralLexicalForm()));
 	    	out.append("\"");
 	    	
 			// shorten the whole URI with prefix for data type
@@ -295,7 +287,7 @@ public class SPNode {
 	    if (jenaNode instanceof Node_Literal) {
 	    	StringBuilder out = new StringBuilder();
 	    	out.append("\"");
-	    	out.append(jenaNode.getLiteralLexicalForm().replaceAll("\"", "'"));
+	    	out.append(StringEscapeUtils.escapeJava(jenaNode.getLiteralLexicalForm()));
 	    	out.append("\"");
 
 	    	// shorten the whole URI with prefix for data type

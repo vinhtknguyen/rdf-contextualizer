@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.zip.GZIPOutputStream;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.riot.Lang;
@@ -360,6 +361,7 @@ public class RDFWriteUtils {
 	}
 	
 	public static void loadPrefixesToTrieMap(Map<String,String> trie, String file){
+		if (!Files.exists(Paths.get(file))) return;
 		try {
 			loadPrefixesToTrieMap(trie, new FileInputStream(new File(file)));
 		} catch (FileNotFoundException e) {
@@ -385,6 +387,7 @@ public class RDFWriteUtils {
 	}
 	
 	public static void loadPrefixesToPrefixTrie(PrefixTrie trie, String file){
+		if (!Files.exists(Paths.get(file))) return;
 		try {
 			loadPrefixesToPrefixTrie(trie, new FileInputStream(new File(file)));
 		} catch (FileNotFoundException e) {
@@ -454,7 +457,7 @@ public class RDFWriteUtils {
 	
 	public static String normalizeN3(String in){
 		try {
-			return URLEncoder.encode(in, "UTF-8").replaceAll("\\.", "%2E");
+			return escapeN3(URLEncoder.encode(in, "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -462,6 +465,90 @@ public class RDFWriteUtils {
 		return in;
 	}
 	
+	public static String escapeN3(String str){
+		StringBuilder out = new StringBuilder();
+		if (str == null) {
+            return out.toString();
+        }
+        int sz;
+        sz = str.length();
+        for (int i = 0; i < sz; i++) {
+            char ch = str.charAt(i);
+
+            // handle unicode
+            if (ch > 0xfff) {
+                out.append("\\u" + hex(ch));
+            } else if (ch > 0xff) {
+                out.append("\\u0" + hex(ch));
+            } else if (ch > 0x7f) {
+                out.append("\\u00" + hex(ch));
+            } else if (ch < 32) {
+                switch (ch) {
+                    case '\b':
+                        out.append('\\');
+                        out.append('b');
+                        break;
+                    case '\n':
+                        out.append('\\');
+                        out.append('n');
+                        break;
+                    case '\t':
+                        out.append('\\');
+                        out.append('t');
+                        break;
+                    case '\f':
+                        out.append('\\');
+                        out.append('f');
+                        break;
+                    case '\r':
+                        out.append('\\');
+                        out.append('r');
+                        break;
+                    default :
+                        if (ch > 0xf) {
+                            out.append("\\u00" + hex(ch));
+                        } else {
+                            out.append("\\u000" + hex(ch));
+                        }
+                        break;
+                }
+            } else {
+                switch (ch) {
+                    case '\'':
+                        out.append('\\');
+                        out.append('\'');
+                        break;
+                    case '"':
+                        out.append('\\');
+                        out.append('"');
+                        break;
+                    case '*':
+                        out.append('\\');
+                        out.append('*');
+                        break;
+                    case '-':
+                        out.append('\\');
+                        out.append('-');
+                        break;
+                    case '.':
+                        out.append('\\');
+                        out.append('.');
+                        break;
+                    case '\\':
+                        out.append('\\');
+                        out.append('\\');
+                        break;
+                    default :
+                        out.append(ch);
+                        break;
+                }
+            }
+        }
+        return out.toString();
+	}
+	private static String hex(char ch) {
+        return Integer.toHexString(ch).toUpperCase();
+    }	
 	public static String genFileOut(String in, String ext, boolean isZip){
 		if (in != null && !isZip) {
 			

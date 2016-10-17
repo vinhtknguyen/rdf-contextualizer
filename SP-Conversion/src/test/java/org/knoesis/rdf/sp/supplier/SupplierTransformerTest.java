@@ -1,12 +1,9 @@
 package org.knoesis.rdf.sp.supplier;
 
-import static org.junit.Assert.*;
-
 import org.apache.jena.graph.NodeFactory;
 import org.apache.jena.sparql.core.Quad;
 import org.junit.Before;
 import org.junit.Test;
-import org.knoesis.rdf.sp.model.SPNode;
 import org.knoesis.rdf.sp.model.SPTriple;
 import org.knoesis.rdf.sp.utils.Constants;
 import org.knoesis.rdf.sp.utils.ConstantsTest;

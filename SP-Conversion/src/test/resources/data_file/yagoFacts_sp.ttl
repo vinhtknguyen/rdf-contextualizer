@@ -17,60 +17,60 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> . 
 @prefix wiki: <http://en.wikipedia.org/wiki/> . 
 @prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> . 
-ns1:1476544109439
+ns1:1476666735500
 	rdf:singletonPropertyOf	 yago:id_1bcczro_1s2_pc2dz5	; 
  	rdf:type	rdf:SingletonProperty . 
-yago:Len%C3%ADlson_Porto_Peixoto	ns1:1476544109439	yago:Am%C3%A9rica_Futebol_Clube_%28SP%29	;
+yago:Len%C3%ADlson_Porto_Peixoto	ns1:1476666735500	yago:Am%C3%A9rica_Futebol_Clube_%28SP%29	;
  	yago:id_1bcczro_1s2_pc2dz5	yago:Am%C3%A9rica_Futebol_Clube_%28SP%29	 . 
-ns2:1476544109440
+ns2:1476666735501
 	rdf:singletonPropertyOf	 rdf:type	; 
  	rdf:type	rdf:SingletonProperty . 
-yago:id_jqyg1z_zkl_1xi58gi	ns2:1476544109440	yago:owns	;
+yago:id_jqyg1z_zkl_1xi58gi	ns2:1476666735501	yago:owns	;
  	rdf:type	yago:owns	 . 
-ns3:1476544109441
+ns3:1476666735502
 	rdf:singletonPropertyOf	 yago:id_jqyg1z_zkl_1xi58gi	; 
  	rdf:type	rdf:SingletonProperty . 
-yago:Jefferson_County%2C_Texas	ns3:1476544109441	yago:Jack_Brooks_Regional_Airport	;
+yago:Jefferson_County%2C_Texas	ns3:1476666735502	yago:Jack_Brooks_Regional_Airport	;
  	yago:id_jqyg1z_zkl_1xi58gi	yago:Jack_Brooks_Regional_Airport	 . 
-ns4:1476544109442
+ns4:1476666735503
 	rdf:singletonPropertyOf	 rdf:type	; 
  	rdf:type	rdf:SingletonProperty . 
-yago:id_zw0wm0_1s2_1b1jycx	ns4:1476544109442	yago:isAffiliatedTo	;
+yago:id_zw0wm0_1s2_1b1jycx	ns4:1476666735503	yago:isAffiliatedTo	;
  	rdf:type	yago:isAffiliatedTo	 . 
-ns5:1476544109443
+ns5:1476666735504
 	rdf:singletonPropertyOf	 yago:id_zw0wm0_1s2_1b1jycx	; 
  	rdf:type	rdf:SingletonProperty . 
-yago:Tom_Hartley	ns5:1476544109443	yago:Sinn_F%C3%A9in	;
+yago:Tom_Hartley	ns5:1476666735504	yago:Sinn_F%C3%A9in	;
  	yago:id_zw0wm0_1s2_1b1jycx	yago:Sinn_F%C3%A9in	 . 
-ns6:1476544109444
+ns6:1476666735505
 	rdf:singletonPropertyOf	 rdf:type	; 
  	rdf:type	rdf:SingletonProperty . 
-yago:id_f258yz_1gi_15sq7rt	ns6:1476544109444	yago:created	;
+yago:id_f258yz_1gi_15sq7rt	ns6:1476666735505	yago:created	;
  	rdf:type	yago:created	 . 
-ns7:1476544109445
+ns7:1476666735506
 	rdf:singletonPropertyOf	 yago:id_f258yz_1gi_15sq7rt	; 
  	rdf:type	rdf:SingletonProperty . 
-yago:Tony_Gibson	ns7:1476544109445	yago:Ghetto_Blaster_%28video_game%29	;
+yago:Tony_Gibson	ns7:1476666735506	yago:Ghetto_Blaster_%28video_game%29	;
  	yago:id_f258yz_1gi_15sq7rt	yago:Ghetto_Blaster_%28video_game%29	 . 
-ns8:1476544109446
+ns8:1476666735507
 	rdf:singletonPropertyOf	 rdf:type	; 
  	rdf:type	rdf:SingletonProperty . 
-yago:id_6z0jld_ice_qhtymo	ns8:1476544109446	yago:hasWebsite	;
+yago:id_6z0jld_ice_qhtymo	ns8:1476666735507	yago:hasWebsite	;
  	rdf:type	yago:hasWebsite	 . 
-ns9:1476544109447
+ns9:1476666735508
 	rdf:singletonPropertyOf	 yago:id_6z0jld_ice_qhtymo	; 
  	rdf:type	rdf:SingletonProperty . 
-yago:M%C3%A4ntt%C3%A4-Vilppula	ns9:1476544109447	ns10:	;
+yago:M%C3%A4ntt%C3%A4\-Vilppula	ns9:1476666735508	ns10:	;
  	yago:id_6z0jld_ice_qhtymo	ns10:	 . 
-ns11:1476544109448
+ns11:1476666735509
 	rdf:singletonPropertyOf	 rdf:type	; 
  	rdf:type	rdf:SingletonProperty . 
-yago:id_ha2a9a_1s2_4mobd4	ns11:1476544109448	yago:isAffiliatedTo	;
+yago:id_ha2a9a_1s2_4mobd4	ns11:1476666735509	yago:isAffiliatedTo	;
  	rdf:type	yago:isAffiliatedTo	 . 
-ns12:1476544109449
+ns12:1476666735510
 	rdf:singletonPropertyOf	 yago:id_ha2a9a_1s2_4mobd4	; 
  	rdf:type	rdf:SingletonProperty . 
-yago:Luis_Carlos_Mart%C3%ADn	ns12:1476544109449	yago:Real_Murcia_Imperial	;
+yago:Luis_Carlos_Mart%C3%ADn	ns12:1476666735510	yago:Real_Murcia_Imperial	;
  	yago:id_ha2a9a_1s2_4mobd4	yago:Real_Murcia_Imperial	 . 
 yago:id_zw0wm0_1s2_1b1jycx	rdf:type	rdf:GenericProperty	 . 
 yago:id_jqyg1z_zkl_1xi58gi	rdf:type	rdf:GenericProperty	 . 

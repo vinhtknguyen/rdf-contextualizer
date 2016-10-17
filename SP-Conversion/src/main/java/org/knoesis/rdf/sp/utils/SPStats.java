@@ -2,7 +2,6 @@ package org.knoesis.rdf.sp.utils;
 
 import java.awt.Color;
 import java.io.*;
-import java.nio.file.Paths;
 import java.text.DecimalFormat;
 
 import org.jfree.chart.ChartFactory;
@@ -12,7 +11,6 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.chart.ChartUtilities;
-import org.knoesis.rdf.sp.parser.ParserElement;
 
 public class SPStats {
 	

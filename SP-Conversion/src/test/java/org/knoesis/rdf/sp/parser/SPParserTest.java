@@ -27,7 +27,7 @@ public class SPParserTest {
 	public void testGenFileList() {
 		parser.getReporter().setExt("nt");
 		parser.genFileList(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_all, null, Constants.PROCESSING_TASK_GENERATE);
-		assertEquals(parser.getManager().size(),4);
+		assertEquals(parser.getManager().size(),5);
 		parser.getManager().printParserElements();
 	}
 

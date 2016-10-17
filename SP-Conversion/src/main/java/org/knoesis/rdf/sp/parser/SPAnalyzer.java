@@ -94,6 +94,7 @@ public class SPAnalyzer {
 	
 	public void analyze(String filein) {
 		if (filein == null) return;
+		if (!Files.exists(Paths.get(filein))) return;
 		long start = System.currentTimeMillis();
 		// Regenerate the file list in parser.manager.queues
 		parseDir(filein, Constants.PROCESSING_TASK_ANALYZE);
@@ -104,6 +105,7 @@ public class SPAnalyzer {
 		boolean doneTasks = false;
 		boolean shutdown = false;
 		while (cont){
+			if (!parser.manager.hasNext()) doneFiles = true;
 			if (!doneFiles){
 				if (parser.manager.canExecuteNextElement()){
 					ParserElement element = parser.manager.next();
@@ -189,6 +191,7 @@ public class SPAnalyzer {
 	
 	public void analyzeFile(ParserElement element){
 		
+		if (element == null) return;
 		
 	    PipedQuadTripleIterator processorIter = new PipedQuadTripleIterator(element.getBufferStream(), false, 5000, 20);
 		final PipedQuadTripleStream processorInputStream = new PipedQuadTripleStream(processorIter);

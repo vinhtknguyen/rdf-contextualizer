@@ -52,11 +52,7 @@ public class ResourceManager {
 	
 	public void startParserElement(ParserElement element){
 		if (element != null){
-			if (task.equals(Constants.PROCESSING_TASK_GENERATE)){
-				curNumTasks += element.getnTasksDefault();
-			} else {
-				curNumTasks += element.getnAnalyzerTasks();
-			}
+			curNumTasks += element.getnTasksDefault();
 			curParserElements += 1;
 		}
 	}
@@ -139,7 +135,6 @@ public class ResourceManager {
 	}
 	
 	private int getNeededTasks(PriorityQueue<ParserElement> queue){
-		if (task.equals(Constants.PROCESSING_TASK_ANALYZE)) return queue.peek().getnAnalyzerTasks();
 		return queue.peek().getnTasksDefault();
 	}
 	

@@ -1,7 +1,5 @@
 package org.knoesis.rdf.sp.parser;
 
-import static org.junit.Assert.*;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.knoesis.rdf.sp.utils.Constants;

@@ -32,7 +32,8 @@ public class SupplierParser implements Supplier<ParserElement>{
 			RDFDataMgr.parse(processorInputStream, element.getFilein(), null);
 			
 			reporter.reportSystem(start, element, Constants.PROCESSING_STEP_PARSE);
-		} catch (Exception e){
+		} catch (RiotException e){
+			System.out.println("File " + element.getFilein() + ": encounter exception in RIOT parser");
 			e.getCause().printStackTrace();
 			throw new SPException("File " + element.getFilein() + ": encounter streaming exception in parser", e);
 			

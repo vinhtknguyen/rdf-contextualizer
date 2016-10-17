@@ -17,7 +17,6 @@ import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.concurrent.atomic.LongAdder;
 import java.util.function.Supplier;
 
 public class SupplierAnalyzer implements Supplier<ParserElement>{

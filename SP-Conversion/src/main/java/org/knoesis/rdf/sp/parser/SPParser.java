@@ -108,6 +108,8 @@ public class SPParser {
 			if (ok != null){
 				System.out.println("File " + element.getFilein() + ": done processing.");
 			} else {
+				System.out.println("File " + element.getFilein() + ": getting error during processing.");
+				ex.getCause().printStackTrace();
 				this.updateCancelledTasks(element);
 				throw new SPException(ex);
 			}
@@ -218,12 +220,12 @@ public class SPParser {
 		boolean doneTasks = false;
 		boolean shutdown = false;
 		while (cont){
+			if (!manager.hasNext()) doneFiles = true;
 			if (!doneFiles){
 				if (manager.canExecuteNextElement()){
 					ParserElement element = manager.next();
 					manager.startParserElement(element);
 					parseFile(element);
-					if (!manager.hasNext()) doneFiles = true;
 				} 
 			}
 			if (doneFiles){
