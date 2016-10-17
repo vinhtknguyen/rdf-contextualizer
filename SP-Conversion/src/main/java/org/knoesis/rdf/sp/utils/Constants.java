@@ -67,6 +67,7 @@ public class Constants {
 	public static final String CONVERTED_TO_SP_INF_TTL = "_inf_ttl";
 	public static final String ORIGINAL_DIRECTORY = "ori";
 	public static final String REPORTS_DIRECTORY = "reports";
+	public static final String CHARTS_DIRECTORY = "charts";
 	public static final String STAT_FILE_TIME = REPORTS_DIRECTORY + "/sp_stat_time.txt";
 	public static final String STAT_FILE_DATA = REPORTS_DIRECTORY + "/sp_stat_data.txt";
 	public static final String STAT_FILE_DISK = REPORTS_DIRECTORY + "/sp_stat_disk.txt";
@@ -76,6 +77,12 @@ public class Constants {
 	public static final String STAT_FILE_DATA_STEP = REPORTS_DIRECTORY + "/sp_stat_data_step.txt";
 	public static final String STAT_FILE_DISK_STEP = REPORTS_DIRECTORY + "/sp_stat_disk_step.txt";
 
+	public static final String STAT_FILE_DISK_CHART = CHARTS_DIRECTORY + "/sp_stat_disk_chart.jpeg";
+	public static final String STAT_FILE_DATA_CHART = CHARTS_DIRECTORY + "/sp_stat_data_chart.jpeg";
+	public static final String STAT_FILE_TIME_CHART = CHARTS_DIRECTORY + "/sp_stat_time_chart.jpeg";
+	public static final String STAT_FILE_SINGLETON_CHART = CHARTS_DIRECTORY + "/sp_stat_singleton_chart.jpeg";
+
+	
 	public static final String DS_TYPE_NQ = "NQ";
 	public static final String DS_TYPE_SP = "SP";
 	public static final String DS_TYPE_SPR = "SPR";

@@ -67,7 +67,7 @@ public class SupplierTransformer implements Supplier<ParserElement>{
 				if (obj instanceof SPTriple){
 					sptriple = (SPTriple) obj;
 					if (reporter.getExt().equals(Constants.NTRIPLE_EXT))
-						node = RDFWriteUtils.printTriples(sptriple, prefixMapping, trie, reporter.getExt(), reporter.isShortenURI());
+						node = this.printSPTriple2NT(sptriple);
 					else 
 						node = this.printSPTriple2N3(sptriple, reporter.isShortenURI());
 					if (node != null) ((PipedNodesStream) transformerInputStream).node(node);
@@ -179,6 +179,33 @@ public class SupplierTransformer implements Supplier<ParserElement>{
 		return prefix.toString();
 	}
 
+	public String printSPTriple2NT(SPTriple triple){
+		if (triple == null) return "";
+		
+		StringBuilder triples = new StringBuilder();
+		// Singleton instance
+		if (triple.getSingletonInstanceTriples().size() > 0) {
+			List<SPTriple> lst = triple.getSingletonInstanceTriples();
+			for (SPTriple t : lst){
+				triples.append(t.printTriple2NT());
+			}
+		}
+		if (triple.getMetaTriples().size() > 0) {
+			List<SPTriple> lst = triple.getMetaTriples();
+			for (SPTriple t : lst){
+				triples.append(t.printTriple2NT());
+			}
+		}
+		triples.append(triple.printTriple2NT());
+		// Meta property triple
+		if (triple.getGenericPropertyTriples().size() > 0) {
+			List<SPTriple> lst = triple.getGenericPropertyTriples();
+			for (SPTriple t : lst){
+				triples.append(t.printTriple2NT());
+			}
+		}
+		return triples.toString();
+	}
 
 	public PipedRDFStream<String> getTransformerInputStream() {
 		return transformerInputStream;

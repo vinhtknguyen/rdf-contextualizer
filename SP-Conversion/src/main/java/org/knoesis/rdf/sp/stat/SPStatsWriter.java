@@ -1,4 +1,4 @@
-package org.knoesis.rdf.sp.utils;
+package org.knoesis.rdf.sp.stat;
 
 import java.awt.Color;
 import java.io.*;
@@ -11,8 +11,10 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.chart.ChartUtilities;
+import org.knoesis.rdf.sp.utils.Constants;
+import org.knoesis.rdf.sp.utils.RDFWriteUtils;
 
-public class SPStats {
+public class SPStatsWriter {
 	
 	public static void reportSystem(long start, long end, String rep, String dsType, String ext, String fileIn, String fileOut, String ds, String step) {
 		

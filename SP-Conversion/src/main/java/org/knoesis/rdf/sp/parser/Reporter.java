@@ -2,9 +2,9 @@ package org.knoesis.rdf.sp.parser;
 
 import java.text.DecimalFormat;
 
+import org.knoesis.rdf.sp.stat.SPStatsWriter;
 import org.knoesis.rdf.sp.utils.Constants;
 import org.knoesis.rdf.sp.utils.RDFWriteUtils;
-import org.knoesis.rdf.sp.utils.SPStats;
 
 public class Reporter {
 	long start;
@@ -34,32 +34,32 @@ public class Reporter {
 		long end = System.currentTimeMillis();
 		String filename = RDFWriteUtils.getPrettyName(element.getFilein());
 	    System.out.println(filename + ": pthread " + Thread.currentThread().getId() + " " + step + " in " + (end-start) + " ms.");
-		SPStats.reportSystem(start, end, rep, (infer?Constants.DS_TYPE_SPR:Constants.DS_TYPE_SP), ext, filename, element.getFileout(), dsName, step);
+		SPStatsWriter.reportSystem(start, end, rep, (infer?Constants.DS_TYPE_SPR:Constants.DS_TYPE_SP), ext, filename, element.getFileout(), dsName, step);
 	}
 	public synchronized void reportSystemTotal(long start, String dsName, String dsType, String ext){
 		long end = System.currentTimeMillis();
 	    System.out.println(dsName + ": pthread " + Thread.currentThread().getId() + " finished in " + (end-start) + " ms.");
-		SPStats.reportSystemTotal(dsName, dsType, end-start, ext);
+		SPStatsWriter.reportSystemTotal(dsName, dsType, end-start, ext);
 	}
 	
 	public synchronized void reportData(long start, String dsName, String dsType, String filein, long countItem, long countSingletonProp, long totalSingInstantiation, long countGenericProp, double average) {
 		long end = System.currentTimeMillis();
 		String filename = RDFWriteUtils.getPrettyName(filein);
 	    System.out.println(filename + ": pthread " + Thread.currentThread().getId() + " " + step + " in " + (end-start) + " ms.");
-		SPStats.reportData(dsName, dsType, filename, countItem, countSingletonProp, totalSingInstantiation, countGenericProp, average, ext);
+		SPStatsWriter.reportData(dsName, dsType, filename, countItem, countSingletonProp, totalSingInstantiation, countGenericProp, average, ext);
 	}
 	
 	public synchronized void reportDataTotal(long start, String dsName, String dsType, long countItem, long countSingletonProp, long totalSingInstantiation, long countGenericProp, double average) {
 		long end = System.currentTimeMillis();
 	    System.out.println(dsName + ": pthread " + Thread.currentThread().getId() + " " + step + " in " + (end-start) + " ms.");
-		SPStats.reportDataTotal(dsName, dsType,  countItem, countSingletonProp, totalSingInstantiation, countGenericProp, average, ext);
+		SPStatsWriter.reportDataTotal(dsName, dsType,  countItem, countSingletonProp, totalSingInstantiation, countGenericProp, average, ext);
 	}
 	
 	public void reportGenericProp(String dsName, String genericprop, long num){
-		SPStats.reportGenericProp(dsName, genericprop, num);
+		SPStatsWriter.reportGenericProp(dsName, genericprop, num);
 	}
 	public synchronized void reportDiskTotal(String dsName, String dsType,  long size, String ext ){
-		SPStats.reportDiskTotal(dsName, dsType, size, ext );
+		SPStatsWriter.reportDiskTotal(dsName, dsType, size, ext );
 
 	}
 
