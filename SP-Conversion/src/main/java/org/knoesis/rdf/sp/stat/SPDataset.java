@@ -3,10 +3,13 @@ package org.knoesis.rdf.sp.stat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.knoesis.rdf.sp.utils.Constants;
+
 public class SPDataset {
 
 	private String dsName;
-	private String dsLabel; // The first 3-4 chars of dsName
+	private String dsLabel;
+	private String dsNameForChart;// The first 3-4 chars of dsName
 	private String ext;
 	private boolean isInfer;
 	private String rep;
@@ -15,14 +18,18 @@ public class SPDataset {
 	private long totalSingletonTriples = 0;
 	private List<Long> timeTaken;
 	private long disk = 0;
+	private long totalInferredTriples = 0;
+	private long timeTakenInferredTriples = 0;
+	private long diskInferredTriples = 0;
 	
 	public SPDataset(String dsName, String ext, boolean isInfer) {
 		super();
 		this.dsName = dsName;
 		this.ext = ext;
 		this.isInfer = isInfer;
-		this.dsLabel = (isInfer?"SPR":"SP") + "_" + ext;
+		this.dsLabel = Constants.DS_TYPE_SP + (isInfer?"-Reasoning":"");
 		this.timeTaken = new ArrayList<Long>();
+		this.dsNameForChart = dsName.substring(0, 3).toUpperCase();
 	}
 	
 	public long getAverageTimeTaken(){
@@ -32,7 +39,8 @@ public class SPDataset {
 			num++;
 			total += time;
 		}
-		return total/num;
+		if (num > 0) return total/num;
+		else return 0;
 	}
 	
 	@Override
@@ -114,6 +122,38 @@ public class SPDataset {
 	}
 	public void setDisk(long disk) {
 		this.disk = disk;
+	}
+
+	public String getDsNameForChart() {
+		return dsNameForChart;
+	}
+
+	public void setDsNameForChart(String dsNameForChart) {
+		this.dsNameForChart = dsNameForChart;
+	}
+
+	public long getTotalInferredTriples() {
+		return totalInferredTriples;
+	}
+
+	public void setTotalInferredTriples(long totalInferredTriples) {
+		this.totalInferredTriples = totalInferredTriples;
+	}
+
+	public long getTimeTakenInferredTriples() {
+		return timeTakenInferredTriples;
+	}
+
+	public void setTimeTakenInferredTriples(long timeTakenInferredTriples) {
+		this.timeTakenInferredTriples = timeTakenInferredTriples;
+	}
+
+	public long getDiskInferredTriples() {
+		return diskInferredTriples;
+	}
+
+	public void setDiskInferredTriples(long diskInferredTriples) {
+		this.diskInferredTriples = diskInferredTriples;
 	}
 	
 	

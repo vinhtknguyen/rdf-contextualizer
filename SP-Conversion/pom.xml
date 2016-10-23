@@ -118,5 +118,5 @@ Proceedings of 23th International Conference on the World Wide Web.</description
 		        <artifactId>java-concurrent-hash-trie-map</artifactId>
 		        <version>0.2.23</version>
 	    </dependency>
-    	</dependencies>
+	</dependencies>
 </project>

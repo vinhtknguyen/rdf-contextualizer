@@ -75,14 +75,14 @@ java -Xmx60g -jar ~/rdf-contextualizer-0.0.1-SNAPSHOT.jar -spInitNum 1  -zip -re
 done
 
 
-for name in goa interpro mesh orphanet taxonomy pharmgkb ctd ncbigene dbpedia
+for name in goa pharmgkb ctd dbpedia ncbigene
 do
-java -Xmx60g -jar ~/rdf-contextualizer-0.0.1-SNAPSHOT.jar -spInitNum 1  -zip -rep NG -task generating -fileout output  -f data/"$name"_data -dsName "$name" -spInitStr "$name" -parallel 4 -ratio 1 -prefix ~/bio2rdf_prefixes.ttl -ext nt > log/"$name"_noinfer_nt.txt  
-java -Xmx60g -jar ~/rdf-contextualizer-0.0.1-SNAPSHOT.jar -spInitNum 1  -zip -rep NG -task generating -fileout output  -f data/"$name"_data -dsName "$name" -spInitStr "$name" -parallel 4 -ratio 1 -prefix ~/bio2rdf_prefixes.ttl -ext nt -infer onto > log/"$name"_infer_nt.txt  
+java -Xmx60g -jar rdf-contextualizer-0.0.1-SNAPSHOT.jar -spInitNum 1  -zip -rep NG -task generating -fileout output  -f data/"$name"_data -dsName "$name" -spInitStr "$name" -parallel 2 -ratio 1 -prefix ~/bio2rdf_prefixes.ttl -ext ttl > log/"$name"_noinfer_ttl.txt  
+java -Xmx60g -jar rdf-contextualizer-0.0.1-SNAPSHOT.jar -spInitNum 1  -zip -rep NG -task generating -fileout output  -f data/"$name"_data -dsName "$name" -spInitStr "$name" -parallel 2 -ratio 1 -prefix ~/bio2rdf_prefixes.ttl -ext ttl -infer onto > log/"$name"_infer_ttl.txt  
 done
 
 
-java -Xmx60g -jar ~/rdf-contextualizer-0.0.1-SNAPSHOT.jar -spInitNum 1  -zip -rep NG -task both -fileout output  -f /semweb2/datasets/data/ctd_data -dsName ctd -spInitStr ctd -parallel 4 -ratio 1 -infer onto -prefix ~/bio2rdf_prefixes.ttl -ext nt > log/ctd_infer_nt.txt  
+java -Xmx60g -jar ~/rdf-contextualizer-0.0.1-SNAPSHOT.jar -spInitNum 1  -zip -rep NG -task analyzing -fileout output  -f /semweb2/datasets/data/ctd_data -dsName ctd -spInitStr ctd -parallel 4 -ratio 1 -infer onto -prefix ~/bio2rdf_prefixes.ttl -ext nt > log/ctd_infer_nt.txt  
 
 java -Xmx60g -jar ~/rdf-contextualizer-0.0.1-SNAPSHOT.jar -spInitNum 1  -zip -rep NG -task both -fileout output  -f data/dbpedia_data -dsName dbpedia -spInitStr dbpedia -parallel 4 -ratio 1 -infer onto -ext nt > log/dbpedia_infer_nt.txt  
 

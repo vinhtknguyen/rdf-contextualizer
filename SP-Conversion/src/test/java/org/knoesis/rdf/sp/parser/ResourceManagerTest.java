@@ -49,6 +49,7 @@ public class ResourceManagerTest {
 		manager.put(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_ng + "/test2.nq", ConstantsTest.test_data_dir + "/" + ConstantsTest.test_ng + "/test2_sp.nt", task, ext);
 		manager.put(ConstantsTest.test_data_dir + "/" + ConstantsTest.test_ng + "/test3.nq", ConstantsTest.test_data_dir + "/" + ConstantsTest.test_ng + "/test1_sp.nt", task, ext);
 		assertEquals(manager.size(), 2);
+		manager.printParserElements();
 	}
 
 }

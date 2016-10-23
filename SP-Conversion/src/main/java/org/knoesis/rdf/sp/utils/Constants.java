@@ -80,6 +80,9 @@ public class Constants {
 	public static final String STAT_FILE_DISK_CHART = CHARTS_DIRECTORY + "/sp_stat_disk_chart.jpeg";
 	public static final String STAT_FILE_DATA_CHART = CHARTS_DIRECTORY + "/sp_stat_data_chart.jpeg";
 	public static final String STAT_FILE_TIME_CHART = CHARTS_DIRECTORY + "/sp_stat_time_chart.jpeg";
+	public static final String STAT_FILE_TIME_SIZE_CHART = CHARTS_DIRECTORY + "/sp_stat_time_size_chart.jpeg";
+	public static final String STAT_FILE_TIME_INFERRED_TRIPLES_CHART = CHARTS_DIRECTORY + "/sp_stat_time_inferred_triples_chart.jpeg";
+	public static final String STAT_FILE_DISK_INFERRED_TRIPLES_CHART = CHARTS_DIRECTORY + "/sp_stat_disk_inferred_triples_chart.jpeg";
 	public static final String STAT_FILE_SINGLETON_CHART = CHARTS_DIRECTORY + "/sp_stat_singleton_chart.jpeg";
 
 	

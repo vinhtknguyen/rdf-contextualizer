@@ -39,7 +39,7 @@ public class ResourceManager {
 			@Override
 			public int compare(ParserElement e1, ParserElement e2) {
 			    //your magic happens here
-				return new Long(e2.getFileSize()).compareTo(new Long(e1.getFileSize()));
+				return Long.compare(e2.getFileSize(), e1.getFileSize());
 			}
 		};
 		
