@@ -64,17 +64,14 @@ public class SupplierAnalyzer implements Supplier<ParserElement>{
 						// If predicate is singletonPropertyOf, increase countSingletonProperty
 						if (triple.getPredicate().toString().equals(Constants.SINGLETON_PROPERTY_OF)){
 							countSingletonProp++;
+							Long num = genericPropMap.get(triple.getObject().toString());
+						    if (num != null){
+								genericPropMap.put(triple.getObject().toString(), new Long(num.longValue() + 1));
+						    } else {
+								genericPropMap.put(triple.getObject().toString(), new Long(1));
+						    }
 						}
 						// if predicate is rdf:type and object is rdf:GenericProperty, increase countGenericProperty
-						if (triple.getPredicate().toString().equals(Constants.RDF_TYPE) && triple.getObject().toString().equals(Constants.RDF_GENERIC_PROPERTY_CLASS)){
-							Long num = genericPropMap.get(triple.getSubject().toString());
-							if (num != null){
-								num += 1L;
-							} else {
-								num = Long.valueOf(1L);
-							}
-							genericPropMap.put(triple.getSubject().toString(), num);
-						}
 						
 					}
 				}
@@ -93,7 +90,7 @@ public class SupplierAnalyzer implements Supplier<ParserElement>{
 		while (it.hasNext()) {
 		    Map.Entry<String,Long> pair = (Map.Entry<String,Long>)it.next();
 		    countGenericProp++;
-		    totalSingInstantiation += (long) pair.getValue();
+		    totalSingInstantiation +=  pair.getValue().longValue();
 //		    System.out.println("generic " + pair.getKey() + ": " + countGenericProp + " vs " + totalSingProp);
 		}
 		SPAnalyzer.mergeGenericProp(genericPropMap);

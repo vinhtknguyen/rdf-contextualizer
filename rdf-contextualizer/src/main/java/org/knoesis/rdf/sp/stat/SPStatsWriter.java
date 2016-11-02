@@ -82,7 +82,7 @@ public class SPStatsWriter {
 	public static void reportDiskTotal(String dsName, String dsType,  long size, String ext ){
 		BufferedWriter report = RDFWriteUtils.getReportWriter(Constants.STAT_FILE_DISK);
 		try {
-			report.write(size + "\t" + dsType + "_" + ext.toUpperCase() + "\t" + dsName + "\t" + ext + "\n");
+			report.write(size + "\t" + dsType + "\t" + dsName + "\t" + ext + "\n");
 			report.close();
 		} catch (IOException e) {
 			e.printStackTrace();

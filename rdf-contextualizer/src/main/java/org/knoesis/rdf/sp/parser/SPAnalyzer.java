@@ -48,9 +48,9 @@ public class SPAnalyzer {
 			// Copy generic props to the accumulator
 		    Long num = dsGenericCount.get(pair.getKey());
 		    if (num != null){
-		    	num += pair.getValue();
+		    	num = new Long(pair.getValue().longValue() + num.longValue());
 		    } else {
-		    	num = new Long(1);
+		    	num = new Long(pair.getValue().longValue());
 		    }
 		    dsGenericCount.put(pair.getKey(),num); 
 		}
@@ -161,7 +161,7 @@ public class SPAnalyzer {
 		while (iter.hasNext()) {
 		    Map.Entry<String,Long> pair = (Map.Entry<String,Long>)iter.next();
 		    if (pair.getValue() != null){
-		    	totalSingInstantiation += (long) pair.getValue();
+		    	totalSingInstantiation += pair.getValue().longValue();
 			    countGenericProp++;
 			    reporter.reportGenericProp(reporter.getDsName(), pair.getKey(), pair.getValue());
 		    }

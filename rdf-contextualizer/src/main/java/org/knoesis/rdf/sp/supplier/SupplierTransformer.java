@@ -190,6 +190,7 @@ public class SupplierTransformer implements Supplier<ParserElement>{
 				triples.append(t.printTriple2NT());
 			}
 		}
+		
 		if (triple.getMetaTriples().size() > 0) {
 			List<SPTriple> lst = triple.getMetaTriples();
 			for (SPTriple t : lst){

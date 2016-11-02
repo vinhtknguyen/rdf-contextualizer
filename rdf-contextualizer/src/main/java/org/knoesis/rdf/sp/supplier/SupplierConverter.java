@@ -26,15 +26,16 @@ public class SupplierConverter implements Supplier<ParserElement>{
 	PipedSPTripleStream converterInputStream;
 	Reporter reporter;
 	ParserElement element;
+	int ind = 0;
 	
     public SupplierConverter(PipedQuadTripleIterator processorIter,
-			PipedSPTripleStream converterInputStream, ParserElement element, Reporter reporter) {
+			PipedSPTripleStream converterInputStream, ParserElement element, Reporter reporter, int ind) {
 		super();
 		this.processorIter = processorIter;
 		this.converterInputStream = converterInputStream;
 		this.reporter = reporter;
 		this.element = element;
-		processor = new SPProcessor(reporter.getRep(), reporter.getUuidInitNum(), reporter.getUuidInitStr());
+		processor = new SPProcessor(reporter.getRep(), reporter.getUuidInitNum(), reporter.getUuidInitStr() + ind);
 		processor.setExt(reporter.getExt());
 		processor.setIsinfer(reporter.isInfer());
 		processor.setOntoDir(reporter.getOntoDir());

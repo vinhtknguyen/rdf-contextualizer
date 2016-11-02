@@ -89,6 +89,9 @@ public class Constants {
 	public static final String DS_TYPE_NQ = "NQ";
 	public static final String DS_TYPE_SP = "SP";
 	public static final String DS_TYPE_SPR = "SPR";
+	public static final String DS_TYPE_NoDup = "ND";
+	public static final String DS_TYPE_NoDup_Full = "Unique";
+	public static final String DS_TYPE_Dup_Full = "Dup";
 	
 
 	public static final String PROCESSING_STEP_PARSE = "parsing";

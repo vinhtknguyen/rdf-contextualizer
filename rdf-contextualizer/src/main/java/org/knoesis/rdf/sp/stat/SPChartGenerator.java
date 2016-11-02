@@ -1,6 +1,7 @@
 package org.knoesis.rdf.sp.stat;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -28,6 +29,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
+import org.jfree.chart.renderer.category.StandardBarPainter;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -36,15 +38,22 @@ import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.ui.RectangleInsets;
 import org.knoesis.rdf.sp.utils.Constants;
 
-import com.fasterxml.jackson.annotation.JsonFormat.Shape;
-
 public class SPChartGenerator {
 
 	private HashMap<String, SPDataset> allDSs;
 	private List<SPDataset> sortedDSs;
 	int width = 480;
 	int height = 300;
+	boolean nodup;
 	
+	public SPChartGenerator(boolean nodup) {
+		super();
+		this.nodup = nodup;
+		if (nodup){
+			this.width = 700;
+		}
+	}
+
 	public void genCharts(String reportDir, String chartDir){
 		allDSs = new HashMap<String, SPDataset>();
 		sortedDSs = new ArrayList<SPDataset>();
@@ -58,14 +67,13 @@ public class SPChartGenerator {
 		Iterator<Entry<String, SPDataset>> it = allDSs.entrySet().iterator();
 		while (it.hasNext()) {
 		    Map.Entry<String,SPDataset> pair = (Map.Entry<String,SPDataset>)it.next();
-		    if (pair.getValue().getTotalTriples() > 2*Math.pow(10,8)) sortedDSs.add(pair.getValue());
+		    if (pair.getValue().getTotalTriples() > 1.5*Math.pow(10,8)) sortedDSs.add(pair.getValue());
 		}
 
 		Collections.sort(sortedDSs, new Comparator<SPDataset>(){
 
 			@Override
 			public int compare(SPDataset o1, SPDataset o2) {
-				// TODO Auto-generated method stub
 				return Long.compare(o2.getTotalTriples(), o1.getTotalTriples());
 			}
 		});
@@ -76,8 +84,14 @@ public class SPChartGenerator {
 				SPDataset sp = allDSs.get(key);
 				if (spr.getDsName().equals(sp.getDsName()) && spr.getExt().equals(sp.getExt())){
 					spr.setTotalInferredTriples(spr.getTotalTriples() - sp.getTotalTriples());
+					spr.setTotalInferredSingletonTriples(spr.getTotalSingletonTriples() - sp.getTotalSingletonTriples());
 					spr.setTimeTakenInferredTriples(spr.getAverageTimeTaken() - sp.getAverageTimeTaken());
 					spr.setDiskInferredTriples(spr.getDisk() - sp.getDisk());
+					
+					spr.setInferredTriplePercentage((float)spr.getTotalInferredTriples()/sp.getTotalTriples());
+					spr.setInferredSingletonTriplePercentage((float)spr.getTotalInferredSingletonTriples()/sp.getTotalSingletonTriples());
+					spr.setTimePercentage((float)spr.getTimeTakenInferredTriples()/sp.getAverageTimeTaken());
+					spr.setDiskPercentage((float)spr.getDiskInferredTriples()/sp.getDisk());
 				}
 			}
 			System.out.println(sortedDSs.get(i).toString());
@@ -93,20 +107,42 @@ public class SPChartGenerator {
 			generateTimeSizeChart(chartDir);
 			generateTimeInferredTriplesChart(chartDir);
 			generateDiskInferredTriplesChart(chartDir);
+			generateSizeTable();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
+	
+	private void generateSizeTable() {
+		System.out.println("Table");
+		DecimalFormat time_formatter = new DecimalFormat("#,###");
+		for (SPDataset ds : sortedDSs){
+			if (!ds.isInfer() &&ds.getExt().equals(Constants.TURTLE_EXT) && !ds.getDsName().startsWith(Constants.DS_TYPE_NoDup)) {
+				System.out.print(ds.getDsNameForChart() + "\t" + time_formatter.format(ds.getTotalSingletonTriples()));
+				SPDataset nd = allDSs.get(Constants.DS_TYPE_NoDup + ds.getDsName() + ds.getExt() + (ds.isInfer()?Constants.DS_TYPE_SPR:Constants.DS_TYPE_SP));
+				if (nd != null) System.out.print("\t" + time_formatter.format(nd.getTotalSingletonTriples()));
+				System.out.print("\n");
+			}
+		}
+	}
+
 	@SuppressWarnings("deprecation")
 	private void formatChart(JFreeChart chart){
 		CategoryPlot plot = (CategoryPlot) chart.getPlot();
 		plot.setBackgroundPaint(Color.WHITE);
 		plot.setRangeGridlinePaint(Color.black);		
 		BarRenderer renderer = (BarRenderer) plot.getRenderer();
-		renderer.setSeriesPaint(0, Color.red);
-		renderer.setSeriesPaint(1, Color.black);
+		renderer.setBarPainter(new StandardBarPainter());
+//		renderer.setSeriesPaint(0, Color.lightGray);
+//		renderer.setSeriesPaint(1, Color.blue);
+//		renderer.setSeriesPaint(2, Color.magenta);
+//		renderer.setSeriesPaint(3, Color.cyan);
+		renderer.setSeriesPaint(0, new Color(161, 44, 33));
+		renderer.setSeriesPaint(1, new Color(231, 77, 36));
+		renderer.setSeriesPaint(2, new Color(243, 113, 33));
+		renderer.setSeriesPaint(3, new Color(248, 151, 40));
+		renderer.setSeriesOutlineStroke(0, null);
 		renderer.setDrawBarOutline(false);
 		renderer.setItemMargin(0.0);
 
@@ -114,6 +150,9 @@ public class SPChartGenerator {
 		CategoryItemLabelGenerator generator = new StandardCategoryItemLabelGenerator(
 		"{2}", new DecimalFormat("0.00"));
 		renderer2.setItemLabelGenerator(generator);
+		Font font = new Font("Dialog", Font.BOLD, 15); 
+		if (chart.getTitle() != null) chart.getTitle().setFont(font);
+//		plot.getRangeAxis().setLabelFont(font3);
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -127,9 +166,14 @@ public class SPChartGenerator {
 		renderer1.setShapesVisible(true);
 		renderer1.setShapesFilled(true);
 		XYItemRenderer renderer = plot.getRenderer();
-		renderer.setSeriesPaint(0, Color.red);
-		renderer.setSeriesPaint(1, Color.black);
-		renderer.setSeriesPaint(2, Color.blue);
+//		renderer.setSeriesPaint(0, Color.BLACK);
+//		renderer.setSeriesPaint(1, Color.blue);
+//		renderer.setSeriesPaint(2, Color.magenta);
+//		renderer.setSeriesPaint(3, Color.RED);
+		renderer.setSeriesPaint(0, new Color(161, 44, 33));
+		renderer.setSeriesPaint(1, new Color(231, 77, 36));
+		renderer.setSeriesPaint(2, new Color(243, 113, 33));
+		renderer.setSeriesPaint(3, new Color(248, 151, 40));
 		NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
 		rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
 		
@@ -137,18 +181,33 @@ public class SPChartGenerator {
 		XYItemLabelGenerator generator = new StandardXYItemLabelGenerator(
 		"{2}", new DecimalFormat("0.00"), new DecimalFormat("0.00"));
 		renderer2.setItemLabelGenerator(generator);
+
+		Font font = new Font("Dialog", Font.BOLD, 15); 
+		if (chart.getTitle() != null) chart.getTitle().setFont(font);
+//		plot.getRangeAxis().setLabelFont(font3);
 	}
 	
 	private void generateDataChart(String chartDir){
 		final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
 		for (SPDataset ds : sortedDSs){
-			if (ds.getExt().equals(Constants.TURTLE_EXT)) dataset.addValue(ds.getTotalTriples()/Math.pow(10, 9), ds.getDsLabel(), ds.getDsNameForChart());
+			if (ds.getExt().equals(Constants.TURTLE_EXT) && !ds.getDsName().startsWith(Constants.DS_TYPE_NoDup)) {
+				dataset.addValue(ds.getTotalTriples()/Math.pow(10, 9), ds.getDsLabel() + "-" + Constants.DS_TYPE_Dup_Full, ds.getDsNameForChart());
+				SPDataset nd = allDSs.get(Constants.DS_TYPE_NoDup + ds.getDsName() + ds.getExt() + (ds.isInfer()?Constants.DS_TYPE_SPR:Constants.DS_TYPE_SP));
+				if (nd != null) dataset.addValue(nd.getTotalTriples()/Math.pow(10, 9), ds.getDsLabel() + "-" + Constants.DS_TYPE_NoDup_Full, ds.getDsNameForChart());
+			}
 		}
-
-		JFreeChart barChart = ChartFactory.createBarChart(
-				"Total Triples: With vs. Without Reasoning", "Singleton Property Dataset", "Triples in Billion", dataset,
-				PlotOrientation.VERTICAL, true, true, false);
+		
+		JFreeChart barChart;
+		if (!nodup){
+			barChart = ChartFactory.createBarChart(
+					"Total Triples: With vs. Without Reasoning", null, "Number of Triples in Billion", dataset,
+					PlotOrientation.VERTICAL, false, true, false);
+		} else {
+			barChart = ChartFactory.createBarChart(
+					null , "Singleton Property Dataset", "Number of Triples in Billion", dataset,
+					PlotOrientation.VERTICAL, true, true, false);
+		}
 		
 		formatChart(barChart);
 		
@@ -156,20 +215,19 @@ public class SPChartGenerator {
 		try {
 			ChartUtilities.saveChartAsJPEG(BarChart, barChart, width, height);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
 	private void generateTimeSizeChart(String chartDir){
 
-		final XYSeries sp = new XYSeries(Constants.DS_TYPE_SP);
+		final XYSeries sp = new XYSeries("No-Reasoning");
 		for (SPDataset ds : sortedDSs){
 			if (!ds.isInfer()) sp.add(ds.getTotalTriples()/Math.pow(10, 9),ds.getAverageTimeTaken()/60000);
 //			if (!ds.isInfer()) sp.add(ds.getAverageTimeTaken()/60000, ds.getTotalTriples()/Math.pow(10, 8));
 		}
 		
-		final XYSeries spr = new XYSeries(Constants.DS_TYPE_SP + "-Reasoning");
+		final XYSeries spr = new XYSeries("With-Reasoning");
 		for (SPDataset ds : sortedDSs){
 			if (ds.isInfer()) spr.add(ds.getTotalTriples()/Math.pow(10, 9), ds.getAverageTimeTaken()/60000);
 		}
@@ -184,42 +242,60 @@ public class SPChartGenerator {
 		dataset.addSeries(sp);
 //		dataset.addSeries(inf);
 
-		JFreeChart barChart = ChartFactory.createXYLineChart(
-				"Time taken across datasets", "Number of triples in Billion", "Time in minutes", dataset,
-				PlotOrientation.VERTICAL, true, true, false);
+		JFreeChart barChart;
+		if (!nodup){
+			barChart = ChartFactory.createXYLineChart(
+					"Run time across datasets", null, "Time in minutes", dataset,
+					PlotOrientation.VERTICAL, false, true, false);
+		} else {
+			barChart = ChartFactory.createXYLineChart(
+					null, "Number of triples in Billion", "Time in minutes", dataset,
+					PlotOrientation.VERTICAL, true, true, false);
+		}
 		
 		formatXYLineChart(barChart);
 		
 		File BarChart = new File(chartDir + "/" + Paths.get(Constants.STAT_FILE_TIME_SIZE_CHART).getFileName());
 		try {
-			ChartUtilities.saveChartAsJPEG(BarChart, barChart, width, height);
+			ChartUtilities.saveChartAsJPEG(BarChart, barChart, 480, height);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
 	private void generateTimeInferredTriplesChart(String chartDir){
 
-		final XYSeries spr = new XYSeries(Constants.DS_TYPE_SP + "-Reasoning");
+		final XYSeries spr = new XYSeries("With-Reasoning");
 		for (SPDataset ds : sortedDSs){
 			if (ds.isInfer() && ds.getExt().equals(Constants.TURTLE_EXT)) spr.add(ds.getTotalInferredTriples()/Math.pow(10, 9), ds.getTimeTakenInferredTriples()/60000);
 		}
 		
+//		final XYSeries spr_nodup = new XYSeries(Constants.DS_TYPE_SP + "-Reasoning-NoDup");
+//		for (SPDataset ds : sortedDSs){
+//			if (ds.getDsNameForChart().endsWith(Constants.DS_TYPE_NoDup) && ds.isInfer() && ds.getExt().equals(Constants.TURTLE_EXT)) spr_nodup.add(ds.getTotalInferredTriples()/Math.pow(10, 9), ds.getTimeTakenInferredTriples()/60000);
+//		}
+
 		final XYSeriesCollection dataset = new XYSeriesCollection();
 		dataset.addSeries(spr);
+//		dataset.addSeries(spr_nodup);
 
-		JFreeChart barChart = ChartFactory.createXYLineChart(
-				"Time taken for inferred triples", "Number of inferred triples in Billion", "Time in minutes", dataset,
-				PlotOrientation.VERTICAL, true, true, false);
+		JFreeChart barChart;
+		if (!nodup){
+			barChart = ChartFactory.createXYLineChart(
+					"Run time for inferred triples", null, "Time in minutes", dataset,
+					PlotOrientation.VERTICAL, false, true, false);
+		} else {
+			barChart = ChartFactory.createXYLineChart(
+					null, "Number of inferred triples in Billion", "Time in minutes", dataset,
+					PlotOrientation.VERTICAL, true, true, false);
+		}
 		
 		formatXYLineChart(barChart);
 		
 		File BarChart = new File(chartDir + "/" + Paths.get(Constants.STAT_FILE_TIME_INFERRED_TRIPLES_CHART).getFileName());
 		try {
-			ChartUtilities.saveChartAsJPEG(BarChart, barChart, width, height);
+			ChartUtilities.saveChartAsJPEG(BarChart, barChart, 480, height);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -234,9 +310,16 @@ public class SPChartGenerator {
 		final XYSeriesCollection dataset = new XYSeriesCollection();
 		dataset.addSeries(spr);
 
-		JFreeChart barChart = ChartFactory.createXYLineChart(
-				"Disk space for inferred triples", "Number of inferred triples in Billion", "Disk space in Gigabyte", dataset,
-				PlotOrientation.VERTICAL, true, true, false);
+		JFreeChart barChart;
+		if (!nodup){
+			barChart = ChartFactory.createXYLineChart(
+					"Disk space for inferred triples", null, "Disk space in Gigabyte", dataset,
+					PlotOrientation.VERTICAL, false, true, false);
+		} else {
+			barChart = ChartFactory.createXYLineChart(
+					null, "Number of inferred triples in Billion", "Disk space in Gigabyte", dataset,
+					PlotOrientation.VERTICAL, true, true, false);
+		}
 		
 		formatXYLineChart(barChart);
 		
@@ -244,7 +327,6 @@ public class SPChartGenerator {
 		try {
 			ChartUtilities.saveChartAsJPEG(BarChart, barChart, width, height);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -254,12 +336,23 @@ public class SPChartGenerator {
 		final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
 		for (SPDataset ds : sortedDSs){
-			if (ds.getTimeTaken().size() > 0 && ds.getExt().equals(Constants.TURTLE_EXT)) dataset.addValue(ds.getAverageTimeTaken()/60000, ds.getDsLabel(), ds.getDsNameForChart());
+			if (ds.getTimeTaken().size() > 0 && ds.getExt().equals(Constants.TURTLE_EXT) && !ds.getDsName().startsWith(Constants.DS_TYPE_NoDup)) {
+				dataset.addValue(ds.getAverageTimeTaken()/60000, ds.getDsLabel() + "-" + Constants.DS_TYPE_Dup_Full, ds.getDsNameForChart());
+				SPDataset nd = allDSs.get(Constants.DS_TYPE_NoDup + ds.getDsName() + ds.getExt() + (ds.isInfer()?Constants.DS_TYPE_SPR:Constants.DS_TYPE_SP));
+				if (nd != null) dataset.addValue(nd.getAverageTimeTaken()/60000, ds.getDsLabel() + "-" + Constants.DS_TYPE_NoDup_Full, ds.getDsNameForChart());
+			}
 		}
 
-		JFreeChart barChart = ChartFactory.createBarChart(
-				"Time Taken: With vs. Without Reasoning", "Singleton Property Dataset", "Time in minutes", dataset,
-				PlotOrientation.VERTICAL, true, true, false);
+		JFreeChart barChart;
+		if (!nodup){
+			barChart = ChartFactory.createBarChart(
+					"Run time: With vs. Without Reasoning", null, "Time in minutes", dataset,
+					PlotOrientation.VERTICAL, false, true, false);
+		} else {
+			barChart = ChartFactory.createBarChart(
+					null, "Singleton Property Dataset", "Time in minutes", dataset,
+					PlotOrientation.VERTICAL, true, true, false);
+		}
 		
 		formatChart(barChart);
 		
@@ -267,7 +360,6 @@ public class SPChartGenerator {
 		try {
 			ChartUtilities.saveChartAsJPEG(BarChart, barChart, width, height);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -277,12 +369,23 @@ public class SPChartGenerator {
 		final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
 		for (SPDataset ds : sortedDSs){
-			if (ds.getExt().equals(Constants.TURTLE_EXT)) dataset.addValue(ds.getTotalSingletonProps()/Math.pow(10, 8), ds.getDsLabel(), ds.getDsNameForChart());
+			if (ds.getTimeTaken().size() > 0 && ds.getExt().equals(Constants.TURTLE_EXT) && !ds.getDsName().startsWith(Constants.DS_TYPE_NoDup)) {
+				dataset.addValue(ds.getTotalSingletonTriples()/Math.pow(10, 9), ds.getDsLabel() + "-" + Constants.DS_TYPE_Dup_Full, ds.getDsNameForChart());
+				SPDataset nd = allDSs.get(Constants.DS_TYPE_NoDup + ds.getDsName() + ds.getExt() + (ds.isInfer()?Constants.DS_TYPE_SPR:Constants.DS_TYPE_SP));
+				if (nd != null) dataset.addValue(nd.getTotalSingletonTriples()/Math.pow(10, 9), ds.getDsLabel() + "-" + Constants.DS_TYPE_NoDup_Full, ds.getDsNameForChart());
+			}
 		}
 
-		JFreeChart barChart = ChartFactory.createBarChart(
-				"Singleton Triples: With vs. Without Reasoning", "Singleton Property Dataset", "Triples in 100 Million", dataset,
-				PlotOrientation.VERTICAL, true, true, false);
+		JFreeChart barChart;
+		if (!nodup){
+			barChart = ChartFactory.createBarChart(
+					"Singleton Triples: With vs. Without Reasoning", null, "Number of Triples in Billion", dataset,
+					PlotOrientation.VERTICAL, false, true, false);
+		} else {
+			barChart = ChartFactory.createBarChart(
+					null, "Singleton Property Dataset", "Number of Triples in Billion", dataset,
+					PlotOrientation.VERTICAL, true, true, false);
+		}
 		
 		formatChart(barChart);
 		
@@ -290,7 +393,6 @@ public class SPChartGenerator {
 		try {
 			ChartUtilities.saveChartAsJPEG(BarChart, barChart, width, height);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -299,12 +401,23 @@ public class SPChartGenerator {
 		final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
 		for (SPDataset ds : sortedDSs){
-			if (ds.getExt().equals(Constants.TURTLE_EXT)) dataset.addValue(ds.getDisk()/Math.pow(2, 30), ds.getDsLabel(), ds.getDsNameForChart());
+			if (ds.getExt().equals(Constants.TURTLE_EXT) && !ds.getDsName().startsWith(Constants.DS_TYPE_NoDup)) {
+				dataset.addValue(ds.getDisk()/Math.pow(2, 30), ds.getDsLabel() + "-" + Constants.DS_TYPE_Dup_Full, ds.getDsNameForChart());
+				SPDataset nd = allDSs.get(Constants.DS_TYPE_NoDup + ds.getDsName() + ds.getExt() + (ds.isInfer()?Constants.DS_TYPE_SPR:Constants.DS_TYPE_SP));
+				if (nd != null) dataset.addValue(nd.getDisk()/Math.pow(2, 30), ds.getDsLabel()+ "-" + Constants.DS_TYPE_NoDup_Full, ds.getDsNameForChart());
+			}
 		}
 
-		JFreeChart barChart = ChartFactory.createBarChart(
-				"Disk Space: With vs. Without Reasoning", "Singleton Property Dataset", "Size in Gigabytes", dataset,
-				PlotOrientation.VERTICAL, true, true, false);
+		JFreeChart barChart;
+		if (!nodup){
+			barChart = ChartFactory.createBarChart(
+					"Disk Space: With vs. Without Reasoning", null, "Size in Gigabytes", dataset,
+					PlotOrientation.VERTICAL, false, true, false);
+		} else {
+			barChart = ChartFactory.createBarChart(
+					null, "Singleton Property Dataset", "Size in Gigabytes", dataset,
+					PlotOrientation.VERTICAL, true, true, false);
+		}
 		
 		formatChart(barChart);
 		
@@ -312,7 +425,6 @@ public class SPChartGenerator {
 		try {
 			ChartUtilities.saveChartAsJPEG(BarChart, barChart, width, height);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -338,7 +450,6 @@ public class SPChartGenerator {
 				allDSs.put(key, ds);
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -363,7 +474,6 @@ public class SPChartGenerator {
 				allDSs.put(key, ds);
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -388,7 +498,6 @@ public class SPChartGenerator {
 				allDSs.put(key, ds);
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -409,11 +518,10 @@ public class SPChartGenerator {
 				} else {
 					ds = new SPDataset(dsName, ext, (dsType.equals(Constants.DS_TYPE_SPR)));
 				}
-				ds.setTotalSingletonProps(totalSingleton);
+				ds.setTotalSingletonTriples(totalSingleton);
 				allDSs.put(key, ds);
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

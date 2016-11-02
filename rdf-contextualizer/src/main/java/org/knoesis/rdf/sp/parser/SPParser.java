@@ -34,6 +34,8 @@ public class SPParser {
 	Reporter reporter;
 	ResourceManager manager;
 	ExecutorService executor;
+	
+	int uuidIndex = 0;
 
 	public SPParser(Reporter _reporter) {
 		reporter = _reporter;
@@ -42,6 +44,9 @@ public class SPParser {
 		executor = Executors.newWorkStealingPool();
 	}
 
+	private synchronized int getUuidIndex(){
+		return uuidIndex++;
+	}
 	public void parseFile(ParserElement element){
 		// Check the condition before submitting new tasks
 		if (element == null) return;
@@ -61,7 +66,7 @@ public class SPParser {
     		PipedNodesIterator transformerIter = new PipedNodesIterator(element.getBufferStream(), false, 5000, 20);
     		PipedNodesStream transformerInputStream = new PipedNodesStream(transformerIter);
 
-    		CompletableFuture<ParserElement> converter = CompletableFuture.supplyAsync(new SupplierConverter(processorIter, converterInputStream, element, reporter), executor);
+    		CompletableFuture<ParserElement> converter = CompletableFuture.supplyAsync(new SupplierConverter(processorIter, converterInputStream, element, reporter, getUuidIndex()), executor);
     		CompletableFuture<ParserElement> transformer = CompletableFuture.supplyAsync(new SupplierTransformer(transformerInputStream, converterIter, element, reporter), executor);
     		CompletableFuture<ParserElement> writer = CompletableFuture.supplyAsync(new SupplierWriter(transformerIter, element, reporter, -1), executor);
    		
@@ -92,7 +97,7 @@ public class SPParser {
         		PipedNodesIterator transformerIter = new PipedNodesIterator(element.getBufferStreamSubStream(), false, 5000, 20);
         		PipedNodesStream transformerInputStream = new PipedNodesStream(transformerIter);
 
-        		CompletableFuture<ParserElement> converter = CompletableFuture.supplyAsync(new SupplierConverter(subProcessorIters.get(i), converterInputStream, element, reporter), executor);
+        		CompletableFuture<ParserElement> converter = CompletableFuture.supplyAsync(new SupplierConverter(subProcessorIters.get(i), converterInputStream, element, reporter, getUuidIndex()), executor);
         		CompletableFuture<ParserElement> transformer = CompletableFuture.supplyAsync(new SupplierTransformer(transformerInputStream, converterIter, element, reporter), executor);
                	CompletableFuture<ParserElement> writer = CompletableFuture.supplyAsync(new SupplierWriter(transformerIter, element, reporter, i), executor);
                	

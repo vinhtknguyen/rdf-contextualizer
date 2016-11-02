@@ -10,9 +10,14 @@ public class SPChartGeneratorTest {
 	}
 
 	@Test
-	public void test() {
-		SPChartGenerator gen = new SPChartGenerator();
+	public void test1() {
+		SPChartGenerator gen = new SPChartGenerator(false);
 		gen.genCharts("reports_249", "/Volumes/Data/Submissions/ReasoningWithSP/images/charts_249");
+	}
+	@Test
+	public void test2() {
+		SPChartGenerator gen = new SPChartGenerator(true);
+		gen.genCharts("reports_249_nodup", "/Volumes/Data/Submissions/ReasoningWithSP/images/charts_249_nodup");
 	}
 
 }

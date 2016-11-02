@@ -162,6 +162,7 @@ public class SPModel {
 				break;
 			case Constants.OWL_EQUIVALENTPROPERTY_PROPERTY:
 				SPModel.addEquivalentPropertyMap(subject.toString(), object.toString());
+				SPModel.addEquivalentPropertyMap(object.toString(), subject.toString());
 				if (!equiProps.contains(subject.toString()))subProps.add(subject.toString());
 				if (!equiProps.contains(object.toString()))subProps.add(object.toString());
 				break;
@@ -216,6 +217,7 @@ public class SPModel {
 										j = SPModel.addSubPropertyOfMap(prop, newsuperprop);
 									} else {
 										j = SPModel.addEquivalentPropertyMap(prop, newsuperprop);
+										j = SPModel.addEquivalentPropertyMap(newsuperprop, prop);
 			
 									}
 									if (j > 0){
