@@ -1,0 +1,67 @@
+============================================================================================================================
+
+Runnable jar file: rdf-contextualizer-0.0.1-SNAPSHOT.jar, can be downloaded at https://drive.google.com/open?id=0B0YeaO2jtR-iOXdoeFBFNl9Nb1E
+
+Parameters:
+
+	 * @param args
+	 * -rep 		NQUAD/NANO/TRIPLE/REI as input file representation
+	 * -ext 		TTL/NT as output file extension
+	 * -f 			FILE/FOLDER to convert the representation
+	 * -zip
+	 * -infer 		Ontology file or directory
+	 * -task		generating, analyzing, or both
+	 
+	 * -base		base URI
+	 * -metaProp	meta property of the triple, which could the provenance property of the triple, default value is prov:wasDerivedFrom
+	 * -metaObj 	meta object of the triple, which could be the source where the triple was created
+	 * -spProp		by default, it is rdf:singletonPropertyOf
+
+Example usage:
+
+> download the file rdf-contextualizer-hands-on.zip from https://github.com/vinhtknguyen/rdf-contextualizer/tree/master/rdf-contextualizer/handson
+> unzip rdf-contextualizer-hands-on.zip
+> cd rdf-contextualizer-hands-on
+
+1. Generate the SP representation for the file data/test1.nq in the format TTL
+
+java -Xmx60g -jar ./rdf-contextualizer-0.0.1-SNAPSHOT.jar -ext ttl -rep NG -task generating -fileout test1.ttl  -f data/test1.nq -dsName test1 -spInitNum 1 -spInitStr test1 -prefix prefix/bio2rdf_prefixes.ttl > test1_ttl.txt
+
+2. Generate the SP representation for the file data/test1.nq in the format TTL with SP inferences
+
+java -Xmx60g -jar ./rdf-contextualizer-0.0.1-SNAPSHOT.jar -ext ttl -rep NG -infer onto -task generating -fileout test1_infer.ttl  -f data/test1.nq -dsName test1 -spInitNum 1 -spInitStr test1 -prefix prefix/bio2rdf_prefixes.ttl > test1_infer_ttl.txt
+
+3. Generate the SP representation for the file data/test1.nq in the format TTL with zip option
+
+java -Xmx60g -jar ./rdf-contextualizer-0.0.1-SNAPSHOT.jar -ext ttl -rep NG -zip -task generating -fileout test1.ttl.gz  -f data/test1.nq -dsName test1 -spInitNum 1 -spInitStr test1 -prefix prefix/bio2rdf_prefixes.ttl > test1_ttl.txt
+
+4. Generate the SP representation for the file data/test1.nq in the format NT
+
+java -Xmx60g -jar ./rdf-contextualizer-0.0.1-SNAPSHOT.jar -ext nt -rep NG -task generating -fileout test1.nt  -f data/test1.nq -dsName test1 -spInitNum 1 -spInitStr test1 -prefix prefix/bio2rdf_prefixes.ttl > test1_nt.txt
+
+5. Generate the SP representation for the file data/test1.nq in the format TTL with zip option
+
+java -Xmx60g -jar ./rdf-contextualizer-0.0.1-SNAPSHOT.jar -ext nt -rep NG -zip -task generating -fileout test1.nt.gz  -f data/test1.nq -dsName test1 -spInitNum 1 -spInitStr test1 -prefix prefix/bio2rdf_prefixes.ttl > test1_infer_nt.txt
+
+============================================================================================================================
+
+SP Datasets
+
+The original datasets in the form of NG including NCBI Gene, DBpedia, PharmKB, GO Annotations, CTD can be downloaded from http://download.bio2rdf.org/release/3/
+
+We remove the duplicates in these datasets and put them in 
+https://drive.google.com/open?id=0B0YeaO2jtR-iOUtSdENRNzYtc0k
+  
+
+============================================================================================================================
+  
+We ran the tool rdf-contextualizer on these datasets and put the results 
+
+1. Without SP reasoning
+
+https://drive.google.com/open?id=0B0YeaO2jtR-iQkxXWk5lRkpRT3c
+
+2. With SP reasoning
+
+https://drive.google.com/open?id=0B0YeaO2jtR-icVZ0SGFfRFBPWDg
+
