@@ -1,6 +1,11 @@
-============================================================================================================================
+RDF-Contextualizer
 
-Runnable jar file: rdf-contextualizer-0.0.1-SNAPSHOT.jar, can be downloaded at https://drive.google.com/open?id=0B0YeaO2jtR-iOXdoeFBFNl9Nb1E
+A tool allows existing knowledge bases using the Named Graph or Reification representation can be transformed into Singleton Property representation.
+During the transformation, the -infer option can be selected to compute SP triples from SP inference rules.
+
+===============================================================================================
+
+Runnable jar file: rdf-contextualizer-0.0.1-SNAPSHOT.jar, can be downloaded at <a href="https://drive.google.com/open?id=0B0YeaO2jtR-iOXdoeFBFNl9Nb1E"></a>
 
 Parameters:
 
@@ -10,8 +15,11 @@ Parameters:
 	 * -f 			FILE/FOLDER to convert the representation
 	 * -zip
 	 * -infer 		Ontology file or directory
+	 * -onto		File/Folder to ontologies to be used in the inference process with -infer option
+	 * -prefix		File/Folder to prefixes to be used with the Turtle format
 	 * -task		generating, analyzing, or both
 	 
+	 * -dsName		Name of the dataset	 
 	 * -base		base URI
 	 * -metaProp	meta property of the triple, which could the provenance property of the triple, default value is prov:wasDerivedFrom
 	 * -metaObj 	meta object of the triple, which could be the source where the triple was created
@@ -43,7 +51,7 @@ java -Xmx60g -jar ./rdf-contextualizer-0.0.1-SNAPSHOT.jar -ext nt -rep NG -task 
 
 java -Xmx60g -jar ./rdf-contextualizer-0.0.1-SNAPSHOT.jar -ext nt -rep NG -zip -task generating -fileout test1.nt.gz  -f data/test1.nq -dsName test1 -spInitNum 1 -spInitStr test1 -prefix prefix/bio2rdf_prefixes.ttl > test1_infer_nt.txt
 
-============================================================================================================================
+===============================================================================================
 
 SP Datasets
 
@@ -53,9 +61,9 @@ We remove the duplicates in these datasets and put them in
 https://drive.google.com/open?id=0B0YeaO2jtR-iOUtSdENRNzYtc0k
   
 
-============================================================================================================================
+===============================================================================================
   
-We ran the tool rdf-contextualizer on these datasets and put the results 
+We ran the tool rdf-contextualizer on these datasets and put the output datasets on Google Drive 
 
 1. Without SP reasoning
 
@@ -65,3 +73,11 @@ https://drive.google.com/open?id=0B0YeaO2jtR-iQkxXWk5lRkpRT3c
 
 https://drive.google.com/open?id=0B0YeaO2jtR-icVZ0SGFfRFBPWDg
 
+===============================================================================================
+
+Author:
+
+Vinh Nguyen
+vinh@knoesis.org
+Kno.e.sis Center,
+Wright State University
